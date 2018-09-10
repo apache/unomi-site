@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="images/favicon.ico">
+
+    <title>Unomi Podling Maturity Assessment | Apache Unomi</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fontawesome CSS CDN -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link href="css/unomi.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <header>
+      <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top border-bottom box-shadow">
+        <div class="container">
+          <a class="navbar-brand" href="index.html"><img src="images/unomi-86x20.png"/></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+            <div>
+              <ul class="navbar-nav mr-auto align-items-center text-uppercase">
+                <li class="nav-item">
+                  <a class="nav-link" href="get-started.html">Get started</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="use-cases.html">Use cases</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="download.html">Download</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="documentation.html">Documentation</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="contribute.html">Contribute <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="community.html">Community</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="https://www.apache.org"><img src="images/apache-feather-tm-new.png"/></a>
+                </li>
+              </ul>
+            <div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main role="main">
+
+      <!-- Marketing messaging and featurettes
+      ================================================== -->
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+
+      <div class="container">
+        <!-- CONTRIBUTE -->
+        <div class="row mb-5 mt-5 pt-3">
+          <div class="col-2 sidenav-menu pt-3">
+            <div class="pb-3 text-uppercase"><strong>Contribute</strong></div>
+            <ul class="list-unstyled mb-3">
+              <li><a href="contribute.html">Get started contributing</a></li>
+              <li class="sidenav-menu-sub-title">Technical Docs</li>
+              <li>
+                <ul class="list-unstyled sidenav-menu-sub-list">
+                  <li><a href="contribute-testing.html">Testing guide</a></li>
+                  <li><a href="contribute-dependencies-guide.html">Dependencies guide</a></li>
+                </ul>
+              </li>
+              <li class="sidenav-menu-sub-title">Policies</li>
+              <li>
+                <ul class="list-unstyled sidenav-menu-sub-list">
+                  <li><a href="contribute-pre-commit-test-policies.html">Pre-commit test policies</a></li>
+                  <li><a href="contribute-post-commit-test-policies.html">Post-commit test policies</a></li>
+                </ul>
+              </li>
+              <li class="sidenav-menu-sub-title">Committers</li>
+              <li>
+                <ul class="list-unstyled sidenav-menu-sub-list">
+                  <li><a href="contribute-become-a-committer.html">Become a committer</a></li>
+                  <li><a href="contribute-committer-guide.html">Committer guide</a></li>
+                  <li><a href="contribute-release-guide.html">Release guide</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="col-8 pt-3 offset-4">
+            <h2 id="definitions">Pre-commit test policies</h2>
+
+            <h3>Definition</h3>
+
+            <ul>
+              <li>Pre-commit test - Any single test in a pre-commit test suite.</li>
+              <li>Pre-commit test suite - A collection of pre-commit tests that have a common denominator. A test suite runs in a single Jenkins job.</li>
+            </ul>
+
+            <h3>Policies</h3>
+
+            <h4>Pull Requests</h4>
+
+            <ul>
+              <li>A PR must pass pre-commit tests before being committed to the main Unomi repo.
+                <ul>
+                  <li>The relevant pre-commit test suites are automatically launched according to PR contents.</li>
+                </ul>
+              </li>
+            </ul>
+
+            <h4>Problems</h4>
+
+            <h5>Breakage</h5>
+
+            <p>Breakage is when one or more tests in a pre-commit test suite fails or is flaky (occasionally fails).</p>
+
+            <ul>
+              <li>Breakages should be fixed within 8 hours.</li>
+            </ul>
+
+            <h5>Slowness</h5>
+
+            <p>Slowness is when the total time to run a pre-commit suite exceeds 30 minutes*, including the time the job spends in the Jenkins queue.</p>
+
+            <ul>
+              <li>Slowness should be fixed within 24 hours.</li>
+            </ul>
+
+            <h4>Problem Resolution</h4>
+
+            <p>For any problem, the options are, one of:</p>
+
+            <ul>
+              <li>Roll back the culprit PR.</li>
+              <li>Roll out a fix within 24 hours.</li>
+              <li>Disable the slow test or feature temporarily (make sure there is a tracking issue to re-enable it).</li>
+            </ul>
+
+        </div>
+      </div> 
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="container-fluid bg-dark pt-5 pb-3 text-white text-center footer">
+      
+      <div class="container pb-5">
+        <div class="row">
+          <div class="col-3 col-md-3">
+            <h5>Start</h5>
+            <ul class="list-unstyled text-small">
+              <li><a href="get-started.html" title="Get started">Get started</a></li>
+              <li><a href="get-started.html#quickstart" title="Quick start">Quick start</a></li>
+              <li><a href="download.html" title="Download">Download</a></li>
+            </ul>
+          </div>
+
+          <div class="col-3 col-md-3">
+            <h5>Documentation</h5>
+            <ul class="list-unstyled text-small">
+              <li><a href="documentation.html" title="Main documentation">Main documentation</a></li>
+              <li><a href="use-cases.html" title="More use cases">More use cases</a></li>
+              <li><a href="rest-api-doc/index.html" title="REST API documentation">REST API documentation</a></li>
+              <li><a href="unomi-api/apidocs/index.html" title="API Javadoc">API Javadoc</a></li>
+            </ul>
+          </div>
+
+          <div class="col-3 col-md-3">
+            <h5>Community</h5>
+            <ul class="list-unstyled text-small">
+              <li><a href="community.html" title="Mailing lists">Contact Us</a></li>
+              <li><a href="contribute.html" title="Contribute">Contribute</a></li>
+              <li><a href="community-team.html" title="Team">Team</a></li>
+              <li><a href="community-maturity-model-report.html" title="Maturity model report card">Maturity model report card</a></li>
+            </ul>
+          </div>
+
+          <div class="col-3 col-md-3">
+            <h5>About</h5>
+            <ul class="list-unstyled text-small">
+              <li><a href="https://www.oasis-open.org/committees/cxs/" title="OASIS Context Server Technical Committee">OASIS CXS Committee</a></li>
+              <li><a href="privacy-policy.html" title="Site policy">Site policy</a></li>
+              <li><a href="license.html" title="Licenses">Licenses</a></li>
+              <li><a href="https://www.apache.org/foundation/sponsorship.html" title="Sponsorship">Sponsorship</a></li>
+              <li><a href="https://www.apache.org/foundation/thanks.html" title="Thanks">Thanks</a></li>
+            </ul>
+          </div>
+          <div class="w-100 pt-md-3"></div>
+        </div>
+      </div>
+      
+      <p class="float-right"><a href="#">Back to top</a></p>
+      <p>Copyright &copy;2014 - 2018 <a href="https://www.apache.org">Apache Software Foundation</a> - All Rights Reserved - Powered by <a href="https://karaf.apache.org">Apache Karaf</a><br/>
+      Apache Karaf, Apache Mahout, Apache and the Apache feather logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</p>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="assets/js/vendor/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

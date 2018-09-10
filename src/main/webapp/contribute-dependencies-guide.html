@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="images/favicon.ico">
+
+    <title>Unomi Podling Maturity Assessment | Apache Unomi</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fontawesome CSS CDN -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link href="css/unomi.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <header>
+      <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top border-bottom box-shadow">
+        <div class="container">
+          <a class="navbar-brand" href="index.html"><img src="images/unomi-86x20.png"/></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+            <div>
+              <ul class="navbar-nav mr-auto align-items-center text-uppercase">
+                <li class="nav-item">
+                  <a class="nav-link" href="get-started.html">Get started</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="use-cases.html">Use cases</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="download.html">Download</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="documentation.html">Documentation</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="contribute.html">Contribute <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="community.html">Community</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="https://www.apache.org"><img src="images/apache-feather-tm-new.png"/></a>
+                </li>
+              </ul>
+            <div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main role="main">
+
+      <!-- Marketing messaging and featurettes
+      ================================================== -->
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+
+      <div class="container">
+        <!-- CONTRIBUTE -->
+        <div class="row mb-5 mt-5 pt-3">
+          <div class="col-2 sidenav-menu pt-3">
+            <div class="pb-3 text-uppercase"><strong>Contribute</strong></div>
+            <ul class="list-unstyled mb-3">
+              <li><a href="contribute.html">Get started contributing</a></li>
+              <li class="sidenav-menu-sub-title">Technical Docs</li>
+              <li>
+                <ul class="list-unstyled sidenav-menu-sub-list">
+                  <li><a href="contribute-testing.html">Testing guide</a></li>
+                  <li><a href="contribute-dependencies-guide.html">Dependencies guide</a></li>
+                </ul>
+              </li>
+              <li class="sidenav-menu-sub-title">Policies</li>
+              <li>
+                <ul class="list-unstyled sidenav-menu-sub-list">
+                  <li><a href="contribute-pre-commit-test-policies.html">Pre-commit test policies</a></li>
+                  <li><a href="contribute-post-commit-test-policies.html">Post-commit test policies</a></li>
+                </ul>
+              </li>
+              <li class="sidenav-menu-sub-title">Committers</li>
+              <li>
+                <ul class="list-unstyled sidenav-menu-sub-list">
+                  <li><a href="contribute-become-a-committer.html">Become a committer</a></li>
+                  <li><a href="contribute-committer-guide.html">Committer guide</a></li>
+                  <li><a href="contribute-release-guide.html">Release guide</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="col-8 pt-3 offset-4">
+            <h2>Dependencies Guide</h2>
+
+            <p>This document describes policies for keeping Unomi dependencies up to date.</p>
+            <p>Old dependencies cause user pain and can result in a system being unusable for some users. Many users do not use Unomi in isolation and bundle other dependencies in the same deployment. These additional dependencies might pull in incompatible dependencies to userâ€™s environment which can again result in broken Unomi pipelines, sometimes with undefined behavior. To prevent this, users will have to update their deployment environment or worse yet may end up not being able to use Unomi along with some of the other dependencies at all.</p>
+
+            <p>If a component <em>X</em> chooses to override the version of a dependency <em>D</em> from <em>a</em> to <em>b</em> and another component <em>Y</em> is incompatible with version <em>b</em> of <em>D</em>, deployment of a user that uses both components <em>X</em> and <em>Y</em> will end up in a broken state.</p>
+
+            <p>A similar issue could arise if two dependencies of Unomi depend on a common library but use incompatible versions of that library.</p>
+
+            <p>Also, users might not use Unomi in isolation, a user that depends on Unomi as well as other libraries in the same environment might run into similar issues if Unomi and the other library share a dependency while using incompatible versions.</p>
+
+            <p>This picture can become even more complicated during runtime. Runner specific code might be incompatible with dependencies included by certain modules and if these dependencies leak into runtime, a pipeline might end up in a broken state.</p>
+
+            <p>The overall issue is not common to Unomi and well known in the industry as the Diamond <a href="https://en.wikipedia.org/wiki/Dependency_hell">Dependency problem (or Dependency Hell)</a>.</p>
+
+            <p>One common solution for the diamond dependency problem is <a href="https://semver.org/">semantic versioning</a>. The basic idea is that dependencies will be versioned in the form <em>x.y.z</em> where <em>x</em> is the <em>major version</em>, <em>y</em> is the <em>minor version</em>, and <em>z</em> is the <em>patch version</em>. A major version change may be backwards incompatible and is expected to be rare. Minor and patch versions may be released more regularly but are expected to be backwards compatible. But in practice, important fixes (such as security patches) might get released in the form of minor or patch version updates and it will be healthy for the Unomi project to depend on recently released minor versions of dependencies.</p>
+
+            <h3>Identifying outdated dependencies</h3>
+
+            <p>A big part of keeping dependencies up to date involves identifying outdated dependencies of Unomi that the community should try to upgrade.</p>
+
+            <p>Unomi currently executes a weekly Jenkins job that tries to identify outdated dependencies for various SDKs. This Jenkins job generates a weekly report that is shared in Unomi dev list.</p>
+
+            <p>In addition to this, Unomi community members might identify other critical dependency updates that have to be manually performed. For example,</p>
+            <ul>
+              <li>A minor release of a dependency due to a critical security vulnerability.</li>
+              <li>A dependency conflict that was was triggered by a minor version release of a Unomi dependency (this does not apply to Java SDK that depends on exact minor versions of dependencies).</li>
+            </ul>
+
+            <p>These kind of urgently required upgrades might not get automatically picked up by the Jenkins job for few months. So Unomi community has to act to identify such issues and perform upgrades early.</p>
+
+            <h3>JIRA Automation</h3>
+
+            <p>In order to track the dependency upgrade process, JIRA tickets will be created per significant outdated dependency based on the report. A bot named <em>Unomi Jira Bot</em> was created for managing JIRA issues. Unomi community agrees on the following policies that creates and updates issues.</p>
+            <ul>
+              <li>Issues will be named as "Unomi Dependency Update Request: "</li>
+              <li>Issues will be created under the component <em>dependencies</em></li>
+              <li>If more than one owners found for a dependency, the first owner will be picked as the primary owner, the others will be pinged in the issue description.</li>
+              <li>If no owners found, leave the assignee empty. The component lead is responsible for triaging the issue.</li>
+              <li>Avoid creating duplicate issues. Updating the descriptions of the open issues created by the previous dependency check.</li>
+              <li>The dependency sometimes is not able to be upgraded, the issue should be closed as <em>"won't fix"</em>. And, the bot should avoid recreating issues with <em>"won't fix"</em>.</li>
+            </ul>
+
+            <h3>Upgrading identified outdated dependencies</h3>
+
+            <p>After outdated dependencies are identified, Unomi community has to act to upgrade the dependencies regularly. Unomi community has agreed on following policies regarding upgrading dependencies.</p>
+
+            <p><strong>Human readable reports on status of Unomi dependencies are generated weekly by an automated Jenkins job and shared with the Unomi community through the dev list.</strong></p>
+
+            <p>These reports should be concise and should highlight the cases where the community has to act on.</p>
+
+            <p><strong>Unomi components should define dependencies and their versions at the top level. There can be rare exceptions, but they should come with explanations.</strong></p>
+
+            <p>Components include various Unomi runners, IO connectors, etc. Component-level dependency version declarations should only be performed in rare cases and should come with a comment explaining the reasoning for overriding the dependency. For example, dependencies specific to a runner that are unlikely to be utilized by other components might be defined at the runner.</p>
+
+            <p><strong>A significantly outdated dependency (identified manually or through the automated Jenkins job) should result in a JIRA that is a blocker for the next release. Release manager may choose to push the blocker to the subsequent release or downgrade from a blocker.</strong></p>
+
+            <p>This will be a blocker for next major and minor version releases of Unomi. JIRA may be created automatically or manually.</p>
+
+            <p>For manually identified critical dependency updates, Unomi community members should create blocking JIRAs for next release. In addition to this Unomi community members may trigger patch releases for any critical dependency fixes that should be made available to users urgently.</p>
+
+            <p><strong>Dependency declarations may identify owners that are responsible for upgrading respective dependencies.</strong></p>
+
+            <p>Owners can be mentioned in the yaml files. Blocking JIRAs will be initially assigned to these owners (if available). Release manager may choose to re-assign these JIRAs. A dependency may have more than one declared owner and in this case the JIRA will be assigned to one of the owners mentioned.</p>
+
+            <p><strong>Dependencies of Java SDK components that may cause issues to other components if leaked should be vendored.</strong></p>
+
+            <p><a href="https://www.ardanlabs.com/blog/2013/10/manage-dependencies-with-godep.html">Vendoring</a> is the process of creating copies of third party dependencies. Combined with repackaging, vendoring will allow Unomi components to depend on third party libraries without causing conflicts to other components. Vendoring should be done in a case-by-case basis since this can increase the total number of dependencies deployed in userâ€™s enviroment.</p>
+
+            <h3>Dependency updates and backwards compatibility</h3>
+
+            <p>Unomi releases <a href="https://unomi.incubator.apache.org/downloads/">adhere to</a> semantic versioning. Hence, community members should take care when updating dependencies. Minor version updates to dependencies should be backwards compatible in most cases. Some updates to dependencies though may result in backwards incompatible API or functionality changes to Unomi. PR reviewers and committers should take care to detect any dependency updates that could potentially introduce backwards incompatible changes to Unomi before merging and PRs that update dependencies should include a statement regarding this verification in the form of a PR comment. Dependency updates that result in backwards incompatible changes to non-experimental features of Unomi should be held till next major version release of Unomi.</p>
+            
+            <p>Any exceptions to this policy should only occur in extreme cases (for example, due to a security vulnerability of an existing dependency that is only fixed in a subsequent major version) and should be discussed in the Unomi dev list. Note that backwards incompatible changes to experimental features may be introduced in a minor version release.</p>
+          </div>
+        </div>
+      </div> 
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="container-fluid bg-dark pt-5 pb-3 text-white text-center footer">
+      
+      <div class="container pb-5">
+        <div class="row">
+          <div class="col-3 col-md-3">
+            <h5>Start</h5>
+            <ul class="list-unstyled text-small">
+              <li><a href="get-started.html" title="Get started">Get started</a></li>
+              <li><a href="get-started.html#quickstart" title="Quick start">Quick start</a></li>
+              <li><a href="download.html" title="Download">Download</a></li>
+            </ul>
+          </div>
+
+          <div class="col-3 col-md-3">
+            <h5>Documentation</h5>
+            <ul class="list-unstyled text-small">
+              <li><a href="documentation.html" title="Main documentation">Main documentation</a></li>
+              <li><a href="use-cases.html" title="More use cases">More use cases</a></li>
+              <li><a href="rest-api-doc/index.html" title="REST API documentation">REST API documentation</a></li>
+              <li><a href="unomi-api/apidocs/index.html" title="API Javadoc">API Javadoc</a></li>
+            </ul>
+          </div>
+
+          <div class="col-3 col-md-3">
+            <h5>Community</h5>
+            <ul class="list-unstyled text-small">
+              <li><a href="community.html" title="Mailing lists">Contact Us</a></li>
+              <li><a href="contribute.html" title="Contribute">Contribute</a></li>
+              <li><a href="community-team.html" title="Team">Team</a></li>
+              <li><a href="community-maturity-model-report.html" title="Maturity model report card">Maturity model report card</a></li>
+            </ul>
+          </div>
+
+          <div class="col-3 col-md-3">
+            <h5>About</h5>
+            <ul class="list-unstyled text-small">
+              <li><a href="https://www.oasis-open.org/committees/cxs/" title="OASIS Context Server Technical Committee">OASIS CXS Committee</a></li>
+              <li><a href="privacy-policy.html" title="Site policy">Site policy</a></li>
+              <li><a href="license.html" title="Licenses">Licenses</a></li>
+              <li><a href="https://www.apache.org/foundation/sponsorship.html" title="Sponsorship">Sponsorship</a></li>
+              <li><a href="https://www.apache.org/foundation/thanks.html" title="Thanks">Thanks</a></li>
+            </ul>
+          </div>
+          <div class="w-100 pt-md-3"></div>
+        </div>
+      </div>
+      
+      <p class="float-right"><a href="#">Back to top</a></p>
+      <p>Copyright &copy;2014 - 2018 <a href="https://www.apache.org">Apache Software Foundation</a> - All Rights Reserved - Powered by <a href="https://karaf.apache.org">Apache Karaf</a><br/>
+      Apache Karaf, Apache Mahout, Apache and the Apache feather logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</p>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="assets/js/vendor/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
