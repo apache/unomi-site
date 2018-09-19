@@ -59,6 +59,8 @@
                     <ignorePathsToDelete>
                         <ignorePathToDelete>docs/**</ignorePathToDelete>
                         <ignorePathToDelete>rest-api-doc/**</ignorePathToDelete>
+                        <ignorePathToDelete>unomi-api/**</ignorePathToDelete>
+                        <ignorePathToDelete>manual/**</ignorePathToDelete>
                     </ignorePathsToDelete>
                 </configuration>
             </plugin>
