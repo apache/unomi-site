@@ -53,8 +53,8 @@
                 <artifactId>maven-scm-publish-plugin</artifactId>
                 <version>1.0-beta-2</version>
                 <configuration>
-                    <checkinComment>[scm-publish] Updating main website contents</checkinComment>
-                    <pubScmUrl>scm:svn:https://svn.apache.org/repos/asf/unomi/site/production</pubScmUrl>
+                    <checkinComment>[scm-publish] Updating Unomi website</checkinComment>
+                    <pubScmUrl>scm:svn:https://svn.apache.org/repos/asf/incubator/unomi/website/</pubScmUrl>
                     <content>src/main/webapp</content>
                     <ignorePathsToDelete>
                         <ignorePathToDelete>docs/**</ignorePathToDelete>
