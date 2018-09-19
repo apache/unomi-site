@@ -58,9 +58,8 @@
                     <content>src/main/webapp</content>
                     <ignorePathsToDelete>
                         <ignorePathToDelete>docs/**</ignorePathToDelete>
+                        <ignorePathToDelete>rest-api-doc/**</ignorePathToDelete>
                     </ignorePathsToDelete>
-                    <tryUpdate>true</tryUpdate>
-                    <skipDeletedFiles>true</skipDeletedFiles>
                 </configuration>
             </plugin>
         </plugins>
