@@ -25,5 +25,5 @@ mvn clean install
 To publish the local website to the production location (https://unomi.incubator.apache.org/), you have to use:
 
 ```
-mvn install scm-publish:publish-scm
+mvn install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD
 ```
