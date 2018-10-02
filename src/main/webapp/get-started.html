@@ -59,7 +59,7 @@
                   <a class="nav-link" href="community.html">Community</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link disabled" href="https://www.apache.org"><img src="images/apache-feather-tm-new.png"/></a>
+                  <a class="nav-link disabled" target="_blank" href="https://www.apache.org"><img src="images/apache-feather-tm-new.png"/></a>
                 </li>
               </ul>
             <div>
@@ -78,8 +78,8 @@
               <p>Apache Unomi is a REST server that manages user profiles and events related to the profiles. It can be used to integrate personalization and profile management within very different systems such as CMS, CRMs, Issue Trackers, native mobile application. It was designed to be easy to integrate with external systems, promoting profile sharing and re-use in very different applications.</p>
               <p>Basically the server tracks users using different mechanisms (by default cookies), builds a progressively populated profile and associates events that are performed by a user with his profile. Events may range from a click on a page, to a file being downloaded, a native mobile application button being clicked, or anything that can be sent to the server.</p>
               <p>The server has a built-in rule system that makes it possible to perform any action when an event is collected for a profile. It also has the notion of user segments, making it possible to classify user profiles into dynamic sub-groups, notably to build personalized experiences for specific segments.</p>
-              <p>As Apache Unomi is built as an OSGi application running inside <a href="https://karaf.apache.org">Apache Karaf</a>, it is extremely extensible and built to be scalable. For example it is possible to plugin new conditions, actions, or any other service that may be needed such as beacon tracking or push notifications.</p>
-              <p>Apache Unomi is also the reference implementation of the upcoming <a href="https://www.oasis-open.org/committees/cxs/">OASIS Context Server (CXS) standard</a> to help standardize personalization of online experience while promoting ethical web experience management and increased user privacy controls.</p>
+              <p>As Apache Unomi is built as an OSGi application running inside <a target="_blank" href="https://karaf.apache.org">Apache Karaf</a>, it is extremely extensible and built to be scalable. For example it is possible to plugin new conditions, actions, or any other service that may be needed such as beacon tracking or push notifications.</p>
+              <p>Apache Unomi is also the reference implementation of the upcoming <a target="_blank" href="https://www.oasis-open.org/committees/cxs/">OASIS Context Server (CXS) standard</a> to help standardize personalization of online experience while promoting ethical web experience management and increased user privacy controls.</p>
             </div>
           </div>            
         </div><!-- in a few words -->
@@ -102,16 +102,16 @@
           <div class="col-md-12">
             <h2 class="featurette-heading">5 Minutes Quick start !</h2>
             <ol style="list-style-type: decimal"> 
-              <li>Install JDK 8 (see <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a> and make sure you set the JAVA_HOME variable <a href="https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/">https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/</a></li> 
-              <li>Download ElasticSearch here : <a href="https://www.elastic.co/downloads/elasticsearch">https://www.elastic.co/downloads/elasticsearch</a> (use version 5.1.2 for Unomi &lt;= 1.2, 5.6.3 for Unomi &gt;= 1.3)</li> 
+              <li>Install JDK 8 (see <a target="_blank" href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a> and make sure you set the JAVA_HOME variable <a target="_blank" href="https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/">https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/</a></li>
+              <li>Download ElasticSearch here : <a target="_blank" href="https://www.elastic.co/downloads/elasticsearch">https://www.elastic.co/downloads/elasticsearch</a> (use version 5.1.2 for Unomi &lt;= 1.2, 5.6.3 for Unomi &gt;= 1.3)</li>
               <li>Uncompress it and change the <code>config/elasticsearch.yml</code> to include the following config : <code>cluster.name: contextElasticSearch</code></li> 
               <li>Launch ElasticSearch using : <code>bin/elasticsearch</code></li> 
-              <li>Download Apache Unomi here : <a href="http://unomi.incubator.apache.org/download.html">http://unomi.incubator.apache.org/download.html</a></li> 
+              <li>Download Apache Unomi here : <a target="_blank" href="http://unomi.incubator.apache.org/download.html">http://unomi.incubator.apache.org/download.html</a></li>
               <li>Start it using : <code>./bin/karaf</code></li> 
               <li>Start the Apache Unomi packages using <code>unomi:start</code> in the Apache Karaf Shell</li> 
               <li>Wait for startup to complete</li> 
-              <li>Try accessing <a href="https://localhost:9443/cxs/cluster">https://localhost:9443/cxs/cluster</a> with username/password: karaf/karaf . You might get a certificate warning in your browser, just accept it despite the warning it is safe.</li> 
-              <li>Request your first context by simply accessing : <a href="http://localhost:8181/context.js?sessionId=1234">http://localhost:8181/context.js?sessionId=1234</a></li> 
+              <li>Try accessing <a target="_blank" href="https://localhost:9443/cxs/cluster">https://localhost:9443/cxs/cluster</a> with username/password: karaf/karaf . You might get a certificate warning in your browser, just accept it despite the warning it is safe.</li>
+              <li>Request your first context by simply accessing : <a target="_blank" href="http://localhost:8181/context.js?sessionId=1234">http://localhost:8181/context.js?sessionId=1234</a></li>
             </ol>
           </div>
         </div>
@@ -156,11 +156,11 @@
           <div class="col-3 col-md-3">
             <h5>About</h5>
             <ul class="list-unstyled text-small">
-              <li><a href="https://www.oasis-open.org/committees/cxs/" title="OASIS Context Server Technical Committee">OASIS CXS Committee</a></li>
+              <li><a target="_blank" href="https://www.oasis-open.org/committees/cxs/" title="OASIS Context Server Technical Committee">OASIS CXS Committee</a></li>
               <li><a href="privacy-policy.html" title="Site policy">Site policy</a></li>
               <li><a href="license.html" title="Licenses">Licenses</a></li>
-              <li><a href="https://www.apache.org/foundation/sponsorship.html" title="Sponsorship">Sponsorship</a></li>
-              <li><a href="https://www.apache.org/foundation/thanks.html" title="Thanks">Thanks</a></li>
+              <li><a target="_blank" href="https://www.apache.org/foundation/sponsorship.html" title="Sponsorship">Sponsorship</a></li>
+              <li><a target="_blank" href="https://www.apache.org/foundation/thanks.html" title="Thanks">Thanks</a></li>
             </ul>
           </div>
           <div class="w-100 pt-md-3"></div>
@@ -168,7 +168,7 @@
       </div>
       
       <p class="float-right"><a href="#">Back to top</a></p>
-      <p>Copyright &copy;2014 - 2018 <a href="https://www.apache.org">Apache Software Foundation</a> - All Rights Reserved - Powered by <a href="https://karaf.apache.org">Apache Karaf</a><br/>
+      <p>Copyright &copy;2014 - 2018 <a target="_blank" href="https://www.apache.org">Apache Software Foundation</a> - All Rights Reserved - Powered by <a target="_blank" href="https://karaf.apache.org">Apache Karaf</a><br/>
       Apache Karaf, Apache Mahout, Apache and the Apache feather logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</p>
     </footer>
 
