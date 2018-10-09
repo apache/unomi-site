@@ -86,13 +86,14 @@
 
           <h3>Overview</h3>
           <p>
-            This is an assessment of the Unomi podling’s maturity, meant to help inform the decision (of the mentors, community, Incubator PMC and ASF Board of Directors) to graduate it as a top-level Apache project. It is based on the ASF project maturity model at <a target="_blank" href="https://community.apache.org/apache-way/apache-project-maturity-model.html">https://community.apache.org/apache-way/apache-project-maturity-model.html</a>
-            Maintaining such a file is a new, experimental idea as part of the continuous improvement of the ASF incubation process. Unomi is the second podling where that happens.
+            This is an assessment of the Unomi podling’s maturity, meant to help inform the decision (of the mentors, community, Incubator PMC and ASF Board of Directors) to graduate
+            it as a top-level Apache project. It is based on the ASF project maturity model at <a target="_blank" href="https://community.apache.org/apache-way/apache-project-maturity-model.html">https://community.apache.org/apache-way/apache-project-maturity-model.html</a>
+            Maintaining such a file is a new, experimental idea as part of the continuous improvement of the ASF incubation process.
           </p>
 
           <h3>Status of this document</h3>
           <p>
-            Updated 2017-07-19 with the latest status of the project.
+            Updated 2018-10-09 with the latest status of the project.
           </p>
 
           <h3>Overall assessment</h3>
@@ -273,8 +274,8 @@
               <tr>
                 <td><strong>QU50</strong></td>
                 <td>The project strives to respond to documented bug reports in a timely manner.</td>
-                <td class="text-center"></td>
-                <td>to be evaluated</td>
+                <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                <td>The project uses <a hred="https://issues.apache.org/jira/projects/UNOMI/summary">Apache's JIRA platform</a> to handle bugs as well as any other types of issues reported on it. A focus is put on making sure that issues are responded to swiftly.</td>
               </tr>
             </tbody>
           </table>
@@ -293,43 +294,47 @@
                 <td><strong>CO10</strong></td>
                 <td>The project has a well-known homepage that points to all the information required to operate according to this maturity model.</td>
                 <td class="text-center"><i class="fas fa-check text-success"></i></td>
-                <td>See the <a class="externalLink" target="_blank" href="http://unomi.incubator.apache.org">project’s home page</a></td>
+                <td>See the <a class="externalLink" target="_blank" href="http://unomi.incubator.apache.org">project’s home page</a> that includes a <a href="contribute.html">contribute</a> section
+                  that describes how to become a committer as well as <a href="contribute-become-a-committer.html">several</a> <a href="contribute-committer-guide.html">documents</a> for on-board newcomers quickly</td>
               </tr> 
               <tr>
                 <td><strong>CO20</strong></td>
                 <td>The community welcomes contributions from anyone who acts in good faith and in a respectful manner and adds value to the project.</td>
-                <td class="text-center"></td>
-                <td>to be evaluated</td>
+                <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                <td>This is a part of the <a href="contribute.html">contribution</a> guide. Here is an example of a recent addition of a committer and the way he was welcome, e.g., <a href="https://lists.apache.org/thread.html/f616d6894ae665325b60c829bb641bfaa43a2c1e354a930340b9645b@%3Cdev.unomi.apache.org%3E">this</a></td>
               </tr> 
               <tr>
                 <td><strong>CO30</strong></td>
                 <td>Contributions include not only source code, but also documentation, constructive bug reports, constructive discussions, marketing and generally anything that adds value to the project.</td>
-                <td class="text-center"></td>
-                <td>to be evaluated</td>
+                <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                <td>
+                  The <a href="contribute.html">contribution guide</a> specifically calls out many avenues for contribution. Specifically, several contributors have contributed documentation or bug fixes.
+                </td>
               </tr> 
               <tr>
                 <td><strong>CO40</strong></td>
                 <td>The community is meritocratic and over time aims to give more rights and responsibilities to contributors who add value to the project.</td>
-                <td class="text-center"></td>
-                <td>to be evaluated</td>
+                <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                <td>A specific <a href="contribute-become-a-committer.html">"become a contributor"</a> page is publicly available that describes the process of how to gain more rights and responsibilities</td>
               </tr> 
               <tr>
                 <td><strong>CO50</strong></td>
                 <td>The way in which contributors can be granted more rights such as commit access or decision power is clearly documented and is the same for all contributors.</td>
                 <td class="text-center"></td>
-                <td>to be evaluated</td>
+                <td>Again, the same <a href="contribute-become-a-committer.html">"become a contributor"</a> page contains all this information.</td>
               </tr> 
               <tr>
                 <td><strong>CO60</strong></td>
                 <td>The community operates based on consensus of its members (see CS10) who have decision power. Dictators, benevolent or not, are not welcome in Apache projects.</td>
-                <td class="text-center"></td>
-                <td>to be evaluated</td>
+                <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                <td>The project works to build consensus. All votes have been unanimous so far. Usually a discussion happens before a vote on a technical or release issue, so the voting process is rarely a problem. Also, in the <a href="contribute-become-a-committer.html">become a contributor</a> page, a code of conduct is put in place to
+                ensure contributors have a reference to it.</td>
               </tr> 
               <tr>
                 <td><strong>CO70</strong></td>
                 <td>The project strives to answer user questions in a timely manner.</td>
-                <td class="text-center"></td>
-                <td>to be evaluated</td>
+                <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                <td>The project typically provides detailed answers to user questions within a few hours via its <a href="https://lists.apache.org/list.html?users@unomi.apache.org">users@ mailing list</a>.</td>
               </tr>
             </tbody>
           </table>
@@ -347,31 +352,32 @@
               <tr>
                 <td><strong>CS10</strong></td>
                 <td>The project maintains a public list of its contributors who have decision power – the project’s PMC (Project Management Committee) consists of those contributors.</td>
-                <td class="text-center"></td>
-                <td>to be evaluated</td>
+                <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                <td>The project has a <a href="community-team.html">team page</a> that lists all the contributors along with their associated roles.</td>
               </tr> 
               <tr>
                 <td><strong>CS20</strong></td>
                 <td>Decisions are made by consensus among PMC members and are documented on the project’s main communications channel. Community opinions are taken into account but the PMC has the final word if needed.</td>
-                <td class="text-center"></td>
-                <td>to be evaluated</td>
+                <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                <td>PPMC decisions have been unonimous so far, including voting new committers and new PPMC members. The project has been making important decisions on the project mailing lists. All community decisions have had a consensus without any PPMC action needed.</td>
               </tr> 
               <tr>
                 <td><strong>CS30</strong></td>
                 <td>Documented voting rules are used to build consensus when discussion is not sufficient.</td>
-                <td class="text-center"></td><td>to be evaluated</td>
+                <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                <td>The project uses the standard ASF voting rules. Voting rules are clearly stated before the voting starts for each individual vote.</td>
               </tr> 
               <tr>
                 <td><strong>CS40</strong></td>
                 <td>In Apache projects, vetoes are only valid for code commits and are justified by a technical explanation, as per the Apache voting rules defined in CS30.</td>
-                <td class="text-center"></td>
-                <td>to be evaluated</td>
+                <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                <td>The project hasn’t used a veto at any point and relies on robust code reviews, especially for any issues around licenses problems.</td>
               </tr> 
               <tr>
                 <td><strong>CS50</strong></td>
                 <td>All “important” discussions happen asynchronously in written form on the project’s main communications channel. Offline, face-to-face or private discussions that affect the project are also documented on that channel.</td>
-                <td class="text-center"></td>
-                <td>to be evaluated</td>
+                <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                <td>The project has been making important decisions on the project mailing lists. When communication occurs on side channels (Slack, face-to-face mostly), the mailing list is always used to communicate important information to the community.</td>
               </tr>
             </tbody>
           </table>
@@ -389,14 +395,15 @@
               <tr>
                 <td><strong>IN10</strong></td>
                 <td>The project is independent from any corporate or organizational influence.</td>
-                <td class="text-center"></td>
-                <td>to be evaluated</td>
+                <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                <td>Although the project originated from a donation by a single corporate entity, it has strived to add external contributors and has now PPMC members that are part of 4 different corporations (Adobe, Talend, Yupiik, Jahia) and some contributors have
+                also moved on to new corporations.</td>
               </tr> 
               <tr>
                 <td><strong>IN20</strong></td>
                 <td>Contributors act as themselves as opposed to representatives of a corporation or organization.</td>
-                <td class="text-center"></td>
-                <td>to be evaluated</td>
+                <td class="text-center"><i class="fas fa-check text-success"></i></td>
+                <td>The project has experienced PPMC members that will make sure that contributors will be acting freely as individuals.</td>
               </tr>
             </tbody>
           </table>
