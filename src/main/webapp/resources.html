@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="images/favicon.ico">
 
-    <title>Apache Unomi Open Source Customer Data Platform | Contribute | Committer guide </title>
+    <title>Apache Unomi Open Source Customer Data Platform | Getting Started </title>
 
     <!-- Google Analytics -->
     <script>
@@ -52,11 +52,11 @@
                 <li class="nav-item">
                   <a class="nav-link" href="documentation.html">Documentation</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="resources.html">Resources</a>
-                </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="contribute.html">Contribute <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="resources.html">Resources <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="contribute.html">Contribute</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="community.html">Community</a>
@@ -72,91 +72,46 @@
     </header>
 
     <main role="main">
+      <div class="container pt-5 pb-5">
+        <h2 class="pb-2 mb-2">Learn more about <span class="text-muted">Apache Unomi</span></h2>
+        
+        <!-- videos -->
+        <div class="row pb-2 pt-4">
+          <div class="col-md-12">
+            <h5 class="project-heading">Videos</h5>
+            <div class="pb-2 pt-2">
+              <h6 class="pb-2 pt-2">ApacheCon NA 2018 - Apache Unomi - An open source customer data platform</h6>
+              <!-- 4:3 aspect ratio -->
+              <div class="embed-responsive embed-responsive-16by9 w-75 d-flex justify-content-center">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/XO1cLSgeRsw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              </div>
+              <a class="btn btn-primary mt-3" target="_blank" href="https://www.slideshare.net/sergehuber/apachecon-na-2018-apache-unomi-an-open-source-customer-data-platformapache-unomi-cdp-presentation">View in slideshare &raquo;</a>
+            </div>
 
-      <!-- Marketing messaging and featurettes
-      ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
+            <hr class="featurette-divider">
 
-      <div class="container">
-        <!-- CONTRIBUTE -->
-        <div class="row mb-5 mt-5 pt-3">
-          <div class="col-2 sidenav-menu pt-3">
-            <div class="pb-3 text-uppercase"><strong>Contribute</strong></div>
-            <ul class="list-unstyled mb-3">
-              <li><a href="contribute.html">Get started contributing</a></li>
-              <li class="sidenav-menu-sub-title">Technical Docs</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="contribute-testing.html">Testing guide</a></li>
-                  <li><a href="contribute-dependencies-guide.html">Dependencies guide</a></li>
-                </ul>
-              </li>
-              <li class="sidenav-menu-sub-title">Policies</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="contribute-pre-commit-test-policies.html">Pre-commit test policies</a></li>
-                  <li><a href="contribute-post-commit-test-policies.html">Post-commit test policies</a></li>
-                </ul>
-              </li>
-              <li class="sidenav-menu-sub-title">Committers</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="contribute-become-a-committer.html">Become a committer</a></li>
-                  <li><a href="contribute-committer-guide.html">Committer guide</a></li>
-                  <li><a href="contribute-release-guide.html">Release guide</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div class="col-8 pt-3 offset-4">
-            <h2>Committer Guide</h2>
+            <div class="pb-2 pt-2">
+              <h6 class="pb-2 pt-2">ApacheCon 2015 - The Apache Unomi Project In-depth</h6>
+              <!-- 4:3 aspect ratio -->
+              <div class="embed-responsive embed-responsive-16by9 w-75 d-flex justify-content-center">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/y4uNwnVMVyg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              </div>
+            </div>
 
-            <p>This guide is for <a target="_blank" href="https://www.apache.org/foundation/how-it-works.html#committers">committers</a> and covers Unomi's guidelines for reviewing and merging code.</p>
+            <hr class="featurette-divider">
 
-            <h3>Always get to LGTM ("Looks good to me!")</h3>
+            <div class="pb-2 pt-2">
+              <h6 class="pb-2 pt-2">Keynote - Introducing Apache Unomi</h6>
+              <!-- 4:3 aspect ratio -->
+              <div class="embed-responsive embed-responsive-16by9 w-75 d-flex justify-content-center">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/4gJPY-KfQ10" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+              </div>
+            </div>
 
-            <p>After a pull request goes through rounds of reviews and revisions, it will become ready for merge. A committer (who is <em>not</em> the author of the code) should signal this either by GitHub "approval" or by a comment such as "Looks good to me!" (LGTM). Any committer can then merge the pull request. It is fine for a committer to self-merge if another committer has reviewed the code and approved it, just be sure to be explicit about whose job it is!</p>
+          </div> 
+        </div><!-- videos -->
 
-            <p>Pull requests should not be merged before the review has received an explicit LGTM from another committer. Exceptions to this rule are rare and made on a
-            case-by-case basis. A committer may use their discretion for situations such as build breaks. In this case, you should still seek a review on the pull request! A common acronym you may see is "TBR" "to be reviewed".</p>
-
-            <p>Committers should never commit anything without going through a pull request, because that bypasses test coverage and could potentially cause the build to
-            fail. In addition, pull requests ensure that changes are communicated properly and potential flaws or improvements can be spotted.<strong>Always go through a pull request, even if you won't wait for the code review.</strong> Even then, reviewers can provide comments in the pull request after the merge happens, for use in follow-up pull requests.</p>
-
-            <h3>Contributor License Agreement</h3>
-
-            <p>If you are merging a larger contribution, please make sure that the contributor has an ICLA on file with the Apache Secretary. You can view the list of
-            committers <a target="_blank" href="http://home.apache.org/phonebook.html?unix=committers">here</a>, as well as <a target="_blank" href="http://home.apache.org/unlistedclas.html">ICLA-signers who aren't yet committers</a>.</p>
-
-            <p>For smaller contributions, however, this is not required. In this case, we rely on <a target="_blank" href="http://www.apache.org/licenses/LICENSE-2.0#contributions">clause five</a> of the Apache License, Version 2.0, describing licensing of intentionally submitted contributions.</p>
-
-            <h3>Tests</h3>
-
-            <p>Before merging, please make sure that Jenkins tests pass, as visible in the GitHub pull request. Do not merge the pull request if there are test failures.</p>
-
-            <p>If the pull request contains changes that call for extra test coverage, you can ask Jenkins to run an extended test suite. You can run the examples and some integration tests with "Run PostCommit".</p>
-
-            <h3>Finishing touches</h3>
-
-            <p>At some point in the review process, the change to the codebase will be  complete. However, the pull request may have a collection of review-related
-            commits that are not meaningful to preserve in the history. The reviewer should give the LGTM and then request that the author of the pull request rebase,
-            squash, split, etc, the commits, so that the history is most useful. Favor commits that do just one thing. The commit is the smallest unit of easy
-            rollback; it is easy to roll back many commits, or a whole pull request, but harder to roll back part of a commit.</p>
-
-            <h3>Merging it!</h3>
-
-            <p>After all the tests pass, there should be a green merge button at the bottom of the pull request.  There are multiple choices and you should choose "Merge pull request" (the default). This preserves the commit history and adds a merge commit, so be sure the commit history has been curated appropriately.</p>
-
-            <p>Do <em>not</em> use the default GitHub commit message, which looks like this:</p>
-            <pre class="alert alert-primary"><code>Merge pull request #1234 from some_user/transient_branch_name [UNOMI-7873] Fix the foo bizzle bazzle</code></pre>
-
-            <p>Instead, pull it all into the subject line:</p>
-            <pre class="alert alert-primary"><code>Merge pull request #1234: [UNOMI-7873] Fix the foo bizzle bazzle</code></pre>
-
-            <p>If you have comments to add, put them in the body of the commit message.</p>    
-          </div>
-        </div>
-      </div> 
+      </div>
     </main>
 
     <!-- FOOTER -->
