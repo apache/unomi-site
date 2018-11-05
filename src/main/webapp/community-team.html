@@ -33,8 +33,11 @@
     <header>
       <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top border-bottom box-shadow">
         <div class="container">
-          <a class="navbar-brand" href="index.html"><img src="images/unomi-86x20.png"/></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <a class="navbar-brand" href="index.html">
+            <img src="images/unomi-86x20.png" alt="Logo Apache Unomi"/>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                  aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
@@ -62,16 +65,18 @@
                   <a class="nav-link" href="community.html">Community <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link disabled" target="_blank" href="https://www.apache.org"><img src="images/apache-feather-tm-new.png"/></a>
+                  <a class="nav-link disabled" target="_blank" href="https://www.apache.org">
+                      <img src="images/apache-feather-tm-new.png" alt="Logo Apache Feather"/>
+                  </a>
                 </li>
               </ul>
-            <div>
+            </div>
           </div>
         </div>
       </nav>
     </header>
 
-    <main role="main">
+    <main>
 
       <div class="container mb-5 pt-5">
         <div class="col-2 sidenav-menu pt-3">
@@ -96,6 +101,7 @@
 
           <table class="table table-striped table-sm">
             <thead class="thead-dark">
+              <tr>
                 <th>Image</th>
                 <th>Id</th>
                 <th>Name</th>
@@ -104,141 +110,142 @@
                 <th>Organization URL</th>
                 <th>Roles</th>
                 <th>Time Zone</th>
+              </tr>
             </thead>
             <tbody>
             <tr> 
-              <td><img src="http://www.gravatar.com/avatar/27790393b874159fe05609ca7ed812f9?d=mm&amp;s=60" alt="" /></td> 
-              <td><a name="jbonofre"></a>jbonofre</td> 
+              <td><img src="http://www.gravatar.com/avatar/27790393b874159fe05609ca7ed812f9?d=mm&s=60" alt="" /></td>
+              <td><a id="jbonofre"></a>jbonofre</td>
               <td>Jean-Baptiste Onofr&eacute;</td> 
               <td><a class="externalLink" href="mailto:jbonofre@apache.org">jbonofre@apache.org</a></td> 
               <td>Talend</td> 
               <td><a class="externalLink" target="_blank" href="https://www.talend.com">https://www.talend.com</a></td>
               <td>champion, committer, PPMC</td> 
               <td>+1</td> 
-            </tr> 
-            <tr> 
-              <td><img src="http://www.gravatar.com/avatar/4d3eed1c656ec68693eb61d8ccc6a3af?d=mm&amp;s=60" alt="" /></td> 
-              <td><a name="shuber"></a>shuber</td> 
+            </tr>
+            <tr>
+              <td><img src="http://www.gravatar.com/avatar/4d3eed1c656ec68693eb61d8ccc6a3af?d=mm&s=60" alt="" /></td>
+              <td><a id="shuber"></a>shuber</td>
               <td>Serge Huber</td> 
               <td><a class="externalLink" href="mailto:shuber@apache.org">shuber@apache.org</a></td> 
               <td>Jahia</td> 
               <td><a class="externalLink" target="_blank" href="https://www.jahia.com">https://www.jahia.com</a></td>
               <td>committer, PPMC</td> 
               <td>+1</td> 
-            </tr> 
+            </tr>
             <tr> 
-             <td><img src="http://www.gravatar.com/avatar/505b92f0f422152656b53018929316f4?d=mm&amp;s=60" alt="" /></td> 
-             <td><a name="bdelacretaz"></a>bdelacretaz</td> 
+             <td><img src="http://www.gravatar.com/avatar/505b92f0f422152656b53018929316f4?d=mm&s=60" alt="" /></td>
+             <td><a id="bdelacretaz"></a>bdelacretaz</td>
              <td>Bertrand Delacretaz</td> 
              <td><a class="externalLink" href="mailto:bdelacretaz@apache.org">bdelacretaz@apache.org</a></td> 
              <td>Adobe</td>
              <td><a class="externalLink" target="_blank" href="https://www.adobe.com">https://www.adobe.com</a></td>
              <td>Mentor, PPMC</td> 
              <td>+1</td> 
-            </tr> 
+            </tr>
             <tr> 
-             <td><img src="http://www.gravatar.com/avatar/b103ce8281c7eef619e5e4bfcfccf639?d=mm&amp;s=60" alt="" /></td> 
-             <td><a name="rvs"></a>rvs</td> 
+             <td><img src="http://www.gravatar.com/avatar/b103ce8281c7eef619e5e4bfcfccf639?d=mm&s=60" alt="" /></td>
+             <td><a id="rvs"></a>rvs</td>
              <td>Roman Shaposhnik</td> 
              <td><a class="externalLink" href="mailto:rvs@apache.org">rvs@apache.org</a></td> 
              <td>Pivotal</td>
              <td><a class="externalLink" target="_blank" href="https://pivotal.io">https://pivotal.io</a></td>
              <td>Retired (was Mentor, PPMC)</td>
              <td>-</td> 
-            </tr> 
+            </tr>
             <tr> 
-             <td><img src="http://www.gravatar.com/avatar/6f919a5883b854b9ae41023ef281ef85?d=mm&amp;s=60" alt="" /></td> 
-             <td><a name="mattmann"></a>mattmann</td> 
+             <td><img src="http://www.gravatar.com/avatar/6f919a5883b854b9ae41023ef281ef85?d=mm&s=60" alt="" /></td>
+             <td><a id="mattmann"></a>mattmann</td>
              <td>Chris Mattmann</td> 
              <td><a class="externalLink" href="mailto:mattmann@apache.org">mattmann@apache.org</a></td> 
              <td>NASA JPL</td>
              <td><a class="externalLink" target="_blank" href="https://www.jpl.nasa.gov">https://www.jpl.nasa.gov</a></td>
              <td>Retired (was Mentor, PPMC)</td>
              <td>-</td> 
-            </tr> 
+            </tr>
             <tr> 
-             <td><img src="http://www.gravatar.com/avatar/9bbc37f4660389c1c54aee53b05a2a65?d=mm&amp;s=60" alt="" /></td> 
-             <td><a name="draier"></a>draier</td> 
+             <td><img src="http://www.gravatar.com/avatar/9bbc37f4660389c1c54aee53b05a2a65?d=mm&s=60" alt="" /></td>
+             <td><a id="draier"></a>draier</td>
              <td>Thomas Draier</td> 
              <td><a class="externalLink" href="mailto:draier@apache.org">draier@apache.org</a></td>
              <td>Jahia</td>
              <td><a class="externalLink" target="_blank" href="https://www.jahia.com">https://www.jahia.com</a></td>
              <td>committer, PPMC</td> 
-             <td>-</td> 
-            </tr> 
+             <td>+1</td>
+            </tr>
             <tr> 
-             <td><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=blank&amp;f=y&amp;s=60" alt="" /></td> 
-             <td><a name="shyrkov">shyrkov</a></td>
+             <td><img src="http://www.gravatar.com/avatar/d21cd1073820fff86b953d57fbfadc83?d=mm&s=60" alt="" /></td>
+             <td><a id="shyrkov">shyrkov</a></td>
              <td>Sergiy Shyrkov</td> 
              <td><a class="externalLink" href="mailto:shyrkov@apache.org">shyrkov@apache.org</a></td>
              <td>Jahia</td>
              <td><a class="externalLink" target="_blank" href="https://www.jahia.com">https://www.jahia.com</a></td>
              <td>committer, PPMC</td> 
-             <td>-</td> 
-            </tr> 
+             <td>+1</td>
+            </tr>
             <tr> 
-             <td><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=blank&amp;f=y&amp;s=60" alt="" /></td> 
-             <td>-</td> 
+             <td><img src="http://www.gravatar.com/avatar/f51aaca9a9943a59ecc3028aca9b113b?d=mm&s=60" alt="" /></td>
+             <td><a id="jkevan">jkevan</a></td>
              <td>Kevan Jahanshahi</td> 
-             <td>-</td>
+             <td><a class="externalLink" href="mailto:jkevan@apache.org">jkevan@apache.org</a></td>
              <td>Jahia</td>
              <td><a class="externalLink" target="_blank" href="https://www.jahia.com">https://www.jahia.com</a></td>
              <td>committer, PPMC</td> 
-             <td>-</td> 
-            </tr> 
+             <td>+1</td>
+            </tr>
             <tr> 
-             <td><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=blank&amp;f=y&amp;s=60" alt="" /></td> 
+             <td><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&s=60" alt="" /></td>
              <td>-</td> 
              <td>C&eacute;dric Mailleux</td> 
              <td>-</td>
              <td>Jahia</td>
              <td><a class="externalLink" target="_blank" href="https://www.jahia.com">https://www.jahia.com</a></td>
              <td>committer, PPMC</td> 
-             <td>-</td> 
-            </tr> 
+             <td>-5</td>
+            </tr>
             <tr> 
-             <td><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=blank&amp;f=y&amp;s=60" alt="" /></td> 
+             <td><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&s=60" alt="" /></td>
              <td>-</td> 
              <td>R&eacute;gis Mora</td> 
              <td>-</td> 
              <td>Pékin Accueil</td>
              <td><a class="externalLink" target="_blank" href="https://www.pekin-accueil.com">https://www.pekin-accueil.com</a></td>
              <td>committer, PPMC</td> 
-             <td>-</td> 
-            </tr> 
+             <td>+8</td>
+            </tr>
             <tr> 
-             <td><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=blank&amp;f=y&amp;s=60" alt="" /></td> 
-             <td><a name="qlamerand">qlamerand</a></td>
+             <td><img src="http://www.gravatar.com/avatar/6affe2a2fc9f902578697788c7fc2a3e?d=mm&s=60" alt="" /></td>
+             <td><a id="qlamerand">qlamerand</a></td>
              <td>Quentin Lamerand</td> 
              <td><a class="externalLink" href="mailto:qlamerand@apache.org">qlamerand@apache.org</a></td>
              <td>IRCAM</td>
              <td><a class="externalLink" target="_blank" href="https://www.ircam.fr">https://www.ircam.fr</a></td>
              <td>committer, PPMC</td> 
-             <td>-</td> 
-            </tr> 
+             <td>+1</td>
+            </tr>
             <tr> 
-             <td><img src="http://www.gravatar.com/avatar/1a18e08c27af0044a1c2218ceea839c3?d=mm&amp;s=60" alt="" /></td> 
-             <td><a name="metacosm"></a>metacosm</td> 
+             <td><img src="http://www.gravatar.com/avatar/1a18e08c27af0044a1c2218ceea839c3?d=mm&s=60" alt="" /></td>
+             <td><a id="metacosm"></a>metacosm</td>
              <td>Chris Laprun</td> 
              <td><a class="externalLink" href="mailto:metacosm@apache.org">metacosm@apache.org</a></td> 
              <td>RedHat</td>
              <td><a class="externalLink" target="_blank" href="https://www.redhat.com">https://www.redhat.com</a></td>
              <td>committer, PPMC</td> 
              <td>+1</td> 
-            </tr> 
+            </tr>
             <tr> 
-             <td><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=blank&amp;f=y&amp;s=60" alt="" /></td> 
-             <td><a name="dgriffon">dgriffon</a></td>
+             <td><img src="http://www.gravatar.com/avatar/e5f766ba9813c868249c07f9c5e349d6?d=mm&s=60" alt="" /></td>
+             <td><a id="dgriffon">dgriffon</a></td>
              <td>David Griffon</td>
              <td><a class="externalLink" href="mailto:dgriffon@apache.org">dgriffon@apache.org</a></td>
              <td>Jahia</td>
              <td><a class="externalLink" target="_blank" href="https://www.jahia.com">https://www.jahia.com</a></td>
              <td>committer, PPMC</td> 
-             <td>-</td> 
+             <td>+1</td>
             </tr> 
             <tr> 
-             <td><img src="http://www.gravatar.com/avatar/8a23a295ccfaa914c8e40d5b36893c3c?d=mm&amp;s=60" alt="" /></td> 
-             <td><a name="amidani"></a>amidani</td> 
+             <td><img src="http://www.gravatar.com/avatar/8a23a295ccfaa914c8e40d5b36893c3c?d=mm&s=60" alt="" /></td>
+             <td><a id="amidani"></a>amidani</td>
              <td>Abdelkader Midani</td> 
              <td><a class="externalLink" href="mailto:amidani@apache.org">amidani@apache.org</a></td> 
              <td>-</td> 
@@ -247,8 +254,8 @@
              <td>+1</td> 
             </tr>
             <tr> 
-              <td><img src="http://www.gravatar.com/avatar/27790393b874159fe05609ca7ed812f9?d=mm&amp;s=60" alt="" /></td> 
-              <td><a name="dgaillard"></a>dgaillard</td> 
+              <td><img src="http://www.gravatar.com/avatar/6d2d161467f0dc565ce0d55b9f73fe4f?d=mm&s=60" alt="" /></td>
+              <td><a id="dgaillard"></a>dgaillard</td>
               <td>Damien Gaillard</td> 
               <td><a class="externalLink" href="mailto:dgaillard@apache.org">dgaillard@apache.org</a></td> 
               <td>Jahia</td> 
@@ -257,14 +264,14 @@
               <td>+1</td> 
             </tr>
             <tr> 
-              <td><img src="http://www.gravatar.com/avatar/27790393b874159fe05609ca7ed812f9?d=mm&amp;s=60" alt="" /></td> 
+              <td><img src="http://www.gravatar.com/avatar/27790393b874159fe05609ca7ed812f9?d=mm&amp;s=60" alt="Gravatar picture" /></td>
               <td><a name="fpapon"></a>fpapon</td> 
               <td>Francois Papon</td> 
               <td><a class="externalLink" href="mailto:fpapon@apache.org">fpapon@apache.org</a></td> 
               <td>Yupiik</td> 
               <td><a class="externalLink" href="https://www.yupiik.com">https://www.yupiik.com</a></td> 
               <td>committer, PPMC</td> 
-              <td>+1</td> 
+              <td>+4</td>
             </tr>
             </tbody>
           </table>

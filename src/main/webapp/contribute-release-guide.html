@@ -33,8 +33,11 @@
     <header>
       <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top border-bottom box-shadow">
         <div class="container">
-          <a class="navbar-brand" href="index.html"><img src="images/unomi-86x20.png"/></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <a class="navbar-brand" href="index.html">
+              <img src="images/unomi-86x20.png" alt="Logo Apache Unomi"/>
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                  aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
@@ -62,16 +65,18 @@
                   <a class="nav-link" href="community.html">Community</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link disabled" target="_blank" href="https://www.apache.org"><img src="images/apache-feather-tm-new.png"/></a>
+                    <a class="nav-link disabled" target="_blank" href="https://www.apache.org">
+                        <img src="images/apache-feather-tm-new.png" alt="Logo Apache Feather"/>
+                    </a>
                 </li>
               </ul>
-            <div>
+            </div>
           </div>
         </div>
       </nav>
     </header>
 
-    <main role="main">
+    <main>
 
       <!-- Marketing messaging and featurettes
       ================================================== -->
@@ -117,11 +122,11 @@
 
             <p>Each release is executed by a <em>Release Manager</em>, who is selected among the Unomi committers. This document describes the process that the Release Manager follows to perform a release. Any changes to this process should be discussed and adopted on the <a href="community.html">dev@ mailing list</a>.</p>
 
-            <p>Please remember that publishing software has legal consequences. This guide complements the foundation-wide <a target="_blank" href="https://www.apache.org/dev/release.html" target="_blank">Product Release Policy</a> and <a target="_blank" href="https://www.apache.org/dev/release-distribution" target="_blank">Release Distribution Policy</a>.</p>
+            <p>Please remember that publishing software has legal consequences. This guide complements the foundation-wide <a href="https://www.apache.org/dev/release.html" target="_blank">Product Release Policy</a> and <a href="https://www.apache.org/dev/release-distribution" target="_blank">Release Distribution Policy</a>.</p>
 
             <h2 id="overview">Overview</h2>
 
-            <p><img src="images/release-guide.png" alt="Alt text" title="Release Process" width="100%" /></p>
+            <p><img src="images/release-guide.png" alt="Apache Unomi release guide" title="Release Process" class="img-fluid" /></p>
 
             <p>The release process consists of several steps:</p>
 
@@ -146,7 +151,7 @@
 
             <p>In general, the community prefers to have a rotating set of 3-5 Release Managers. Keeping a small core set of managers allows enough people to build expertise in this area and improve processes over time, without Release Managers needing to re-learn the processes for each release. That said, if you are a committer interested in serving the community in this way, please reach out to the community on the dev@ mailing list.</p>
 
-            <p>Basically we will be following the procedure described <a target="_blank" href="https://www.apache.org/dev/publishing-maven-artifacts.html" target="_blank">here</a> with a few more steps and details before and after.</p>
+            <p>Basically we will be following the procedure described <a href="https://www.apache.org/dev/publishing-maven-artifacts.html" target="_blank">here</a> with a few more steps and details before and after.</p>
 
 
             <h3 id="checklist-to-proceed-to-the-next-step">Checklist to proceed to the next step</h3>
@@ -179,7 +184,7 @@
                 <pre class="alert alert-primary"><code>mvn clean install -P apache-release,integration-tests</code></pre>
               </li>
               <li>Make sure we generate all sub-projects using:
-                <pre class="alert alert-primary"><code>mvn clean install -DskipTests=true 
+                <pre class="alert alert-primary"><code>mvn clean install -DskipTests=true
 -P integration-tests,performance-tests,rat,apache-release</code></pre>
               </li>
               <li>Check that there are no JARs or ZIP files in the source code, you can do this by looking at the generated RAT report here :
@@ -196,7 +201,7 @@ gpg: 'echec de la signature : Inappropriate ioctl for device
 gpg: signing failed: Inappropriate ioctl for device</code></pre>
                 you can either try to sign a file like this:
                 <pre class="alert alert-primary"><code>gpg -ab test.txt</code></pre>
-                this will ask for your password and remember it in the agent for a while, or if you want a more permanent solution: <a target="_blank" href="https://dan.cx/2016/11/gpg-inappropriate-ioctl-for-device-errors" target="_blank">https://dan.cx/2016/11/gpg-inappropriate-ioctl-for-device-errors</a>
+                this will ask for your password and remember it in the agent for a while, or if you want a more permanent solution: <a href="https://dan.cx/2016/11/gpg-inappropriate-ioctl-for-device-errors" target="_blank">https://dan.cx/2016/11/gpg-inappropriate-ioctl-for-device-errors</a>
               </li>
             </ol>
 
@@ -205,7 +210,7 @@ gpg: signing failed: Inappropriate ioctl for device</code></pre>
 
             <ol>
               <li>Setup server passwords for publishing as document here:
-                <a target="_blank" href="https://www.apache.org/dev/publishing-maven-artifacts.html" target="_blank">https://www.apache.org/dev/publishing-maven-artifacts.html</a> and <a target="_blank" href="https://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords" target="_blank">https://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords</a>
+                <a href="https://www.apache.org/dev/publishing-maven-artifacts.html" target="_blank">https://www.apache.org/dev/publishing-maven-artifacts.html</a> and <a href="https://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords" target="_blank">https://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords</a>
               </li>
               <li>Check into the target directory and unzip the source release and compile it using:
                 <pre class="alert alert-primary"><code>cd target
@@ -227,7 +232,7 @@ mvn clean install</code></pre>
               <li>
                 <pre class="alert alert-primary"><code>mvn -DskipITs=true -DskipTests=true -P integration-tests release:perform</code></pre>
               </li>
-              <li>If something fails, make sure you first drop the staging repository created here: <a target="_blank" href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache.org/#stagingRepositories</a>.<br>
+              <li>If something fails, make sure you first drop the staging repository created here: <a href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache.org/#stagingRepositories</a>.<br>
 If you need to relaunch the <code>release:perform</code> and don’t have a release.properties, create a <code>release.properties</code> file with the following contents:
                 <pre class="alert alert-primary"><code>scm.url=scm:git:https://git-wip-us.apache.org/repos/asf/incubator-unomi.git
 scm.tag=unomi-root-1.2.0-incubating
@@ -236,7 +241,8 @@ and run mvn release:perform</code></pre>
               <li>Make sure you uploaded your public PGP key using:
                 <pre class="alert alert-primary"><code>gpg --keyserver hkp://pgp.mit.edu --send-keys KEY_IDENTIFIER</code></pre>(get the identifier using gpg --list-secret-keys).<br>This will be used by the Apache Nexus Repository Manager to validate the JARs uploaded in the staging repository.
               </li>
-              <li>Connect to <a target="_blank" href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache.org/#stagingRepositories</a> and look for the open staging repositories, you should have two (one for everything and the other for KAR/features) for releases <= 1.2 and just one for versions >= 1.3.0 (because of changes in the Karaf plugins). Close the repositories and given a meaningful comment when closing such as:<br>
+              <li>Connect to <a href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache
+                  .org/#stagingRepositories</a> and look for the open staging repositories, you should have two (one for everything and the other for KAR/features) for releases &lt;= 1.2 and just one for versions &gt;= 1.3.0 (because of changes in the Karaf plugins). Close the repositories and given a meaningful comment when closing such as:<br>
                 <strong>Apache Unomi 1.3.0-incubating Release</strong>
               </li>
             </ol>
@@ -254,9 +260,9 @@ mkdir 1.2.0-incubating</code></pre>
               </li>
               <li>
                 Copy all the Zip and Tarbars including SHA1/ASC (but do not copy the MD5 sum) files from:
-                <a target="_blank" href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/1.3.0-incubating/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/1.3.0-incubating/</a>
+                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/1.3.0-incubating/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/1.3.0-incubating/</a>
                 and
-                <a target="_blank" href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/1.3.0-incubating/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/1.3.0-incubating/</a>
+                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/1.3.0-incubating/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/1.3.0-incubating/</a>
               </li>
               <li>
                 Rename the source files to something shorter and consistent with previous releases:
@@ -307,7 +313,7 @@ https://dist.apache.org/repos/dist/release/incubator/unomi/1.2.0-incubating
                 In JIRA mark the version as released and add a release date
               </li>
               <li>
-                Connect to <a target="_blank" href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache.org/#stagingRepositories</a> and look for the open staging repositories, you should have one. Select the staging repositoriy and click on <code>release</code>.
+                Connect to <a href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache.org/#stagingRepositories</a> and look for the open staging repositories, you should have one. Select the staging repositoriy and click on <code>release</code>.
               </li>
               <li>Update the website to point to the new release on the download page by first copying the current release to the archive page. Make sure you change the links to use the archive.apache.org instead of the closer.lua script (see other archived versions for example). Then you can update the download page with the proper links to the new release (no direct links to <code>www.apache.org/dist</code>, make sure you use the closer.lua script). Be careful with links that contain & (ampersand) characters, they must be replaced with &amp; Finally on the home page update the news section to add the release.
               </li>
@@ -385,20 +391,20 @@ All artefacts are now signed in an apache email address
 
 Staging Repository:
 *https://repository.apache.org/content/repositories/orgapacheunomi-1021/
-<https://repository.apache.org/content/repositories/orgapacheunomi-1021/>*
+&lt;https://repository.apache.org/content/repositories/orgapacheunomi-1021/&gt;*
 
 You can find the sources here : 
 
 *https://repository.apache.org/content/repositories/orgapacheunomi-1021/org/apache/
 unomi/unomi-root/1.3.0-incubating/unomi-root-1.3.0-incubating-source-release.zip
-<https://repository.apache.org/content/repositories/orgapacheunomi-1021/org/apache/
-unomi/unomi-root/1.3.0-incubating/unomi-root-1.3.0-incubating-source-release.zip>*
+&lt;https://repository.apache.org/content/repositories/orgapacheunomi-1021/org/apache/
+unomi/unomi-root/1.3.0-incubating/unomi-root-1.3.0-incubating-source-release.zip&gt;*
 
 Convenience binaries are also available here:
 *https://repository.apache.org/content/repositories/orgapacheunomi-1021/org/apache/
 unomi/unomi/1.3.0-incubating/
-<https://repository.apache.org/content/repositories/orgapacheunomi-1021/org/apache/
-unomi/unomi/1.3.0-incubating/>*
+&lt;https://repository.apache.org/content/repositories/orgapacheunomi-1021/org/apache/
+unomi/unomi/1.3.0-incubating/&gt;*
 
 Git tag:
 unomi-root-1.3.0-incubating
@@ -491,8 +497,8 @@ https://dist.apache.org/repos/dist/release/incubator/unomi/KEYS
 The tag is at:
 *https://git-wip-us.apache.org/repos/asf?p=incubator-unomi.git;a=tag;h=refs/
 tags/unomi-root-1.3.0-incubating
-<https://git-wip-us.apache.org/repos/asf?p=incubator-unomi.git;a=tag;h=refs/
-tags/unomi-root-1.3.0-incubating>*
+&lt;https://git-wip-us.apache.org/repos/asf?p=incubator-unomi.git;a=tag;h=refs/
+tags/unomi-root-1.3.0-incubating&gt;*
 ( 98ef47a9a71c9f31ba55d01f01370265bcb5a557 )
 
 This vote will be open for at least 72 hours, or until the necessary number
