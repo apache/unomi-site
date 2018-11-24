@@ -85,7 +85,7 @@
       <div class="container">
 
         <!-- Migrating ES -->
-        <div class="row mb-5 mt-5">
+        <div id="ubuntu-tutorial" class="row mb-5 mt-5">
           <div class="col">
             <h2 class="pb-3 border-bottom">Running and Interfacing with Apache Unomi 1.3 on Ubuntu</h2>
             <p>This section includes a quick tutorial demonstrating how to install and interface with Unomi running on Ubuntu. The purpose of this tutorial is to demonstrate how to use the features of Apache Unomi.</p>
@@ -346,6 +346,77 @@ http://localhost:8181/cxs/profile/10
 
           </div><!-- /.blog-main -->
         </div>
+
+        <div id="docker-tutorial" class="row mb-5 mt-5">
+          <div class="col">
+            <h2 class="pb-3 border-bottom">Running Unomi 1.3 using Docker</h2>
+            <p>This section includes a quick tutorial demonstrating how to run Unomi using Docker. The purpose of this tutorial is to demonstrate how to run Apache Unomi in a Docker container.</p>
+            <h3 class="pt-3 pb-2 text-dark">Install Docker and Docker Compose</h3>
+            <p>Before you get started, you will need to install Docker and Docker Compose on your machine. Installation instructions can be found <a href="https://docs.docker.com/install/">here</a>. Docker for Mac and Docker Toolbox already include Docker Compose.</p>
+            <h3 class="pt-3 pb-2 text-dark">About the Required Images</h3>
+            <p>Unomi requires ElasticSearch so this setup will use an Elasticsearch image provided by <a href="https://www.elastic.co/">Elasticsearch B.V.</a>. We will use a Unomi Docker image mantained by the community.</p>
+            <ul>
+              <li><a href="https://hub.docker.com/r/mikeghen/unomi/">Unomi 1.3 image</a></li>
+              <li><a href="https://hub.docker.com/_/elasticsearch/">ElasticSearch 5.6.3 image</a></li>
+            </ul>
+            <h3 class="pt-3 pb-2 text-dark">Create a Docker Compose Configuration</h3>
+            <p>Create a new directory and add a <code>docker-compose.yaml</code> file. Then copy the code below into that file.</p>
+            <pre><code>
+version: '2.2'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.3
+    volumes: # Persist ES data in seperate "esdata" volume
+      - esdata1:/usr/share/elasticsearch/data
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - cluster.name=contextElasticSearch
+    ports: # Expose Elasticsearch ports
+      - "9300:9300"
+      - "9200:9200"
+  unomi:
+    image: mikeghen/unomi:1.3
+    container_name: unomi
+    environment:
+      - ELASTICSEARCH_HOST=elasticsearch
+      - ELASTICSEARCH_PORT=9300
+    ports:
+      - 8181:8181
+      - 9443:9443
+    links:
+      - elasticsearch
+    depends_on:
+      - elasticsearch
+
+volumes: # Define seperate volume for Elasticsearch data
+  esdata1:
+    driver: local
+            </code></pre>
+            <p>The configuration above creates a single node ElasticSearch container with persistent storage. It also creates a single Unomi container and links it so it can access ElasticSearch.</p>
+            <p>You can find the code for the Unomi image here: <a href="https://github.com/mikeghen/unomi-docker">https://github.com/mikeghen/unomi-docker</a>
+            <h3 class="pt-3 pb-2 text-dark">Create the Environment with Docker Compose</h3>
+            <p>To start everything, run this command from the same directory where the <code>docker-compose.yaml</code> file exists:</p>
+            <pre><code>
+docker-compose up
+            </code></pre>
+            <div class="alert alert-warning" role="alert">At this point you need to wait several minutes for both ElasticSearch and Unomi to become available</div>
+            <h3 class="pt-3 pb-2 text-dark">Check Unomi Services are Running</h3>
+            <p>You will need to wait a few minutes for ElasticSearch and Unomi to start up. Check that services are running locally by opening this URL in a browser:</p>
+            <pre><code>
+http://localhost:8181/cxs
+            </code></pre>
+            <p>This will check Unomi. It will come back with "Available RESTful services" and a list of services when Unomi finishes starting up.</p>
+            <p>You can check ElasticSearch is running with this curl command:
+            <pre><code>
+curl http://localhost:9200/_cat/health?format=json
+            </code></pre>
+            <p>This will come back with a "yellow" status which is just because we're only running 1 ElasticSearch node.</p>
+          </div>
+        </div>
+
       </div><!-- /.container -->
     </main>
 
