@@ -116,7 +116,7 @@
           <div class="col-8 pt-3 offset-4">
             <h2 id="apache-unomi-release-guide">Apache Unomi Release Guide</h2>
 
-            <p>The Apache Unomi project periodically declares and publishes releases. A release is one or more packages of the project artifact(s) that are approved for general public distribution and use. They may come with various degrees of caveat regarding their perceived quality and potential for change, such as "alpha", "beta", "incubating", "stable", etc.</p>
+            <p>The Apache Unomi project periodically declares and publishes releases. A release is one or more packages of the project artifact(s) that are approved for general public distribution and use. They may come with various degrees of caveat regarding their perceived quality and potential for change, such as "alpha", "beta", "stable", etc.</p>
 
             <p>The Unomi community treats releases with great importance. They are a public face of the project and most users interact with the project only through the releases. Releases are signed off by the entire Unomi community in a public vote.</p>
 
@@ -174,7 +174,7 @@
             <h3 id="prepare-git">Git</h3>
             <ol>
               <li>Clone and checkout the project using:
-                <pre class="alert alert-primary"><code>git clone https://git-wip-us.apache.org/repos/asf/incubator-unomi.git</code></pre>
+                <pre class="alert alert-primary"><code>git clone https://gitbox.apache.org/repos/asf?p=unomi.git</code></pre>
                  in a separate directory, to make sure you don’t have any additional files in the build (such as allCountries.zip or other binary files that should not be there)</li>
             </ol>
 
@@ -188,9 +188,9 @@
 -P integration-tests,performance-tests,rat,apache-release</code></pre>
               </li>
               <li>Check that there are no JARs or ZIP files in the source code, you can do this by looking at the generated RAT report here :
-                <pre class="alert alert-primary"><code>less target/unomi-root-1.3.0-incubating-SNAPSHOT.rat</code></pre>
+                <pre class="alert alert-primary"><code>less target/unomi-root-1.4.0-SNAPSHOT.rat</code></pre>
               </li>
-              <li>Check that the KEYS file only contains signatures with @apache.org addresses (if there are non @apache.org don’t remove them because they have 
+              <li>Check that the KEYS file only contains signatures with @apache.org addresses (if there are non @apache.org don’t remove them because they have
                 been used to sign older releases)
               </li>
               <li>Update the copyright notice years in the NOTICE file and anywhere else where it might be</li>
@@ -214,13 +214,13 @@ gpg: signing failed: Inappropriate ioctl for device</code></pre>
               </li>
               <li>Check into the target directory and unzip the source release and compile it using:
                 <pre class="alert alert-primary"><code>cd target
-unzip unomi-root-1.3.0-incubating-SNAPSHOT-source-release.zip
-cd unomi-root-1.3.0-incubating-SNAPSHOT
+unzip unomi-root-1.4.0-SNAPSHOT-source-release.zip
+cd unomi-root-1.4.0-SNAPSHOT
 mvn clean install</code></pre>
                 to check that the packaged source build properly
               </li>
               <li>Go back to the root project directory and run:
-                <pre class="alert alert-primary"><code>mvn release:prepare -DskipTests=true -DdryRun=true 
+                <pre class="alert alert-primary"><code>mvn release:prepare -DskipTests=true -DdryRun=true
 -P apache-release,integration-tests,performance-tests</code></pre>
               </li>
               <li>Publish a snapshot to test the deployment passwords:
@@ -234,8 +234,8 @@ mvn clean install</code></pre>
               </li>
               <li>If something fails, make sure you first drop the staging repository created here: <a href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache.org/#stagingRepositories</a>.<br>
 If you need to relaunch the <code>release:perform</code> and don’t have a release.properties, create a <code>release.properties</code> file with the following contents:
-                <pre class="alert alert-primary"><code>scm.url=scm:git:https://git-wip-us.apache.org/repos/asf/incubator-unomi.git
-scm.tag=unomi-root-1.2.0-incubating
+                <pre class="alert alert-primary"><code>scm.url=scm:git:https://gitbox.apache.org/repos/asf?p=unomi.git
+scm.tag=unomi-root-1.4.0
 and run mvn release:perform</code></pre>
               </li>
               <li>Make sure you uploaded your public PGP key using:
@@ -243,7 +243,7 @@ and run mvn release:perform</code></pre>
               </li>
               <li>Connect to <a href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache
                   .org/#stagingRepositories</a> and look for the open staging repositories, you should have two (one for everything and the other for KAR/features) for releases &lt;= 1.2 and just one for versions &gt;= 1.3.0 (because of changes in the Karaf plugins). Close the repositories and given a meaningful comment when closing such as:<br>
-                <strong>Apache Unomi 1.3.0-incubating Release</strong>
+                <strong>Apache Unomi 1.4.0 Release</strong>
               </li>
             </ol>
 
@@ -251,47 +251,41 @@ and run mvn release:perform</code></pre>
             <ol>
               <li>Send out to the Unomi mailing list a mail to start the voting process, see <a href="#mail-1">[1]</a></li>
               <li>Send out a vote summary in the same thread to the Unomi mailing list once the voting period has expired, see <a href="#mail-2">[2]</a></li>
-              <li>Upload the source and binary distributions to the Apache Dist repository before the ipmc vote:
-                <pre class="alert alert-primary"><code>svn checkout https://dist.apache.org/repos/dist/dev/incubator/unomi unomi-dev</code></pre>
+              <li>Upload the source and binary distributions to the Apache Dist repository before the PMC vote:
+                <pre class="alert alert-primary"><code>svn checkout https://dist.apache.org/repos/dist/dev/unomi unomi-dev</code></pre>
               </li>
               <li>
                 <pre class="alert alert-primary"><code>cd unomi-dev
-mkdir 1.2.0-incubating</code></pre>
+mkdir 1.4.0</code></pre>
               </li>
               <li>
                 Copy all the Zip and Tarbars including SHA1/ASC (but do not copy the MD5 sum) files from:
-                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/1.3.0-incubating/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/1.3.0-incubating/</a>
+                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/1.4.0/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/1.4.0/</a>
                 and
-                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/1.3.0-incubating/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/1.3.0-incubating/</a>
+                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/1.4.0/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/1.4.0/</a>
               </li>
               <li>
                 Rename the source files to something shorter and consistent with previous releases:
                 <pre class="alert alert-primary"><code>
-mv unomi-root-1.2.0-incubating-source-release.zip unomi-1.2.0-incubating-src.zip
-mv unomi-root-1.2.0-incubating-source-release.zip.asc unomi-1.2.0-incubating-src.zip.asc
-mv unomi-root-1.2.0-incubating-source-release.zip.md5 unomi-1.2.0-incubating-src.zip.md5
-mv unomi-root-1.2.0-incubating-source-release.zip.sha1 unomi-1.2.0-incubating-src.zip.sha1
+mv unomi-root-1.4.0-source-release.zip unomi-1.4.0-src.zip
+mv unomi-root-1.4.0-source-release.zip.asc unomi-1.4.0-src.zip.asc
+mv unomi-root-1.4.0-source-release.zip.md5 unomi-1.4.0-src.zip.md5
+mv unomi-root-1.4.0-source-release.zip.sha1 unomi-1.4.0-src.zip.sha1
                 </code></pre>
               </li>
               <li>
                 <pre class="alert alert-primary"><code>cd ..
-svn add 1.2.0-incubating</code></pre>
+svn add 1.4.0</code></pre>
               </li>
               <li>
-                If needed, update the KEYS file (that is in the svn checkout <code>https://dist.apache.org/repos/dist/release/incubator/unomi</code>)
+                If needed, update the KEYS file (that is in the svn checkout <code>https://dist.apache.org/repos/dist/release/unomi</code>)
               </li>
               <li>
-                <pre class="alert alert-primary"><code>svn commit -m "Apache 1.2.0-incubating Release (for IPMC voting)"</code></pre>
-              </li>
-              <li>
-              Once the vote is approved (three +1 votes and no -1 from the PPMC members), send an email out to the Incubator mailing list to get the Incubator PMCs to approve the release, see <a href="#mail-3">[3]</a>. Make sure to update all the links
+                <pre class="alert alert-primary"><code>svn commit -m "Apache 1.4.0 Release (for PMC voting)"</code></pre>
               </li>
               <li>
                 If the vote is refused, you will need to restart the release process. Make sure you remove the staging repositories as well as the release tag. You will also need to reset the version in the project using:
                 <pre class="alert alert-primary"><code>mvn versions:set</code></pre>
-              </li>
-              <li>
-                Once the vote of the Incubator PMC is approved, send out the result mail using the template <a href="#mail-4">[4]</a> in a separate thread (after closing the vote in the thread). If approved all is ok, otherwise restart release process.
               </li>
               <li>
                 Promote the staging repositories now that the release is approved
@@ -302,9 +296,9 @@ svn add 1.2.0-incubating</code></pre>
             <ol>
               <li>
                 Move the files uploaded to the unomi-dev repository to the unomi-release repository by doing the following:
-                <pre class="alert alert-primary"><code>svn mv https://dist.apache.org/repos/dist/dev/incubator/unomi/1.2.0-incubating
-https://dist.apache.org/repos/dist/release/incubator/unomi/1.2.0-incubating 
--m "Apache Unomi 1.2.0-incubating Release"</code></pre>
+                <pre class="alert alert-primary"><code>svn mv https://dist.apache.org/repos/dist/dev/unomi/1.4.0
+https://dist.apache.org/repos/dist/release/unomi/1.4.0
+-m "Apache Unomi 1.4.0 Release"</code></pre>
               </li>
               <li>
                 Update Jenkins
@@ -334,8 +328,8 @@ https://dist.apache.org/repos/dist/release/incubator/unomi/1.2.0-incubating
             <h3 id="rollback">Rollback</h3>
             <ol>
               <li>Delete the tag:
-                <pre class="alert alert-primary"><code>git push --delete origin unomi-root-1.2.0-incubating
-git tag --delete unomi-root-1.2.0-incubating</code></pre>
+                <pre class="alert alert-primary"><code>git push --delete origin unomi-root-1.4.0
+git tag --delete unomi-root-1.4.0</code></pre>
               </li>
               <li>Reset to the previous commit before the release preparation:
                 <pre class="alert alert-primary"><code>git reset --hard c65f9897ec5f31d9d22ad639738c7db9d109aa77
@@ -346,7 +340,7 @@ git push origin -f</code></pre>
             <h2 id="final">Announce</h2>
 
             <ol>
-              <li>Send an announce to the project mailing list and the incubator mailing list to announce the new release using mail template <a href="#mail-5">[5]</a></li>
+              <li>Send an announce to the project mailing list and the incubator mailing list to announce the new release using mail template <a href="#mail-3">[3]</a></li>
               <li>If you were releasing from a branch, make sure you merge all the branch changes for the release back to the master.</li>
             </ol>
 
@@ -376,13 +370,13 @@ git push origin -f</code></pre>
 
             <h2 id="mail-template">Mail templates</h2>
 
-            <h6 id="mail-1" class="pt-3">[1] Mail template for the Unomi PPMC vote:</h6>
+            <h6 id="mail-1" class="pt-3">[1] Mail template for the Unomi PMC vote:</h6>
             <pre class="alert alert-primary"><code>
-Subject: [VOTE] Apache Unomi 1.3.0-incubating release [TAKE2]
-Body: 
+Subject: [VOTE] Apache Unomi 1.4.0 release [TAKE2]
+Body:
 Hi all,
 
-I submit Apache Unomi 1.3.0-incubating release [TAKE2] to your vote.
+I submit Apache Unomi 1.4.0 release [TAKE2] to your vote.
 
 The following corrections were done since TAKE 1:
 NOTICE year (2016) has been updated to 2018
@@ -393,21 +387,21 @@ Staging Repository:
 *https://repository.apache.org/content/repositories/orgapacheunomi-1021/
 &lt;https://repository.apache.org/content/repositories/orgapacheunomi-1021/&gt;*
 
-You can find the sources here : 
+You can find the sources here :
 
 *https://repository.apache.org/content/repositories/orgapacheunomi-1021/org/apache/
-unomi/unomi-root/1.3.0-incubating/unomi-root-1.3.0-incubating-source-release.zip
+unomi/unomi-root/1.4.0/unomi-root-1.4.0-source-release.zip
 &lt;https://repository.apache.org/content/repositories/orgapacheunomi-1021/org/apache/
-unomi/unomi-root/1.3.0-incubating/unomi-root-1.3.0-incubating-source-release.zip&gt;*
+unomi/unomi-root/1.4.0/unomi-root-1.4.0-source-release.zip&gt;*
 
 Convenience binaries are also available here:
 *https://repository.apache.org/content/repositories/orgapacheunomi-1021/org/apache/
-unomi/unomi/1.3.0-incubating/
+unomi/unomi/1.4.0/
 &lt;https://repository.apache.org/content/repositories/orgapacheunomi-1021/org/apache/
-unomi/unomi/1.3.0-incubating/&gt;*
+unomi/unomi/1.4.0/&gt;*
 
 Git tag:
-unomi-root-1.3.0-incubating
+unomi-root-1.4.0
 
 Release Notes:
 https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&
@@ -427,9 +421,9 @@ Thanks,
 Regards
             </code></pre>
 
-            <h6 id="mail-2" class="pt-3">[2] Mail template for the results of the Unomi PPMC vote:</h6>
+            <h6 id="mail-2" class="pt-3">[2] Mail template for the results of the Unomi PMC vote:</h6>
             <pre class="alert alert-primary"><code>
-Subject: [RESULT][VOTE] Apache Unomi 1.3.0-incubating release [TAKE2]
+Subject: [RESULT][VOTE] Apache Unomi 1.4.0 release [TAKE2]
 Body:
 Hi,
 
@@ -443,128 +437,41 @@ John Doe 1
 John Doe 2
 John Doe 3
 
-2 non-binding vote +1: 
+2 non-binding vote +1:
 John Doe 4
 John Doe 5
 
 No 0 or -1.
 
-The proposal to release Unomi 1.3.0-incubating is approved by the team.
-I'll start the vote on the general incubating mailing list for IPMC
-approval.
+The proposal to release Unomi 1.4.0 is approved by the team.
 
 Thanks,
 John Doe 1
             </code></pre>
 
-            <h6 id="mail-3" class="pt-3">[3] Mail template for the Incubator IPMC vote:</h6>
+            <h6 id="mail-3" class="pt-3">[3] Announce mailing list template:</h6>
             <pre class="alert alert-primary"><code>
-Subject: [VOTE] Apache Unomi 1.3.0-incubating release [TAKE2]
-Body:
-Hi all,
-
-The Unomi community has voted again for the release of Apache Unomi 1.3.0
-(incubating) [TAKE2].
-
-The following corrections were done since TAKE 1:
-NOTICE year (2016) has been updated to 2018
-unexpected binaries inside zip file [1] : zip file has been completely removed
-All artefacts are now signed in an apache email address
-
-The vote thread can be found at :
-http://mail-archives.apache.org/mod_mbox/unomi-dev/201807.mbox/
-%3CCACR6SAV0N729Nb9cZXNiGh%3DvQx0ncSLToVEO%3Dd_jR%3DFqrGJyig%40mail.gmail.com%3E
-
-and the result is at:
-http://mail-archives.apache.org/mod_mbox/unomi-dev/201807.mbox/
-%3CCACR6SAW%3D2hO_1h_sPM6rJpG0TeONDgQm9Tvax1AUcdSkX%3DFQyQ%40mail.gmail.com%3E
-
-We kindly ask the IPMC to vote on this release.
-
-The artifacts to be voted on are located at:
-https://dist.apache.org/repos/dist/dev/incubator/unomi/1.3.0-incubating
-Source distribution is here :
-https://dist.apache.org/repos/dist/dev/incubator/unomi/1.3.0-incubating/
-unomi-1.3.0-incubating-src.zip
-
-With signature :
-https://dist.apache.org/repos/dist/dev/incubator/unomi/1.3.0-incubating/
-unomi-1.3.0-incubating-src.zip.asc
-
-The keys used to sign the released artifacts can be found in :
-https://dist.apache.org/repos/dist/release/incubator/unomi/KEYS
-
-The tag is at:
-*https://git-wip-us.apache.org/repos/asf?p=incubator-unomi.git;a=tag;h=refs/
-tags/unomi-root-1.3.0-incubating
-&lt;https://git-wip-us.apache.org/repos/asf?p=incubator-unomi.git;a=tag;h=refs/
-tags/unomi-root-1.3.0-incubating&gt;*
-( 98ef47a9a71c9f31ba55d01f01370265bcb5a557 )
-
-This vote will be open for at least 72 hours, or until the necessary number
-of votes (3 +1) is reached.
-
-[ ] +1 Approve the release
-[ ] -1 Don't approve the release (please provide specific comments)
-
-Regards,
-            </code></pre>
-
-            <h6 id="mail-4" class="pt-3">[4] Mail template for the results of the Unomi IPMC vote:</h6>
-            <pre class="alert alert-primary"><code>
-Subject : [RESULT][VOTE] Release Apache Unomi 1.3.0 (incubating) [TAKE2]
-Body:
-Hi all,
-
-The vote to release Unomi 1.3.0-incubating, having been open for 27
-days is now closed.
-
-There were three binding +1s and no -1 votes.
-
-Here's the vote summary :
-
-3 binding votes +1 :
-- John Doe 1
-- John Doe 2
-- John Doe 3
-
-No 0 or -1.
-
-The release is approved.
-
-Vote thread can be found here :
-http://mail-archives.apache.org/mod_mbox/incubator-general/201709.mbox/
-%3CCACR6SAW1pY7MCZCg_Z4GSycySe4LH%2Bm%2Bck5x%3Du2J7d-56xeMYw%40mail.gmail.com%3E
- ,
-
-Thank you for your votes and reviews !
-
-Regards,
-            </code></pre>
-
-            <h6 id="mail-5" class="pt-3">[5] Announce mailing list template:</h6>
-            <pre class="alert alert-primary"><code>
-Subject : [ANNOUNCE] Apache Unomi 1.2.0-incubating Release
+Subject : [ANNOUNCE] Apache Unomi 1.4.0 Release
 Body:
 The Apache Unomi team would like to announce the release of Apache
-Unomi 1.2.0-incubating.
+Unomi 1.4.0.
 
 Release notes are here:
 https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&
 version=12338361
 
-Apache Unomi (incubating) is a Java Open Source customer data platform, a Java server 
-designed to manage customers, leads and visitors’ data and help personalize customers’ 
+Apache Unomi (incubating) is a Java Open Source customer data platform, a Java server
+designed to manage customers, leads and visitors’ data and help personalize customers’
 experiences.
 
 More details regarding Apache Unomi (incubating) can be found here:
 http://unomi.incubator.apache.org/
 
 The release artifacts can be downloaded here:
-https://dist.apache.org/repos/dist/release/incubator/unomi/1.2.0-incubating/
+https://dist.apache.org/repos/dist/release/incubator/unomi/1.4.0/
 
 All JIRAs completed for this release are tagged with 'FixVersion =
-1.2.0-incubating'; the JIRA release notes can be found here:
+1.4.0'; the JIRA release notes can be found here:
 https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&
 version=12338361
 
@@ -583,12 +490,12 @@ project has yet to be fully endorsed by the ASF.
             </code></pre>
           </div>
         </div>
-      </div> 
+      </div>
     </main>
 
     <!-- FOOTER -->
     <footer class="container-fluid bg-dark pt-5 pb-3 text-white text-center footer">
-      
+
       <div class="container pb-5">
         <div class="row">
           <div class="col-3 col-md-3">
@@ -635,7 +542,7 @@ project has yet to be fully endorsed by the ASF.
           <div class="w-100 pt-md-3"></div>
         </div>
       </div>
-      
+
       <p class="float-right"><a href="#">Back to top</a></p>
       <p>Copyright &copy;2014 - 2018 <a target="_blank" href="https://www.apache.org">Apache Software Foundation</a> - All Rights Reserved - Powered by <a target="_blank" href="https://karaf.apache.org">Apache Karaf</a><br/>
       Apache Karaf, Apache Mahout, Apache and the Apache feather logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</p>
