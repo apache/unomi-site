@@ -7,7 +7,7 @@
     <meta name="author" content="">
     <link rel="icon" href="images/favicon.ico">
 
-    <title>Apache Unomi Open Source Customer Data Platform | Contribute | Dependencies guide </title>
+    <title>Apache Unomi&trade; Open Source Customer Data Platform | Contribute | Dependencies guide </title>
 
     <!-- Google Analytics -->
     <script>
@@ -117,7 +117,7 @@
             <h2>Dependencies Guide</h2>
 
             <p>This document describes policies for keeping Unomi dependencies up to date.</p>
-            <p>Old dependencies cause user pain and can result in a system being unusable for some users. Many users do not use Unomi in isolation and bundle other dependencies in the same deployment. These additional dependencies might pull in incompatible dependencies to userâ€™s environment which can again result in broken Unomi pipelines, sometimes with undefined behavior. To prevent this, users will have to update their deployment environment or worse yet may end up not being able to use Unomi along with some of the other dependencies at all.</p>
+            <p>Old dependencies cause user pain and can result in a system being unusable for some users. Many users do not use Unomi in isolation and bundle other dependencies in the same deployment. These additional dependencies might pull in incompatible dependencies to userâ€&trade;s environment which can again result in broken Unomi pipelines, sometimes with undefined behavior. To prevent this, users will have to update their deployment environment or worse yet may end up not being able to use Unomi along with some of the other dependencies at all.</p>
 
             <p>If a component <em>X</em> chooses to override the version of a dependency <em>D</em> from <em>a</em> to <em>b</em> and another component <em>Y</em> is incompatible with version <em>b</em> of <em>D</em>, deployment of a user that uses both components <em>X</em> and <em>Y</em> will end up in a broken state.</p>
 
@@ -181,21 +181,21 @@
 
             <p><strong>Dependencies of Java SDK components that may cause issues to other components if leaked should be vendored.</strong></p>
 
-            <p><a target="_blank" href="https://www.ardanlabs.com/blog/2013/10/manage-dependencies-with-godep.html">Vendoring</a> is the process of creating copies of third party dependencies. Combined with repackaging, vendoring will allow Unomi components to depend on third party libraries without causing conflicts to other components. Vendoring should be done in a case-by-case basis since this can increase the total number of dependencies deployed in userâ€™s enviroment.</p>
+            <p><a target="_blank" href="https://www.ardanlabs.com/blog/2013/10/manage-dependencies-with-godep.html">Vendoring</a> is the process of creating copies of third party dependencies. Combined with repackaging, vendoring will allow Unomi components to depend on third party libraries without causing conflicts to other components. Vendoring should be done in a case-by-case basis since this can increase the total number of dependencies deployed in userâ€&trade;s enviroment.</p>
 
             <h3>Dependency updates and backwards compatibility</h3>
 
             <p>Unomi releases <a target="_blank" href="https://unomi.incubator.apache.org/downloads/">adhere to</a> semantic versioning. Hence, community members should take care when updating dependencies. Minor version updates to dependencies should be backwards compatible in most cases. Some updates to dependencies though may result in backwards incompatible API or functionality changes to Unomi. PR reviewers and committers should take care to detect any dependency updates that could potentially introduce backwards incompatible changes to Unomi before merging and PRs that update dependencies should include a statement regarding this verification in the form of a PR comment. Dependency updates that result in backwards incompatible changes to non-experimental features of Unomi should be held till next major version release of Unomi.</p>
-            
+
             <p>Any exceptions to this policy should only occur in extreme cases (for example, due to a security vulnerability of an existing dependency that is only fixed in a subsequent major version) and should be discussed in the Unomi dev list. Note that backwards incompatible changes to experimental features may be introduced in a minor version release.</p>
           </div>
         </div>
-      </div> 
+      </div>
     </main>
 
     <!-- FOOTER -->
     <footer class="container-fluid bg-dark pt-5 pb-3 text-white text-center footer">
-      
+
       <div class="container pb-5">
         <div class="row">
           <div class="col-3 col-md-3">
@@ -242,10 +242,10 @@
           <div class="w-100 pt-md-3"></div>
         </div>
       </div>
-      
+
       <p class="float-right"><a href="#">Back to top</a></p>
-      <p>Copyright &copy;2014 - 2018 <a target="_blank" href="https://www.apache.org">Apache Software Foundation</a> - All Rights Reserved - Powered by <a target="_blank" href="https://karaf.apache.org">Apache Karaf</a><br/>
-      Apache Karaf, Apache Mahout, Apache and the Apache feather logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</p>
+      <p>Copyright &copy;2014 - 2019 <a target="_blank" href="https://www.apache.org">Apache Software Foundation</a> - All Rights Reserved - Powered by <a target="_blank" href="https://karaf.apache.org">Apache Karaf&trade;</a><br/>
+        Apache Unomi, Unomi, Apache and the Apache feather logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</p>
     </footer>
 
     <!-- Bootstrap core JavaScript
