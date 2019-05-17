@@ -174,7 +174,7 @@
             <h3 id="prepare-git">Git</h3>
             <ol>
               <li>Clone and checkout the project using:
-                <pre class="alert alert-primary"><code>git clone https://gitbox.apache.org/repos/asf?p=unomi.git</code></pre>
+                <pre class="alert alert-primary"><code>git clone https://gitbox.apache.org/repos/asf/unomi.git</code></pre>
                  in a separate directory, to make sure you don’t have any additional files in the build (such as allCountries.zip or other binary files that should not be there)</li>
             </ol>
 
@@ -226,6 +226,9 @@ mvn clean install</code></pre>
               <li>Publish a snapshot to test the deployment passwords:
                 <pre class="alert alert-primary"><code>mvn deploy</code></pre>
               </li>
+                <li>Delete the release.properties file
+                    <pre class="alert alert-primary"><code>rm release.properties</code></pre>
+                </li>
               <li>
                 <pre class="alert alert-primary"><code>mvn -P apache-release,integration-tests release:prepare</code></pre>
               </li>
