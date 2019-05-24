@@ -25,7 +25,7 @@
 
     <groupId>org.apache.unomi</groupId>
     <artifactId>site</artifactId>
-    <name>Incubator Apache Unomi :: Site</name>
+    <name>Apache Unomi :: Site</name>
     <version>1.0.0</version>
     <packaging>war</packaging>
 
