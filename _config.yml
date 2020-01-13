@@ -1,0 +1,4 @@
+source: src/main/webapp
+destination: target/site
+name: Apache Unomi website
+title: Apache Unomi&trade; Open Source Customer Data Platform

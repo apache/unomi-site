@@ -29,26 +29,183 @@
     <version>1.0.0</version>
     <packaging>war</packaging>
 
-    <properties>
-        <jetty-port>8080</jetty-port>
-        <maven.wagon.version>1.0-beta-6</maven.wagon.version>
-    </properties>
+    <repositories>
+        <repository>
+            <id>rubygems-proxy</id>
+            <name>Rubygems Proxy</name>
+            <url>http://rubygems-proxy.torquebox.org/releases</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>rubygems</groupId>
+            <artifactId>jekyll</artifactId>
+            <type>gem</type>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>jekyll</artifactId>
+                <version>3.1.2</version>
+                <type>gem</type>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>liquid</artifactId>
+                <type>gem</type>
+                <version>3.0.6</version>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>kramdown</artifactId>
+                <type>gem</type>
+                <version>1.10.0</version>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>mercenary</artifactId>
+                <type>gem</type>
+                <version>0.3.5</version>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>safe_yaml</artifactId>
+                <type>gem</type>
+                <version>1.0.4</version>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>colorator</artifactId>
+                <type>gem</type>
+                <version>0.1</version>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>rouge</artifactId>
+                <type>gem</type>
+                <version>1.10.1</version>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>jekyll-sass-converter</artifactId>
+                <type>gem</type>
+                <version>1.4.0</version>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>sass</artifactId>
+                <type>gem</type>
+                <version>3.4.22</version>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>jekyll-watch</artifactId>
+                <type>gem</type>
+                <version>1.3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>listen</artifactId>
+                <type>gem</type>
+                <version>3.0.6</version>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>rb-fsevent</artifactId>
+                <type>gem</type>
+                <version>0.9.7</version>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>rb-inotify</artifactId>
+                <type>gem</type>
+                <version>0.9.7</version>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>ffi</artifactId>
+                <type>gem</type>
+                <version>1.9.10</version>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>celluloid-essentials</artifactId>
+                <version>0.20.5</version>
+                <type>gem</type>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>celluloid-supervision</artifactId>
+                <type>gem</type>
+                <version>0.20.5</version>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>yajl-ruby</artifactId>
+                <type>gem</type>
+                <version>1.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>rubygems</groupId>
+                <artifactId>bundler</artifactId>
+                <type>gem</type>
+                <version>1.11.2</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>8.1.4.v20120524</version>
+                <groupId>de.saumya.mojo</groupId>
+                <artifactId>gem-maven-plugin</artifactId>
+                <version>1.1.5</version>
+                <executions>
+                    <execution>
+                        <id>generate-documentation</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <file>${project.build.directory}/rubygems/bin/jekyll</file>
+                            <execArgs>build --trace --source ${project.basedir}/src/main/webapp --destination ${project.build.outputDirectory}</execArgs>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!-- run me with: mvn gem:exec@jekyll-serve -->
+                        <id>jekyll-serve</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <file>${project.build.directory}/rubygems/bin/jekyll</file>
+                            <execArgs>serve --trace --source ${project.basedir}/src/main/webapp --destination ${project.build.outputDirectory}</execArgs>
+                        </configuration>
+                        <phase>none</phase>
+                    </execution>
+                </executions>
                 <configuration>
-                    <!-- When editing the conf files, you can comment this line to run
-                        mvn jetty:run
-                       to have a live web site
-                    -->
-                    <webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>
+                    <supportNative>true</supportNative>
+                    <jrubyVersion>9.0.5.0</jrubyVersion>
+                    <addProjectClasspath>true</addProjectClasspath>
+                    <jrubyVerbose>false</jrubyVerbose>
                 </configuration>
-            </plugin>
-            <plugin>
+            </plugin>            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-scm-publish-plugin</artifactId>
                 <version>1.0-beta-2</version>
