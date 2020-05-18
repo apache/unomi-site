@@ -45,6 +45,11 @@
         </repository>
     </repositories>
 
+    <properties>
+        <latest.stable.version>1.5.1</latest.stable.version>
+        <latest.development.version>2.0.0-SNAPSHOT</latest.development.version>
+    </properties>
+
 
     <dependencies>
         <dependency>
@@ -171,6 +176,40 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>filter-webapp-files</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <!-- # Filtered Resources -->
+                                <resource>
+                                    <directory>${project.basedir}/src/main/webapp</directory>
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>**/*.html</include>
+                                    </includes>
+                                </resource>
+                                <!-- # Unfiltered Resources -->
+                                <resource>
+                                    <directory>${project.basedir}/src/main/webapp</directory>
+                                    <filtering>false</filtering>
+                                    <excludes>
+                                        <exclude>**/*.html</exclude>
+                                    </excludes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${project.build.directory}/filtered-webapp</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>de.saumya.mojo</groupId>
                 <artifactId>gem-maven-plugin</artifactId>
                 <version>1.1.5</version>
@@ -183,7 +222,7 @@
                         <phase>generate-resources</phase>
                         <configuration>
                             <file>${project.build.directory}/rubygems/bin/jekyll</file>
-                            <execArgs>build --trace --source ${project.basedir}/src/main/webapp --destination
+                            <execArgs>build --trace --source ${project.build.directory}/filtered-webapp --destination
                                 ${project.build.directory}/generated-jekyll
                             </execArgs>
                         </configuration>

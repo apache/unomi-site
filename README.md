@@ -20,6 +20,8 @@ Run Build:
 mvn clean install
 ```
 
+The generated site will be in target/generated-jekyll
+
 ## Publish
 
 To publish the local website to the production location (https://unomi.apache.org/), you have to use:
@@ -39,6 +41,9 @@ mvn install
 `
 mvn gem:exec@jekyll-serve
 `
+
+Note: the Jekyll serve will not filter the files so you will still see property references such as ${latest.stable.version}.
+This is by design. If you want to see a final version you need to generate it using the `mvn clean install` command.
 
 It works as expected on Mac and Linux, but not on Windows the following stacktrace appears:
     
