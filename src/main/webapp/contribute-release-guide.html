@@ -119,12 +119,17 @@ gpg --verify test.txt.asc test.txt
                 <pre class="alert alert-primary"><code>git clone https://gitbox.apache.org/repos/asf/unomi.git</code></pre>
                  in a separate directory, to make sure you don’t have any additional files in the build
                   (such as allCountries.zip or other binary files that should not be there)</li>
-                <li>Create a new branch if needed for the release using:
+                <li>
+                    Simply checkout an existing branch for release
                     <pre class="alert alert-primary"><code>cd unomi
-                        git checkout -b unomi-1.5.x
+git checkout unomi-1.5.x
                     </code></pre>
                 </li>
-
+                <li>OR Create a new branch if needed for the release using:
+                    <pre class="alert alert-primary"><code>cd unomi
+git checkout -b unomi-1.5.x
+                    </code></pre>
+                </li>
             </ol>
 
             <h3 id="prepare-build">Build the project</h3>
@@ -139,7 +144,7 @@ gpg --verify test.txt.asc test.txt
                 <pre class="alert alert-primary"><code>mvn clean install -DskipITs=true -DskipTests=true -P integration-tests,performance-tests,rat,apache-release,docker,\!run-tests</code></pre>
               </li>
               <li>Check that there are no JARs or ZIP files in the source code, you can do this by looking at the generated RAT report here :
-                <pre class="alert alert-primary"><code>less target/unomi-root-${latest.development.version}.rat</code></pre>
+                <pre class="alert alert-primary"><code>less target/unomi-root-${next.development.version}.rat</code></pre>
               </li>
               <li>Check that the KEYS file only contains signatures with @apache.org addresses (if there are non @apache.org don’t remove them because they have
                 been used to sign older releases)
@@ -165,11 +170,11 @@ gpg: signing failed: Inappropriate ioctl for device</code></pre>
               </li>
               <li>Check into the target directory and unzip the source release and compile it using:
                 <pre class="alert alert-primary"><code>cd target
-gpg --verify unomi-root-${latest.development.version}-source-release.zip.asc unomi-root-${latest.development.version}-source-release.zip
-shasum -a 512 unomi-root-${latest.development.version}-source-release.zip
-cat unomi-root-${latest.development.version}-source-release.zip.sha512
-unzip unomi-root-${latest.development.version}-source-release.zip
-cd unomi-root-${latest.development.version}
+gpg --verify unomi-root-${next.development.version}-source-release.zip.asc unomi-root-${next.development.version}-source-release.zip
+shasum -a 512 unomi-root-${next.development.version}-source-release.zip
+cat unomi-root-${next.development.version}-source-release.zip.sha512
+unzip unomi-root-${next.development.version}-source-release.zip
+cd unomi-root-${next.development.version}
 mvn clean install</code></pre>
                 to check that the packaged source build properly
               </li>
@@ -191,7 +196,7 @@ mvn clean install</code></pre>
               <li>If something fails, make sure you first drop the staging repository created here: <a href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache.org/#stagingRepositories</a>.<br>
 If you need to relaunch the <code>release:perform</code> and don’t have a release.properties, create a <code>release.properties</code> file with the following contents:
                 <pre class="alert alert-primary"><code>scm.url=scm:git:https://gitbox.apache.org/repos/asf?p=unomi.git
-scm.tag=unomi-root-${latest.stable.version}
+scm.tag=unomi-root-${next.stable.version}
 and run mvn release:perform</code></pre>
               </li>
               <li>Make sure you uploaded your public PGP key using:
@@ -199,7 +204,7 @@ and run mvn release:perform</code></pre>
               </li>
               <li>Connect to <a href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache
                   .org/#stagingRepositories</a> and look for the open staging repositories, you should have two (one for everything and the other for KAR/features) for releases &lt;= 1.2 and just one for versions &gt;= 1.3.0 (because of changes in the Karaf plugins). Close the repositories and given a meaningful comment when closing such as:<br>
-                <strong>Apache Unomi ${latest.stable.version} Release Candidate 1</strong>
+                <strong>Apache Unomi ${next.stable.version} Release Candidate 1</strong>
               </li>
             </ol>
 
@@ -210,48 +215,48 @@ and run mvn release:perform</code></pre>
               </li>
               <li>
                 <pre class="alert alert-primary"><code>cd unomi-dev
-mkdir ${latest.stable.version}</code></pre>
+mkdir ${next.stable.version}</code></pre>
               </li>
               <li>
                 Copy all the Zip and Tarbars including ASC (but do not copy the SHA1 or MD5 sum) files from:
-                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/${latest.stable.version}/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/${latest.stable.version}/</a>
+                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/${next.stable.version}/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/${next.stable.version}/</a>
                 and
-                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/${latest.stable.version}/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/${latest.stable.version}/</a>
+                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/${next.stable.version}/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/${next.stable.version}/</a>
               </li>
               <li>
                 Rename the source and binary files to something shorter and consistent with previous releases and generate
                   the SHA 512 checksum manually:
                 <pre class="alert alert-primary"><code>
-mv unomi-root-${latest.stable.version}-source-release.zip unomi-${latest.stable.version}-src.zip
-mv unomi-root-${latest.stable.version}-source-release.zip.asc unomi-${latest.stable.version}-src.zip.asc
-shasum -a 512 unomi-${latest.stable.version}-src.zip > unomi-${latest.stable.version}-src.zip.sha512
+mv unomi-root-${next.stable.version}-source-release.zip unomi-${next.stable.version}-src.zip
+mv unomi-root-${next.stable.version}-source-release.zip.asc unomi-${next.stable.version}-src.zip.asc
+shasum -a 512 unomi-${next.stable.version}-src.zip > unomi-${next.stable.version}-src.zip.sha512
 
-mv unomi-${latest.stable.version}.zip unomi-${latest.stable.version}-bin.zip
-mv unomi-${latest.stable.version}.zip.asc unomi-${latest.stable.version}-bin.zip.asc
-shasum -a 512 unomi-${latest.stable.version}-bin.zip > unomi-${latest.stable.version}-bin.zip.sha512
+mv unomi-${next.stable.version}.zip unomi-${next.stable.version}-bin.zip
+mv unomi-${next.stable.version}.zip.asc unomi-${next.stable.version}-bin.zip.asc
+shasum -a 512 unomi-${next.stable.version}-bin.zip > unomi-${next.stable.version}-bin.zip.sha512
 
-mv unomi-${latest.stable.version}.tar.gz unomi-${latest.stable.version}-bin.tar.gz
-mv unomi-${latest.stable.version}.tar.gz.asc unomi-${latest.stable.version}-bin.tar.gz.asc
-shasum -a 512 unomi-${latest.stable.version}-bin.tar.gz > unomi-${latest.stable.version}-bin.tar.gz.sha512
+mv unomi-${next.stable.version}.tar.gz unomi-${next.stable.version}-bin.tar.gz
+mv unomi-${next.stable.version}.tar.gz.asc unomi-${next.stable.version}-bin.tar.gz.asc
+shasum -a 512 unomi-${next.stable.version}-bin.tar.gz > unomi-${next.stable.version}-bin.tar.gz.sha512
                 </code></pre>
               </li>
               <li>
                 <pre class="alert alert-primary"><code>cd ..
-svn add ${latest.stable.version}</code></pre>
+svn add ${next.stable.version}</code></pre>
               </li>
               <li>
                 If needed, update the KEYS file (that is in the svn checkout <code>https://dist.apache.org/repos/dist/release/unomi</code>)
               </li>
               <li>
-                <pre class="alert alert-primary"><code>svn commit -m "Apache ${latest.stable.version} Release (for PMC voting)"</code></pre>
+                <pre class="alert alert-primary"><code>svn commit -m "Apache ${next.stable.version} Release (for PMC voting)"</code></pre>
               </li>
                 <li>Send out to the Unomi mailing list a mail to start the voting process, see <a href="#mail-1">[1]</a></li>
                 <li>If the vote is refused or cancelled, peform the following steps to restart the release process:
                     <ol>
                         <li>Drop the release in <a href="https://repository.apache.org/#stagingRepositories" target="_blank">Nexus</a></li>
                         <li>Remove the tag in Git:
-                            <pre class="alert alert-primary"><code>git push --delete origin unomi-root-${latest.stable.version}
-git tag -d unomi-root-${latest.stable.version}</code></pre>
+                            <pre class="alert alert-primary"><code>git push --delete origin unomi-root-${next.stable.version}
+git tag -d unomi-root-${next.stable.version}</code></pre>
                         </li>
                         <li>Correct any problems in the source, make sure to do them in master and cherry-pick them to the relevant branches</li>
                         <li>Reset all versions with the following command:
@@ -274,9 +279,7 @@ git tag -d unomi-root-${latest.stable.version}</code></pre>
             <ol>
               <li>
                 Move the files uploaded to the unomi-dev repository to the unomi-release repository by doing the following:
-                <pre class="alert alert-primary"><code>svn mv https://dist.apache.org/repos/dist/dev/unomi/${latest.stable.version}
-https://dist.apache.org/repos/dist/release/unomi/${latest.stable.version}
--m "Apache Unomi ${latest.stable.version} Release"</code></pre>
+                <pre class="alert alert-primary"><code>svn mv https://dist.apache.org/repos/dist/dev/unomi/${next.stable.version} https://dist.apache.org/repos/dist/release/unomi/${next.stable.version} -m "Apache Unomi ${next.stable.version} Release"</code></pre>
               </li>
               <li>
                 Update Jenkins
@@ -288,6 +291,31 @@ https://dist.apache.org/repos/dist/release/unomi/${latest.stable.version}
                 Connect to <a href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache.org/#stagingRepositories</a> and look for the open staging repositories, you should have one. Select the staging repositoriy and click on <code>release</code>.
               </li>
               <li>Update the website to point to the new release on the download page by first copying the current release to the archive page. Make sure you change the links to use the archive.apache.org instead of the closer.lua script (see other archived versions for example). Then you can update the download page with the proper links to the new release (no direct links to <code>www.apache.org/dist</code>, make sure you use the closer.lua script). Be careful with links that contain & (ampersand) characters, they must be replaced with &amp; Finally on the home page update the news section to add the release.
+                  <pre class="alert alert-primary"><code>git clone https://gitbox.apache.org/repos/asf/unomi-site.git</code></pre>
+                  Perform any modifications, notably change the versions in the pom.xml file:
+                  <pre class="alert alert-primary"><code>    &lt;properties&gt;
+        &lt;latest.stable.version&gt;1.5.4&lt;/latest.stable.version&gt;
+        &lt;next.development.version&gt;1.5.5-SNAPSHOT&lt;/next.development.version&gt;
+        &lt;next.stable.version&gt;1.5.5&lt;/next.stable.version&gt;
+        &lt;latest.development.version&gt;2.0.0-SNAPSHOT&lt;/latest.development.version&gt;
+    &lt;/properties&gt;
+</code></pre>
+                 Then modify the index.html, download.html to add the new files. For the documentation see the next step.
+              </li>
+                <li>
+                  Test the site modifications using the generated site HTML using Jekyll serve
+                    <pre class="alert alert-primary"><code>mvn clean install gem:exec@jekyll-serve-filtered</code></pre>
+                    Connect to http://127.0.0.1:4000 to check the modifications. If you need to make more modifications,
+                    simply relaunch the above line after modifying the HTML files.
+                </li>
+                <li>
+                  Deploy the web site changes using:
+                  <pre class="alert alert-primary"><code>mvn clean install
+mvn install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD</code></pre>
+                </li>
+                <li>
+                  Then make sure to commit all the changes to the web site's git project:
+                  <pre class="alert alert-primary"><code>git commit -m "Apache Unomi ${next.stable.version} Release website update"</code></pre>
               </li>
             </ol>
 
@@ -306,8 +334,8 @@ https://dist.apache.org/repos/dist/release/unomi/${latest.stable.version}
             <h3 id="rollback">Rollback</h3>
             <ol>
               <li>Delete the tag:
-                <pre class="alert alert-primary"><code>git push --delete origin unomi-root-${latest.stable.version}
-git tag --delete unomi-root-${latest.stable.version}</code></pre>
+                <pre class="alert alert-primary"><code>git push --delete origin unomi-root-${next.stable.version}
+git tag --delete unomi-root-${next.stable.version}</code></pre>
               </li>
               <li>Reset to the previous commit before the release preparation:
                 <pre class="alert alert-primary"><code>git reset --hard c65f9897ec5f31d9d22ad639738c7db9d109aa77
@@ -350,11 +378,11 @@ git push origin -f</code></pre>
 
             <h6 id="mail-1" class="pt-3">[1] Mail template for the Unomi PMC vote:</h6>
             <pre class="alert alert-primary"><code>
-Subject: [VOTE] Apache Unomi ${latest.stable.version} release [TAKE2]
+Subject: [VOTE] Apache Unomi ${next.stable.version} release [TAKE2]
 Body:
 Hi all,
 
-I submit Apache Unomi ${latest.stable.version} release [TAKE2] to your vote.
+I submit Apache Unomi ${next.stable.version} release [TAKE2] to your vote.
 
 The following corrections were done since TAKE 1:
 NOTICE year (2016) has been updated to 2018
@@ -368,18 +396,18 @@ Staging Repository:
 You can find the sources here :
 
 *https://repository.apache.org/content/repositories/orgapacheunomi-1021/org/apache/
-unomi/unomi-root/${latest.stable.version}/unomi-root-${latest.stable.version}-source-release.zip
+unomi/unomi-root/${next.stable.version}/unomi-root-${next.stable.version}-source-release.zip
 &lt;https://repository.apache.org/content/repositories/orgapacheunomi-1021/org/apache/
-unomi/unomi-root/${latest.stable.version}/unomi-root-${latest.stable.version}-source-release.zip&gt;*
+unomi/unomi-root/${next.stable.version}/unomi-root-${next.stable.version}-source-release.zip&gt;*
 
 Convenience binaries are also available here:
 *https://repository.apache.org/content/repositories/orgapacheunomi-1021/org/apache/
-unomi/unomi/${latest.stable.version}/
+unomi/unomi/${next.stable.version}/
 &lt;https://repository.apache.org/content/repositories/orgapacheunomi-1021/org/apache/
-unomi/unomi/${latest.stable.version}/&gt;*
+unomi/unomi/${next.stable.version}/&gt;*
 
 Git tag:
-unomi-root-${latest.stable.version}
+unomi-root-${next.stable.version}
 
 Release Notes:
 https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&
@@ -401,7 +429,7 @@ Regards
 
             <h6 id="mail-2" class="pt-3">[2] Mail template for the results of the Unomi PMC vote:</h6>
             <pre class="alert alert-primary"><code>
-Subject: [RESULT][VOTE] Apache Unomi ${latest.stable.version} release [TAKE2]
+Subject: [RESULT][VOTE] Apache Unomi ${next.stable.version} release [TAKE2]
 Body:
 Hi,
 
@@ -421,7 +449,7 @@ John Doe 5
 
 No 0 or -1.
 
-The proposal to release Unomi ${latest.stable.version} is approved by the team.
+The proposal to release Unomi ${next.stable.version} is approved by the team.
 
 Thanks,
 John Doe 1
@@ -429,10 +457,10 @@ John Doe 1
 
             <h6 id="mail-3" class="pt-3">[3] Announce mailing list template:</h6>
             <pre class="alert alert-primary"><code>
-Subject : [ANNOUNCE] Apache Unomi ${latest.stable.version} Release
+Subject : [ANNOUNCE] Apache Unomi ${next.stable.version} Release
 Body:
 The Apache Unomi team would like to announce the release of Apache
-Unomi ${latest.stable.version}.
+Unomi ${next.stable.version}.
 
 Release notes are here:
 https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&
@@ -446,10 +474,10 @@ More details regarding Apache Unomi can be found here:
 http://unomi.apache.org/
 
 The release artifacts can be downloaded here:
-https://dist.apache.org/repos/dist/release/incubator/unomi/${latest.stable.version}/
+https://dist.apache.org/repos/dist/release/incubator/unomi/${next.stable.version}/
 
 All JIRAs completed for this release are tagged with 'FixVersion =
-${latest.stable.version}'; the JIRA release notes can be found here:
+${next.stable.version}'; the JIRA release notes can be found here:
 https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&
 version=12338361
 

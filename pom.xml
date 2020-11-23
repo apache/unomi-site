@@ -46,7 +46,9 @@
     </repositories>
 
     <properties>
-        <latest.stable.version>1.5.1</latest.stable.version>
+        <latest.stable.version>1.5.4</latest.stable.version>
+        <next.stable.version>1.5.5</next.stable.version>
+        <next.development.version>1.5.5-SNAPSHOT</next.development.version>
         <latest.development.version>2.0.0-SNAPSHOT</latest.development.version>
     </properties>
 
@@ -228,8 +230,8 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <!-- run me with: mvn gem:exec@jekyll-serve -->
-                        <id>jekyll-serve</id>
+                        <!-- run me with: mvn gem:exec@jekyll-serve-source -->
+                        <id>jekyll-serve-source</id>
                         <goals>
                             <goal>exec</goal>
                         </goals>
@@ -240,6 +242,20 @@
                             </execArgs>
                         </configuration>
                         <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <!-- run me with: mvn gem:exec@jekyll-serve-filtered -->
+                        <id>jekyll-serve-filtered</id>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <file>${project.build.directory}/rubygems/bin/jekyll</file>
+                            <execArgs>serve --trace --source ${project.build.directory}/filtered-webapp --destination
+                                ${project.build.directory}/generated-jekyll
+                            </execArgs>
+                        </configuration>
+                        <phase>compile</phase>
                     </execution>
                 </executions>
                 <configuration>

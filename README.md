@@ -2,7 +2,8 @@
 Apache Unomi Website source repository
 ======================================
 
-This project contains the Apache Unomi Website.
+This project contains the Apache Unomi Website. The website is generated using Maven filtering (for version numbers) and
+then is passed to Jenkins to build the pages using templates.
 
 ## Build
 
@@ -36,14 +37,14 @@ mvn install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=Y
 mvn install
 `
 
-## Jekyll serve
+## Jekyll serve (from source)
 
 `
-mvn gem:exec@jekyll-serve
+mvn gem:exec@jekyll-serve-source
 `
 
 Note: the Jekyll serve will not filter the files so you will still see property references such as ${latest.stable.version}.
-This is by design. If you want to see a final version you need to generate it using the `mvn clean install` command.
+This is by design. If you want to see a final version you need to generate it using the `mvn clean install gem:exec@jekyll-serve-filtered` command.
 
 It works as expected on Mac and Linux, but not on Windows the following stacktrace appears:
     
