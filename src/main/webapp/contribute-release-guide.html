@@ -329,6 +329,21 @@ mvn install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=Y
                 Upload the site modification by using:
                 <pre class="alert alert-primary"><code>./generate-site-and-upload.sh APACHE_LDAP_USERNAME APACHE_LDAP_PASSWORD</code></pre>
               </li>
+                <li>
+                    You will now need to publish the new version of the manual as downloadable resources
+                    <pre class="alert alert-primary"><code>cd manual
+cd target
+svn co https://dist.apache.org/repos/dist/release/unomi/${next.stable.version}
+mv unomi-manual-1_5_x.pdf ${next.stable.version}
+mv unomi-manual-1_5_x.pdf.asc ${next.stable.version}
+mv unomi-manual-1_5_x.zip ${next.stable.version}
+mv unomi-manual-1_5_x.pdf.sha512 ${next.stable.version}
+mv unomi-manual-1_5_x.zip.asc ${next.stable.version}
+mv unomi-manual-1_5_x.zip.sha512 ${next.stable.version}
+cd ${next.stable.version}
+svn add unomi-manual*
+svn commit -m "Update Unomi manual packages"
+                </li>
             </ol>
 
             <h3 id="rollback">Rollback</h3>
