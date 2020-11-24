@@ -255,7 +255,7 @@
                                 ${project.build.directory}/generated-jekyll
                             </execArgs>
                         </configuration>
-                        <phase>compile</phase>
+                        <phase>none</phase>
                     </execution>
                 </executions>
                 <configuration>
