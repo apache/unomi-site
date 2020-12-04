@@ -342,9 +342,29 @@ mv unomi-manual-1_5_x.zip.asc ${next.stable.version}
 mv unomi-manual-1_5_x.zip.sha512 ${next.stable.version}
 cd ${next.stable.version}
 svn add unomi-manual*
-svn commit -m "Update Unomi manual packages"
+svn commit -m "Update Unomi manual packages"</code></pre>
                 </li>
             </ol>
+
+            <h3 id="final-docker">Docker image</h3>
+
+            <ol>
+                <li>
+                    Checkout the tagged version:
+                    <pre class="alert alert-primary"><code>git checkout tags/unomi-root-${next.stable.version}</code></pre>
+                </li>
+                <li>
+                    Change to the Docker directory. Make sure you have docker running locally (start Docker Desktop for
+                    example):
+                    <pre class="alert alert-primary"><code>cd docker</code></pre>
+                </li>
+                <li>
+                    Launch the docker build and push
+                    <pre class="alert alert-primary"><code>mvn clean install
+mvn docker:push</code></pre>
+                </li>
+            </ol>
+
 
             <h3 id="rollback">Rollback</h3>
             <ol>
