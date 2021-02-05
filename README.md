@@ -37,6 +37,12 @@ mvn install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=Y
 mvn install
 `
 
+## Jekyll serve (with filtering)
+
+`
+mvn gem:exec@jekyll-serve-filtered
+`
+
 ## Jekyll serve (from source)
 
 `
