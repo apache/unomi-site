@@ -28,25 +28,25 @@ The generated site will be in target/generated-jekyll
 To publish the local website to the production location (https://unomi.apache.org/), you have to use:
 
 ```
-mvn install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD
+mvn clean install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD
 ```
 
 ## Generate jekyll site
 
 `
-mvn install
+mvn clean install install
 `
 
 ## Jekyll serve (with filtering)
 
 `
-mvn gem:exec@jekyll-serve-filtered
+mvn clean install gem:exec@jekyll-serve-filtered
 `
 
 ## Jekyll serve (from source)
 
 `
-mvn gem:exec@jekyll-serve-source
+mvn clean install gem:exec@jekyll-serve-source
 `
 
 Note: the Jekyll serve will not filter the files so you will still see property references such as ${latest.stable.version}.
