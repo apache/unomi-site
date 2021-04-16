@@ -389,7 +389,14 @@ git push origin -f</code></pre>
 
             <p>Tweet, post on Facebook, LinkedIn, and other platforms. Ask other contributors to do the same.</p>
 
-            <!--<p>Also, update <a target="_blank" href="https://en.wikipedia.org/wiki/Apache_Unomi">the Wikipedia article on Apache Unomi</a>.</p>-->
+              <h3 id="remove-old-releases">Remove old releases</h3>
+
+              <p>
+                  In order to lighten the load on mirrors, remove old releases from the dist server once the new release
+                  has properly been deployed to all the mirrors. Old releases are automatically archived so they are
+                  not needed on the mirrors anymore. Just make sure that all the links in the download page do point
+                  to the archive server.
+              </p>
 
             <h3 id="checklist-to-declare-the-process-completed">Checklist to declare the process completed</h3>
 
@@ -398,7 +405,7 @@ git push origin -f</code></pre>
               <li>Release recorded in reporter.apache.org.</li>
               <li>Release announced on social media.</li>
               <li>Completion declared on the dev@ mailing list.</li>
-              <!--<li>Update Wikipedia Apache Unomi article.</li>-->
+                <li>Check that old release where removed from the dist server</li>
             </ol>
 
             <h2 id="improve-the-process">Improve the process</h2>
