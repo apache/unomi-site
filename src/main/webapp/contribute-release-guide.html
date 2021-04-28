@@ -169,16 +169,18 @@ gpg: signing failed: Inappropriate ioctl for device</code></pre>
                 <a href="https://www.apache.org/dev/publishing-maven-artifacts.html" target="_blank">https://www.apache.org/dev/publishing-maven-artifacts.html</a> and <a href="https://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords" target="_blank">https://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords</a>
               </li>
               <li>Check into the target directory and unzip the source release and compile it using:
-                <pre class="alert alert-primary"><code>cd target
+                <pre class="alert alert-primary"><code>pushd
+cd target
 gpg --verify unomi-root-${next.development.version}-source-release.zip.asc unomi-root-${next.development.version}-source-release.zip
 shasum -a 512 unomi-root-${next.development.version}-source-release.zip
 cat unomi-root-${next.development.version}-source-release.zip.sha512
 unzip unomi-root-${next.development.version}-source-release.zip
 cd unomi-root-${next.development.version}
-mvn clean install</code></pre>
+mvn clean install
+popd</code></pre>
                 to check that the packaged source build properly
               </li>
-              <li>Go back to the root project directory and run:
+              <li>Go back to the root project directory (pushd/popd did that for you normally) and run:
                 <pre class="alert alert-primary"><code>mvn release:prepare -DskipITs=true -DskipTests=true -Darguments="-DskipITs=true -DskipTests=true"  -DdryRun=true -P apache-release,integration-tests,performance-tests,docker,\!run-tests</code></pre>
               </li>
               <li>Publish a snapshot to test the deployment passwords:
@@ -222,6 +224,13 @@ mkdir ${next.stable.version}</code></pre>
                 <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/${next.stable.version}/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/${next.stable.version}/</a>
                 and
                 <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/${next.stable.version}/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/${next.stable.version}/</a>
+                  using commands such as : <pre class="alert alert-primary"><code>wget https://repository.apache.org/content/repositories/orgapacheunomi-1030/org/apache/unomi/unomi-root/${next.stable.version}/unomi-root-${next.stable.version}-source-release.zip
+wget https://repository.apache.org/content/repositories/orgapacheunomi-1030/org/apache/unomi/unomi-root/${next.stable.version}/unomi-root-${next.stable.version}-source-release.zip.asc
+wget https://repository.apache.org/content/repositories/orgapacheunomi-1030/org/apache/unomi/unomi/${next.stable.version}/unomi-${next.stable.version}.tar.gz
+wget https://repository.apache.org/content/repositories/orgapacheunomi-1030/org/apache/unomi/unomi/${next.stable.version}/unomi-${next.stable.version}.tar.gz.asc
+wget https://repository.apache.org/content/repositories/orgapacheunomi-1030/org/apache/unomi/unomi/${next.stable.version}/unomi-${next.stable.version}.zip
+wget https://repository.apache.org/content/repositories/orgapacheunomi-1030/org/apache/unomi/unomi/${next.stable.version}/unomi-${next.stable.version}.zip.asc</code></pre>
+
               </li>
               <li>
                 Rename the source and binary files to something shorter and consistent with previous releases and generate

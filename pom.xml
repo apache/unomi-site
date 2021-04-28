@@ -46,9 +46,9 @@
     </repositories>
 
     <properties>
-        <latest.stable.version>1.5.4</latest.stable.version>
-        <next.stable.version>1.5.5</next.stable.version>
-        <next.development.version>1.5.5-SNAPSHOT</next.development.version>
+        <latest.stable.version>1.5.5</latest.stable.version>
+        <next.stable.version>1.5.6</next.stable.version>
+        <next.development.version>1.5.6-SNAPSHOT</next.development.version>
         <latest.development.version>2.0.0-SNAPSHOT</latest.development.version>
     </properties>
 
