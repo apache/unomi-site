@@ -181,7 +181,7 @@ popd</code></pre>
                 to check that the packaged source build properly
               </li>
               <li>Go back to the root project directory (pushd/popd did that for you normally) and run:
-                <pre class="alert alert-primary"><code>mvn release:prepare -DskipITs=true -DskipTests=true -Darguments="-DskipITs=true -DskipTests=true"  -DdryRun=true -P apache-release,integration-tests,performance-tests,docker,\!run-tests</code></pre>
+                <pre class="alert alert-primary"><code>mvn release:prepare -DskipITs=true -DskipTests=true -Drelease.arguments="-Papache-release,integration-tests -DskipITs=true -DskipTests=true"  -DdryRun=true -P apache-release,integration-tests,performance-tests,docker,\!run-tests</code></pre>
               </li>
               <li>Publish a snapshot to test the deployment passwords:
                 <pre class="alert alert-primary"><code>mvn deploy -DskipITs=true -DskipTests=true -P \!run-tests</code></pre>
@@ -193,7 +193,7 @@ popd</code></pre>
                 <pre class="alert alert-primary"><code>mvn -P apache-release,integration-tests,performance-tests,docker,\!run-tests release:prepare</code></pre>
               </li>
               <li>
-                <pre class="alert alert-primary"><code>mvn -DskipITs=true -DskipTests=true -Darguments="-DskipITs=true -DskipTests=true" -P integration-tests,docker,performance-tests,\!run-tests release:perform</code></pre>
+                <pre class="alert alert-primary"><code>mvn -DskipITs=true -DskipTests=true -Drelease.arguments="-Papache-release,integration-tests -DskipITs=true -DskipTests=true" -P integration-tests,docker,performance-tests,\!run-tests release:perform</code></pre>
               </li>
               <li>If something fails, make sure you first drop the staging repository created here: <a href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache.org/#stagingRepositories</a>.<br>
 If you need to relaunch the <code>release:perform</code> and don’t have a release.properties, create a <code>release.properties</code> file with the following contents:
