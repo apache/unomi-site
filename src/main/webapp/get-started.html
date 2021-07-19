@@ -49,4 +49,22 @@ layout: default
           </div>
         </div>
 
+         <div id="docker" class="row featurette pt-4">
+          <div class="col-md-12">
+            <h2 class="featurette-heading">Start Unomi with Docker-compose !</h2>
+            <h3>Prerequisites</h3>
+            How to Install docker? Find that here: <a href="https://docs.docker.com/get-docker/">https://docs.docker.com/get-docker/</a>
+What is docker-compose? Read more on that here: <a href="https://docs.docker.com/compose/">https://docs.docker.com/compose/</a>
+            <h3>Spinning up the docker containers</h3>
+              <ol style="list-style-type: decimal">
+                <li>Create a file named docker-compose.yml and paste the contents of <a href="https://github.com/woutersf/unomi-docker-compose/blob/main/docker-compose.yml">this github repository</a> in there. This will give you: (Kibana if you uncomment it), elasticsearch and Apache Unomi</li>
+                <li>Use the command 'docker-compose up -d' to start it all. This will download all docker images and up your services.</li>
+                <li>Wait for startup to complete</li>
+                <li>Try accessing <a target="_blank" href="https://localhost:9443/cxs/cluster">https://localhost:9443/cxs/cluster</a> with username/password: karaf/karaf . You might get a certificate warning in your browser, just accept it despite the warning it is safe.</li>
+                <li>Request your first context by simply accessing : <a target="_blank" href="http://localhost:8181/context.js?sessionId=1234">http://localhost:8181/context.js?sessionId=1234</a></li>
+                <li>With 'docker-compose logs -t -f --tail 2000' you can follow the logs along should anything occur.</br>With 'docker-compose ps' You can then see the status of the containers and see if they are Up or not.</li> .</li>
+              </ol>
+          </div>
+        </div>
+
       </div>
