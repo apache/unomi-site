@@ -93,10 +93,21 @@ layout: default
               <h3 id="prepare-source">Pre-flight checks</h3>
               <ol>
                   <li>Make sure all copyright years have been changed in NOTICE and any other file</li>
+                  <li>Check that all SNAPSHOT versions are correct by searching for SNAPSHOT in all XML files</li>
+              </ol>
+
+              <h3 id="prepare-gpg">GPG Key configuration</h3>
+              <ol>
+                  <li>
+                      Make sure to have a PGP key for your @apache.org email.
+                      if not you can create a new one locally:
+                      <pre class="alert alert-primary"><code>gpg --gen-key</code></pre>
+                  </li>
                   <li>Make sure that your default GPG key is configured to use an signature with an @apache.org email.
-                  You can do this by adding the following to your ~/.gnupg/gpg.conf :
+                      You can do this by adding the following to your ~/.gnupg/gpg.conf :
                       <pre class="alert alert-primary"><code>default-key &lt;key-uid&gt;</code></pre>
-                      replacing &lt;key-uid&gt; with the key uid you want to use by default.
+                      replacing &lt;key-uid&gt; with the key uid you want to use by default. You can get the &lt;key-uid&gt; using:
+                      <pre class="alert alert-primary"><code>gpg --list-secret-keys</code></pre>
                       You should then check by signing a file and verifying its signature that you have the right
                       default key:
                       <pre class="alert alert-primary"><code>gpg -ab test.txt
@@ -104,13 +115,35 @@ gpg --verify test.txt.asc test.txt
                       </code></pre>
                       This should tell you which key was used and display the email address.
                   </li>
-                  <li>Check that all SNAPSHOT versions are correct by searching for SNAPSHOT in all XML files</li>
+                  <li>
+                      Make sure your public KEY is available in this files (if not add your key to the files and commit/push):
+                      <ol>
+                          <li><a href="https://github.com/apache/unomi/blob/master/KEYS">GIT https://github.com/apache/unomi/blob/master/KEYS (cherry-pick to the branches if necessary)</a></li>
+                          <li><a href="https://dist.apache.org/repos/dist/dev/unomi/KEYS">SVN https://dist.apache.org/repos/dist/dev/unomi/KEYS</a></li>
+                          <li><a href="https://dist.apache.org/repos/dist/release/unomi/KEYS">SVN https://dist.apache.org/repos/dist/release/unomi/KEYS</a></li>
+                      </ol>
+                  </li>
+                  <li>
+                      Make sure your public KEY is also available in public pgp server like <a href="https://keys.openpgp.org/">https://keys.openpgp.org/</a>.
+                      You can export your key to file with:
+                      <pre class="alert alert-primary"><code>gpg --export USERNAME@apache.org > USERNAME@apache.pub</code></pre>
+                      Then upload it on <a href="https://keys.openpgp.org/upload">https://keys.openpgp.org/upload</a>
+                  </li>
               </ol>
 
             <h3 id="prepare-jira">Jira</h3>
             <ol>
               <li>Setup new version in JIRA project</li>
-              <li>Update all JIRAs, close the ones that are still not closed, review tickets that can be closed, postpone to another release tickets that are not managed now</li>
+              <li>
+                  Update all JIRAs, close the ones that are still not closed, review tickets that can be closed, postpone to another release tickets that are not managed now.
+                  You can use this JIRA page: <a href="https://issues.apache.org/jira/projects/UNOMI?selectedItem=com.atlassian.jira.jira-projects-plugin%3Arelease-page&status=unreleased">Unomi JIRA releases</a>.
+                  Then review the list of tickets that need to be updated, also additionally you can check the list of commits since previous release and insure they are closed using fix version: ${next.stable.version}.
+                  Ideally all tickets listed for version: ${next.stable.version} should be closed or moved to the next version in case they are not finished/started.
+              </li>
+                <li>
+                    Then you can also generate a release notes automatically using: <a href="https://issues.apache.org/jira/secure/ConfigureReleaseNote.jspa?projectId=12319220&version=12350150">JIRA release note</a>,
+                    By choosing the version: ${next.stable.version}. It will be useful for linking the release notes in the voting mail.
+                </li>
             </ol>
 
             <h3 id="prepare-git">Git</h3>
@@ -201,9 +234,6 @@ If you need to relaunch the <code>release:perform</code> and don’t have a rele
 scm.tag=unomi-root-${next.stable.version}
 and run mvn release:perform</code></pre>
               </li>
-              <li>Make sure you uploaded your public PGP key using:
-                <pre class="alert alert-primary"><code>gpg --keyserver hkp://pgp.mit.edu --send-keys KEY_IDENTIFIER</code></pre>(get the identifier using gpg --list-secret-keys).<br>This will be used by the Apache Nexus Repository Manager to validate the JARs uploaded in the staging repository.
-              </li>
               <li>Connect to <a href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache
                   .org/#stagingRepositories</a> and look for the open staging repositories, you should have two (one for everything and the other for KAR/features) for releases &lt;= 1.2 and just one for versions &gt;= 1.3.0 (because of changes in the Karaf plugins). Close the repositories and given a meaningful comment when closing such as:<br>
                 <strong>Apache Unomi ${next.stable.version} Release Candidate 1</strong>
@@ -252,9 +282,6 @@ shasum -a 512 unomi-${next.stable.version}-bin.tar.gz > unomi-${next.stable.vers
               <li>
                 <pre class="alert alert-primary"><code>cd ..
 svn add ${next.stable.version}</code></pre>
-              </li>
-              <li>
-                If needed, update the KEYS file (that is in the svn checkout <code>https://dist.apache.org/repos/dist/release/unomi</code>)
               </li>
               <li>
                 <pre class="alert alert-primary"><code>svn commit -m "Apache ${next.stable.version} Release (for PMC voting)"</code></pre>
