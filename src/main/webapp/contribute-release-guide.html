@@ -155,12 +155,12 @@ gpg --verify test.txt.asc test.txt
                 <li>
                     Simply checkout an existing branch for release
                     <pre class="alert alert-primary"><code>cd unomi
-git checkout unomi-1.5.x
+git checkout unomi-1.6.x
                     </code></pre>
                 </li>
                 <li>OR Create a new branch if needed for the release using:
                     <pre class="alert alert-primary"><code>cd unomi
-git checkout -b unomi-1.5.x
+git checkout -b unomi-1.6.x
                     </code></pre>
                 </li>
             </ol>
@@ -316,9 +316,6 @@ git tag -d unomi-root-${next.stable.version}</code></pre>
               <li>
                 Move the files uploaded to the unomi-dev repository to the unomi-release repository by doing the following:
                 <pre class="alert alert-primary"><code>svn mv https://dist.apache.org/repos/dist/dev/unomi/${next.stable.version} https://dist.apache.org/repos/dist/release/unomi/${next.stable.version} -m "Apache Unomi ${next.stable.version} Release"</code></pre>
-              </li>
-              <li>
-                Update Jenkins
               </li>
               <li>
                 In JIRA mark the version as released and add a release date
