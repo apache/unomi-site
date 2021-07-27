@@ -367,12 +367,12 @@ mvn install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=Y
                     <pre class="alert alert-primary"><code>cd manual
 cd target
 svn co https://dist.apache.org/repos/dist/release/unomi/${next.stable.version}
-mv unomi-manual-1_5_x.pdf ${next.stable.version}
-mv unomi-manual-1_5_x.pdf.asc ${next.stable.version}
-mv unomi-manual-1_5_x.zip ${next.stable.version}
-mv unomi-manual-1_5_x.pdf.sha512 ${next.stable.version}
-mv unomi-manual-1_5_x.zip.asc ${next.stable.version}
-mv unomi-manual-1_5_x.zip.sha512 ${next.stable.version}
+mv unomi-manual-1_6_x.pdf ${next.stable.version}
+mv unomi-manual-1_6_x.pdf.asc ${next.stable.version}
+mv unomi-manual-1_6_x.zip ${next.stable.version}
+mv unomi-manual-1_6_x.pdf.sha512 ${next.stable.version}
+mv unomi-manual-1_6_x.zip.asc ${next.stable.version}
+mv unomi-manual-1_6_x.zip.sha512 ${next.stable.version}
 cd ${next.stable.version}
 svn add unomi-manual*
 svn commit -m "Update Unomi manual packages"</code></pre>
