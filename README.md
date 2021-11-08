@@ -11,13 +11,13 @@ You need a machine with Maven installed to build the website.
 
 Checkout:
 
-```
+```shell
 git clone https://github.com/apache/unomi-site
 ```
 
 Run Build:
 
-```
+```shell
 mvn clean install
 ```
 
@@ -27,27 +27,27 @@ The generated site will be in target/generated-jekyll
 
 To publish the local website to the production location (https://unomi.apache.org/), you have to use:
 
-```
+```shell
 mvn clean install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD
 ```
 
 ## Generate jekyll site
 
-`
-mvn clean install install
-`
+```shell
+mvn clean install
+```
 
 ## Jekyll serve (with filtering)
 
-`
+```shell
 mvn clean install gem:exec@jekyll-serve-filtered
-`
+```
 
 ## Jekyll serve (from source)
 
-`
+```shell
 mvn clean install gem:exec@jekyll-serve-source
-`
+```
 
 Note: the Jekyll serve will not filter the files so you will still see property references such as ${latest.stable.version}.
 This is by design. If you want to see a final version you need to generate it using the `mvn clean install gem:exec@jekyll-serve-filtered` command.
