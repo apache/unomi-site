@@ -13,27 +13,27 @@ layout: default
           <div class="col-2 sidenav-menu pt-3">
             <div class="pb-3 text-uppercase"><strong>Contribute</strong></div>
             <ul class="list-unstyled mb-3">
-              <li><a href="contribute.html">Get started contributing</a></li>
+              <li><a href="index.html">Get started contributing</a></li>
               <li class="sidenav-menu-sub-title">Technical Docs</li>
               <li>
                 <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="contribute-testing.html">Testing guide</a></li>
-                  <li><a href="contribute-dependencies-guide.html">Dependencies guide</a></li>
+                  <li><a href="testing.html">Testing guide</a></li>
+                  <li><a href="dependencies-guide.html">Dependencies guide</a></li>
                 </ul>
               </li>
               <li class="sidenav-menu-sub-title">Policies</li>
               <li>
                 <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="contribute-pre-commit-test-policies.html">Pre-commit test policies</a></li>
-                  <li><a href="contribute-post-commit-test-policies.html">Post-commit test policies</a></li>
+                  <li><a href="pre-commit-test-policies.html">Pre-commit test policies</a></li>
+                  <li><a href="post-commit-test-policies.html">Post-commit test policies</a></li>
                 </ul>
               </li>
               <li class="sidenav-menu-sub-title">Committers</li>
               <li>
                 <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="contribute-become-a-committer.html">Become a committer</a></li>
-                  <li><a href="contribute-committer-guide.html">Committer guide</a></li>
-                  <li><a href="contribute-release-guide.html">Release guide</a></li>
+                  <li><a href="become-a-committer.html">Become a committer</a></li>
+                  <li><a href="committer-guide.html">Committer guide</a></li>
+                  <li><a href="release-guide.html">Release guide</a></li>
                 </ul>
               </li>
             </ul>
@@ -50,11 +50,11 @@ layout: default
             <p>To ensure that Unomi's post-commit tests are reliable and healthy, the Unomi community follows these post-commit test policies:</p>
 
             <ul>
-              <li><a href="contribute-post-commit-policies-details.html#rollback_first">Rollback first</a></li>
-              <li><a href="contribute-post-commit-policies-details.html#failing_test_is_critical_bug">A failing test is a critical bug</a></li>
-              <li><a href="contribute-post-commit-policies-details.html#flake_is_failing">A flaky test is a critical bug</a></li>
-              <li><a href="contribute-post-commit-policies-details.html#remove_flake">Flaky tests must either be fixed or removed</a></li>
-              <li><a href="contribute-post-commit-policies-details.html#precommit_for_postcommit">Fixes for post-commit failures should include a corresponding new pre-commit test</a></li>
+              <li><a href="post-commit-policies-details.html#rollback_first">Rollback first</a></li>
+              <li><a href="post-commit-policies-details.html#failing_test_is_critical_bug">A failing test is a critical bug</a></li>
+              <li><a href="post-commit-policies-details.html#flake_is_failing">A flaky test is a critical bug</a></li>
+              <li><a href="post-commit-policies-details.html#remove_flake">Flaky tests must either be fixed or removed</a></li>
+              <li><a href="post-commit-policies-details.html#precommit_for_postcommit">Fixes for post-commit failures should include a corresponding new pre-commit test</a></li>
             </ul>
 
             <h3>Post-commit test failure scenarios</h3>
@@ -66,14 +66,14 @@ layout: default
             <ol>
               <li>Create a <a target="_blank" href="https://issues.apache.org/jira/issues/?jql=project%20%3D%20UNOMI%20AND%20component%20%3D%20test-failures">JIRA issue</a> and assign it to yourself.</li>
               <li>Do high level triage of the failure.</li>
-              <li><a href="contribute-post-commit-guides.html#find_specialist">Assign the JIRA issue to a relevant person</a>.</li>
+              <li><a href="post-commit-guides.html#find_specialist">Assign the JIRA issue to a relevant person</a>.</li>
             </ol>
 
             <h4>I was assigned a JIRA issue for a test failure</h4>
 
             <ol>
-              <li><a href="contribute-post-commit-guides.html#rollback">Rollback the culprit change</a>.</li>
-              <li>If you determine that rollback will take longer than 8 hours, <a href="contribute-post-commit-guides.html#disabling">disable the test temporarily</a> while you rollback or create a fix.</li>
+              <li><a href="post-commit-guides.html#rollback">Rollback the culprit change</a>.</li>
+              <li>If you determine that rollback will take longer than 8 hours, <a href="post-commit-guides.html#disabling">disable the test temporarily</a> while you rollback or create a fix.</li>
             </ol>
 
             <blockquote>
@@ -92,7 +92,7 @@ layout: default
             <h3>Useful links</h3>
 
             <ul>
-              <li><a href="contribute-testing.html#best_practices">Best practices for writing tests</a></li>
+              <li><a href="testing.html#best_practices">Best practices for writing tests</a></li>
             </ul>
           </div>
         </div>
