@@ -18,7 +18,7 @@ git clone https://github.com/apache/unomi-site
 Run Build:
 
 ```shell
-mvn clean install
+./mvnw clean install
 ```
 
 The generated site will be in target/generated-jekyll
@@ -28,25 +28,25 @@ The generated site will be in target/generated-jekyll
 To publish the local website to the production location (https://unomi.apache.org/), you have to use:
 
 ```shell
-mvn clean install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD
+./mvnw clean install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD
 ```
 
 ## Generate jekyll site
 
 ```shell
-mvn clean install
+./mvnw clean install
 ```
 
 ## Jekyll serve (with filtering)
 
 ```shell
-mvn clean install gem:exec@jekyll-serve-filtered
+./mvnw clean install gem:exec@jekyll-serve-filtered
 ```
 
 ## Jekyll serve (from source)
 
 ```shell
-mvn clean install gem:exec@jekyll-serve-source
+./mvnw clean install gem:exec@jekyll-serve-source
 ```
 
 Note: the Jekyll serve will not filter the files so you will still see property references such as ${latest.stable.version}.
