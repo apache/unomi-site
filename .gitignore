@@ -2,3 +2,4 @@
 **/*.iml
 target/
 /src/main/webapp/.jekyll-cache/
+/.mvn/wrapper/maven-wrapper.jar
