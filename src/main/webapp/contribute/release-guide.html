@@ -348,16 +348,31 @@ git tag -d unomi-root-${next.stable.version}</code></pre>
                 </li>
                 <li>
                   Then make sure to commit all the changes to the web site's git project:
-                  <pre class="alert alert-primary"><code>git commit -m "Apache Unomi ${next.stable.version} Release website update"</code></pre>
+                  <pre class="alert alert-primary"><code>git commit -m "Apache Unomi ${next.stable.version} Release website update"
+git push</code></pre>
               </li>
             </ol>
 
             <h3 id="final-documentation">Documentation</h3>
 
             <ol>
-              <li>In the `unomi` project, check the generated site by opening <code>target/staging/index.html</code> and check your changes and verify that there are no broken links
+                <li>
+                    In the `unomi` project, on the master, branch, make sure that you have a archive for the current
+                    branch in the `manual/src/archives` directory. If not, create one with the current main version and
+                    copy the contents of `manual/src/main` into the newly created directory. Make sure you add all the
+                    files to the git repository.
+                </li>
+                <li>
+                    Modify the `generate-site.sh` and `generate-site-and-upload.sh` if needed to add the new version
+                    you added in the previous step.
+                </li>
+                <li>
+                    Launch <pre class="alert alert-primary"><code>./generate-site.sh</code></pre> from the project's
+                    root directory.
+                </li>
+              <li>Check the generated site by opening <code>target/staging/manual/index.html</code>
+                  and check your changes and verify that there are no broken links.
               </li>
-              <li>WAIT FOR THE MIRRORS TO SYNC (at least 24 hours)</li>
               <li>
                 Upload the site modification by using:
                 <pre class="alert alert-primary"><code>./generate-site-and-upload.sh APACHE_LDAP_USERNAME APACHE_LDAP_PASSWORD</code></pre>
@@ -376,6 +391,10 @@ mv unomi-manual-1_6_x.zip.sha512 ${next.stable.version}
 cd ${next.stable.version}
 svn add unomi-manual*
 svn commit -m "Update Unomi manual packages"</code></pre>
+                </li>
+                <li>
+                    Go back to the site project and make sure you update the documentation page to link to the proper
+                    versions of the documents.
                 </li>
             </ol>
 
