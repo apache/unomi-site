@@ -323,7 +323,7 @@ git tag -d unomi-root-${next.stable.version}</code></pre>
               <li>
                 Connect to <a href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache.org/#stagingRepositories</a> and look for the open staging repositories, you should have one. Select the staging repositoriy and click on <code>release</code>.
               </li>
-              <li>Update the website to point to the new release on the download page by first copying the current release to the archive page. Make sure you change the links to use the archive.apache.org instead of the closer.lua script (see other archived versions for example). Then you can update the download page with the proper links to the new release (no direct links to <code>www.apache.org/dist</code>, make sure you use the closer.lua script). Be careful with links that contain & (ampersand) characters, they must be replaced with &amp; Finally on the home page update the news section to add the release.
+              <li>Update the website (in project `unomi-site`) to point to the new release on the download page by first copying the current release to the archive page. Make sure you change the links to use the archive.apache.org instead of the closer.lua script (see other archived versions for example). Then you can update the download page with the proper links to the new release (no direct links to <code>www.apache.org/dist</code>, make sure you use the closer.lua script). Be careful with links that contain & (ampersand) characters, they must be replaced with &amp; Finally on the home page update the news section to add the release.
                   <pre class="alert alert-primary"><code>git clone https://gitbox.apache.org/repos/asf/unomi-site.git</code></pre>
                   Perform any modifications, notably change the versions in the pom.xml file:
                   <pre class="alert alert-primary"><code>    &lt;properties&gt;
@@ -337,14 +337,14 @@ git tag -d unomi-root-${next.stable.version}</code></pre>
               </li>
                 <li>
                   Test the site modifications using the generated site HTML using Jekyll serve
-                    <pre class="alert alert-primary"><code>mvn clean install gem:exec@jekyll-serve-filtered</code></pre>
+                    <pre class="alert alert-primary"><code>./mvnw clean install gem:exec@jekyll-serve-filtered</code></pre>
                     Connect to http://127.0.0.1:4000 to check the modifications. If you need to make more modifications,
                     simply relaunch the above line after modifying the HTML files.
                 </li>
                 <li>
                   Deploy the web site changes using:
-                  <pre class="alert alert-primary"><code>mvn clean install
-mvn install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD</code></pre>
+                  <pre class="alert alert-primary"><code>./mvnw clean install
+./mvnw install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD</code></pre>
                 </li>
                 <li>
                   Then make sure to commit all the changes to the web site's git project:
@@ -355,7 +355,7 @@ mvn install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=Y
             <h3 id="final-documentation">Documentation</h3>
 
             <ol>
-              <li>Check the generated site by opening <code>target/staging/index.html</code> and check your changes and verify that there are no broken links
+              <li>In the `unomi` project, check the generated site by opening <code>target/staging/index.html</code> and check your changes and verify that there are no broken links
               </li>
               <li>WAIT FOR THE MIRRORS TO SYNC (at least 24 hours)</li>
               <li>
