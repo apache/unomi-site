@@ -46,10 +46,10 @@
     </repositories>
 
     <properties>
-        <latest.stable.version>1.6.1</latest.stable.version>
-        <next.stable.version>2.0.0</next.stable.version>
-        <next.development.version>1.6.2-SNAPSHOT</next.development.version>
-        <latest.development.version>2.0.0-SNAPSHOT</latest.development.version>
+        <latest.stable.version>2.0.0</latest.stable.version>
+        <next.stable.version>2.0.1</next.stable.version>
+        <next.development.version>2.0.0-SNAPSHOT</next.development.version>
+        <latest.development.version>2.0.1-SNAPSHOT</latest.development.version>
     </properties>
 
 
