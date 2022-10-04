@@ -50,6 +50,8 @@
         <next.stable.version>2.0.1</next.stable.version>
         <next.development.version>2.0.0-SNAPSHOT</next.development.version>
         <latest.development.version>2.0.1-SNAPSHOT</latest.development.version>
+        <branch.version>2.0.x</branch.version>
+        <doc.version>2_0_x</doc.version>
     </properties>
 
 

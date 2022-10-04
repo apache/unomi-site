@@ -155,12 +155,12 @@ gpg --verify test.txt.asc test.txt
                 <li>
                     Simply checkout an existing branch for release
                     <pre class="alert alert-primary"><code>cd unomi
-git checkout unomi-1.6.x
+git checkout unomi-${branch.version}
                     </code></pre>
                 </li>
                 <li>OR Create a new branch if needed for the release using:
                     <pre class="alert alert-primary"><code>cd unomi
-git checkout -b unomi-1.6.x
+git checkout -b unomi-${branch.version}
                     </code></pre>
                 </li>
             </ol>
@@ -384,12 +384,12 @@ git push</code></pre>
                     <pre class="alert alert-primary"><code>cd manual
 cd target
 svn co https://dist.apache.org/repos/dist/release/unomi/${next.stable.version}
-mv unomi-manual-1_6_x.pdf ${next.stable.version}
-mv unomi-manual-1_6_x.pdf.asc ${next.stable.version}
-mv unomi-manual-1_6_x.zip ${next.stable.version}
-mv unomi-manual-1_6_x.pdf.sha512 ${next.stable.version}
-mv unomi-manual-1_6_x.zip.asc ${next.stable.version}
-mv unomi-manual-1_6_x.zip.sha512 ${next.stable.version}
+mv unomi-manual-${doc.version}.pdf ${next.stable.version}
+mv unomi-manual-${doc.version}.pdf.asc ${next.stable.version}
+mv unomi-manual-${doc.version}.zip ${next.stable.version}
+mv unomi-manual-${doc.version}.pdf.sha512 ${next.stable.version}
+mv unomi-manual-${doc.version}.zip.asc ${next.stable.version}
+mv unomi-manual-${doc.version}.zip.sha512 ${next.stable.version}
 cd ${next.stable.version}
 svn add unomi-manual*
 svn commit -m "Update Unomi manual packages"</code></pre>
