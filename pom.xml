@@ -46,12 +46,12 @@
     </repositories>
 
     <properties>
-        <latest.stable.version>2.1.0</latest.stable.version>
-        <next.stable.version>2.2.0</next.stable.version>
-        <next.development.version>2.2.0-SNAPSHOT</next.development.version>
-        <latest.development.version>2.2.0-SNAPSHOT</latest.development.version>
-        <branch.version>2.1.x</branch.version>
-        <doc.version>2_1_x</doc.version>
+        <latest.stable.version>2.2.0</latest.stable.version>
+        <next.stable.version>2.3.0</next.stable.version>
+        <next.development.version>2.3.0-SNAPSHOT</next.development.version>
+        <latest.development.version>2.3.0-SNAPSHOT</latest.development.version>
+        <branch.version>2.2.x</branch.version>
+        <doc.version>2_2_x</doc.version>
     </properties>
 
 
