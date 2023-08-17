@@ -2,26 +2,48 @@
 Apache Unomi Website source repository
 ======================================
 
-This project contains the Apache Unomi Website. The website is generated using Maven filtering (for version numbers) and
-then is passed to Jenkins to build the pages using templates.
+This project contains the Apache Unomi Website. The website is generated using [Jekyll](https://jekyllrb.com/) framework
+with [Liquid](https://shopify.github.io/liquid/) templates.
+
+## Configuration
+### Jekyll Config
+Can be found in [_config](_config.yml) YAML file
+```yaml
+source: src/main/webapp
+destination: target/site
+```
+### Data config
+Can be found in [_data folder](src/main/webapp/_data/unomi.yml)
+This contains some variables used to replace placeholders in the site. 
 
 ## Build
 
-You need a machine with Maven installed to build the website.
+You need a machine with Jekyll or Docker to build the website.
 
-Checkout:
+Checkout the current project:
 
 ```shell
 git clone https://github.com/apache/unomi-site
 ```
 
-Run Build:
-
+### Build with Jekyll 
 ```shell
-./mvnw clean install
+jekyll build
 ```
 
-The generated site will be in target/generated-jekyll
+### Build with Docker
+See Jekyll Docker's images [documentation](https://github.com/envygeeks/jekyll-docker/blob/master/README.md#server).
+The Docker image provides all Ruby and Jekyll resources to avoid to install them locally. 
+Note that the version used of Jekyll is set to 4.2.0 as the newer images have an issue with a missing dependency. 
+```shell
+ docker run --rm \
+  --volume="$PWD:/srv/jekyll:Z" \
+  -p 4000:4000 \
+  jekyll/jekyll:4.2.0 \
+  jekyll build 
+```
+
+The generated site will be in the folder target/site
 
 ## Publish
 
@@ -31,56 +53,14 @@ To publish the local website to the production location (https://unomi.apache.or
 ./mvnw clean install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD
 ```
 
-## Generate jekyll site
-
+## Local build with local server
+Run the following command
 ```shell
-./mvnw clean install
+docker run --rm \
+  --volume="$PWD:/srv/jekyll:Z" \
+  -p 4000:4000 \
+  jekyll/jekyll:4.2.0 \ 
+  jekyll serve 
 ```
 
-## Jekyll serve (with filtering)
-
-```shell
-./mvnw clean install gem:exec@jekyll-serve-filtered
-```
-
-## Jekyll serve (from source)
-
-```shell
-./mvnw clean install gem:exec@jekyll-serve-source
-```
-
-Note: the Jekyll serve will not filter the files so you will still see property references such as ${latest.stable.version}.
-This is by design. If you want to see a final version you need to generate it using the `mvn clean install gem:exec@jekyll-serve-filtered` command.
-
-It works as expected on Mac and Linux, but not on Windows the following stacktrace appears:
-    
-    [INFO] Configuration file: c:\Users\username\projects\jekyll-jruby-maven/src/main/webapp/_config.yml
-    [INFO] Source: c:\Users\username\projects\jekyll-jruby-maven/src/main/webapp
-    [INFO] Destination: c:\Users\username\projects\jekyll-jruby-maven\target\classes
-    [INFO] Incremental build: disabled. Enable with --incremental
-    [INFO] Generating...
-    [INFO] C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/jekyll-3.0.2/lib/jekyll/utils.rb:117:in `open': Permission denied - c
-    :/Users/username/projects/jekyll-jruby-maven/src/main/resources/css (Errno::EACCES)
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/jekyll-3.0.2/lib/jekyll/utils.rb:117:in `has_yaml_header?'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/jekyll-3.0.2/lib/jekyll/reader.rb:43:in `block in read_directories'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/jekyll-3.0.2/lib/jekyll/reader.rb:43:in `select'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/jekyll-3.0.2/lib/jekyll/reader.rb:43:in `read_directories'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/jekyll-3.0.2/lib/jekyll/reader.rb:17:in `read'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/jekyll-3.0.2/lib/jekyll/site.rb:144:in `read'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/jekyll-3.0.2/lib/jekyll/site.rb:57:in `process'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/jekyll-3.0.2/lib/jekyll/command.rb:28:in `process_site'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/jekyll-3.0.2/lib/jekyll/commands/build.rb:60:in `build'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/jekyll-3.0.2/lib/jekyll/commands/build.rb:35:in `process'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/jekyll-3.0.2/lib/jekyll/commands/build.rb:18:in `block in init_
-    with_program'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/mercenary-0.3.5/lib/mercenary/command.rb:220:in `call'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/mercenary-0.3.5/lib/mercenary/command.rb:220:in `block in execute'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/mercenary-0.3.5/lib/mercenary/command.rb:220:in `each'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/mercenary-0.3.5/lib/mercenary/command.rb:220:in `execute'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/mercenary-0.3.5/lib/mercenary/program.rb:42:in `go'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/mercenary-0.3.5/lib/mercenary.rb:19:in `program'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/gems/jekyll-3.0.2/bin/jekyll:17:in `<top>'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/bin/jekyll:1:in `load'
-    [INFO] from C:/Users/username/projects/jekyll-jruby-maven/target/rubygems/bin/jekyll:1:in `<top>'
-    [INFO] from -e:1:in `load'
-    [INFO] from -e:1:in `<top>'
+Then access to http://localhost:4000/ to access the site. Note that source changes are detected and apply automatically.
