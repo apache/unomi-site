@@ -38,7 +38,7 @@
                 <configuration>
                     <checkinComment>[scm-publish] Updating Unomi website</checkinComment>
                     <pubScmUrl>scm:svn:https://svn.apache.org/repos/asf/unomi/website/</pubScmUrl>
-                    <content>${project.build.directory}/site/content>
+                    <content>${project.build.directory}/site</content>
                     <ignorePathsToDelete>
                         <ignorePathToDelete>docs/**</ignorePathToDelete>
                         <ignorePathToDelete>rest-api-doc/**</ignorePathToDelete>

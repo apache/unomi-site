@@ -43,14 +43,14 @@ Note that the version used of Jekyll is set to 4.2.0 as the newer images have an
   jekyll build 
 ```
 
-The generated site will be in the folder target/site
+The generated site will be in the folder `target/site`
 
 ## Publish
 
 To publish the local website to the production location (https://unomi.apache.org/), you have to use:
-
+Do not use the `clean` maven goal to not remove the previous generated site.
 ```shell
-./mvnw clean install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD
+mvn install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD
 ```
 
 ## Local build with local server
