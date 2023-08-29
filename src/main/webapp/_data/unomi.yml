@@ -1,7 +1,7 @@
 latest:
   stable:
     version: 2.3.0
-  .development:
+  development:
     version: 2.4.0-SNAPSHOT
 next:
   stable:
