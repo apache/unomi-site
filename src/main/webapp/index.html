@@ -3,31 +3,90 @@ title: Main Page
 layout: default
 ---
 
-      <div class="container-fluid product pt-5 pb-5 mx-auto">
-        <div class="row pt-5 pb-5">
-          <div class="container">
+<div class="container-fluid product pt-5 pb-5 mx-auto">
+    <div class="row pt-5 pb-5">
+        <div class="container">
             <div class="col pt-5 mx-auto text-left">
-              <h1 class="display-5">Apache Unomi&trade;: The Open Source Customer Data Platform</h1>
-              <p class="lead">Apache Unomi&trade; (pronounced "You know me") is a Java Open Source customer data platform, a Java server designed to manage customers, leads and visitors data and help personalize customers experiences while also offering features to respect visitor privacy rules (such as GDPR)</p>
-              <div class="pt-4">
-                <a class="btn btn-primary btn-lg" href="get-started.html">Learn more</a>&nbsp;&nbsp;
-                <a class="btn btn-primary btn-lg" href="download.html">Download</a>
-              </div>
+                <h1 class="display-5">Apache Unomi&trade;: The Open Source Customer Data Platform</h1>
+                <p class="lead">Apache Unomi&trade; (pronounced "You know me") is a Java Open Source customer data
+                    platform, a Java server designed to manage customers, leads and visitors data and help personalize
+                    customers experiences while also offering features to respect visitor privacy rules (such as
+                    GDPR)</p>
+                <div class="pt-4">
+                    <a class="btn btn-primary btn-lg" href="get-started.html">Learn more</a>&nbsp;&nbsp;
+                    <a class="btn btn-primary btn-lg" href="download.html">Download</a>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
 
 
-      <!-- Marketing messaging and featurettes
-      ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
+<!-- Marketing messaging and featurettes
+================================================== -->
+<!-- Wrap the rest of the page in another container to center all the content. -->
 
 <div class="container marketing pt-5">
 
     <h1 class="mb-5">News</h1>
 
     <div class="row">
+        <div class="col-lg-6 pl-5">
+            <h3>Version 2.4.0 released!</h3>
+            <h4>Changes in 2.4.0 (since 2.3.0)</h4>
+            <h5> Bug Fix
+            </h5>
+            <ul>
+                <li>[<a href='https://issues.apache.org/jira/browse/UNOMI-784'>UNOMI-784</a>] - Timeout on updateByQuery
+                    request such as scoring update
+                </li>
+                <li>[<a href='https://issues.apache.org/jira/browse/UNOMI-788'>UNOMI-788</a>] - remove OGNL warning when
+                    evaluating missing properties
+                </li>
+                <li>[<a href='https://issues.apache.org/jira/browse/UNOMI-792'>UNOMI-792</a>] - Log error should be
+                    warning
+                </li>
+                <li>[<a href='https://issues.apache.org/jira/browse/UNOMI-796'>UNOMI-796</a>] - Add log4j conf + env
+                    variable to set SchemaService log level
+                </li>
+                <li>[<a href='https://issues.apache.org/jira/browse/UNOMI-800'>UNOMI-800</a>] - Example tracker page
+                    view event is rejected
+                </li>
+            </ul>
+
+            <h5> Improvement
+            </h5>
+            <ul>
+                <li>[<a href='https://issues.apache.org/jira/browse/UNOMI-787'>UNOMI-787</a>] - Improve migration script
+                    from unomi 1.x to 2.x to take target.properties.path into account
+                </li>
+            </ul>
+
+            <h5> Task
+            </h5>
+            <ul>
+                <li>[<a href='https://issues.apache.org/jira/browse/UNOMI-789'>UNOMI-789</a>] - Update json schema
+                    validator library
+                </li>
+                <li>[<a href='https://issues.apache.org/jira/browse/UNOMI-790'>UNOMI-790</a>] - Clean
+                    properties.attributes
+                </li>
+                <li>[<a href='https://issues.apache.org/jira/browse/UNOMI-791'>UNOMI-791</a>] - Make sessionId optional
+                    for events
+                </li>
+                <li>[<a href='https://issues.apache.org/jira/browse/UNOMI-795'>UNOMI-795</a>] - Fix the use of jekyll
+                    for unomi-site
+                </li>
+                <li>[<a href='https://issues.apache.org/jira/browse/UNOMI-799'>UNOMI-799</a>] - Upgrade nodejs version
+                    to 16
+                </li>
+            </ul>
+        </div><!-- /.col-lg-8 -->
+        <div class="col-lg-6 my-auto mx-auto">
+        </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+    <hr class="featurette-divider"><div class="row">
         <div class="col-lg-6 pl-5">
             <h3>Version 1.9.1 released!</h3>
             <h4>Changes in 1.9.1 (since 1.9.0)</h4>
@@ -44,6 +103,7 @@ layout: default
     <hr class="featurette-divider">
 
     <div class="row">
+
         <div class="col-lg-6 pl-5">
             <h3>Version 2.3.0 released!</h3>
             <h4>Changes in 2.3.0 (since 2.2.0)</h4>
@@ -88,7 +148,9 @@ layout: default
             <h4>Changes in 2.2.0 (since 2.1.0)</h4>
             <ul>
                 <li>Reduced the number of ElasticSearch indices</li>
-                <li>Implemented ElasticSearch rollover strategy to optimize the monthly indices rotation (events, sessions)</li>
+                <li>Implemented ElasticSearch rollover strategy to optimize the monthly indices rotation (events,
+                    sessions)
+                </li>
                 <li>Bug fixes and improvements in the profile merge system</li>
                 <li>New JSON Schema endpoint allowing for direct validation of events</li>
                 <li>Performance improvements for direct profile export to CSV</li>
@@ -145,290 +207,326 @@ layout: default
     <hr class="featurette-divider">
 
     <div class="row">
-          <div class="col-lg-6 pl-5">
+        <div class="col-lg-6 pl-5">
             <h3>Version 2.0 released !</h3>
             <h4>JSON Schema</h4>
             <ul>
-              <li>Define strict structure for events</li>
-              <li>Easily extensible through plugins & API</li>
+                <li>Define strict structure for events</li>
+                <li>Easily extensible through plugins & API</li>
             </ul>
             <h4>GraphQL API (beta)</h4>
             <ul>
-              <li>Brand new GraphQL API to input events and manage all objects</li>
-              <li>Based on the OASIS CXS CDP Specification</li>
-              <li>Deactivated by default for security</li>
+                <li>Brand new GraphQL API to input events and manage all objects</li>
+                <li>Based on the OASIS CXS CDP Specification</li>
+                <li>Deactivated by default for security</li>
             </ul>
             <h4>Profile aliases</h4>
             <ul>
-              <li>Profiles may now have alias IDs, multiple IDs for a single profile</li>
-              <li>Simplifies merging of profiles</li>
-              <li>Enables new use cases for integrating with external systems (CRM IDs, ...)</li>
+                <li>Profiles may now have alias IDs, multiple IDs for a single profile</li>
+                <li>Simplifies merging of profiles</li>
+                <li>Enables new use cases for integrating with external systems (CRM IDs, ...)</li>
             </ul>
             <h4>New web tracker</h4>
             <ul>
-              <li>Replaces old web tracker that had dependencies on third party library with self-sufficient code</li>
-              <li>Designed to be used directly as well as extended</li>
-              <li>New tutorial that illustrates its use</li>
+                <li>Replaces old web tracker that had dependencies on third party library with self-sufficient code</li>
+                <li>Designed to be used directly as well as extended</li>
+                <li>New tutorial that illustrates its use</li>
             </ul>
             <h4>Lots of smaller fixes/improvements</h4>
             <ul>
-              <li>Migration tools from 1.6 to 2.0</li>
-              <li>Docker images now use JDK 11 by default</li>
-              <li>Lots more details <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12343140">here</a></li>
+                <li>Migration tools from 1.6 to 2.0</li>
+                <li>Docker images now use JDK 11 by default</li>
+                <li>Lots more details <a
+                        href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12343140">here</a>
+                </li>
             </ul>
-          </div><!-- /.col-lg-8 -->
-          <div class="col-lg-6 my-auto mx-auto">
-            <img src="https://json-schema.org/assets/logo.svg" class="img-thumbnail" alt="JSON Schema Logo" />
-          </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
+        </div><!-- /.col-lg-8 -->
+        <div class="col-lg-6 my-auto mx-auto">
+            <img src="https://json-schema.org/assets/logo.svg" class="img-thumbnail" alt="JSON Schema Logo"/>
+        </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
 
-        <hr class="featurette-divider">
+    <hr class="featurette-divider">
 
-        <div class="row">
-          <div class="col-lg-6 pl-5">
+    <div class="row">
+        <div class="col-lg-6 pl-5">
             <h3>Version 1.6.1 released !</h3>
             <h4>Minor release with the following changes</h4>
             <ul>
-              <li>Bug fixes</li>
-              <li>Migration fix</li>
-              <li>More details <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12351508">here</a></li>
+                <li>Bug fixes</li>
+                <li>Migration fix</li>
+                <li>More details <a
+                        href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12351508">here</a>
+                </li>
             </ul>
-          </div><!-- /.col-lg-8 -->
-          <div class="col-lg-6 my-auto mx-auto">
+        </div><!-- /.col-lg-8 -->
+        <div class="col-lg-6 my-auto mx-auto">
             &nbsp;
-          </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
+        </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
 
-        <hr class="featurette-divider">
+    <hr class="featurette-divider">
 
-        <div class="row">
-          <div class="col-lg-6 pl-5">
+    <div class="row">
+        <div class="col-lg-6 pl-5">
             <h3>Version 1.6 released !</h3>
             <h4>Groovy actions REST API</h4>
             <ul>
-              <li>Deploy Groovy actions directly through API</li>
-              <li>Makes it possible to use Groovy actions in cloud deployments!</li>
+                <li>Deploy Groovy actions directly through API</li>
+                <li>Makes it possible to use Groovy actions in cloud deployments!</li>
             </ul>
             <h4>Rule engine optimization</h4>
             <ul>
-              <li>Rule are now associated to event types in memory</li>
-              <li>Only rules related to incoming event are evaluated</li>
-              <li>Changes rule engine performance from exponential to linear when rules are added</li>
+                <li>Rule are now associated to event types in memory</li>
+                <li>Only rules related to incoming event are evaluated</li>
+                <li>Changes rule engine performance from exponential to linear when rules are added</li>
             </ul>
             <h4>Lots of smaller fixes/improvements</h4>
             <ul>
-              <li>Log4j upgrades</li>
-              <li>Docker support improvements</li>
-              <li>Segment and score process fixes</li>
-              <li>Lots more details <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12350121">here</a></li>
+                <li>Log4j upgrades</li>
+                <li>Docker support improvements</li>
+                <li>Segment and score process fixes</li>
+                <li>Lots more details <a
+                        href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12350121">here</a>
+                </li>
             </ul>
-          </div><!-- /.col-lg-8 -->
-          <div class="col-lg-6 my-auto mx-auto">
-            <img src="assets/images/groovy-logo.svg" class="img-thumbnail" alt="Apache Groovy logo" />
-          </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
+        </div><!-- /.col-lg-8 -->
+        <div class="col-lg-6 my-auto mx-auto">
+            <img src="assets/images/groovy-logo.svg" class="img-thumbnail" alt="Apache Groovy logo"/>
+        </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
 
-        <hr class="featurette-divider">
+    <hr class="featurette-divider">
 
-        <div class="row featurette">
-          <div class="col-lg-4 my-auto mx-auto">
-            <img src="/assets/images/unomi-meetup-logo.png" class="img-thumbnail" alt="Unomi Meetup Logo" />
+    <div class="row featurette">
+        <div class="col-lg-4 my-auto mx-auto">
+            <img src="/assets/images/unomi-meetup-logo.png" class="img-thumbnail" alt="Unomi Meetup Logo"/>
             <p>Find more details on the <a href="/community/events/meetups/2021-11-18.html">event's page</a>.</p>
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-8 pl-5">
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-8 pl-5">
             <h3>First Apache Unomi meetup !</h3>
 
             <p>
-              The event was held on <strong>Nov 18th, 2021 from 1600 to 1800 CET</strong>. See the event's page for
-              information about viewing the recorded session.
+                The event was held on <strong>Nov 18th, 2021 from 1600 to 1800 CET</strong>. See the event's page for
+                information about viewing the recorded session.
             </p>
 
-          </div><!-- /.col-lg-8 -->
-        </div><!-- /.row -->
+        </div><!-- /.col-lg-8 -->
+    </div><!-- /.row -->
 
-        <hr class="featurette-divider">
+    <hr class="featurette-divider">
 
-        <div class="row">
-          <div class="col-lg-6 pl-5">
+    <div class="row">
+        <div class="col-lg-6 pl-5">
             <h3>Version 1.5 released !</h3>
             <h4>ElasticSearch 7 support</h4>
             <ul>
-              <li>New data model to support ElasticSearch 7 and up</li>
-              <li>Better compatibility with Kibana</li>
-              <li>Migration tool updated to make the upgrade from the old to the new data model seamless</li>
+                <li>New data model to support ElasticSearch 7 and up</li>
+                <li>Better compatibility with Kibana</li>
+                <li>Migration tool updated to make the upgrade from the old to the new data model seamless</li>
             </ul>
             <h4>Docker / Cloud improvements</h4>
             <ul>
-              <li>Official Docker image now on Docker Hub!</li>
-              <li>Improved Docker project to be in line with latest project builds</li>
+                <li>Official Docker image now on Docker Hub!</li>
+                <li>Improved Docker project to be in line with latest project builds</li>
             </ul>
             <h4>Profiles</h4>
             <ul>
-              <li>Added last updated property to profiles to make it easy to query last modified profiles</li>
+                <li>Added last updated property to profiles to make it easy to query last modified profiles</li>
             </ul>
             <h4>Actions</h4>
             <ul>
-              <li>It is now possible to build Unomi actions using Groovy scripts inside a plugin</li>
+                <li>It is now possible to build Unomi actions using Groovy scripts inside a plugin</li>
             </ul>
             <h4>JDK support</h4>
             <ul>
-              <li>Both JDK 11 and JDK 8 are now supported.</li>
+                <li>Both JDK 11 and JDK 8 are now supported.</li>
             </ul>
             <h4>Kafka support</h4>
             <ul>
-              <li>Initial Kafka consumer support</li>
+                <li>Initial Kafka consumer support</li>
             </ul>
             </p>
-          </div><!-- /.col-lg-8 -->
-          <div class="col-lg-6 my-auto mx-auto">
-            <img src="assets/images/apache-unomi-functionalities.png" class="img-thumbnail" alt="Apache Unomi profile view shell command" />
-          </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
+        </div><!-- /.col-lg-8 -->
+        <div class="col-lg-6 my-auto mx-auto">
+            <img src="assets/images/apache-unomi-functionalities.png" class="img-thumbnail"
+                 alt="Apache Unomi profile view shell command"/>
+        </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
 
-        <hr class="featurette-divider">
+    <hr class="featurette-divider">
 
-        <div class="row">
-          <div class="col-lg-4 my-auto mx-auto">
-            <img src="assets/images/unomi-profile-view.png" class="img-thumbnail" alt="Apache Unomi profile view shell command" width="350" />
-          </div><!-- /.col-lg-4 -->
-          <div class="col-lg-8 pl-5">
+    <div class="row">
+        <div class="col-lg-4 my-auto mx-auto">
+            <img src="assets/images/unomi-profile-view.png" class="img-thumbnail"
+                 alt="Apache Unomi profile view shell command" width="350"/>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-8 pl-5">
             <h3>Version 1.4.0 released !</h3>
             <h4>Container/Cloud deployments</h4>
             <ul>
-              <li>Centralized configuration compatible with Docker environment variables
-              </li>
-              <li>New Dockerfile and Docker Compose project files (official Apache Unomi Docker image coming soon!)
-              </li>
+                <li>Centralized configuration compatible with Docker environment variables
+                </li>
+                <li>New Dockerfile and Docker Compose project files (official Apache Unomi Docker image coming soon!)
+                </li>
             </ul>
             <h4>Event, rules, profiles management and tools</h4>
             <ul>
-              <li>New Karaf Shell Commands to view events, sessions and profiles, analyze rule executions, view incoming events, and much more...</li>
-              <li>Endpoint to search in events has been added</li>
-              <li>New patch system to improve modifying default definitions (rules, segments, …)</li>
+                <li>New Karaf Shell Commands to view events, sessions and profiles, analyze rule executions, view
+                    incoming events, and much more...
+                </li>
+                <li>Endpoint to search in events has been added</li>
+                <li>New patch system to improve modifying default definitions (rules, segments, …)</li>
             </ul>
             <h4>Data collection</h4>
             <ul>
-              <li>Analytics.js integration, providing an out-of-the-box ready-to-use web tracker</li>
+                <li>Analytics.js integration, providing an out-of-the-box ready-to-use web tracker</li>
             </ul>
             </p>
-          </div><!-- /.col-lg-8 -->
-        </div><!-- /.row -->
+        </div><!-- /.col-lg-8 -->
+    </div><!-- /.row -->
 
-        <hr class="featurette-divider">
+    <hr class="featurette-divider">
 
-        <div class="row featurette">
-          <div class="col-lg-8 pl-5">
+    <div class="row featurette">
+        <div class="col-lg-8 pl-5">
             <h3>Version 1.3.0 introduced Privacy (GPDR consent management) features</h3>
             <p>New in release 1.3.0 are features to manage visitor consents,
-              in order to make it easier to comply with new privacy regulations such as the <a target="_blank"
-                                                                                               href="https://en.wikipedia.org/wiki/General_Data_Protection_Regulation">GDPR</a>.
-              A quick guide to these new features is also available <a href="manual/latest/#_consent_api">here</a>.</p>
-          </div><!-- /.col-lg-8 -->
-          <div class="col-lg-4 my-auto mx-auto">
-            <img src="assets/images/europe-gdpr.jpg" class="img-thumbnail" alt="GDPR Illustration" width="350" />
-          </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
+                in order to make it easier to comply with new privacy regulations such as the <a target="_blank"
+                                                                                                 href="https://en.wikipedia.org/wiki/General_Data_Protection_Regulation">GDPR</a>.
+                A quick guide to these new features is also available <a href="manual/latest/#_consent_api">here</a>.
+            </p>
+        </div><!-- /.col-lg-8 -->
+        <div class="col-lg-4 my-auto mx-auto">
+            <img src="assets/images/europe-gdpr.jpg" class="img-thumbnail" alt="GDPR Illustration" width="350"/>
+        </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
 
-        <hr class="featurette-divider">
+    <hr class="featurette-divider">
 
-        <div class="row featurette">
-          <div class="col-md-12">
-            <h2 class="featurette-heading">Why would you need a <span class="text-muted">Customer Data Platform</span> ?</h2>
-            <p>Organizations collect data from multiple sources and channels - sales, web, emails, mobile, brick and mortar - and all of this data is spread across different departments and technologies. As a result, many professionals are lacking the data they need to do their job, especially data analysts and marketers.</p>
-            <p>A customer data platform helps business users collect all the customer data in one place, providing a complete view of the customers. When the data is collected, the customer data platform will also play a key role in choosing which content or offer is more relevant to a customer.</p>
-          </div>
+    <div class="row featurette">
+        <div class="col-md-12">
+            <h2 class="featurette-heading">Why would you need a <span class="text-muted">Customer Data Platform</span> ?
+            </h2>
+            <p>Organizations collect data from multiple sources and channels - sales, web, emails, mobile, brick and
+                mortar - and all of this data is spread across different departments and technologies. As a result, many
+                professionals are lacking the data they need to do their job, especially data analysts and
+                marketers.</p>
+            <p>A customer data platform helps business users collect all the customer data in one place, providing a
+                complete view of the customers. When the data is collected, the customer data platform will also play a
+                key role in choosing which content or offer is more relevant to a customer.</p>
         </div>
+    </div>
 
-        <div class="row featurette pt-5">
-          <div class="col-md-12">
+    <div class="row featurette pt-5">
+        <div class="col-md-12">
             <h2 class="featurette-heading">The <span class="text-muted">Apache Unomi&trade;</span> advantage ?</h2>
-            <p>Each organization is unique and will always have specific needs, this is why Apache Unomi&trade; has been designed to be extended and to ease the integration of external data. The embedded features such as segmentation, scoring and built-in privacy will be appreciated by business users while horizontal scalability and open source positioning will be loved by developers and architects. </p>
-            <p>Apache Unomi&trade; is also the reference implementation of the upcoming OASIS Context Server Customer Data Platform (CDP) standard (<a target="_blank" href="https://www.oasis-open.org/committees/cxs/">https://www.oasis-open.org/committees/cxs/</a>) to help standardize personalization of customer experience while promoting ethical web experience management and increased user privacy controls. </p>
-          </div>
+            <p>Each organization is unique and will always have specific needs, this is why Apache Unomi&trade; has been
+                designed to be extended and to ease the integration of external data. The embedded features such as
+                segmentation, scoring and built-in privacy will be appreciated by business users while horizontal
+                scalability and open source positioning will be loved by developers and architects. </p>
+            <p>Apache Unomi&trade; is also the reference implementation of the upcoming OASIS Context Server Customer
+                Data Platform (CDP) standard (<a target="_blank" href="https://www.oasis-open.org/committees/cxs/">https://www.oasis-open.org/committees/cxs/</a>)
+                to help standardize personalization of customer experience while promoting ethical web experience
+                management and increased user privacy controls. </p>
         </div>
+    </div>
 
-        <div class="row featurette pt-5">
-          <div class="col-md-12">
-            <h2 class="featurette-heading">Business cases based on <span class="text-muted">Apache Unomi&trade;</span> ?</h2>
+    <div class="row featurette pt-5">
+        <div class="col-md-12">
+            <h2 class="featurette-heading">Business cases based on <span class="text-muted">Apache Unomi&trade;</span> ?
+            </h2>
             <ul>
-              <li>Build a web personalization software to adapt the content on your website to your audience</li>
-              <li>Collect data from mobile application and feed Apache Unomi&trade; to track and understand your customers’ journeys</li>
-              <li>Connect the beacons deployed in your stores to Apache Unomi&trade; and consolidate the profile of your customers and leads across all these channels</li>
-              <li>Automatically push profiles from Apache Unomi&trade; to your CRM when a lead reach a given number of points in one of your scoring plans</li>
+                <li>Build a web personalization software to adapt the content on your website to your audience</li>
+                <li>Collect data from mobile application and feed Apache Unomi&trade; to track and understand your
+                    customers’ journeys
+                </li>
+                <li>Connect the beacons deployed in your stores to Apache Unomi&trade; and consolidate the profile of
+                    your customers and leads across all these channels
+                </li>
+                <li>Automatically push profiles from Apache Unomi&trade; to your CRM when a lead reach a given number of
+                    points in one of your scoring plans
+                </li>
             </ul>
-          </div>
         </div>
+    </div>
 
-        <div class="row featurette pt-5">
-          <div class="col-md-12">
+    <div class="row featurette pt-5">
+        <div class="col-md-12">
             <h2 class="featurette-heading"><span class="text-muted">Apache Unomi&trade;</span> logical architecture</h2>
             <p>All communication is done using HTTP REST requests and JSON data formats.</p>
-          </div>
         </div>
+    </div>
 
-        <div class="row featurette">
-          <div class="col-md-12">
-            <img src="assets/images/unomi-logical-architecture-diagram.png" alt="Apache Unomi logical architecture diagram" class="img-fluid" />
-          </div>
+    <div class="row featurette">
+        <div class="col-md-12">
+            <img src="assets/images/unomi-logical-architecture-diagram.png"
+                 alt="Apache Unomi logical architecture diagram" class="img-fluid"/>
         </div>
+    </div>
 
-        <div class="row featurette pt-5">
-          <div class="col-md-6">
+    <div class="row featurette pt-5">
+        <div class="col-md-6">
             <h2>For developers</h2>
             <ul>
-              <li>Uses ElasticSearch for data storage, dynamic data structure</li>
-              <li>Highly scalable architecture</li>
-              <li>Very simple to deploy and install (simply unzip &amp; run)</li>
-              <li>Uses Apache Karaf&trade; as the OSGi runtime</li>
-              <li>Full &amp; simple REST API</li>
-              <li>Extensible through plugin architecture (using OSGi &amp; simple JSON descriptors)</li>
-              <li>Apache Open Source project</li>
+                <li>Uses ElasticSearch for data storage, dynamic data structure</li>
+                <li>Highly scalable architecture</li>
+                <li>Very simple to deploy and install (simply unzip &amp; run)</li>
+                <li>Uses Apache Karaf&trade; as the OSGi runtime</li>
+                <li>Full &amp; simple REST API</li>
+                <li>Extensible through plugin architecture (using OSGi &amp; simple JSON descriptors)</li>
+                <li>Apache Open Source project</li>
             </ul>
-          </div>
-          <div class="col-md-6">
+        </div>
+        <div class="col-md-6">
             <h2>For IT stakeholders and business users</h2>
             <ul>
-              <li>First-Party Data Collection and Ownership</li>
-              <li>Persistent and consolidated profiles for all your audience (customers &amp; leads), storing anonymous and personally identifiable information</li>
-              <li>Regulation-proof and privacy management built-in</li>
-              <li>Real-Time Decisioning (Scoring logics, segmentation)</li>
-              <li>Open standard, easy integration and extension</li>
+                <li>First-Party Data Collection and Ownership</li>
+                <li>Persistent and consolidated profiles for all your audience (customers &amp; leads), storing
+                    anonymous and personally identifiable information
+                </li>
+                <li>Regulation-proof and privacy management built-in</li>
+                <li>Real-Time Decisioning (Scoring logics, segmentation)</li>
+                <li>Open standard, easy integration and extension</li>
             </ul>
-          </div>
         </div>
+    </div>
 
-        <div class="row featurette pt-5">
-          <div class="col-md-12">
+    <div class="row featurette pt-5">
+        <div class="col-md-12">
             <h2 class="featurette-heading">Articles &amp; slides</h2>
             <p>Checkout the latest <a href="resources.html#articlesAndSlides">articles and slides</a></p>
-          </div>
         </div>
+    </div>
 
-        <div class="row featurette mb-5 pt-5">
-          <div class="col-md-7">
+    <div class="row featurette mb-5 pt-5">
+        <div class="col-md-7">
             <h2 class="featurette-heading">Apache & OpenSource.</h2>
             <p>
-              Unomi&trade; is your project ! Unomi&trade; is an Apache Software Foundation project, available under the Apache v2 license.
-              It's a complete open community, always listening proposals and comments.
-              Sources, mailing lists, issue tracker: it's fully open, you can access directly.
-              We also love contributions : don't hesitate to contribute.
+                Unomi&trade; is your project ! Unomi&trade; is an Apache Software Foundation project, available under
+                the Apache v2 license.
+                It's a complete open community, always listening proposals and comments.
+                Sources, mailing lists, issue tracker: it's fully open, you can access directly.
+                We also love contributions : don't hesitate to contribute.
             </p>
             <p>
-              <a href="community/index.html">Be Involved In The Community</a> |
-              <a href="contribute/index.html">How To Contribute</a>
+                <a href="community/index.html">Be Involved In The Community</a> |
+                <a href="contribute/index.html">How To Contribute</a>
             </p>
-          </div>
-          <div class="col-md-5 align-items-center">
+        </div>
+        <div class="col-md-5 align-items-center">
             <a href="http://apache.org" target="_blank">
-            <img class="featurette-image img-fluid mx-auto" src="assets/images/apache.png" alt="Apache Software Foundation">
+                <img class="featurette-image img-fluid mx-auto" src="assets/images/apache.png"
+                     alt="Apache Software Foundation">
             </a>
             <br><br><br>
             <a href="https://events.apache.org/x/current-event.html" target="_blank">
-              <img class="featurette-image img-fluid mx-auto" src="http://www.apache.org/events/current-event-234x60.png" alt="ApacheCon" />
+                <img class="featurette-image img-fluid mx-auto"
+                     src="http://www.apache.org/events/current-event-234x60.png" alt="ApacheCon"/>
             </a>
-          </div>
         </div>
+    </div>
 
-        <!-- /END THE FEATURETTES -->
+    <!-- /END THE FEATURETTES -->
 
-      </div><!-- /.container -->
+</div><!-- /.container -->

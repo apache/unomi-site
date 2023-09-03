@@ -1,15 +1,14 @@
 latest:
   stable:
-    version: 2.3.0
-  development:
-    version: 2.4.0-SNAPSHOT
-next:
-  stable:
     version: 2.4.0
   development:
-    version: 2.4.0-SNAPSHOT
+    version: 2.5.0-SNAPSHOT
+next:
+  stable:
+    version: 2.5.0
+  development:
+    version: 2.5.0-SNAPSHOT
 branch:
-  version: 2.3.x
+  version: master
 doc:
-  version: 2_3_x
-test: xxxx
+  version: master
