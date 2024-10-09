@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl"?>
+<rdf:RDF xml:lang="en"
+         xmlns="http://usefulinc.com/ns/doap#" 
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+         xmlns:asfext="http://projects.apache.org/ns/asfext#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/">
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+   
+         https://www.apache.org/licenses/LICENSE-2.0
+   
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+  <Project rdf:about="https://unomi.apache.org">
+    <created>2024-10-08</created>
+    <license rdf:resource="https://spdx.org/licenses/Apache-2.0" />
+    <name>Apache Unomi</name>
+    <homepage rdf:resource="https://unomi.apache.org" />
+    <asfext:pmc rdf:resource="https://unomi.apache.org" />
+    <shortdesc>Apache Unomi™ (pronounced "You know me") is a Java Open Source customer data platform, a Java server designed to manage customers, leads and visitors data and help personalize customers experiences while also offering features to respect visitor privacy rules (such as GDPR)</shortdesc>
+    <description>Apache Unomi is a REST server that manages user profiles and events related to the profiles. It can be used to integrate personalization and profile management within very different systems such as CMS, CRMs, Issue Trackers, native mobile application. It was designed to be easy to integrate with external systems, promoting profile sharing and re-use in very different applications.
+
+Basically the server tracks users using different mechanisms (by default cookies), builds a progressively populated profile and associates events that are performed by a user with his profile. Events may range from a click on a page, to a file being downloaded, a native mobile application button being clicked, or anything that can be sent to the server.
+
+The server has a built-in rule system that makes it possible to perform any action when an event is collected for a profile. It also has the notion of user segments, making it possible to classify user profiles into dynamic sub-groups, notably to build personalized experiences for specific segments.</description>
+    <bug-database rdf:resource="https://issues.apache.org/jira/projects/UNOMI/" />
+    <mailing-list rdf:resource="https://unomi.apache.org/community/index.html" />
+    <download-page rdf:resource="https://unomi.apache.org/download.html" />
+    <programming-language>Java</programming-language>
+    <category rdf:resource="https://projects.apache.org/category/search" />
+    <release>
+      <Version>
+        <name>2.5.0</name>
+        <created>2024-06-12</created>
+        <revision>2.5.0</revision>
+      </Version>
+    </release>
+    <repository>
+      <GitRepository>
+        <location rdf:resource="https://github.com/apache/unomi"/>
+        <browse rdf:resource="https://github.com/apache/unomi"/>
+      </GitRepository>
+    </repository>
+  </Project>
+</rdf:RDF>
+
