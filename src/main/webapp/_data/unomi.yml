@@ -1,13 +1,13 @@
 latest:
   stable:
-    version: 2.5.0
+    version: 2.6.0
   development:
-    version: 2.5.1-SNAPSHOT
+    version: 2.7.0-SNAPSHOT
 next:
   stable:
-    version: 2.5.1
+    version: 2.6.0
   development:
-    version: 2.5.1-SNAPSHOT
+    version: 2.7.0-SNAPSHOT
 branch:
   version: master
 doc:
