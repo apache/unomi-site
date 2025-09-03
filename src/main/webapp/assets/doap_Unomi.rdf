@@ -1,3 +1,7 @@
+---
+layout: null
+permalink: /assets/doap_Unomi.rdf
+---
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl"?>
 <rdf:RDF xml:lang="en"
@@ -40,9 +44,9 @@ The server has a built-in rule system that makes it possible to perform any acti
     <category rdf:resource="https://projects.apache.org/category/search" />
     <release>
       <Version>
-        <name>2.5.0</name>
-        <created>2024-06-12</created>
-        <revision>2.5.0</revision>
+        <name>{{ site.data.unomi.latest.stable.version }}</name>
+        <created>{{ site.data.unomi.latest.stable.date }}</created>
+        <revision>{{ site.data.unomi.latest.stable.version }}</revision>
       </Version>
     </release>
     <repository>
@@ -53,4 +57,3 @@ The server has a built-in rule system that makes it possible to perform any acti
     </repository>
   </Project>
 </rdf:RDF>
-

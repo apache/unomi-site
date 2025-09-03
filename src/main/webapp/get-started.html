@@ -46,10 +46,10 @@ layout: default
                         environment:
                           - discovery.type=single-node
                         ports:
-                          - 9200:9200                    
+                          - 9200:9200
                       unomi:
                         # Unomi version can be updated based on your needs
-                        image: apache/unomi:1.5.7
+                        image: apache/unomi:{{ site.data.unomi.latest.stable.version }}
                         environment:
                           - UNOMI_ELASTICSEARCH_ADDRESSES=elasticsearch:9200
                           - UNOMI_THIRDPARTY_PROVIDER1_IPADDRESSES=0.0.0.0/0,::1,127.0.0.1
@@ -60,7 +60,7 @@ layout: default
                         links:
                           - elasticsearch
                         depends_on:
-                          - elasticsearch                    
+                          - elasticsearch
                   </pre>
                 </code>
               </p>
