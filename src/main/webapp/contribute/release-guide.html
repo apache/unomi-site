@@ -285,25 +285,44 @@ git push</code></pre>
               </li>
             </ol>
 
-            <h3 id="final-documentation">Documentation</h3>
+              <h3 id="final-documentation">Documentation</h3>
 
-            <ol>
-                <li>
-                    Launch <pre class="alert alert-primary"><code>./generate-site.sh {{ site.data.unomi.doc.version }} {{ site.data.unomi.next.stable.version }}</code></pre> from the project's
-                    root directory.
-                </li>
-              <li>Check the generated site by opening <code>target/staging/manual/index.html</code>
-                  and check your changes and verify that there are no broken links.
-              </li>
-              <li>
-                Upload the site modification by using:
-                <pre class="alert alert-primary"><code>./generate-site-and-upload.sh {{ site.data.unomi.doc.version }} {{ site.data.unomi.next.stable.version }} APACHE_LDAP_USERNAME APACHE_LDAP_PASSWORD</code></pre>
-              </li>
-                <li>
-                    Go back to the site project and make sure you update the documentation page to link to the proper
-                    versions of the documents.
-                </li>
-            </ol>
+              <ol>
+                  <li>
+                      Before running the manual and API generation tool, make sure to update the versions in the
+                      <pre class="alert alert-primary"><code>generate-manual-config</code></pre> file to make sure the
+                      correct versions are used. You should only have to update the following lines:
+                      <pre class="alert alert-primary"><code>
+# === VERSION CONFIGURATION ===
+# Latest version (master branch)
+LATEST_BRANCH="master"
+LATEST_VERSION="3.0.0-SNAPSHOT"
+LATEST_DIR="latest"
+
+# Stable version (release branch)
+STABLE_BRANCH="unomi-2.7.x"
+STABLE_VERSION="2.7.0"
+STABLE_DIR="2_7_x"
+                      </code></pre>
+                  </li>
+                  <li>
+                      Generate the documentation for both the latest and stable versions by running:<br>
+                      <pre class="alert alert-primary"><code>./generate-manual.sh simulate APACHE_LDAP_USERNAME APACHE_LDAP_PASSWORD</code></pre>
+                      This will perform a dry-run and show all actions without making any changes.
+                  </li>
+                  <li>
+                      Check the generated site by opening <code>target/staging/</code>
+                      and verify your changes, ensuring there are no broken links.
+                  </li>
+                  <li>
+                      To publish the documentation to the Apache SVN, run:<br>
+                      <pre class="alert alert-primary"><code>./generate-manual.sh publish APACHE_LDAP_USERNAME APACHE_LDAP_PASSWORD</code></pre>
+                      This will generate and upload both the latest and stable documentation versions, as well as release packages.
+                  </li>
+                  <li>
+                      Go back to the site project and update the documentation page to link to the correct versions of the documents.
+                  </li>
+              </ol>
 
             <h3 id="final-docker">Docker image</h3>
 
