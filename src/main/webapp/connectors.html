@@ -1,77 +1,24 @@
 ---
-title: Documentation
+title: Connectors
+description: "Apache Unomi connectors and integrations. Salesforce CRM, MailChimp, and custom Groovy connectors."
 layout: default
+noindex: true
 ---
 
-    <div class="container mb-5 pt-5">
-      <h2 class="pb-2 mb-2 border-bottom">Connectors</h2>
-
-      <h4 class="pt-4 mt-2 text-dark">Featured</h4>
-
-      <div class="row mb-2">
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-success"><i class="fas fa-circle"></i> Stable</strong>
-              <h3 class="mb-0 text-dark">Salesforce CRM <span class="text-muted">1.5.7</span></h3>
-              <div class="mb-1 text-muted">Last update: July 27th, 2021</div>
-              <p class="card-text">
-                <a href="manual/1_5_x/index.html">Download</a><br>
-              </p>
+<!-- Redirect to Integrations page -->
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <div class="p-5 rounded-3" style="background:var(--unomi-primary-light)">
+                    <div class="feature-icon feature-icon-lg mx-auto mb-3"><i class="bi bi-arrow-right-circle"></i></div>
+                    <h1 class="h3 mb-3">This page has moved</h1>
+                    <p class="text-muted mb-4">Connectors are now part of our comprehensive <strong>Integrations &amp; Ecosystem</strong> page.</p>
+                    <a href="/integrations.html" class="btn btn-primary btn-lg">
+                        <i class="bi bi-puzzle me-2"></i>Go to Integrations
+                    </a>
+                </div>
             </div>
-          </div>
         </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-warning"><i class="fas fa-circle"></i> Unstable</strong>
-              <h3 class="mb-0 text-dark">MailChimp <span class="text-muted">{{ site.data.unomi.latest.development.version }}</span></h3>
-              <div class="mb-1 text-muted">In development</div>
-              <p class="card-text">
-                <a href="manual/latest/index.html">Download</a><br>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <p>Add your own connector to this page! Learn <a href="">how now</a>.</p>
-        </div>
-      </div>
-
-      <h4 class="pt-4 mt-2 text-dark">Build your own !</h4>
-
-      <div class="row mb-2">
-        <div class="col-md-8">
-          <p>Quick example of a Groovy connector</p>
-          <code>
-            <pre>
-import org.apache.unomi.api.services.EventService
-import org.jsoup.nodes.Document
-
-import static groovyx.net.http.HttpBuilder.configure
-
-Document page = configure {
-    request.uri = 'https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all'
-}.get()
-
-String license = page.select('span.b.lic').collect { it.text() }.join(', ')
-
-println "Event type:${event.getEventType()}"
-println "Profile ID=${event.getProfile().getItemId()}"
-println "Action name=${action.actionType.metadata.name}"
-println "Action parameters=${action.parameterValues}"
-
-println "Groovy is licensed under: ${license}"
-
-EventService.NO_CHANGE
-            </pre>
-          </code>
-        </div>
-        <div class="col-md-4">
-          <a href="">Learn</a> more about building your own Groovy connector !
-        </div>
-      </div>
     </div>
-
-      </div><!-- /.container -->
-
+</section>

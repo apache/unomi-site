@@ -2,17 +2,159 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- SEO Meta Tags -->
+    <title>{{ page.title }} | Apache Unomi&trade; &mdash; Open Source Customer Data Platform</title>
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}Apache Unomi is an open source Customer Data Platform (CDP) for managing customer profiles, personalizing experiences, and respecting visitor privacy (GDPR).{% endif %}">
+    <meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}Apache Unomi, Customer Data Platform, CDP, open source, personalization, GDPR, privacy, customer profiles, segmentation, real-time, REST API, Java, ElasticSearch, OASIS{% endif %}">
+    <meta name="author" content="Apache Unomi Project">
+    <meta name="robots" content="{% if page.noindex %}noindex, nofollow{% else %}index, follow{% endif %}">
+    <link rel="canonical" href="{{ site.url }}{{ page.url | replace: 'index.html', '' }}">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:title" content="{{ page.title }} | Apache Unomi">
+    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}Open source Customer Data Platform for managing profiles and personalizing experiences with built-in privacy.{% endif %}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:site_name" content="Apache Unomi">
+    <meta property="og:image" content="{{ site.url }}/assets/images/apache-unomi-380x85.png">
+    <meta property="og:image:width" content="380">
+    <meta property="og:image:height" content="85">
+    <meta property="og:image:alt" content="Apache Unomi - Open Source Customer Data Platform">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page.title }} | Apache Unomi">
+    <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}Open source Customer Data Platform for managing profiles and personalizing experiences with built-in privacy.{% endif %}">
+    <meta name="twitter:image" content="{{ site.url }}/assets/images/apache-unomi-380x85.png">
+
+    <!-- JSON-LD: WebSite with SearchAction (enables sitelinks search box in Google) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Apache Unomi",
+        "alternateName": ["Unomi", "Apache Unomi CDP"],
+        "url": "https://unomi.apache.org",
+        "description": "Apache Unomi is an open source Customer Data Platform (CDP) for managing customer profiles, real-time personalization, and privacy-first data management."
+    }
+    </script>
+
+    <!-- JSON-LD: Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Apache Unomi",
+        "url": "https://unomi.apache.org",
+        "logo": "https://unomi.apache.org/assets/images/apache-unomi-380x85.png",
+        "parentOrganization": {
+            "@type": "Organization",
+            "name": "Apache Software Foundation",
+            "url": "https://www.apache.org"
+        },
+        "sameAs": [
+            "https://github.com/apache/unomi",
+            "https://the-asf.slack.com/messages/CBP2Z98Q7/"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "technical support",
+            "email": "users@unomi.apache.org",
+            "url": "https://unomi.apache.org/community/"
+        }
+    }
+    </script>
+
+    <!-- JSON-LD: SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Apache Unomi",
+        "applicationCategory": "DeveloperApplication",
+        "applicationSubCategory": "Customer Data Platform",
+        "operatingSystem": "Cross-platform (Java)",
+        "description": "Apache Unomi is an open source Customer Data Platform (CDP) that manages customer profiles, enables real-time personalization, and provides built-in privacy management including GDPR compliance. It is the reference implementation of the OASIS CDP specification.",
+        "url": "https://unomi.apache.org",
+        "downloadUrl": "https://unomi.apache.org/download.html",
+        "softwareHelp": {
+            "@type": "CreativeWork",
+            "url": "https://unomi.apache.org/documentation.html"
+        },
+        "releaseNotes": "https://unomi.apache.org/download.html",
+        "license": "https://www.apache.org/licenses/LICENSE-2.0",
+        "softwareVersion": "{{ site.data.unomi.latest.stable.version }}",
+        "datePublished": "{{ site.data.unomi.latest.stable.date }}",
+        "programmingLanguage": "Java",
+        "author": {
+            "@type": "Organization",
+            "name": "Apache Software Foundation",
+            "url": "https://www.apache.org"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Customer profile management and unification",
+            "Real-time segmentation and audience building",
+            "Event tracking, collection, and processing",
+            "Lead scoring and engagement scoring",
+            "Rules engine for automated actions",
+            "Privacy management and GDPR compliance",
+            "Consent management and data anonymization",
+            "Full REST/JSON API",
+            "Plugin architecture (OSGi, Groovy actions)",
+            "ElasticSearch storage backend",
+            "Connectors (Salesforce, MailChimp, custom)",
+            "OASIS CDP standard reference implementation"
+        ]
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList (per-page) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://unomi.apache.org/"
+            }{% if page.url != "/index.html" and page.url != "/" %},
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "{{ page.title }}",
+                "item": "{{ site.url }}{{ page.url }}"
+            }{% endif %}
+        ]
+    }
+    </script>
+
+    {% if page.structured_data %}{{ page.structured_data }}{% endif %}
+
     <link rel="icon" href="/assets/images/favicon.ico">
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 
-    <title>{{ site.title }} | {{ page.title }}</title>
+    <!-- AI/LLM discoverability -->
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM project summary">
+    <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLM full technical reference">
 
-    <!-- Matomo -->
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/assets/css/unomi.css" as="style">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://analytics.apache.org">
+
+    <!-- Matomo Analytics (privacy-respecting) -->
     <script>
         var _paq = window._paq = window._paq || [];
-        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
         _paq.push(["setDoNotTrack", true]);
         _paq.push(["disableCookies"]);
         _paq.push(['trackPageView']);
@@ -25,130 +167,219 @@
             g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
         })();
     </script>
-    <!-- End Matomo Code -->
 
-    <!-- Bootstrap core CSS -->
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Fontawesome CSS CDN -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-    <!-- Custom styles for this template -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap 5.3.8 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          crossorigin="anonymous">
+
+    <!-- Bootstrap Icons 1.11 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
     <link href="/assets/css/unomi.css" rel="stylesheet">
 </head>
 <body>
 
-<header>
-    <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top border-bottom box-shadow">
+<!-- Skip to content for accessibility -->
+<a class="visually-hidden-focusable" href="#main-content">Skip to main content</a>
+
+<header class="sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom" aria-label="Main navigation">
         <div class="container">
-            <a class="navbar-brand" href="/index.html">
-                <img src="/assets/images/unomi-86x20.png" alt="Logo Apache Unomi"/>
+            <a class="navbar-brand d-flex align-items-center" href="/index.html" aria-label="Apache Unomi home">
+                <img src="/assets/images/apache-unomi-380x85.png" alt="Apache Unomi" height="36" style="width:auto">
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+                    aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
-                <div>
-                    <ul class="navbar-nav mr-auto align-items-center text-uppercase">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/get-started.html">Get started</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/use-cases.html">Use cases</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/stories.html">Stories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/download.html">Download</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/documentation.html">Documentation</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/resources.html">Resources</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/contribute/index.html">Contribute</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/community/index.html">Community</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" target="_blank" href="https://www.apache.org">
-                                <img src="/assets/images/feather.svg" alt="Logo Apache Feather" style="height: 1.3em"/>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="collapse navbar-collapse" id="navbarMain">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="/get-started.html">Get Started</a>
+                    </li>
+
+                    <!-- Documentation Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle fw-medium" href="/documentation.html" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">Docs</a>
+                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-3 p-2">
+                            <li><a class="dropdown-item rounded-2 py-2" href="/documentation.html">
+                                <i class="bi bi-book me-2 text-primary"></i>Documentation Home</a></li>
+                            <li><a class="dropdown-item rounded-2 py-2" href="/manual/latest/index.html">
+                                <i class="bi bi-journal-text me-2 text-primary"></i>Latest Manual</a></li>
+                            <li><hr class="dropdown-divider my-1"></li>
+                            <li><a class="dropdown-item rounded-2 py-2" href="/use-cases.html">
+                                <i class="bi bi-lightbulb me-2 text-primary"></i>Use Cases</a></li>
+                            <li><a class="dropdown-item rounded-2 py-2" href="/resources.html">
+                                <i class="bi bi-play-circle me-2 text-primary"></i>Videos &amp; Articles</a></li>
+                            <li><a class="dropdown-item rounded-2 py-2" href="/tutorial.html">
+                                <i class="bi bi-mortarboard me-2 text-primary"></i>Tutorials</a></li>
+                            <li><hr class="dropdown-divider my-1"></li>
+                            <li><a class="dropdown-item rounded-2 py-2" href="/rest-api-doc/index.html">
+                                <i class="bi bi-braces me-2 text-primary"></i>REST API</a></li>
+                            <li><a class="dropdown-item rounded-2 py-2" href="/unomi-api/apidocs/index.html">
+                                <i class="bi bi-code-square me-2 text-primary"></i>Javadoc</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Community Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle fw-medium" href="/community/index.html" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">Community</a>
+                        <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-3 p-2">
+                            <li><a class="dropdown-item rounded-2 py-2" href="/community/index.html">
+                                <i class="bi bi-chat-dots me-2 text-primary"></i>Get Help &amp; Contact</a></li>
+                            <li><a class="dropdown-item rounded-2 py-2" href="mailto:users-subscribe@unomi.apache.org">
+                                <i class="bi bi-envelope me-2 text-primary"></i>Subscribe to Mailing List</a></li>
+                            <li><a class="dropdown-item rounded-2 py-2" href="https://the-asf.slack.com/messages/CBP2Z98Q7/" target="_blank" rel="noopener">
+                                <i class="bi bi-slack me-2 text-primary"></i>Slack Channel</a></li>
+                            <li><hr class="dropdown-divider my-1"></li>
+                            <li><a class="dropdown-item rounded-2 py-2" href="/contribute/index.html">
+                                <i class="bi bi-code-slash me-2 text-primary"></i>Contribute</a></li>
+                            <li><a class="dropdown-item rounded-2 py-2" href="/community/team.html">
+                                <i class="bi bi-people me-2 text-primary"></i>Team</a></li>
+                            <li><a class="dropdown-item rounded-2 py-2" href="/community/events/index.html">
+                                <i class="bi bi-calendar-event me-2 text-primary"></i>Events</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="/integrations.html">Integrations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="/download.html">Download</a>
+                    </li>
+
+                    <!-- Prominent CTA -->
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-primary btn-sm rounded-pill px-3 fw-semibold" href="/community/index.html">
+                            <i class="bi bi-chat-heart me-1"></i>Get Help
+                        </a>
+                    </li>
+
+                    <!-- Apache -->
+                    <li class="nav-item ms-lg-2 d-none d-lg-block">
+                        <a class="nav-link px-1 opacity-50" target="_blank" rel="noopener" href="https://www.apache.org"
+                           title="Apache Software Foundation" aria-label="Apache Software Foundation">
+                            <img src="/assets/images/feather.svg" alt="" style="height:1.2em" aria-hidden="true">
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
 </header>
 
-<main>
+<main id="main-content">
     {{ content }}
 </main>
 
-<!-- FOOTER -->
-<footer class="container-fluid bg-dark pt-5 pb-3 text-white text-center footer">
-
-    <div class="container pb-5">
-        <div class="row">
-            <div class="col-3 col-md-3">
-                <h5>Start</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a href="/get-started.html" title="Get started">Get started</a></li>
-                    <li><a href="/get-started.html#quickstart" title="Quick start">Quick start</a></li>
-                    <li><a href="/download.html" title="Download">Download</a></li>
+<footer class="bg-dark text-white pt-5 pb-4">
+    <div class="container">
+        <div class="row g-4 pb-4">
+            <div class="col-6 col-md-3">
+                <h6 class="text-uppercase fw-semibold mb-3 text-white-50 small">Get Started</h6>
+                <ul class="list-unstyled small">
+                    <li class="mb-2"><a href="/get-started.html" class="footer-link">Getting Started</a></li>
+                    <li class="mb-2"><a href="/get-started.html#quickstart" class="footer-link">Quick Start</a></li>
+                    <li class="mb-2"><a href="/download.html" class="footer-link">Download</a></li>
+                    <li class="mb-2"><a href="/integrations.html" class="footer-link">Integrations</a></li>
                 </ul>
             </div>
-
-            <div class="col-3 col-md-3">
-                <h5>Documentation</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a href="/documentation.html" title="Main documentation">Main documentation</a></li>
-                    <li><a href="/use-cases.html" title="More use cases">More use cases</a></li>
-                    <li><a href="/rest-api-doc/index.html" title="REST API documentation">REST API documentation</a></li>
-                    <li><a href="/unomi-api/apidocs/index.html" title="API Javadoc">API Javadoc</a></li>
+            <div class="col-6 col-md-3">
+                <h6 class="text-uppercase fw-semibold mb-3 text-white-50 small">Documentation</h6>
+                <ul class="list-unstyled small">
+                    <li class="mb-2"><a href="/documentation.html" class="footer-link">Documentation Home</a></li>
+                    <li class="mb-2"><a href="/use-cases.html" class="footer-link">Use Cases</a></li>
+                    <li class="mb-2"><a href="/rest-api-doc/index.html" class="footer-link">REST API</a></li>
+                    <li class="mb-2"><a href="/unomi-api/apidocs/index.html" class="footer-link">Javadoc</a></li>
                 </ul>
             </div>
-
-            <div class="col-3 col-md-3">
-                <h5>Community</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a href="/community/index.html" title="Mailing lists">Contact Us</a></li>
-                    <li><a href="/contribute/index.html" title="Contribute">Contribute</a></li>
-                    <li><a href="/community/team.html" title="Team">Team</a></li>
-                    <li><a href="/community/maturity-model-report.html" title="Maturity model report card">Maturity model report card</a></li>
+            <div class="col-6 col-md-3">
+                <h6 class="text-uppercase fw-semibold mb-3 text-white-50 small">Community</h6>
+                <ul class="list-unstyled small">
+                    <li class="mb-2"><a href="/community/index.html" class="footer-link">Get Help &amp; Contact</a></li>
+                    <li class="mb-2"><a href="mailto:users-subscribe@unomi.apache.org" class="footer-link">Subscribe to Mailing List</a></li>
+                    <li class="mb-2"><a href="/contribute/index.html" class="footer-link">Contribute</a></li>
+                    <li class="mb-2"><a href="/community/team.html" class="footer-link">Team</a></li>
                 </ul>
             </div>
-
-            <div class="col-3 col-md-3">
-                <h5>About</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a target="_blank" href="https://www.oasis-open.org/committees/cxs/" title="OASIS Context Server Technical Committee">OASIS CXS Committee</a></li>
-                    <li><a href="/privacy-policy.html" title="Site policy">Site policy</a></li>
-                    <li><a target="_blank" href="https://www.apache.org/events/current-event.html" title="Apache Events">Apache Events</a></li>
-                    <li><a target="_blank" href="https://www.apache.org/licenses/" title="License">License</a></li>
-                    <li><a target="_blank" href="https://www.apache.org/security/" title="Security">Security</a></li>
-                    <li><a target="_blank" href="https://www.apache.org/foundation/sponsorship.html" title="Sponsorship">Sponsorship</a></li>
-                    <li><a target="_blank" href="https://www.apache.org/foundation/thanks.html" title="Thanks">Thanks</a></li>
+            <div class="col-6 col-md-3">
+                <h6 class="text-uppercase fw-semibold mb-3 text-white-50 small">Apache</h6>
+                <ul class="list-unstyled small">
+                    <li class="mb-2"><a href="https://www.apache.org/licenses/" target="_blank" rel="noopener" class="footer-link">License</a></li>
+                    <li class="mb-2"><a href="https://www.apache.org/security/" target="_blank" rel="noopener" class="footer-link">Security</a></li>
+                    <li class="mb-2"><a href="https://www.apache.org/events/current-event.html" target="_blank" rel="noopener" class="footer-link">Events</a></li>
+                    <li class="mb-2"><a href="https://www.apache.org/foundation/sponsorship.html" target="_blank" rel="noopener" class="footer-link">Sponsorship</a></li>
+                    <li class="mb-2"><a href="https://www.apache.org/foundation/thanks.html" target="_blank" rel="noopener" class="footer-link">Thanks</a></li>
+                    <li class="mb-2"><a href="/privacy-policy.html" class="footer-link">Privacy Policy</a></li>
                 </ul>
             </div>
-            <div class="w-100 pt-md-3"></div>
+        </div>
+        <hr class="border-secondary my-3">
+        <div class="row align-items-center pt-2">
+            <div class="col-md-8">
+                <p class="small text-white-50 mb-1">
+                    Copyright &copy; 2014&ndash;2026 <a href="https://www.apache.org" target="_blank" rel="noopener" class="footer-link">The Apache Software Foundation</a>. All Rights Reserved.
+                </p>
+                <p class="small text-white-50 mb-0">
+                    Apache Unomi, Unomi, Apache, the Apache feather logo are trademarks of The Apache Software Foundation.
+                </p>
+            </div>
+            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                <a href="https://www.apache.org" target="_blank" rel="noopener">
+                    <img src="/assets/images/asf_logo_wide.svg" alt="Apache Software Foundation" height="30" class="opacity-50">
+                </a>
+            </div>
         </div>
     </div>
-
-    <p class="float-right"><a href="#">Back to top</a></p>
-    <p>Copyright &copy;2014 - 2020 <a target="_blank" href="https://www.apache.org">Apache Software Foundation</a> - All Rights Reserved - Powered by <a target="_blank" href="https://karaf.apache.org">Apache Karaf&trade;</a><br/>
-        Apache Unomi, Unomi, Apache and the Apache feather logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.</p>
 </footer>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="/assets/js/vendor/popper.min.js"></script>
-<script src="/assets/js/vendor/bootstrap.min.js"></script>
+<!-- Bootstrap 5.3.8 JS Bundle (includes Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+<!-- Mermaid for diagrams -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+    (function() {
+        var s = getComputedStyle(document.documentElement);
+        var v = function(name) { return s.getPropertyValue(name).trim(); };
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: v('--unomi-primary-light'),
+                primaryTextColor: v('--unomi-text'),
+                primaryBorderColor: v('--unomi-primary'),
+                lineColor: v('--unomi-primary'),
+                secondaryColor: v('--unomi-primary-subtle'),
+                tertiaryColor: v('--unomi-primary-faint'),
+                fontFamily: 'Inter, system-ui, sans-serif',
+                fontSize: '14px'
+            }
+        });
+    })();
+</script>
+
+<!-- Smooth scroll + active nav highlighting -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Highlight active nav link
+    var path = window.location.pathname;
+    document.querySelectorAll('.navbar-nav .nav-link, .dropdown-item').forEach(function(link) {
+        if (link.getAttribute('href') === path) {
+            link.classList.add('active');
+            var parent = link.closest('.dropdown');
+            if (parent) parent.querySelector('.nav-link').classList.add('active');
+        }
+    });
+});
+</script>
 </body>
 </html>

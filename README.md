@@ -2,23 +2,25 @@
 Apache Unomi Website source repository
 ======================================
 
-This project contains the Apache Unomi Website. The website is generated using [Jekyll](https://jekyllrb.com/) framework
+This project contains the Apache Unomi Website. The website is generated using [Jekyll](https://jekyllrb.com/) 4.4
 with [Liquid](https://shopify.github.io/liquid/) templates.
 
 ## Configuration
+
 ### Jekyll Config
 Can be found in [_config](_config.yml) YAML file
 ```yaml
 source: src/main/webapp
 destination: target/site
 ```
+
 ### Data config
 Can be found in [_data folder](src/main/webapp/_data/unomi.yml)
-This contains some variables used to replace placeholders in the site. 
+This contains some variables used to replace placeholders in the site.
 
 ## Build
 
-You need a machine with Jekyll or Docker to build the website.
+You need either Docker (recommended) or a local Ruby/Jekyll installation to build the website.
 
 Checkout the current project:
 
@@ -26,41 +28,51 @@ Checkout the current project:
 git clone https://github.com/apache/unomi-site
 ```
 
-### Build with Jekyll 
+### Build with Docker (recommended)
+
+Using the [bretfisher/jekyll](https://hub.docker.com/r/bretfisher/jekyll) Docker image.
+No local Ruby or Jekyll installation required.
+
 ```shell
-jekyll build
+docker run --rm \
+  --volume="$PWD:/site" \
+  bretfisher/jekyll \
+  build
 ```
 
-### Build with Docker
-See Jekyll Docker's images [documentation](https://github.com/envygeeks/jekyll-docker/blob/master/README.md#server).
-The Docker image provides all Ruby and Jekyll resources to avoid to install them locally. 
-Note that the version used of Jekyll is set to 4.2.0 as the newer images have an issue with a missing dependency. 
+The generated site will be in the folder `target/site`.
+
+### Local development server with Docker
+
+Serves the site at http://localhost:4000/ with live-reload on source changes:
+
 ```shell
- docker run --rm \
-  --volume="$PWD:/srv/jekyll:Z" \
+docker run --rm \
+  --volume="$PWD:/site" \
   -p 4000:4000 \
-  jekyll/jekyll:4.2.0 \
-  jekyll build 
+  bretfisher/jekyll-serve
 ```
 
-The generated site will be in the folder `target/site`
+### Build with local Jekyll
+
+Requires Ruby 2.7+ and Bundler. Install dependencies once, then build:
+
+```shell
+bundle install
+bundle exec jekyll build
+```
+
+Or serve locally with live-reload:
+
+```shell
+bundle exec jekyll serve
+```
 
 ## Publish
 
 To publish the local website to the production location (https://unomi.apache.org/), you have to use:
 Do not use the `clean` maven goal to not remove the previous generated site.
+
 ```shell
 mvn install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD
 ```
-
-## Local build with local server
-Run the following command
-```shell
-docker run --rm \
-  --volume="$PWD:/srv/jekyll:Z" \
-  -p 4000:4000 \
-  jekyll/jekyll:4.2.0 \
-  jekyll serve 
-```
-
-Then access to http://localhost:4000/ to access the site. Note that source changes are detected and apply automatically.

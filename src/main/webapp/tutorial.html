@@ -1,344 +1,614 @@
 ---
-title: Tutorial
+title: Tutorials &mdash; Getting Started with Apache Unomi 3
+description: "Step-by-step tutorials for Apache Unomi 3.0: Docker quick start, manual installation, REST API basics, web tracking integration, and profile personalization."
 layout: default
+structured_data: >
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "Getting Started with Apache Unomi 3",
+        "description": "Learn how to set up and use Apache Unomi 3.0 as a Customer Data Platform with Docker, REST APIs, and web tracking.",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "name": "Start Unomi with Docker",
+                "text": "Create a docker-compose.yml and run docker-compose up to start Unomi with Elasticsearch."
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Verify the cluster",
+                "text": "Access https://localhost:9443/cxs/cluster with credentials karaf/karaf to verify the installation."
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Create a scope and send events",
+                "text": "Use the REST API to create scopes, send events, and query profiles."
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Integrate the web tracker",
+                "text": "Add the Unomi web tracker to your web pages for automatic event collection and personalization."
+            }
+        ]
+    }
+    </script>
 ---
 
-      <!-- Marketing messaging and featurettes
-      ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
-      <div class="container">
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Tutorials</p>
+        <h1>Getting Started with Apache Unomi 3</h1>
+        <p class="lead">From zero to a running CDP in minutes. Pick the path that suits you.</p>
+    </div>
+</section>
 
-        <!-- Migrating ES -->
-        <div id="ubuntu-tutorial" class="row mb-5 mt-5">
-          <div class="col">
-            <h2 class="pb-3 border-bottom">Running and Interfacing with Apache Unomi 1.4 on Ubuntu</h2>
-            <p>This section includes a quick tutorial demonstrating how to install and interface with Unomi running on Ubuntu. The purpose of this tutorial is to demonstrate how to use the features of Apache Unomi.</p>
-
-            <h3 class="pt-3 pb-2 text-dark">Install Java 8</h3>
-            <p>Unomi 1.4 requires Java 8. Use these command to install this specific version:</p>
-            <pre><code>
-apt install openjdk-8-jdk
-            </code></pre>
-            <p>Set your <code>JAVA_HOME</code> by editing <code>/etc/environment</code>:</p>
-            <pre><code>
-vi /etc/environment
-            </code></pre>
-            <p>and add these two lines below what is already there:</p>
-            <pre><code>
-JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/"
-PATH=$JAVA_HOME/bin:$PATH
-            </code></pre>
-            <div class="alert alert-warning" role="alert">Your <code>JAVA_HOME</code> may vary. You can review the output of the <code>apt install</code> command to see where Java was installed.</div>
-            <p>Now reload the environment:</p>
-            <pre><code>
-source /etc/environment
-            </code></pre>
-
-            <h3 class="pt-3 pb-2 text-dark">Installing ElasticSearch 5.6.3</h3>
-            <p>Unomi 1.4 requires ElasticSearch version 5.6.3. Use these command to install this specific version:</p>
-            <pre><code>
-apt-get update && apt-get -y install apt-transport-https curl wget
-wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-5.6.3.deb
-dpkg -i elasticsearch-5.6.3.deb
-            </code></pre>
-            <p>Now, edit the ElasticSearch configuration:</p>
-            <pre><code>
-vi /etc/elasticsearch/elasticsearch.yml
-            </code></pre>
-            <p>Uncomment and edit the line with <code>cluster.name</code> to:</p>
-            <pre><code>
-cluster.name: contextElasticSearch
-            </code></pre>
-            <p>Now start and check the status of ElasticSearch to confirm it is running:</p>
-            <pre><code>
-service elasticsearch start
-service elasticsearch status
-            </code></pre>
-
-            <h3 class="pt-3 pb-2 text-dark">Installing Unomi 1.4</h3>
-            <p>You can install a binary distribution from any of <a href="https://www.apache.org/dyn/closer.lua/incubator/unomi/1.4.0/unomi-1.4.0-bin.tar.gz">these</a> mirrors. Just download and extract the files, then run it using Karaf:</p>
-            <pre><code>
-wget http://apache.mirrors.pair.com/incubator/unomi/1.4.0/unomi-1.4.0-bin.tar.gz
-tar -xzf unomi-1.4.0-bin.tar.gz
-            </code></pre>
-            <p>After it is extracted, move it into <code>/opt/unomi</code>:</p>
-            <pre><code>
-mkdir /opt/unomi
-mv unomi-1.4.0-incubating/*
-            </code></pre>
-
-
-            <h3 class="pt-3 pb-2 text-dark">Start Unomi</h3>
-            <p>Next, start Unomi from the terminal:</p>
-            <pre><code>
-/opt/unomi/bin/karaf
-            </code></pre>
-            <p>In the Karaf terminal, run <code>unomi:start</code>:</p>
-            <pre><code>
-karaf@root()> unomi:start
-            </code></pre>
-
-            <div class="alert alert-info">
-              <h4 class="pt-3 pb-2 text-dark">Installing Unomi as a Service</h4>
-              <p>You can install Unomi as a service using Karaf's <a href="http://karaf.apache.org/manual/latest/#_service_wrapper">Service Wrapper</a>.</p>
-              <p>From the Karaf command line:</p>
-              <pre><code>
-  karaf@root()> feature:install wrapper
-  karaf@root()> wrapper:install
-              </code></pre>
-              <p>The output from the <code>wrapper:install</code> command will include instructions for finishing the installation and starting/stoping Karaf.</p>
+<!-- Table of Contents -->
+<section class="section" style="padding-bottom:0">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="feature-card">
+                    <h2 class="h6 fw-semibold mb-3"><i class="bi bi-list-ol me-2 text-primary"></i>In this guide</h2>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <ol class="small mb-0">
+                                <li><a href="#docker-quickstart">Quick Start with Docker</a> <span class="badge badge-success">Recommended</span></li>
+                                <li><a href="#manual-install">Manual Installation</a></li>
+                                <li><a href="#first-api-calls">Your First API Calls</a></li>
+                            </ol>
+                        </div>
+                        <div class="col-md-6">
+                            <ol class="small mb-0" start="4">
+                                <li><a href="#web-tracking">Web Tracking Tutorial</a></li>
+                                <li><a href="#rules-personalization">Rules &amp; Personalization</a></li>
+                                <li><a href="#next-steps">Next Steps</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <h3 class="pt-3 pb-2 text-dark">Interfacing with Unomi</h3>
-            <p>Below are some Python scripts that demonstrate how to interface with Unomi.</p>
-            <p>You can check some endpoints in a web browser, the default username and password is `karaf` and `karaf`:</p>
-            <pre><code>
-https://localhost:9443/cxs/cluster
-http://localhost:8181/context.js?sessionId=1234
-            </code></pre>
-
-
-            <h4 class="pt-3 pb-2 text-dark">Create a New Profile</h4>
-            <p>Run the Python code to create a new profile (use Python 3):</p>
-            <pre><code>
-from requests import request
-
-"""
-Make a request to Unomi to create a profile with ID = 10
-"""
-r = requests.post('http://localhost:8181/cxs/profiles/',
-auth=('karaf','karaf'),
-json ={
-        "itemId":"10",
-        "itemType":"profile",
-        "version":None,
-        "properties": {
-            "firstName": "John",
-            "lastName": "Smith"
-        },
-        "systemProperties":{},
-        "segments":[],
-        "scores":{},
-        "mergedWith":None,
-        "consents":{}
-    })
-print(r)
-print(r.content)
-            </code></pre>
-            <p>This creates a profile with ID 10. You can view this profile with a <a href="https://unomi.apache.org/rest-api-doc/#-1185500428">GET /profile endpoint</a> in the browser:</p>
-            <pre><code>
-http://localhost:8181/cxs/profile/10
-            </code></pre>
-
-            <h4 class="pt-3 pb-2 text-dark">Create a New Profile and Session</h4>
-            <p>Run the Python code to create a new profile and session (use Python 3):</p>
-            <pre><code>
-from requests import post
-from datetime import datetime
-
-profile = {
-    "itemId":"10",
-    "itemType":"profile",
-    "version":None,
-    "properties": {
-        "firstName": "John",
-        "lastName": "Smith"
-    },
-    "systemProperties":{},
-    "segments":[],
-    "scores":{},
-    "mergedWith":None,
-    "consents":{}
-}
-
-session = {
-    "itemId": "101",
-    "itemType":"session",
-    "scope":None,
-    "version":1,
-    "profileId":profile_id,
-    "profile": profile,
-    "properties":{},
-    "systemProperties":{},
-    "timeStamp": datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
-}
-
-# Create or update profile
-r = post('http://localhost:8181/cxs/profiles/',
-auth=('karaf','karaf'),
-json =profile)
-print(r)
-print(r.content)
-
-
-# Create session
-r = post('http://localhost:8181/cxs/profiles/sessions/101',
-    auth=('karaf', 'karaf'),
-    json=session)
-
-print(r)
-print(r.content)
-            </code></pre>
-            <p>This creates a session with ID 101 and profile with ID 10. You can view this profile with a <a href="https://unomi.apache.org/rest-api-doc/#1764110248">[GET /profile/{profile_id}/sessions endpoint]</a> in the browser:</p>
-            <pre><code>
-http://localhost:8181/cxs/profiles/10/sessions/
-            </code></pre>
-
-            <h4 class="pt-3 pb-2 text-dark">Create a New Rule</h4>
-            <p>Run the Python code to create a new rule (use Python 3):</p>
-            <pre><code>
-import requests
-
-"""
-Make a request to Unomi to create a rule that marks profiles as "eligible = yes"
-when annualIncome &lt; 12000
-"""
-r = requests.post('http://localhost:8181/cxs/rules/',
-auth=('karaf','karaf'),
-json ={
-  "metadata": {
-    "id": "eligibilityRule",
-    "name": "Example eligibility rule",
-    "description": "Profile annualIncome &lt; 12000"
-  },
-  "condition": {
-    "parameterValues": {
-      "subConditions": [
-        {
-          "parameterValues": {
-            "propertyName": "properties.annualIncome",
-            "comparisonOperator": "greaterThan",
-            "propertyValueInt": 12000
-          },
-          "type": "profilePropertyCondition"
-        },
-        {
-          "type": "profileUpdatedEventCondition",
-          "parameterValues": {
-          }
-        }
-      ],
-      "operator" : "and"
-    },
-    "type": "booleanCondition"
-  },
-  "actions": [
-    {
-      "parameterValues": {
-        "setPropertyName": "properties.eligibility",
-        "setPropertyValue": "yes"
-      },
-      "type": "setPropertyAction"
-    }
-  ]
-})
-print("Rule Response Code:", r)
-print("Rule Response Content:", r.content)
-
-
-"""
-Make a request to Unomi to create a profile with annualIncome &lt; 12000
-"""
-r = requests.post('http://localhost:8181/cxs/profiles/',
-auth=('karaf','karaf'),
-json ={
-        "itemId":"10",
-        "itemType":"profile",
-        "version":None,
-        "properties": {
-            "firstName": "John",
-            "lastName": "Smith",
-            "annualIncome": 10000
-        },
-        "systemProperties":{},
-        "segments":[],
-        "scores":{},
-        "mergedWith":None,
-        "consents":{}
-    })
-print("Profile Response Code:", r)
-print("Profile Response Content:", r.content)
-            </code></pre>
-            <p>This creates a rule with ID eligibilityRule and a profile with ID 10. You can view this rule with a <a href="https://unomi.apache.org/rest-api-doc/#-1505954579">[GET /rule/{rule_id} endpoint]</a> in the browser:</p>
-            <pre><code>
-http://localhost:8181/cxs/rules/eligibilityRule/
-            </code></pre>
-            <p>and you can view the profile which has been marked as eligible = "yes":</p>
-            <pre><code>
-http://localhost:8181/cxs/profile/10
-            </code></pre>
-
-          </div><!-- /.blog-main -->
         </div>
+    </div>
+</section>
 
-        <div id="docker-tutorial" class="row mb-5 mt-5">
-          <div class="col">
-            <h2 class="pb-3 border-bottom">Running Unomi 1.3 using Docker</h2>
-            <p>This section includes a quick tutorial demonstrating how to run Unomi using Docker. The purpose of this tutorial is to demonstrate how to run Apache Unomi in a Docker container.</p>
-            <h3 class="pt-3 pb-2 text-dark">Install Docker and Docker Compose</h3>
-            <p>Before you get started, you will need to install Docker and Docker Compose on your machine. Installation instructions can be found <a href="https://docs.docker.com/install/">here</a>. Docker for Mac and Docker Toolbox already include Docker Compose.</p>
-            <h3 class="pt-3 pb-2 text-dark">About the Required Images</h3>
-            <p>Unomi requires ElasticSearch so this setup will use an Elasticsearch image provided by <a href="https://www.elastic.co/">Elasticsearch B.V.</a>. We will use a Unomi Docker image mantained by the community.</p>
-            <ul>
-              <li><a href="https://hub.docker.com/r/mikeghen/unomi/">Unomi 1.3 image</a></li>
-              <li><a href="https://hub.docker.com/_/elasticsearch/">ElasticSearch 5.6.3 image</a></li>
-            </ul>
-            <h3 class="pt-3 pb-2 text-dark">Create a Docker Compose Configuration</h3>
-            <p>Create a new directory and add a <code>docker-compose.yaml</code> file. Then copy the code below into that file.</p>
-            <pre><code>
-version: '2.2'
+<!-- ============================================================ -->
+<!-- 1. Docker Quick Start -->
+<!-- ============================================================ -->
+<section id="docker-quickstart" class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <span class="badge badge-primary mb-3">Step 1</span>
+                <h2>Quick Start with Docker</h2>
+                <p class="text-muted">The fastest way to get Unomi running. You only need <a href="https://docs.docker.com/get-docker/" target="_blank" rel="noopener">Docker</a> installed.</p>
+
+                <h3 class="h6 fw-semibold mt-4 mb-3">Create <code>docker-compose.yml</code></h3>
+                <p>Create a new directory and add a <code>docker-compose.yml</code> file with the following content:</p>
+<pre><code>version: '3.8'
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:5.6.3
-    volumes: # Persist ES data in seperate "esdata" volume
-      - esdata1:/usr/share/elasticsearch/data
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
     environment:
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
       - discovery.type=single-node
-      - xpack.security.enabled=false
-      - cluster.name=contextElasticSearch
-    ports: # Expose Elasticsearch ports
-      - "9300:9300"
-      - "9200:9200"
+    ports:
+      - 9200:9200
+
   unomi:
-    image: mikeghen/unomi:1.3
-    container_name: unomi
+    image: apache/unomi:3.0.0
     environment:
-      - ELASTICSEARCH_HOST=elasticsearch
-      - ELASTICSEARCH_PORT=9300
+      - UNOMI_ELASTICSEARCH_ADDRESSES=elasticsearch:9200
+      - UNOMI_THIRDPARTY_PROVIDER1_IPADDRESSES=0.0.0.0/0,::1,127.0.0.1
     ports:
       - 8181:8181
       - 9443:9443
+      - 8102:8102
     links:
       - elasticsearch
     depends_on:
-      - elasticsearch
+      - elasticsearch</code></pre>
 
-volumes: # Define seperate volume for Elasticsearch data
-  esdata1:
-    driver: local
-            </code></pre>
-            <p>The configuration above creates a single node ElasticSearch container with persistent storage. It also creates a single Unomi container and links it so it can access ElasticSearch.</p>
-            <p>You can find the code for the Unomi image here: <a href="https://github.com/mikeghen/unomi-docker">https://github.com/mikeghen/unomi-docker</a>
-            <h3 class="pt-3 pb-2 text-dark">Create the Environment with Docker Compose</h3>
-            <p>To start everything, run this command from the same directory where the <code>docker-compose.yaml</code> file exists:</p>
-            <pre><code>
-docker-compose up
-            </code></pre>
-            <div class="alert alert-warning" role="alert">At this point you need to wait several minutes for both ElasticSearch and Unomi to become available</div>
-            <h3 class="pt-3 pb-2 text-dark">Check Unomi Services are Running</h3>
-            <p>You will need to wait a few minutes for ElasticSearch and Unomi to start up. Check that services are running locally by opening this URL in a browser:</p>
-            <pre><code>
-http://localhost:8181/cxs
-            </code></pre>
-            <p>This will check Unomi. It will come back with "Available RESTful services" and a list of services when Unomi finishes starting up.</p>
-            <p>You can check ElasticSearch is running with this curl command:
-            <pre><code>
-curl http://localhost:9200/_cat/health?format=json
-            </code></pre>
-            <p>This will come back with a "yellow" status which is just because we're only running 1 ElasticSearch node.</p>
+                <h3 class="h6 fw-semibold mt-4 mb-3">Start the environment</h3>
+                <p>From the same directory, run:</p>
+<pre><code>docker compose up</code></pre>
+                <div class="alert alert-warning small" role="alert">
+                    <i class="bi bi-hourglass-split me-1"></i> Wait 1&ndash;2 minutes for both Elasticsearch and Unomi to fully initialize before testing.
+                </div>
+
+                <h3 class="h6 fw-semibold mt-4 mb-3">Verify the cluster</h3>
+                <p>Open your browser and navigate to:</p>
+<pre><code>https://localhost:9443/cxs/cluster</code></pre>
+                <p class="small text-muted">Default credentials: <code>karaf</code> / <code>karaf</code>. Accept the self-signed certificate warning &mdash; it is expected in development mode.</p>
+
+                <p>You can also verify Elasticsearch is running:</p>
+<pre><code>curl http://localhost:9200/_cat/health?format=json</code></pre>
+
+                <div class="alert alert-info small" role="alert">
+                    <i class="bi bi-info-circle me-1"></i> This Docker setup is for <strong>development and learning only</strong>. For production deployments, see the <a href="/manual/latest/index.html#_securing_a_production_environment">production security guide</a>.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- 2. Manual Installation -->
+<!-- ============================================================ -->
+<section id="manual-install" class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <span class="badge badge-primary mb-3">Step 2 (alternative)</span>
+                <h2>Manual Installation</h2>
+                <p class="text-muted">Prefer running Unomi directly on your machine? Follow these steps.</p>
+
+                <h3 class="h6 fw-semibold mt-4 mb-3">Prerequisites</h3>
+                <ul class="small">
+                    <li><strong>Java 17</strong> or later &mdash; set <code>JAVA_HOME</code> accordingly. OpenJDK distributions work fine.</li>
+                    <li><strong>Elasticsearch 7.17.x</strong> &mdash; <a href="https://www.elastic.co/downloads/past-releases/elasticsearch-7-17-5" target="_blank" rel="noopener">Download 7.17.5</a></li>
+                </ul>
+
+                <h3 class="h6 fw-semibold mt-4 mb-3">1. Configure &amp; start Elasticsearch</h3>
+                <p>After extracting Elasticsearch, edit <code>config/elasticsearch.yml</code>:</p>
+<pre><code>cluster.name: contextElasticSearch</code></pre>
+                <p>Then start it:</p>
+<pre><code>bin/elasticsearch</code></pre>
+
+                <h3 class="h6 fw-semibold mt-4 mb-3">2. Download &amp; start Apache Unomi</h3>
+                <p>Download the latest binary from the <a href="/download.html">download page</a>, extract it, then:</p>
+<pre><code># Start Apache Karaf
+./bin/karaf
+
+# In the Karaf shell, start Unomi
+karaf@root()&gt; unomi:start</code></pre>
+
+                <p>Wait until you see the service initialization messages:</p>
+<pre><code>Initializing profile service endpoint...
+Initializing cluster service endpoint...</code></pre>
+
+                <h3 class="h6 fw-semibold mt-4 mb-3">3. Verify</h3>
+                <p>Open <a href="https://localhost:9443/cxs/cluster">https://localhost:9443/cxs/cluster</a> (credentials: <code>karaf</code>/<code>karaf</code>).</p>
+                <p>Request your first context:</p>
+<pre><code>http://localhost:8181/cxs/context.json?sessionId=1234</code></pre>
+
+                <div class="alert alert-info small" role="alert">
+                    <i class="bi bi-terminal me-1"></i> <strong>Tip:</strong> Connect to the Karaf SSH console at any time with <code>ssh -p 8102 karaf@localhost</code> (password: <code>karaf</code>) for useful commands like <code>profile-list</code>, <code>event-tail</code>, and <code>rule-list</code>.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- 3. First API Calls -->
+<!-- ============================================================ -->
+<section id="first-api-calls" class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <span class="badge badge-primary mb-3">Step 3</span>
+                <h2>Your First API Calls</h2>
+                <p class="text-muted">With Unomi running, let&rsquo;s explore the REST API using <code>curl</code>.</p>
+
+                <!-- Read context -->
+                <h3 class="h6 fw-semibold mt-4 mb-3">Read the current context</h3>
+                <p>The <code>/cxs/context.json</code> endpoint is the primary public-facing endpoint. It returns the current visitor&rsquo;s profile, session, segments, and scores:</p>
+<pre><code>curl -X POST http://localhost:8181/cxs/context.json?sessionId=1234 \
+  -H "Content-Type: application/json" \
+  --data-raw '{
+    "source": {
+      "itemId": "homepage",
+      "itemType": "page",
+      "scope": "example"
+    },
+    "requiredProfileProperties": ["*"],
+    "requiredSessionProperties": ["*"],
+    "requireSegments": true,
+    "requireScores": true
+  }'</code></pre>
+
+                <!-- Create a scope -->
+                <h3 class="h6 fw-semibold mt-4 mb-3">Create a scope</h3>
+                <p>Events in Unomi must be associated with a <strong>scope</strong>. Create one before sending events:</p>
+<pre><code>curl -X POST http://localhost:8181/cxs/scopes \
+  -u karaf:karaf \
+  -H "Content-Type: application/json" \
+  --data-raw '{
+    "itemId": "my-website",
+    "itemType": "scope",
+    "metadata": {
+      "id": "my-website",
+      "name": "My Website Scope"
+    }
+  }'</code></pre>
+
+                <!-- Send a custom event -->
+                <h3 class="h6 fw-semibold mt-4 mb-3">Send a custom event</h3>
+                <p>Before sending a custom event, register a <strong>JSON Schema</strong> to validate it (required since Unomi 2.x):</p>
+<pre><code>curl -X POST http://localhost:8181/cxs/jsonSchema \
+  -u karaf:karaf \
+  -H "Content-Type: application/json" \
+  --data-raw '{
+    "$id": "https://unomi.apache.org/schemas/json/events/contactInfoSubmitted/1-0-0",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "self": {
+      "vendor": "org.apache.unomi",
+      "name": "contactInfoSubmitted",
+      "format": "jsonschema",
+      "target": "events",
+      "version": "1-0-0"
+    },
+    "title": "contactInfoSubmittedEvent",
+    "type": "object",
+    "allOf": [{ "$ref": "https://unomi.apache.org/schemas/json/event/1-0-0" }],
+    "properties": {
+      "source": { "$ref": "https://unomi.apache.org/schemas/json/item/1-0-0" },
+      "target": { "$ref": "https://unomi.apache.org/schemas/json/item/1-0-0" },
+      "properties": {
+        "type": "object",
+        "properties": {
+          "firstName": { "type": ["null", "string"] },
+          "lastName":  { "type": ["null", "string"] },
+          "email":     { "type": ["null", "string"] }
+        }
+      }
+    },
+    "unevaluatedProperties": false
+  }'</code></pre>
+
+                <p>Now send the event via the <strong>event collector</strong> (the public endpoint for submitting events):</p>
+<pre><code>curl -X POST http://localhost:8181/cxs/eventcollector \
+  -H "Content-Type: application/json" \
+  --data-raw '{
+    "sessionId": "1234",
+    "events": [{
+      "eventType": "contactInfoSubmitted",
+      "scope": "my-website",
+      "source": {
+        "itemType": "site",
+        "scope": "my-website",
+        "itemId": "mysite"
+      },
+      "target": {
+        "itemType": "form",
+        "scope": "my-website",
+        "itemId": "contactForm"
+      },
+      "properties": {
+        "firstName": "Jane",
+        "lastName": "Doe",
+        "email": "jane.doe@example.com"
+      }
+    }]
+  }'</code></pre>
+
+                <!-- Search events -->
+                <h3 class="h6 fw-semibold mt-4 mb-3">Search events</h3>
+                <p>Retrieve events matching a condition:</p>
+<pre><code>curl -X POST http://localhost:8181/cxs/events/search \
+  -u karaf:karaf \
+  -H "Content-Type: application/json" \
+  --data-raw '{
+    "offset": 0,
+    "limit": 20,
+    "sortby": "timeStamp:desc",
+    "condition": {
+      "type": "eventPropertyCondition",
+      "parameterValues": {
+        "propertyName": "properties.firstName",
+        "comparisonOperator": "equals",
+        "propertyValue": "Jane"
+      }
+    }
+  }'</code></pre>
+
+                <!-- View a profile -->
+                <h3 class="h6 fw-semibold mt-4 mb-3">View a profile</h3>
+                <p>Use the profile UUID (from the <code>context-profile-id</code> cookie or event response) to look up profile details:</p>
+<pre><code>curl http://localhost:8181/cxs/profiles/PROFILE_UUID \
+  -u karaf:karaf</code></pre>
+
+                <div class="alert alert-info small" role="alert">
+                    <i class="bi bi-terminal me-1"></i> <strong>SSH Console shortcuts:</strong> <code>event-tail</code> watches events in real time, <code>event-list</code> shows recent events, <code>profile-list</code> lists recently modified profiles, <code>profile-view PROFILE_UUID</code> shows profile details.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- 4. Web Tracking Tutorial -->
+<!-- ============================================================ -->
+<section id="web-tracking" class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <span class="badge badge-primary mb-3">Step 4</span>
+                <h2>Web Tracking Tutorial</h2>
+                <p class="text-muted">Integrate the built-in Unomi web tracker into any web page to automatically collect page views and enable personalization.</p>
+
+                <!-- Install tracker -->
+                <h3 class="h6 fw-semibold mt-4 mb-3">Add the tracker to your page</h3>
+                <p>Include the tracker script and initialize it:</p>
+<pre><code>&lt;!-- Load the Unomi web tracker --&gt;
+&lt;script src="/tracker/unomi-web-tracker.min.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+(function () {
+  var conf = {
+    "scope": "my-website",
+    "site": {
+      "siteInfo": { "siteID": "my-website" }
+    },
+    "page": {
+      "pageInfo": {
+        "pageID": "home",
+        "pageName": document.title,
+        "pagePath": document.location.pathname,
+        "destinationURL": document.location.origin + document.location.pathname,
+        "language": "en",
+        "categories": [],
+        "tags": []
+      },
+      "attributes": {},
+      "consentTypes": []
+    },
+    "events:": [],
+    "wemInitConfig": {
+      "contextServerUrl": document.location.origin,
+      "timeoutInMilliseconds": "1500",
+      "contextServerCookieName": "context-profile-id",
+      "activateWem": true,
+      "trackerSessionIdCookieName": "my-website-session-id",
+      "trackerProfileIdCookieName": "my-website-profile-id"
+    }
+  };
+
+  // Generate a new session if needed
+  if (unomiWebTracker.getCookie(conf.wemInitConfig.trackerSessionIdCookieName) == null) {
+    unomiWebTracker.setCookie(conf.wemInitConfig.trackerSessionIdCookieName, unomiWebTracker.generateGuid(), 1);
+  }
+
+  unomiWebTracker.initTracker(conf);
+
+  unomiWebTracker._registerCallback(function() {
+    console.log("Unomi context loaded:", unomiWebTracker.getLoadedContext());
+  }, 'My callback');
+
+  unomiWebTracker.startTracker();
+})();
+&lt;/script&gt;</code></pre>
+
+                <div class="alert alert-warning small" role="alert">
+                    <i class="bi bi-exclamation-triangle me-1"></i> Remember to <strong>create the scope</strong> first (see <a href="#first-api-calls">Step 3</a>) or events will be rejected.
+                </div>
+
+                <!-- NPM -->
+                <h3 class="h6 fw-semibold mt-4 mb-3">Using the tracker as an NPM package</h3>
+                <p>For JavaScript/TypeScript projects, install the tracker from npm:</p>
+<pre><code>npm install apache-unomi-tracker
+# or
+yarn add apache-unomi-tracker</code></pre>
+                <p>Then import and use it:</p>
+<pre><code>import { useTracker } from "apache-unomi-tracker";
+
+const unomiWebTracker = useTracker();
+// ... configure and start as shown above</code></pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- 5. Rules & Personalization -->
+<!-- ============================================================ -->
+<section id="rules-personalization" class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <span class="badge badge-primary mb-3">Step 5</span>
+                <h2>Rules &amp; Personalization</h2>
+                <p class="text-muted">Rules let Unomi react to events in real time &mdash; updating profiles, triggering actions, or integrating with external systems.</p>
+
+                <!-- Create a rule -->
+                <h3 class="h6 fw-semibold mt-4 mb-3">Create a rule that counts page views</h3>
+                <p>This rule increments a <code>pageViewCount</code> property on the visitor&rsquo;s profile every time a <code>view</code> event is received:</p>
+<pre><code>curl -X POST http://localhost:8181/cxs/rules \
+  -u karaf:karaf \
+  -H "Content-Type: application/json" \
+  --data-raw '{
+    "metadata": {
+      "id": "viewEventRule",
+      "name": "View event rule",
+      "description": "Increments pageViewCount on each page view"
+    },
+    "condition": {
+      "type": "eventTypeCondition",
+      "parameterValues": {
+        "eventTypeId": "view"
+      }
+    },
+    "actions": [{
+      "type": "incrementPropertyAction",
+      "parameterValues": {
+        "propertyName": "pageViewCount"
+      }
+    }]
+  }'</code></pre>
+                <p class="small text-muted">After creating this rule, reload your tracked page a few times, then check the profile with <code>profile-view PROFILE_UUID</code> in the SSH console to see the counter increase.</p>
+
+                <!-- Copy event properties to profile -->
+                <h3 class="h6 fw-semibold mt-4 mb-3">Map event data to a profile</h3>
+                <p>This rule listens for the <code>contactInfoSubmitted</code> event (from Step 3) and copies its properties to the profile:</p>
+<pre><code>curl -X POST http://localhost:8181/cxs/rules \
+  -u karaf:karaf \
+  -H "Content-Type: application/json" \
+  --data-raw '{
+    "metadata": {
+      "id": "setContactInfo",
+      "name": "Copy contact info to profile",
+      "description": "Maps firstName, lastName, email from event to profile"
+    },
+    "condition": {
+      "type": "eventTypeCondition",
+      "parameterValues": {
+        "eventTypeId": "contactInfoSubmitted"
+      }
+    },
+    "actions": [
+      {
+        "type": "setPropertyAction",
+        "parameterValues": {
+          "setPropertyName": "properties(firstName)",
+          "setPropertyValue": "eventProperty::properties(firstName)",
+          "setPropertyStrategy": "alwaysSet"
+        }
+      },
+      {
+        "type": "setPropertyAction",
+        "parameterValues": {
+          "setPropertyName": "properties(lastName)",
+          "setPropertyValue": "eventProperty::properties(lastName)",
+          "setPropertyStrategy": "alwaysSet"
+        }
+      },
+      {
+        "type": "setPropertyAction",
+        "parameterValues": {
+          "setPropertyName": "properties(email)",
+          "setPropertyValue": "eventProperty::properties(email)",
+          "setPropertyStrategy": "alwaysSet"
+        }
+      }
+    ]
+  }'</code></pre>
+
+                <!-- Personalization -->
+                <h3 class="h6 fw-semibold mt-4 mb-3">Personalize content based on a profile property</h3>
+                <p>Using the web tracker, you can register personalization rules that show different content based on profile data. For example, show a special message after 5 page views:</p>
+<pre><code>&lt;div id="variant1" style="display:none"&gt;
+  Welcome back! You've visited this page over 5 times.
+&lt;/div&gt;
+&lt;div id="variant2" style="display:none"&gt;
+  Welcome! Keep exploring to unlock personalized content.
+&lt;/div&gt;
+
+&lt;script&gt;
+var variants = {
+  "var1": { content: "variant1" },
+  "var2": { content: "variant2" }
+};
+
+unomiWebTracker.registerPersonalizationObject({
+  "id": "pageViewPersonalization",
+  "strategy": "matching-first",
+  "strategyOptions": { "fallback": "var2" },
+  "contents": [{
+    "id": "var1",
+    "filters": [{
+      "condition": {
+        "type": "profilePropertyCondition",
+        "parameterValues": {
+          "propertyName": "properties.pageViewCount",
+          "comparisonOperator": "greaterThan",
+          "propertyValueInteger": 5
+        }
+      }
+    }]
+  }, {
+    "id": "var2"
+  }]
+}, variants, false, function (successfulFilters, selectedFilter) {
+  if (selectedFilter) {
+    document.getElementById(selectedFilter.content).style.display = '';
+  }
+});
+&lt;/script&gt;</code></pre>
+                <p class="small text-muted">The personalization engine evaluates conditions server-side against the visitor&rsquo;s profile and returns which variant to display, keeping your business logic private.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- 6. Next Steps -->
+<!-- ============================================================ -->
+<section id="next-steps" class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h2>Next Steps</h2>
+                <p class="text-muted mb-4">You now have a working Unomi environment with event tracking, profile management, rules, and personalization. Here&rsquo;s where to go next.</p>
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="feature-card h-100">
+                            <div class="feature-icon"><i class="bi bi-book"></i></div>
+                            <h3 class="h6 fw-semibold mb-2">Full Documentation</h3>
+                            <p class="small text-muted mb-2">Dive deeper into segmentation, scoring, conditions, and actions in the comprehensive manual.</p>
+                            <a href="/manual/latest/index.html" class="small fw-semibold">Read the manual <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-card h-100">
+                            <div class="feature-icon"><i class="bi bi-braces"></i></div>
+                            <h3 class="h6 fw-semibold mb-2">REST API Reference</h3>
+                            <p class="small text-muted mb-2">Explore every endpoint for profiles, events, segments, rules, and more.</p>
+                            <a href="/rest-api-doc/index.html" class="small fw-semibold">Browse the API <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-card h-100">
+                            <div class="feature-icon"><i class="bi bi-puzzle"></i></div>
+                            <h3 class="h6 fw-semibold mb-2">Integrations</h3>
+                            <p class="small text-muted mb-2">See how organizations use Unomi with CMS, CRM, e-commerce, and other platforms.</p>
+                            <a href="/integrations.html" class="small fw-semibold">View integrations <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="feature-card h-100">
+                            <div class="feature-icon"><i class="bi bi-chat-dots"></i></div>
+                            <h3 class="h6 fw-semibold mb-2">Get Help</h3>
+                            <p class="small text-muted mb-2">Stuck? The community is friendly and responsive on the mailing list and Slack.</p>
+                            <a href="/community/index.html" class="small fw-semibold">Join the community <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
           </div>
         </div>
+    </div>
+</section>
 
-      </div><!-- /.container -->
+<!-- Debugging Tip -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="feature-card tip-box">
+                    <h3 class="h6 fw-semibold mb-3"><i class="bi bi-bug me-2"></i>Debugging Tip</h3>
+                    <p class="small text-muted mb-2">Enable debug logging via the Karaf SSH console to see detailed event validation and rule execution logs:</p>
+<pre><code># Connect to Karaf SSH console
+ssh -p 8102 karaf@localhost
+
+# Enable schema validation debug logs
+karaf@root()&gt; log:set DEBUG org.apache.unomi.schema.impl.SchemaServiceImpl
+
+# Watch logs in real-time
+karaf@root()&gt; log:tail</code></pre>
+                    <p class="small text-muted mb-0">Useful commands: <code>event-tail</code>, <code>event-list</code>, <code>rule-list</code>, <code>rule-tail</code>, <code>profile-list</code>, <code>profile-view &lt;ID&gt;</code></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

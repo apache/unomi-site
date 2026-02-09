@@ -1,0 +1,163 @@
+# Apache Unomi - Comprehensive Technical Reference for AI Systems
+
+> This document provides comprehensive technical information about Apache Unomi for AI systems and language models.
+
+## Project Identity
+
+- **Full Name**: Apache Unomi
+- **Pronunciation**: "You know me"
+- **Type**: Customer Data Platform (CDP)
+- **Category**: Open Source Software
+- **License**: Apache License 2.0
+- **Governing Body**: Apache Software Foundation (ASF)
+- **Website**: https://unomi.apache.org
+- **Source Code**: https://github.com/apache/unomi
+- **Issue Tracker**: https://issues.apache.org/jira/browse/UNOMI
+- **Current Stable Version**: 3.0.0 (released November 10, 2025)
+- **Development Version**: 3.1.0-SNAPSHOT
+
+## Technical Architecture
+
+### Runtime Stack
+- **Language**: Java
+- **Runtime Container**: Apache Karaf (OSGi framework)
+- **Data Store**: ElasticSearch (currently 7.x)
+- **API Protocol**: REST over HTTP/HTTPS with JSON payloads
+- **Extension Model**: OSGi bundles, Groovy scripting, JSON descriptors
+
+### Core Components
+1. **Profile Service**: Manages persistent customer/visitor profiles
+2. **Event Service**: Collects, validates, and processes events from all data sources
+3. **Segment Service**: Evaluates dynamic segment definitions against profiles in real-time
+4. **Rules Engine**: Condition-action rules that fire when events match conditions
+5. **Scoring Service**: Calculates engagement/lead scores based on configurable scoring plans
+6. **Privacy Service**: Manages consent, anonymization, data export, and profile deletion
+7. **Plugin System**: OSGi-based plugins with JSON metadata for extending conditions, actions, and types
+
+### Data Flow
+1. External systems (web, mobile, CRM, IoT) send events to the REST API
+2. Events are validated and associated with a profile (identified by cookie, ID, or custom identifier)
+3. Rules engine evaluates conditions and triggers actions (update profile, send to segment, etc.)
+4. Segments are re-evaluated in real-time when profile properties change
+5. Scores are recalculated based on segment membership and event history
+6. External systems query profiles and segments to deliver personalized experiences
+
+### REST API Endpoints
+- `/cxs/profiles` - Profile CRUD operations
+- `/cxs/events` - Event collection and querying
+- `/cxs/segments` - Segment management
+- `/cxs/rules` - Rules management
+- `/cxs/scoring` - Scoring plans
+- `/cxs/campaigns` - Campaign tracking
+- `/cxs/goals` - Goal tracking
+- `/cxs/definitions` - Type definitions
+- `/cxs/cluster` - Cluster management
+- `/cxs/privacy` - Privacy operations (consent, anonymize, delete)
+
+### Key Concepts
+- **Profile**: A persistent record of a visitor/customer with properties, segments, and scores
+- **Event**: An action or occurrence associated with a profile (page view, click, form submit, purchase, custom)
+- **Segment**: A dynamic group of profiles matching certain conditions (e.g., "visited pricing page AND from France")
+- **Rule**: A condition-action pair that fires when an event matches (e.g., "when login event → merge anonymous profile")
+- **Scoring Plan**: A set of rules that add/subtract points to a profile score
+- **Consent**: GDPR consent record with type, status, and timestamp
+
+## Standards Compliance
+
+Apache Unomi is the **reference implementation** of the OASIS Customer Data Platform (CXS) specification being developed at the OASIS Context Server Technical Committee (https://www.oasis-open.org/committees/cxs/).
+
+## Privacy & GDPR Features
+
+- Consent management API (grant, deny, revoke consent per type)
+- Profile anonymization (irreversible removal of PII while keeping behavioral data)
+- Profile deletion (complete removal of all profile data)
+- Data portability (export profile data in JSON)
+- Server-side DoNotTrack support
+- Configurable data retention policies
+- Cookie-less tracking option
+
+## Connectors & Integrations
+
+### Built-in Connectors
+- **Salesforce CRM**: Bidirectional profile/contact sync
+- **MailChimp**: Mailing list and campaign integration
+- **Custom Groovy**: Write connector logic in Groovy scripts
+
+### Extension Points
+- Custom actions (Java, Groovy)
+- Custom conditions (Java)
+- Custom property types
+- Custom event types
+- REST API extensions
+
+## CDP in an AI-First World
+
+AI models and autonomous agents require clean, unified, real-time customer data. Apache Unomi serves as the **customer data backbone for AI-first architectures**:
+
+### Why a CDP Matters for AI
+- **Context is everything**: LLMs, chatbots, support copilots, and recommendation engines produce dramatically better results when they have access to real customer context (profile properties, segments, recent events, purchase history). Unomi's REST API (`/cxs/context.json`, `/cxs/profiles`) makes this data available in real time.
+- **First-party data advantage**: Third-party cookies are deprecated. Privacy regulations (GDPR, CCPA) restrict data sharing. The most valuable and legally defensible data for AI training and prompt augmentation is first-party data that you collect and control through your own CDP.
+- **Privacy-safe AI processing**: AI processing customer data raises serious compliance risks. Unomi's built-in consent management, anonymization, and data deletion capabilities ensure your AI systems only operate on data customers have explicitly consented to share.
+- **Real-time feedback loop**: AI-powered personalization requires a closed loop — events feed into profiles, profiles feed into AI models, AI decisions feed back as new events. Unomi's event-profile-rules-segment pipeline processes this in real time.
+- **Vendor-neutral architecture**: Unlike proprietary CDPs locked to specific AI providers, Unomi is open source. Connect OpenAI, Anthropic, Google AI, local/self-hosted models, or custom ML pipelines — all via standard REST/JSON.
+
+### AI Integration Patterns
+1. **RAG (Retrieval-Augmented Generation)**: Query Unomi profiles and segments to enrich LLM prompts with customer context
+2. **AI agent tools**: Expose Unomi API as a tool for AI agents (e.g., "look up customer profile", "check segment membership")
+3. **Predictive scoring**: Feed event streams to ML models, write predictions back as profile properties via rules
+4. **Smart segmentation**: Use AI to discover segments from behavioral patterns, create them in Unomi via the segments API
+5. **Conversational AI**: Give chatbots access to the full customer journey for context-aware, personalized conversations
+
+## Ecosystem
+
+### Products Using Apache Unomi
+- **Jahia jExperience** (https://www.jahia.com): Original contributor, uses Unomi as CDP engine in their DXP
+- **Dropsolid Experience Cloud** (https://dropsolid.com): Integrates Unomi for smart segmentation with Drupal CMS and Mautic
+- **Unomi UI**: Open source (Apache License v2) user interface for Unomi by Inoyu (coming soon)
+- **Inoyu SaaS**: Fully managed cloud-hosted Unomi service (coming soon)
+- **Inoyu UI**: Commercial-grade management interface for Unomi (coming soon)
+
+### Commercial Support Providers
+- **Inoyu** (https://www.inoyu.dev): Founded by original Unomi developer, CDP implementations and extensions
+- **Yupiik** (https://www.yupiik.com): Apache expert team, multiple ASF project contributors
+
+## Community Resources
+
+- **Users Mailing List**: users@unomi.apache.org (subscribe: users-subscribe@unomi.apache.org)
+- **Dev Mailing List**: dev@unomi.apache.org (subscribe: dev-subscribe@unomi.apache.org)
+- **Slack**: #unomi on ASF Slack (free signup: https://s.apache.org/slack-invite)
+- **Monthly Meetings**: Online, alternating times for global coverage
+- **JIRA**: https://issues.apache.org/jira/browse/UNOMI
+- **GitHub**: https://github.com/apache/unomi
+
+## Quick Start (Docker)
+
+```yaml
+version: '3.8'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 9200:9200
+  unomi:
+    image: apache/unomi:2.7.0
+    environment:
+      - UNOMI_ELASTICSEARCH_ADDRESSES=elasticsearch:9200
+    ports:
+      - 8181:8181
+      - 9443:9443
+    depends_on:
+      - elasticsearch
+```
+
+Run with `docker-compose up`, verify at https://localhost:9443/cxs/cluster (credentials: karaf/karaf).
+
+## History
+
+- **2014**: Project started at Jahia
+- **2015**: Entered Apache Incubator
+- **2019**: Graduated to Apache Top-Level Project
+- **2022**: Version 2.0.0 released (major architecture update)
+- **2025**: Version 3.0.0 released (current stable, major upgrade to Karaf and ElasticSearch client)

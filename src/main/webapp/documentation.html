@@ -1,459 +1,373 @@
 ---
 title: Documentation
+description: "Apache Unomi documentation hub. Find the latest manual, REST API reference, Javadoc, tutorials, use cases, migration guides, and security advisories."
 layout: default
 ---
 
-    <div class="container mb-5 pt-5">
-      <h2 class="pb-2 mb-2 border-bottom">Documentation</h2>
-
-      <h4 class="pt-4 mt-2 text-dark">Latest versions</h4>
-
-      <div class="row mb-2">
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-success"><i class="fas fa-circle"></i> Stable</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">3.0.x</span></h3>
-              <p class="card-text">
-                <a href="manual/3_0_x/index.html">online</a><br>
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/3.0.0/unomi-manual-3_0_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/3.0.0/unomi-manual-3_0_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/3.0.0/unomi-manual-3_0_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/3.0.0/unomi-manual-3_0_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/3.0.0/unomi-manual-3_0_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/3.0.0/unomi-manual-3_0_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-warning"><i class="fas fa-circle"></i> Unstable</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">{{ site.data.unomi.latest.development.version }}</span></h3>
-              <div class="mb-1 text-muted">In development</div>
-              <p class="card-text">
-                <a href="manual/latest/index.html">online</a><br>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <h4 class="pt-4 mt-2 text-dark">Archives</h4>
-
-      <div class="row mb-2">
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-info"><i class="fas fa-circle"></i> Archive</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">2.6.x</span></h3>
-              <p class="card-text">
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.6.0/unomi-manual-2_6_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.6.0/unomi-manual-2_6_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.6.0/unomi-manual-2_6_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.6.0/unomi-manual-2_6_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.6.0/unomi-manual-2_6_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.6.0/unomi-manual-2_6_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-info"><i class="fas fa-circle"></i> Archive</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">2.5.x</span></h3>
-              <p class="card-text">
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.5.0/unomi-manual-2_5_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.5.0/unomi-manual-2_5_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.5.0/unomi-manual-2_5_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.5.0/unomi-manual-2_5_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.5.0/unomi-manual-2_5_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.5.0/unomi-manual-2_5_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-info"><i class="fas fa-circle"></i> Archive</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">2.4.x</span></h3>
-              <p class="card-text">
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.4.0/unomi-manual-2_4_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.4.0/unomi-manual-2_4_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.4.0/unomi-manual-2_4_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.4.0/unomi-manual-2_4_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.4.0/unomi-manual-2_4_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/2.4.0/unomi-manual-2_4_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-info"><i class="fas fa-circle"></i> Archive</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">2.3.x</span></h3>
-              <p class="card-text">
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.3.0/unomi-manual-2_3_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/2.3.0/unomi-manual-2_3_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.3.0/unomi-manual-2_3_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.3.0/unomi-manual-2_3_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/2.3.0/unomi-manual-2_3_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.3.0/unomi-manual-2_3_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-info"><i class="fas fa-circle"></i> Archive</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">2.2.x</span></h3>
-              <p class="card-text">
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.2.0/unomi-manual-2_2_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/2.2.0/unomi-manual-2_2_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.2.0/unomi-manual-2_2_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.2.0/unomi-manual-2_2_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/2.2.0/unomi-manual-2_2_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.2.0/unomi-manual-2_2_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-info"><i class="fas fa-circle"></i> Archive</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">2.1.x</span></h3>
-              <p class="card-text">
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.1.0/unomi-manual-2_1_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/2.1.0/unomi-manual-2_1_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.1.0/unomi-manual-2_1_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.1.0/unomi-manual-2_1_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/2.1.0/unomi-manual-2_1_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.1.0/unomi-manual-2_1_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-info"><i class="fas fa-circle"></i> Archive</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">2.0.x</span></h3>
-              <p class="card-text">
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.0.0/unomi-manual-2_0_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/2.0.0/unomi-manual-2_0_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.0.0/unomi-manual-2_0_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.0.0/unomi-manual-2_0_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/2.0.0/unomi-manual-2_0_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/2.0.0/unomi-manual-2_0_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-info"><i class="fas fa-circle"></i> Archive</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">1.9.x</span></h3>
-              <p class="card-text">
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/1.9.0/unomi-manual-1_9_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/1.9.0/unomi-manual-1_9_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/1.9.0/unomi-manual-1_9_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/1.9.0/unomi-manual-1_9_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/1.9.0/unomi-manual-1_9_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://dist.apache.org/repos/dist/release/unomi/1.9.0/unomi-manual-1_9_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-info"><i class="fas fa-circle"></i> Archive</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">1.7.x</span></h3>
-              <p class="card-text">
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.7.0/unomi-manual-1_7_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/1.7.0/unomi-manual-1_7_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.7.0/unomi-manual-1_7_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.7.0/unomi-manual-1_7_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/1.7.0/unomi-manual-1_7_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.7.0/unomi-manual-1_7_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-info"><i class="fas fa-circle"></i> Archive</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">1.6.x</span></h3>
-              <p class="card-text">
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.6.0/unomi-manual-1_6_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/1.6.0/unomi-manual-1_6_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.6.0/unomi-manual-1_6_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.6.0/unomi-manual-1_6_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/1.6.0/unomi-manual-1_6_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.6.0/unomi-manual-1_6_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-info"><i class="fas fa-circle"></i> Archive</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">1.5.x</span></h3>
-              <p class="card-text">
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.5.0/unomi-manual-1_5_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/1.5.0/unomi-manual-1_5_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.5.0/unomi-manual-1_5_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.5.0/unomi-manual-1_5_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/1.5.0/unomi-manual-1_5_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.5.0/unomi-manual-1_5_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-info"><i class="fas fa-circle"></i> Archive</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">1.4.x</span></h3>
-              <p class="card-text">
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.4.0/unomi-manual-1_4_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/1.4.0/unomi-manual-1_4_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.4.0/unomi-manual-1_4_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.4.0/unomi-manual-1_4_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/unomi/1.4.0/unomi-manual-1_4_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/unomi/1.4.0/unomi-manual-1_4_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-info"><i class="fas fa-circle"></i> Archive</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">1.3.x-incubating</span></h3>
-              <p class="card-text">
-                <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.3.0-incubating/unomi-manual-1_3_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.3.0-incubating/unomi-manual-1_3_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.3.0-incubating/unomi-manual-1_3_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.3.0-incubating/unomi-manual-1_3_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.3.0-incubating/unomi-manual-1_3_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.3.0-incubating/unomi-manual-1_3_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-info"><i class="fas fa-circle"></i> Archive</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">1.2.x-incubating</span></h3>
-              <p class="card-text">
-                <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.2.0-incubating/unomi-manual-1_2_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.2.0-incubating/unomi-manual-1_2_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.2.0-incubating/unomi-manual-1_2_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.2.0-incubating/unomi-manual-1_2_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.2.0-incubating/unomi-manual-1_2_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.2.0-incubating/unomi-manual-1_2_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-info"><i class="fas fa-circle"></i> Archive</strong>
-              <h3 class="mb-0 text-dark">Unomi <span class="text-muted">1.1.x-incubating</span></h3>
-              <p class="card-text">
-                <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.1.0-incubating/unomi-manual-1_1_x.zip">html (zipped)</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.1.0-incubating/unomi-manual-1_1_x.zip.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.1.0-incubating/unomi-manual-1_1_x.zip.sha512">SHA512</a> ]<br>
-                <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.1.0-incubating/unomi-manual-1_1_x.pdf">pdf</a>
-                [ <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.1.0-incubating/unomi-manual-1_1_x.pdf.asc">PGP</a> |
-                <a target="_blank" href="https://archive.apache.org/dist/incubator/unomi/1.1.0-incubating/unomi-manual-1_1_x.pdf.sha512">SHA512</a> ]
-              </p>
-            </div>
-          </div>
-      </div>
-      </div>
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Docs</p>
+        <h1>Documentation</h1>
+        <p class="lead">Everything you need to learn, build with, and operate Apache Unomi.</p>
     </div>
+</section>
 
-      <!-- Marketing messaging and featurettes
-      ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
-      <div class="container">
+<!-- Quick Links -->
+<section class="section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <a href="/get-started.html" class="feature-card d-block text-decoration-none h-100">
+                    <div class="feature-icon"><i class="bi bi-rocket-takeoff"></i></div>
+                    <h3 class="h6 fw-semibold text-dark">Getting Started</h3>
+                    <p class="small text-muted mb-0">New to Unomi? Start here with a quick overview and Docker setup.</p>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <a href="/manual/3_0_x/index.html" class="feature-card d-block text-decoration-none h-100">
+                    <div class="feature-icon"><i class="bi bi-book"></i></div>
+                    <h3 class="h6 fw-semibold text-dark">Stable Manual <span class="text-muted fw-normal">3.0.x</span></h3>
+                    <p class="small text-muted mb-0">The comprehensive guide for the current stable release.</p>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <a href="/rest-api-doc/index.html" class="feature-card d-block text-decoration-none h-100">
+                    <div class="feature-icon"><i class="bi bi-braces"></i></div>
+                    <h3 class="h6 fw-semibold text-dark">REST API</h3>
+                    <p class="small text-muted mb-0">Complete REST API reference for profiles, events, segments, and more.</p>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <a href="/unomi-api/apidocs/index.html" class="feature-card d-block text-decoration-none h-100" target="_blank" rel="noopener">
+                    <div class="feature-icon"><i class="bi bi-code-square"></i></div>
+                    <h3 class="h6 fw-semibold text-dark">Javadoc</h3>
+                    <p class="small text-muted mb-0">Java API documentation for plugin and extension developers.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <!-- Migrating ES -->
-        <div class="row mb-5 mt-5">
-          <div class="col">
-            <h2 class="pb-3 border-bottom">API Documentation</h2>
-            <h3 class="pt-3 pb-2 text-dark">Javadoc</h3>
-            <p>Click <a class="btn-link" target="_blank"
-                        href="https://unomi.apache.org/unomi-api/latest/apidocs/index.html">here</a> to view the Javadoc documentation</p>
+<hr class="section-divider">
 
-            <h4 class="pt-4 pb-2 text-dark">REST</h4>
+<!-- Explore by Topic -->
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-7">
+                <p class="section-label">Explore</p>
+                <h2>Documentation by Topic</h2>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon icon-success"><i class="bi bi-box-seam"></i></div>
+                    <h3 class="h6 fw-semibold">Installation &amp; Configuration</h3>
+                    <p class="small text-muted mb-2">Docker setup, manual installation, ElasticSearch configuration, and production deployment.</p>
+                    <a href="/manual/latest/index.html#_quick_start" class="small fw-semibold">Read more <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon icon-info"><i class="bi bi-braces"></i></div>
+                    <h3 class="h6 fw-semibold">REST API &amp; Integration</h3>
+                    <p class="small text-muted mb-2">Send events, query profiles, manage segments, and integrate with external systems.</p>
+                    <a href="/rest-api-doc/index.html" class="small fw-semibold">REST API docs <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon icon-amber"><i class="bi bi-shield-lock"></i></div>
+                    <h3 class="h6 fw-semibold">Privacy &amp; GDPR</h3>
+                    <p class="small text-muted mb-2">Consent management, data portability, anonymization, and profile deletion.</p>
+                    <a href="/manual/latest/index.html" class="small fw-semibold">Read more <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon icon-rose"><i class="bi bi-puzzle"></i></div>
+                    <h3 class="h6 fw-semibold">Extending Unomi</h3>
+                    <p class="small text-muted mb-2">Build plugins, custom actions, rules, conditions, and Groovy connectors.</p>
+                    <a href="/manual/latest/index.html" class="small fw-semibold">Plugin guide <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon"><i class="bi bi-lightbulb"></i></div>
+                    <h3 class="h6 fw-semibold">Use Cases</h3>
+                    <p class="small text-muted mb-2">Web personalization, mobile analytics, centralized profile management, and more.</p>
+                    <a href="/use-cases.html" class="small fw-semibold">View use cases <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon icon-neutral-dark"><i class="bi bi-play-circle"></i></div>
+                    <h3 class="h6 fw-semibold">Videos &amp; Tutorials</h3>
+                    <p class="small text-muted mb-2">Conference talks, video tutorials, articles, and community presentations.</p>
+                    <a href="/resources.html" class="small fw-semibold">Browse resources <i class="bi bi-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-            <p>
-              Starting with version 1.6, the REST API is no longer updated here since it is embedded directly in the
-              server as OpenAPI documentation. You can find it here: <a href="http://localhost:8181/cxs/api-docs?url=openapi.json">http://localhost:8181/cxs/api-docs?url=openapi.json</a>
-              once the server was started.
-            </p>
+<hr class="section-divider">
 
-            <table class="table table-striped table-sm">
-              <thead class="thead-dark">
-                <th>Name</th>
-                <th>Description</th>
-                <th>REST API Documentation</th>
-                <th>Since version</th>
-                <th class="text-center">Status</th>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>userList</strong></td>
-                  <td>Manage user</td>
-                  <td><a href="https://unomi.apache.org/rest-api-doc/index.html#568140055" target="_blank">view</a></td>
-                  <td>1.3.0-incubating</td>
-                  <td class="text-center"><strong class="d-inline-block mb-2 text-success"><i class="fas fa-circle"></i></strong>
-                </tr>
-                <tr>
-                  <td><strong>campaigns</strong></td>
-                  <td>Manage campaign</td>
-                  <td><a href="https://unomi.apache.org/rest-api-doc/#-241880339" target="_blank">view</a></td>
-                  <td>1.3.0-incubating</td>
-                  <td class="text-center"><strong class="d-inline-block mb-2 text-success"><i class="fas fa-circle"></i></strong>
-                </tr>
-                <tr>
-                  <td><strong>cluster</strong></td>
-                  <td>Manage cluster</td>
-                  <td><a href="https://unomi.apache.org/rest-api-doc/#1007094421" target="_blank">view</a></td>
-                  <td>1.3.0-incubating</td>
-                  <td class="text-center"><strong class="d-inline-block mb-2 text-success"><i class="fas fa-circle"></i></strong>
-                </tr>
-                <tr>
-                  <td><strong>definitions</strong></td>
-                  <td>Manage definitions</td>
-                  <td><a href="https://unomi.apache.org/rest-api-doc/#1834364863" target="_blank">view</a></td>
-                  <td>1.3.0-incubating</td>
-                  <td class="text-center"><strong class="d-inline-block mb-2 text-success"><i class="fas fa-circle"></i></strong>
-                </tr>
-                <tr>
-                  <td><strong>goals</strong></td>
-                  <td>Manage goal</td>
-                  <td><a href="https://unomi.apache.org/rest-api-doc/#-379780403" target="_blank">view</a></td>
-                  <td>1.3.0-incubating</td>
-                  <td class="text-center"><strong class="d-inline-block mb-2 text-success"><i class="fas fa-circle"></i></strong>
-                </tr>
-                <tr>
-                  <td><strong>profile</strong></td>
-                  <td>Manage profile</td>
-                  <td><a href="https://unomi.apache.org/rest-api-doc/#-1907885015" target="_blank">view</a></td>
-                  <td>1.3.0-incubating</td>
-                  <td class="text-center"><strong class="d-inline-block mb-2 text-success"><i class="fas fa-circle"></i></strong>
-                </tr>
-                <tr>
-                  <td><strong>query</strong></td>
-                  <td>Manage query</td>
-                  <td><a href="https://unomi.apache.org/rest-api-doc/#371361199" target="_blank">view</a></td>
-                  <td>1.3.0-incubating</td>
-                  <td class="text-center"><strong class="d-inline-block mb-2 text-success"><i class="fas fa-circle"></i></strong>
-                </tr>
-                <tr>
-                  <td><strong>rules</strong></td>
-                  <td>Manage rule</td>
-                  <td><a href="https://unomi.apache.org/rest-api-doc/#-1505954579" target="_blank">view</a></td>
-                  <td>1.3.0-incubating</td>
-                  <td class="text-center"><strong class="d-inline-block mb-2 text-success"><i class="fas fa-circle"></i></strong>
-                </tr>
-                <tr>
-                  <td><strong>scoring</strong></td>
-                  <td>Manage scoring</td>
-                  <td><a href="https://unomi.apache.org/rest-api-doc/#-1379828888" target="_blank">view</a></td>
-                  <td>1.3.0-incubating</td>
-                  <td class="text-center"><strong class="d-inline-block mb-2 text-success"><i class="fas fa-circle"></i></strong>
-                </tr>
-                <tr>
-                  <td><strong>segments</strong></td>
-                  <td>Manage segment</td>
-                  <td><a href="https://unomi.apache.org/rest-api-doc/#1558745832" target="_blank">view</a></td>
-                  <td>1.3.0-incubating</td>
-                  <td class="text-center"><strong class="d-inline-block mb-2 text-success"><i class="fas fa-circle"></i></strong>
-                </tr>
-                <tr>
-                  <td><strong>patches</strong></td>
-                  <td>Manage patch</td>
-                  <td><a href="https://unomi.apache.org/rest-api-doc/#943335618" target="_blank">view</a></td>
-                  <td>1.4.0</td>
-                  <td class="text-center"><strong class="d-inline-block mb-2 text-success"><i class="fas fa-circle"></i></strong>
-                </tr>
-                <tr>
-                  <td><strong>events</strong></td>
-                  <td>Manage event</td>
-                  <td><a href="https://unomi.apache.org/rest-api-doc/#1768188821" target="_blank">view</a></td>
-                  <td>1.4.0</td>
-                  <td class="text-center"><strong class="d-inline-block mb-2 text-success"><i class="fas fa-circle"></i></strong>
-                </tr>
-              </tbody>
-            </table>
-          </div><!-- /.blog-main -->
+<!-- Manual Versions -->
+<section class="section section-alt" id="versions">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-7">
+                <p class="section-label">Versions</p>
+                <h2>Manual by Version</h2>
+            </div>
         </div>
 
-        <!-- Migrating ES -->
-        <div class="row mb-5 mt-5">
-          <div class="col">
-            <h2 class="pb-3 mb-3 border-bottom">Migrating ElasticSearch</h2>
-            <h3 class="mb-3 text-dark">Introduction</h3>
-            <p>
-              In this section of the documentation we will explain some general notions of how to migrate between ElasticSearch versions, as well as present specific migration steps to migrate from one version of ElasticSearch used by Apache Unomi to another, if it is needed.
-            </p>
-
-            <h3 class="pt-3 mb-3 text-dark">General steps and notions</h3>
-            <p>
-              Depending on the type of ElasticSearch install you may have, the migration steps will differ. Basically when dealing with a single node (standalone) installation, a simple procedure may be used that simply copies some directories over, while in the case of a cluster installation ElasticSearch Snapshot and Restore functionality must be used.
-            </p>
-            <h4 class="mb-2">Standalone (one node migration)</h4>
-            <p>
-              In the case of a standalone install, it is generally sufficient, provided the versions are compatible (meaning that only one major version seperates the two installs), to simply copy over the data directory over to the new version. Also you will need to make sure that you copy over any custom settings from the <code>config/elasticsearch.yml</code> file over to the new version.
-            </p>
-            <h4 class="mb-2">Cluster migration</h4>
-            <p>
-              Here we recommend you read the <a target="_blank" href="https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html">official upgrading documentation</a>.
-            </p>
-
-            <h3 class="pt-3 mb-3 text-dark">Migrating between versions used by Apache Unomi.</h3>
-            <h4 class="mb-2">Cluster migration</h4>
-            <p>
-              Steps:
-            </p>
-            <ol>
-              <li>Depending on your install, perform either the standalone or cluster migration</li>
-              <li>That's it !</li>
-            </ol>
-          </div><!-- /.blog-main -->
+        <!-- Latest -->
+        <div class="row g-4 mb-4 justify-content-center">
+            <div class="col-md-5">
+                <div class="version-card featured">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge badge-success me-2"><i class="bi bi-circle-fill me-1" style="font-size:.45em"></i> Stable</span>
+                        <span class="fw-semibold">Recommended</span>
+                    </div>
+                    <h3 class="h5 fw-bold mb-1">Unomi 3.0.x</h3>
+                    <div class="d-flex flex-wrap gap-2 mt-3">
+                        <a href="/manual/3_0_x/index.html" class="btn btn-primary btn-sm">Read Online</a>
+                        <a href="https://dist.apache.org/repos/dist/release/unomi/3.0.0/unomi-manual-3_0_x.zip" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">HTML (zip)</a>
+                        <a href="https://dist.apache.org/repos/dist/release/unomi/3.0.0/unomi-manual-3_0_x.pdf" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">PDF</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="version-card">
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="badge badge-warning me-2"><i class="bi bi-circle-fill me-1" style="font-size:.45em"></i> Development</span>
+                    </div>
+                    <h3 class="h5 fw-bold mb-1">Unomi {{ site.data.unomi.latest.development.version }}</h3>
+                    <p class="small text-muted mb-2">In development &mdash; may contain unreleased features.</p>
+                    <a href="/manual/latest/index.html" class="btn btn-outline-primary btn-sm">Read Online</a>
+                </div>
+            </div>
         </div>
 
-        <div class="row mb-5 mt-5">
-          <div class="col">
-            <h2 class="pb-3 mb-3 border-bottom">Security Advisories</h2>
-            <p>
-              <a href="security/cve-2020-11975.txt">CVE-2020-11975</a> : Remote Code Execution in Apache Unomi
-            </p>
-            <p>
-              <a href="security/cve-2020-13942.txt">CVE-2020-13942</a> : Remote Code Execution in Apache Unomi
-            </p>
-            <p>
-              <a href="security/cve-2021-31164.txt">CVE-2021-31164</a> : CRLF Log injection in Apache Unomi
-            </p>
-          </div>
+        <!-- Archives (collapsed) -->
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <details class="mt-3">
+                    <summary class="fw-semibold text-primary" style="cursor:pointer">
+                        <i class="bi bi-archive me-1"></i> Archived Versions (2.7.x &ndash; 1.1.x)
+                    </summary>
+                    <div class="table-responsive mt-3">
+                        <table class="table table-sm align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Version</th>
+                                    <th>Online</th>
+                                    <th>HTML (zip)</th>
+                                    <th>PDF</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="fw-semibold">2.7.x</td>
+                                    <td><a href="/manual/2_7_x/index.html">Online</a></td>
+                                    <td><a href="https://dist.apache.org/repos/dist/release/unomi/2.7.0/unomi-manual-2_7_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://dist.apache.org/repos/dist/release/unomi/2.7.0/unomi-manual-2_7_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">2.6.x</td>
+                                    <td>&mdash;</td>
+                                    <td><a href="https://dist.apache.org/repos/dist/release/unomi/2.6.0/unomi-manual-2_6_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://dist.apache.org/repos/dist/release/unomi/2.6.0/unomi-manual-2_6_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">2.5.x</td>
+                                    <td>&mdash;</td>
+                                    <td><a href="https://dist.apache.org/repos/dist/release/unomi/2.5.0/unomi-manual-2_5_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://dist.apache.org/repos/dist/release/unomi/2.5.0/unomi-manual-2_5_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">2.4.x</td>
+                                    <td>&mdash;</td>
+                                    <td><a href="https://dist.apache.org/repos/dist/release/unomi/2.4.0/unomi-manual-2_4_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://dist.apache.org/repos/dist/release/unomi/2.4.0/unomi-manual-2_4_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">2.3.x</td>
+                                    <td>&mdash;</td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/2.3.0/unomi-manual-2_3_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/2.3.0/unomi-manual-2_3_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">2.2.x</td>
+                                    <td>&mdash;</td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/2.2.0/unomi-manual-2_2_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/2.2.0/unomi-manual-2_2_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">2.1.x</td>
+                                    <td>&mdash;</td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/2.1.0/unomi-manual-2_1_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/2.1.0/unomi-manual-2_1_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">2.0.x</td>
+                                    <td>&mdash;</td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/2.0.0/unomi-manual-2_0_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/2.0.0/unomi-manual-2_0_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">1.9.x</td>
+                                    <td>&mdash;</td>
+                                    <td><a href="https://dist.apache.org/repos/dist/release/unomi/1.9.0/unomi-manual-1_9_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://dist.apache.org/repos/dist/release/unomi/1.9.0/unomi-manual-1_9_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">1.7.x</td>
+                                    <td>&mdash;</td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/1.7.0/unomi-manual-1_7_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/1.7.0/unomi-manual-1_7_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">1.6.x</td>
+                                    <td>&mdash;</td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/1.6.0/unomi-manual-1_6_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/1.6.0/unomi-manual-1_6_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">1.5.x</td>
+                                    <td>&mdash;</td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/1.5.0/unomi-manual-1_5_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/1.5.0/unomi-manual-1_5_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">1.4.x</td>
+                                    <td>&mdash;</td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/1.4.0/unomi-manual-1_4_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://archive.apache.org/dist/unomi/1.4.0/unomi-manual-1_4_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">1.3.x-incubating</td>
+                                    <td>&mdash;</td>
+                                    <td><a href="https://archive.apache.org/dist/incubator/unomi/1.3.0-incubating/unomi-manual-1_3_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://archive.apache.org/dist/incubator/unomi/1.3.0-incubating/unomi-manual-1_3_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">1.2.x-incubating</td>
+                                    <td>&mdash;</td>
+                                    <td><a href="https://archive.apache.org/dist/incubator/unomi/1.2.0-incubating/unomi-manual-1_2_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://archive.apache.org/dist/incubator/unomi/1.2.0-incubating/unomi-manual-1_2_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-semibold">1.1.x-incubating</td>
+                                    <td>&mdash;</td>
+                                    <td><a href="https://archive.apache.org/dist/incubator/unomi/1.1.0-incubating/unomi-manual-1_1_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://archive.apache.org/dist/incubator/unomi/1.1.0-incubating/unomi-manual-1_1_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+            </div>
         </div>
+    </div>
+</section>
 
+<!-- REST API Reference Table -->
+<section class="section" id="rest-api">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-7">
+                <p class="section-label">API Reference</p>
+                <h2>REST API Endpoints</h2>
+                <p class="text-muted">Since v1.6, the REST API is embedded as OpenAPI docs in the server at<br><code>http://localhost:8181/cxs/api-docs?url=openapi.json</code></p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="table-responsive">
+                    <table class="table table-sm align-middle">
+                        <thead>
+                            <tr><th>Endpoint</th><th>Description</th><th>Since</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="fw-semibold">profiles</td><td>Manage user profiles</td><td>1.3</td></tr>
+                            <tr><td class="fw-semibold">events</td><td>Send and query events</td><td>1.4</td></tr>
+                            <tr><td class="fw-semibold">segments</td><td>Manage segments</td><td>1.3</td></tr>
+                            <tr><td class="fw-semibold">rules</td><td>Manage rules</td><td>1.3</td></tr>
+                            <tr><td class="fw-semibold">scoring</td><td>Manage scoring plans</td><td>1.3</td></tr>
+                            <tr><td class="fw-semibold">campaigns</td><td>Manage campaigns</td><td>1.3</td></tr>
+                            <tr><td class="fw-semibold">goals</td><td>Manage goals</td><td>1.3</td></tr>
+                            <tr><td class="fw-semibold">definitions</td><td>Manage definitions</td><td>1.3</td></tr>
+                            <tr><td class="fw-semibold">cluster</td><td>Manage cluster</td><td>1.3</td></tr>
+                            <tr><td class="fw-semibold">query</td><td>Run queries</td><td>1.3</td></tr>
+                            <tr><td class="fw-semibold">userList</td><td>Manage user lists</td><td>1.3</td></tr>
+                            <tr><td class="fw-semibold">patches</td><td>Manage patches</td><td>1.4</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="small text-muted text-center mt-2">
+                    <a href="/rest-api-doc/index.html">View full REST API documentation <i class="bi bi-arrow-right"></i></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
 
-      </div><!-- /.container -->
+<hr class="section-divider">
 
+<!-- ElasticSearch Migration & Security -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <h2 class="h4 mb-3"><i class="bi bi-database-gear me-2 text-primary"></i>ElasticSearch Migration</h2>
+                <p class="small text-muted">When migrating between ElasticSearch versions used by Unomi:</p>
+                <ul class="small text-muted">
+                    <li class="mb-2"><strong>Standalone:</strong> Copy the data directory and custom <code>elasticsearch.yml</code> settings to the new version.</li>
+                    <li class="mb-2"><strong>Cluster:</strong> Use ElasticSearch <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html" target="_blank" rel="noopener">Snapshot and Restore</a> functionality.</li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <h2 class="h4 mb-3"><i class="bi bi-shield-check me-2 text-primary"></i>Security Advisories</h2>
+                <ul class="list-unstyled small">
+                    <li class="d-flex align-items-center mb-2">
+                        <span class="badge bg-danger me-2" style="font-size:.65rem">CVE</span>
+                        <a href="/security/cve-2021-31164.txt">CVE-2021-31164</a><span class="text-muted ms-2">&mdash; CRLF Log injection</span>
+                    </li>
+                    <li class="d-flex align-items-center mb-2">
+                        <span class="badge bg-danger me-2" style="font-size:.65rem">CVE</span>
+                        <a href="/security/cve-2020-13942.txt">CVE-2020-13942</a><span class="text-muted ms-2">&mdash; Remote Code Execution</span>
+                    </li>
+                    <li class="d-flex align-items-center mb-2">
+                        <span class="badge bg-danger me-2" style="font-size:.65rem">CVE</span>
+                        <a href="/security/cve-2020-11975.txt">CVE-2020-11975</a><span class="text-muted ms-2">&mdash; Remote Code Execution</span>
+                    </li>
+                </ul>
+                <p class="small text-muted">Report vulnerabilities to <a href="mailto:security@apache.org">security@apache.org</a>.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Need Help CTA -->
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="cta-banner text-center">
+                    <h3 class="h4 mb-3">Can&rsquo;t find what you need?</h3>
+                    <p class="mb-4">The community is happy to help. Ask on the mailing list or chat on Slack.</p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="/community/index.html" class="btn btn-light fw-semibold">
+                            <i class="bi bi-chat-dots me-2"></i>Get Help
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

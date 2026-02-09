@@ -1,44 +1,45 @@
 ---
-title: Contribute | Manual Release guide
+title: Manual Release Guide
+description: "Manual release guide for Apache Unomi release managers"
 layout: default
 ---
 
-      <!-- Marketing messaging and featurettes
-      ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Contribute</p>
+        <h1>Manual Release Guide</h1>
+    </div>
+</section>
 
-      <div class="container">
-        <!-- CONTRIBUTE -->
-        <div class="row mb-5 mt-5 pt-3">
-          <div class="col-2 sidenav-menu pt-3">
-            <div class="pb-3 text-uppercase"><strong>Contribute</strong></div>
-            <ul class="list-unstyled mb-3">
-              <li><a href="index.html">Get started contributing</a></li>
-              <li class="sidenav-menu-sub-title">Technical Docs</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="testing.html">Testing guide</a></li>
-                  <li><a href="dependencies-guide.html">Dependencies guide</a></li>
-                </ul>
-              </li>
-              <li class="sidenav-menu-sub-title">Policies</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="pre-commit-test-policies.html">Pre-commit test policies</a></li>
-                  <li><a href="post-commit-test-policies.html">Post-commit test policies</a></li>
-                </ul>
-              </li>
-              <li class="sidenav-menu-sub-title">Committers</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="become-a-committer.html">Become a committer</a></li>
-                  <li><a href="committer-guide.html">Committer guide</a></li>
-                  <li><a href="release-guide.html">Release guide</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div class="col-8 pt-3 offset-4">
+<section class="section">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-3">
+                <div class="sidenav-menu">
+                    <div class="menu-title">Contribute</div>
+                    <ul class="list-unstyled mb-3">
+                        <li><a href="index.html">Getting Started</a></li>
+                    </ul>
+                    <div class="menu-title mt-3">Technical Docs</div>
+                    <ul class="list-unstyled mb-3">
+                        <li><a href="testing.html">Testing Guide</a></li>
+                        <li><a href="dependencies-guide.html">Dependencies Guide</a></li>
+                    </ul>
+                    <div class="menu-title mt-3">Policies</div>
+                    <ul class="list-unstyled mb-3">
+                        <li><a href="pre-commit-test-policies.html">Pre-commit Policies</a></li>
+                        <li><a href="post-commit-test-policies.html">Post-commit Policies</a></li>
+                    </ul>
+                    <div class="menu-title mt-3">Committers</div>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="become-a-committer.html">Become a Committer</a></li>
+                        <li><a href="committer-guide.html">Committer Guide</a></li>
+                        <li><a href="release-guide.html">Release Guide</a></li>
+                        <li><a href="manual-release-guide.html" class="active">Manual Release Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
             <h2 id="apache-unomi-release-guide">Manual Apache Unomi Release Guide</h2>
 
             <p>The Apache Unomi project periodically declares and publishes releases. A release is one or more packages of the project artifact(s) that are approved for general public distribution and use. They may come with various degrees of caveat regarding their perceived quality and potential for change, such as "alpha", "beta", "stable", etc.</p>
@@ -150,7 +151,7 @@ gpg --verify test.txt.asc test.txt
             <ol>
               <li>Clone and checkout the project using:
                 <pre class="alert alert-primary"><code>git clone https://gitbox.apache.org/repos/asf/unomi.git</code></pre>
-                 in a separate directory, to make sure you don’t have any additional files in the build
+                 in a separate directory, to make sure you don't have any additional files in the build
                   (such as allCountries.zip or other binary files that should not be there)</li>
                 <li>
                     Simply checkout an existing branch for release
@@ -179,7 +180,7 @@ git checkout -b unomi-{{ site.data.unomi.branch.version }}
               <li>Check that there are no JARs or ZIP files in the source code, you can do this by looking at the generated RAT report here :
                 <pre class="alert alert-primary"><code>less target/unomi-root-{{ site.data.unomi.next.development.version }}.rat</code></pre>
               </li>
-              <li>Check that the KEYS file only contains signatures with @apache.org addresses (if there are non @apache.org don’t remove them because they have
+              <li>Check that the KEYS file only contains signatures with @apache.org addresses (if there are non @apache.org don't remove them because they have
                 been used to sign older releases)
               </li>
               <li>Check the Copyright notice years in the NOTICE file and anywhere else where it might be (by using search and replace)</li>
@@ -228,7 +229,7 @@ popd</code></pre>
                 <pre class="alert alert-primary"><code>mvn -DskipITs=true -DskipTests=true -Drelease.arguments="-Papache-release,integration-tests -DskipITs=true -DskipTests=true" -P integration-tests,docker,\!run-tests release:perform</code></pre>
               </li>
               <li>If something fails, make sure you first drop the staging repository created here: <a href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache.org/#stagingRepositories</a>.<br>
-If you need to relaunch the <code>release:perform</code> and don’t have a release.properties, create a <code>release.properties</code> file with the following contents:
+If you need to relaunch the <code>release:perform</code> and don't have a release.properties, create a <code>release.properties</code> file with the following contents:
                 <pre class="alert alert-primary"><code>scm.url=scm:git:https://gitbox.apache.org/repos/asf?p=unomi.git
 scm.tag=unomi-root-{{ site.data.unomi.next.stable.version }}
 and run mvn release:perform</code></pre>
@@ -464,7 +465,7 @@ git push origin -f</code></pre>
 
             <h2 id="improve-the-process">Improve the process</h2>
 
-            <p>It is important that we improve the release processes over time. Once you’ve finished the release, please take a step back and look what areas of this process and be improved. Perhaps some part of the process can be simplified. Perhaps parts of this guide can be clarified.</p>
+            <p>It is important that we improve the release processes over time. Once you've finished the release, please take a step back and look what areas of this process and be improved. Perhaps some part of the process can be simplified. Perhaps parts of this guide can be clarified.</p>
 
             <p>If we have specific ideas, please start a discussion on the dev@ mailing list and/or propose a pull request to update this guide. Thanks!</p>
 
@@ -581,6 +582,7 @@ Thanks!
 The Apache Unomi Team
 
             </code></pre>
-          </div>
+            </div>
         </div>
-      </div>
+    </div>
+</section>

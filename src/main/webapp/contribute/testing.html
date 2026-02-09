@@ -1,45 +1,44 @@
 ---
 title: Contribute | Testing
+description: "Learn how to write tests for Apache Unomi, which tests are appropriate where, and when tests are run."
 layout: default
 ---
 
-      <!-- Marketing messaging and featurettes
-      ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Contribute</p>
+        <h1>Apache Unomi Testing</h1>
+    </div>
+</section>
 
-      <div class="container">
-        <!-- CONTRIBUTE -->
-        <div class="row mb-5 mt-5 pt-3">
-          <div class="col-2 sidenav-menu pt-3">
-            <div class="pb-3 text-uppercase"><strong>Contribute</strong></div>
-            <ul class="list-unstyled mb-3">
-              <li><a href="index.html">Get started contributing</a></li>
-              <li class="sidenav-menu-sub-title">Technical Docs</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="testing.html">Testing guide</a></li>
-                  <li><a href="dependencies-guide.html">Dependencies guide</a></li>
-                </ul>
-              </li>
-              <li class="sidenav-menu-sub-title">Policies</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="pre-commit-test-policies.html">Pre-commit test policies</a></li>
-                  <li><a href="post-commit-test-policies.html">Post-commit test policies</a></li>
-                </ul>
-              </li>
-              <li class="sidenav-menu-sub-title">Committers</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="become-a-committer.html">Become a committer</a></li>
-                  <li><a href="committer-guide.html">Committer guide</a></li>
-                  <li><a href="release-guide.html">Release guide</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div class="col-8 pt-3 offset-4">
-            <h2 class="pb-1">Apache Unomi Testing</h2>
+<section class="section">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-3">
+                <div class="sidenav-menu">
+                    <div class="menu-title">Contribute</div>
+                    <ul class="list-unstyled mb-3">
+                        <li><a href="index.html">Getting Started</a></li>
+                    </ul>
+                    <div class="menu-title mt-3">Technical Docs</div>
+                    <ul class="list-unstyled mb-3">
+                        <li><a href="testing.html" class="active">Testing Guide</a></li>
+                        <li><a href="dependencies-guide.html">Dependencies Guide</a></li>
+                    </ul>
+                    <div class="menu-title mt-3">Policies</div>
+                    <ul class="list-unstyled mb-3">
+                        <li><a href="pre-commit-test-policies.html">Pre-commit Policies</a></li>
+                        <li><a href="post-commit-test-policies.html">Post-commit Policies</a></li>
+                    </ul>
+                    <div class="menu-title mt-3">Committers</div>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="become-a-committer.html">Become a Committer</a></li>
+                        <li><a href="committer-guide.html">Committer Guide</a></li>
+                        <li><a href="release-guide.html">Release Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
             <p>This document outlines how to write tests, which tests are appropriate where, and when tests are run, with some additional information about the testing systems at the bottom.</p>
 
             <h3 id="testing-scenarios">Testing Scenarios</h3>
@@ -48,11 +47,11 @@ layout: default
 
             <p>Thus tests are split into <em>pre-commit</em> and <em>post-commit</em> suites. Pre-commit is fast, while post-commit is comprehensive. As their names imply, pre-commit tests are run on each PR before it is committed, while post-commits run periodically against the master branch (i.e. on already committed PRs).</p>
 
-            <p>Unomi uses <a target="_blank" href="https://builds.apache.org/job/unomi-master/">Jenkins</a> to run pre-commit and post-commit tests.</p>
+            <p>Unomi uses <a target="_blank" href="https://github.com/apache/unomi/actions/workflows/unomi-ci-build-tests.yml">GitHub Actions</a> to run pre-commit and post-commit tests.</p>
 
             <h4 id="pre-commit">Pre-commit</h4>
 
-            <p>The pre-commit test suite verifies correctness via two testing tools: unit tests and end-to-end (E2E) tests. Unit tests ensure correctness at a basic level, while WordCount E2E tests are run to verify that a basic level of functionality exists.</p>
+            <p>The pre-commit test suite verifies correctness via two testing tools: unit tests and integration tests. Unit tests ensure correctness at a basic level, while a full build (<code>mvn clean install</code>) compiles all modules and runs unit tests to verify that a basic level of functionality exists.</p>
 
             <p>This combination of tests hits the appropriate tradeoff between a desire for
             short (ideally &lt;30m) pre-commit times and a desire to verify that PRs going
@@ -62,13 +61,11 @@ layout: default
 
             <h4 id="post-commit">Post-commit</h4>
 
-            <p>Running in post-commit removes as stringent of a time constraint, which gives us the ability to do some more comprehensive testing. In post-commit we have a test suite running the ValidatesRunner tests against each supported runner, and another for running the full set of E2E tests against each runner.
-            Currently-supported runners are Dataflow, Flink, Spark, and Gearpump, with others soon to follow. Work is ongoing to enable Flink, Spark, and Gearpump in
-            the E2E framework, with full support targeted for end of August 2016. Post-commit tests run periodically, with timing defined in their Jenkins configurations.</p>
+            <p>Running in post-commit removes the stringent time constraint, which gives us the ability to do more comprehensive testing. In post-commit the full integration test suite is executed against both supported search engines &mdash; <strong>Elasticsearch</strong> and <strong>OpenSearch</strong> &mdash; via the <code>-Pintegration-tests</code> Maven profile. The suite is defined in <a target="_blank" href="https://github.com/apache/unomi/blob/master/itests/src/test/java/org/apache/unomi/itests/AllITs.java"><code>AllITs.java</code></a> and currently contains 30+ test classes covering profiles, segments, events, conditions, rules, privacy, import/export, GraphQL API, JSON Schema validation, health checks, and data migration scenarios.</p>
 
-            <p>Adding new post-commit E2E tests is generally as easy as adding a *IT.java file to the repository - Failsafe will notice it and run it - but if you want to do more interesting things, take a look at <a target="_blank" href="https://github.com/apache/unomi/blob/master/examples/java/src/test/java/org/apache/unomi/examples/WordCountIT.java">WordCountIT.java</a>.</p>
+            <p>Adding new integration tests is generally as easy as adding a <code>*IT.java</code> file to the <code>itests/</code> module and registering it in the <code>AllITs.java</code> suite class. New tests should extend <a target="_blank" href="https://github.com/apache/unomi/blob/master/itests/src/test/java/org/apache/unomi/itests/BaseIT.java"><code>BaseIT</code></a>, which provides access to all Unomi OSGi services, an HTTP client for REST API calls, and helper methods for waiting and retrying asynchronous operations.</p>
 
-            <p>Post-commit test results can be found in <a target="_blank" href="https://builds.apache.org/view/A-D/view/Unomi/">Jenkins</a>.</p>
+            <p>Post-commit test results can be found in <a target="_blank" href="https://github.com/apache/unomi/actions/workflows/unomi-ci-build-tests.yml">GitHub Actions</a>.</p>
 
             <h3 id="testing-types">Testing Types</h3>
 
@@ -78,19 +75,48 @@ layout: default
 
             <h4 id="how-to-run-java-needsrunner-tests">How to run Java tests</h4>
 
-            <p>//TODO add description</p>
+            <p>Apache Unomi uses <strong>JUnit 4</strong> for unit tests and the <strong>Maven Surefire Plugin</strong> for execution. Unit tests are located in each module&rsquo;s <code>src/test/java</code> directory and follow standard Maven conventions. To run all unit tests across the project:</p>
 
-            <pre class="alert alert-primary"><code>$ .mvn test -Dtest=MyClassTest</code></pre>
+            <pre class="alert alert-primary"><code>$ mvn clean test</code></pre>
+
+            <p>To run a specific test class:</p>
+
+            <pre class="alert alert-primary"><code>$ mvn test -Dtest=MyClassTest</code></pre>
+
+            <p>To run the full integration test suite (requires Elasticsearch or OpenSearch running):</p>
+
+            <pre class="alert alert-primary"><code>$ mvn clean install -Pintegration-tests</code></pre>
+
+            <p>For OpenSearch instead of Elasticsearch, add <code>-Duse.opensearch=true</code>. Integration tests use the <strong>Maven Failsafe Plugin</strong> and follow the <code>*IT.java</code> naming convention.</p>
 
             <h4 id="e2e">E2E</h4>
 
-            <p>End-to-End tests are meant to verify at the very highest level that the Unomi codebase is working as intended. Because they are implemented as a thin wrapper around existing pipelines, they can be used to prove that the core Unomi functionality is available. They will be used to verify //TODO</p>
+            <p>Integration tests (E2E) are meant to verify at the very highest level that the Unomi codebase is working as intended. They boot a real Apache Karaf container with Unomi deployed inside it, connected to a real search engine (Elasticsearch or OpenSearch). These tests verify that core Unomi services are fully operational end-to-end, including profile management, event collection, segmentation, rule execution, context serving, consent and privacy controls, data import/export workflows, GraphQL API operations, JSON Schema validation, and data migration between versions.</p>
 
             <h3 id="testing-systems">Testing Systems</h3>
 
-            <h4 id="e2e-testing-framework">E2E Testing</h4>
+            <h4 id="e2e-testing-framework">Integration Testing Framework</h4>
 
-            <p>//TODO</p>
+            <p>Unomi&rsquo;s integration tests use the following technology stack:</p>
+
+            <ul>
+                <li><strong><a target="_blank" href="https://ops4j1.jira.com/wiki/spaces/PAXEXAM4/overview">Pax Exam</a></strong> &mdash; An OSGi testing framework that provisions and manages the Apache Karaf container used during tests. It handles downloading the Unomi distribution, configuring features, and injecting OSGi services into test classes.</li>
+                <li><strong><a target="_blank" href="https://karaf.apache.org/">Apache Karaf</a> Test Support</strong> &mdash; Provides the base class (<code>KarafTestSupport</code>) for container-based integration tests, enabling Karaf shell command execution and OSGi service lookups.</li>
+                <li><strong><a target="_blank" href="https://maven.apache.org/surefire/maven-failsafe-plugin/">Maven Failsafe Plugin</a></strong> &mdash; Executes the integration tests during the <code>integration-test</code> phase and verifies results in the <code>verify</code> phase. Tests follow the <code>*IT.java</code> naming convention.</li>
+                <li><strong>Embedded Elasticsearch / Docker OpenSearch</strong> &mdash; The Elasticsearch profile uses the <code>elasticsearch-maven-plugin</code> to start an embedded Elasticsearch instance, while the OpenSearch profile uses the <code>docker-maven-plugin</code> to spin up an OpenSearch container.</li>
+                <li><strong><a target="_blank" href="https://www.jacoco.org/">JaCoCo</a></strong> &mdash; Optionally collects code coverage data during integration test runs.</li>
+            </ul>
+
+            <p>All test classes extend <a target="_blank" href="https://github.com/apache/unomi/blob/master/itests/src/test/java/org/apache/unomi/itests/BaseIT.java"><code>BaseIT</code></a>, which provides access to injected Unomi services (ProfileService, RulesService, SegmentService, etc.), a pre-configured HTTP client for REST API testing, and utility methods for polling asynchronous operations.</p>
+
+            <h4 id="ci">Continuous Integration</h4>
+
+            <p>Unomi uses <strong>GitHub Actions</strong> for continuous integration. The <a target="_blank" href="https://github.com/apache/unomi/blob/master/.github/workflows/unomi-ci-build-tests.yml"><code>unomi-ci-build-tests.yml</code></a> workflow is triggered on every push to <code>master</code> and on pull requests. It runs in two stages:</p>
+
+            <ol>
+                <li><strong>Unit tests</strong> &mdash; A full <code>mvn clean install</code> build with a 15-minute timeout. This must pass before integration tests begin.</li>
+                <li><strong>Integration tests</strong> &mdash; Run in a matrix against both Elasticsearch (port 9400) and OpenSearch (port 9401) using JDK 17. Test results and logs are archived as GitHub Actions artifacts on failure.</li>
+            </ol>
 
             <h3 id="best_practices">Best practices for writing tests</h3>
 
@@ -142,6 +168,7 @@ layout: default
             <p>Post-commit tests validate that Unomi works correctly in broad variety of scenarios. The tests catch errors that are hard to predict in the design and implementation stages</p>
 
             <p>However, we often write a test to verify a specific scenario. In this situation, it is usually possible to implement the test as a unit test or a component test. You can add your unit tests or component tests to the pre-commit test suite, and the pre-commit test results give you faster code health feedback during the development stage, when a bug is cheap to fix.</p>
-          </div>
+            </div>
         </div>
-      </div>
+    </div>
+</section>
