@@ -1,6 +1,7 @@
 ---
 title: Community &mdash; Get Help & Contact
 description: "Connect with the Apache Unomi community. Join mailing lists, Slack, monthly meetings, report bugs, and get help from developers and users worldwide."
+keywords: "Apache Unomi community, mailing list, Slack, JIRA, open source community, contributor, support channels, monthly meetings"
 layout: default
 structured_data: >
     <script type="application/ld+json">
@@ -13,7 +14,7 @@ structured_data: >
                 "name": "How do I get help with Apache Unomi?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "The best way to get help is to subscribe to the users@unomi.apache.org mailing list by sending an email to users-subscribe@unomi.apache.org. You can also join the #unomi channel on the ASF Slack (create a free account at https://s.apache.org/slack-invite). The community also holds monthly online meetings."
+                    "text": "The best way to get help is to subscribe to the users@unomi.apache.org mailing list by sending an email to users-subscribe@unomi.apache.org. You can also join the #unomi channel on the ASF Slack. If you have an @apache.org email, sign in directly at https://the-asf.slack.com. Otherwise, email users@unomi.apache.org to request a guest invitation. See https://infra.apache.org/slack.html for details."
                 }
             },
             {
@@ -21,7 +22,7 @@ structured_data: >
                 "name": "How do I join the Apache Unomi Slack channel?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Step 1: Create a free ASF Slack account at https://s.apache.org/slack-invite (anyone can sign up, no Apache email required). Step 2: Once you have an account, join the #unomi channel at https://the-asf.slack.com/messages/CBP2Z98Q7/"
+                    "text": "Send an email to users@unomi.apache.org asking for a guest invitation to the #unomi Slack channel. Include the email address you want the invite sent to. A project member will send you a guest invite. If you already have an @apache.org email you can sign in directly at https://the-asf.slack.com and join #unomi. Full details at https://infra.apache.org/slack.html"
                 }
             },
             {
@@ -90,7 +91,7 @@ structured_data: >
                 <div class="text-center">
                     <div class="step-number mx-auto mb-3">3</div>
                     <h3 class="h6 fw-semibold">Chat on Slack</h3>
-                    <p class="small text-muted">For quick questions, join <strong>#unomi</strong> on the ASF Slack (free account for anyone).</p>
+                    <p class="small text-muted">For quick questions, join <strong>#unomi</strong> on the ASF Slack. <a href="#slack-access" class="fw-medium">See how to get access</a>.</p>
                 </div>
             </div>
         </div>
@@ -111,7 +112,7 @@ structured_data: >
         <div class="row g-4">
 
             <!-- Mailing Lists (primary) -->
-            <div class="col-md-6">
+            <div class="col-md-6" id="mailing-lists">
                 <div class="community-card">
                     <div class="community-icon icon-primary">
                         <i class="bi bi-envelope"></i>
@@ -146,7 +147,7 @@ structured_data: >
             </div>
 
             <!-- Slack -->
-            <div class="col-md-6">
+            <div class="col-md-6" id="slack-access">
                 <div class="community-card">
                     <div class="community-icon icon-amber">
                         <i class="bi bi-slack"></i>
@@ -155,24 +156,32 @@ structured_data: >
                         <h3 class="h6 fw-semibold mb-1">Slack &mdash; #unomi</h3>
                         <p class="small text-muted mb-2">Real-time chat for quick questions and informal discussions.</p>
                         <div class="d-flex flex-column gap-1">
-                            <p class="small mb-1"><strong>Step 1:</strong> <a href="https://s.apache.org/slack-invite" target="_blank" rel="noopener">Create a free ASF Slack account</a> <span class="text-muted">(anyone can sign up)</span></p>
-                            <p class="small mb-0"><strong>Step 2:</strong> <a href="https://the-asf.slack.com/messages/CBP2Z98Q7/" target="_blank" rel="noopener">Join the #unomi channel</a></p>
+                            <p class="small fw-semibold mb-1">How to join:</p>
+                            <p class="small mb-1"><strong>1.</strong> Send an email to <a href="mailto:users@unomi.apache.org">users@unomi.apache.org</a> asking for an invitation to the <strong>#unomi</strong> Slack channel. Include the email address you want the invite sent to.</p>
+                            <p class="small mb-1"><strong>2.</strong> A project member will send you a guest invite. Accept it to join the channel.</p>
+                            <p class="small text-muted mb-1"><em>Already have an @apache.org email?</em> Sign in directly at <a href="https://the-asf.slack.com" target="_blank" rel="noopener">the-asf.slack.com</a> and join <a href="https://the-asf.slack.com/messages/CBP2Z98Q7/" target="_blank" rel="noopener">#unomi</a>.</p>
+                            <p class="small text-muted mb-0"><a href="https://infra.apache.org/slack.html" target="_blank" rel="noopener">ASF Slack access policy &amp; details <i class="bi bi-box-arrow-up-right"></i></a></p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Monthly Meeting -->
-            <div class="col-md-6">
-                <a href="https://lists.apache.org/thread/70oo862br3d4g7j8dvnyy3o4z1p0ozfq" target="_blank" rel="noopener" class="community-card text-decoration-none">
+            <div class="col-md-6" id="monthly-meeting">
+                <div class="community-card">
                     <div class="community-icon icon-success">
                         <i class="bi bi-camera-video"></i>
                     </div>
                     <div>
-                        <h3 class="h6 fw-semibold mb-1 text-dark">Monthly Meeting</h3>
-                        <p class="small text-muted mb-0">The community meets monthly online with alternating times for different time zones. Current status and roadmap are discussed. Everyone is welcome!</p>
+                        <h3 class="h6 fw-semibold mb-1">Monthly Meeting <span class="badge badge-primary ms-1">Open to all</span></h3>
+                        <p class="small text-muted mb-2"><strong>You don&rsquo;t need to be a contributor to attend</strong> &mdash; newcomers, users evaluating Unomi, and anyone curious about the project are very welcome. It&rsquo;s a great way to ask questions, see what&rsquo;s being worked on, and meet the team.</p>
+                        <p class="small fw-semibold mb-1">Schedule &amp; how to join:</p>
+                        <p class="small mb-1"><i class="bi bi-calendar3 me-1"></i> <strong>When:</strong> Second Thursday of each month, alternating 9:00 AM CET (even months) and 5:00 PM CET (odd months).</p>
+                        <p class="small mb-1"><i class="bi bi-camera-video me-1"></i> <strong>Join:</strong> <a href="https://us02web.zoom.us/j/85252119410" target="_blank" rel="noopener">Click here to join the Zoom call</a> at the scheduled time. No account needed.</p>
+                        <p class="small text-muted mb-1"><strong>Agenda:</strong> Round table &amp; introductions, next release, project roadmap, Q&amp;A.</p>
+                        <p class="small text-muted mb-0">Reminders are posted on <a href="/community/index.html#slack-access">Slack</a>. Can&rsquo;t attend? Meeting minutes are sent to the <a href="https://lists.apache.org/list.html?dev@unomi.apache.org" target="_blank" rel="noopener">dev mailing list</a>. <a href="https://lists.apache.org/thread/70oo862br3d4g7j8dvnyy3o4z1p0ozfq" target="_blank" rel="noopener">Original announcement <i class="bi bi-box-arrow-up-right"></i></a></p>
                     </div>
-                </a>
+                </div>
             </div>
 
             <!-- JIRA -->

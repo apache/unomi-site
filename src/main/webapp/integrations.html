@@ -1,8 +1,9 @@
 ---
 title: Integrations &amp; Ecosystem
 description: "Discover products built on Apache Unomi, extensions, connectors, and companies offering commercial support for the open source Customer Data Platform."
-keywords: "Apache Unomi integrations, Unomi connectors, Salesforce connector, MailChimp connector, Jahia jExperience, Dropsolid, Unomi UI, Inoyu SaaS, CDP integrations, Unomi plugins, commercial support"
+keywords: "Apache Unomi integrations, Unomi connectors, Groovy actions, custom plugins, Jahia jExperience, Dropsolid, Inoyu SaaS, CDP integrations, Unomi plugins, commercial support"
 layout: default
+mermaid: true
 structured_data: >
     <script type="application/ld+json">
     {
@@ -10,14 +11,13 @@ structured_data: >
         "@type": "ItemList",
         "name": "Apache Unomi Integrations and Ecosystem",
         "description": "Products, extensions, connectors, and services built on Apache Unomi.",
-        "numberOfItems": 6,
+        "numberOfItems": 5,
         "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Jahia jExperience", "url": "https://www.jahia.com" },
             { "@type": "ListItem", "position": 2, "name": "Ninetailed Personalization Platform", "url": "https://ninetailed.io" },
             { "@type": "ListItem", "position": 3, "name": "Dropsolid Experience Cloud", "url": "https://dropsolid.com" },
-            { "@type": "ListItem", "position": 4, "name": "Salesforce CRM Connector" },
-            { "@type": "ListItem", "position": 5, "name": "Inoyu", "url": "https://www.inoyu.dev" },
-            { "@type": "ListItem", "position": 6, "name": "Yupiik", "url": "https://www.yupiik.com" }
+            { "@type": "ListItem", "position": 4, "name": "Inoyu", "url": "https://www.inoyu.dev" },
+            { "@type": "ListItem", "position": 5, "name": "Yupiik", "url": "https://www.yupiik.com" }
         ]
     }
     </script>
@@ -50,7 +50,7 @@ structured_data: >
                     <p class="small text-muted mb-3">Jahia is the initial contributor of Apache Unomi, using it as the core engine for their Customer Data Platform (jExperience) and Digital Experience Platform with native GDPR support.</p>
                     <blockquote class="small fst-italic text-muted border-start border-3 border-primary ps-3 mb-3">
                         &ldquo;Apache Unomi is a very important foundation of our products. We love Apache Unomi and are deeply committed to helping our customers succeed with it.&rdquo;
-                        <footer class="mt-1 fw-semibold" style="font-style:normal">Serge Huber, Jahia CTO</footer>
+                        <footer class="mt-1 fw-semibold" class="quote-attribution">Serge Huber, Jahia CTO</footer>
                     </blockquote>
                     <a href="https://www.jahia.com" target="_blank" rel="noopener" class="small fw-semibold">www.jahia.com <i class="bi bi-box-arrow-up-right"></i></a>
                 </div>
@@ -62,7 +62,7 @@ structured_data: >
                     <p class="small text-muted mb-3">The Dropsolid Experience Cloud delivers an out-of-box DXP with enhanced Drupal CMS, Mautic marketing automation, and Unomi CDP for smart segmentation and cross-system marketing.</p>
                     <blockquote class="small fst-italic text-muted border-start border-3 border-primary ps-3 mb-3">
                         &ldquo;Apache Unomi was the puzzle piece that fitted perfectly. It was the obvious CDP to integrate in our DXP solution.&rdquo;
-                        <footer class="mt-1 fw-semibold" style="font-style:normal">Mattias Michaux, Director of Engineering</footer>
+                        <footer class="mt-1 fw-semibold" class="quote-attribution">Mattias Michaux, Director of Engineering</footer>
                     </blockquote>
                     <a href="https://dropsolid.com/en/dropsolid-experience-cloud" target="_blank" rel="noopener" class="small fw-semibold">dropsolid.com <i class="bi bi-box-arrow-up-right"></i></a>
                 </div>
@@ -74,7 +74,7 @@ structured_data: >
                     <p class="small text-muted mb-3">Ninetailed uses Apache Unomi to provide a complete view of visitors, discover new segments, and deliver personalization recommendations to grow the traffic customers already have.</p>
                     <blockquote class="small fst-italic text-muted border-start border-3 border-primary ps-3 mb-3">
                         &ldquo;Apache Unomi was chosen as our CDP due to its logical and plugin architecture, because it is an Apache open source project, and especially because of its Privacy (GDPR consent management) features.&rdquo;
-                        <footer class="mt-1 fw-semibold" style="font-style:normal">Andy Kaiser, Ninetailed Founder</footer>
+                        <footer class="mt-1 fw-semibold" class="quote-attribution">Andy Kaiser, Ninetailed Founder</footer>
                     </blockquote>
                     <a href="https://ninetailed.io" target="_blank" rel="noopener" class="small fw-semibold">ninetailed.io <i class="bi bi-box-arrow-up-right"></i></a>
                 </div>
@@ -82,24 +82,8 @@ structured_data: >
             <div class="col-md-6 col-lg-4">
                 <div class="feature-card h-100">
                     <span class="badge mb-3 badge-coming-soon">Coming Soon</span>
-                    <h3 class="h6 fw-semibold">Unomi UI <span class="badge badge-oss">Open Source</span></h3>
-                    <p class="small text-muted mb-3">A modern, open source user interface for Apache Unomi by Inoyu, making it easy to manage profiles, segments, and rules through an intuitive dashboard. 100% open source under the Apache License v2.</p>
-                    <a href="https://www.inoyu.dev" target="_blank" rel="noopener" class="small fw-semibold">www.inoyu.dev <i class="bi bi-box-arrow-up-right"></i></a>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="feature-card h-100">
-                    <span class="badge mb-3 badge-coming-soon">Coming Soon</span>
                     <h3 class="h6 fw-semibold">Inoyu SaaS</h3>
                     <p class="small text-muted mb-3">A fully managed, cloud-hosted Apache Unomi service by Inoyu. Get a production-ready CDP without the operational overhead &mdash; just connect your data sources and go.</p>
-                    <a href="https://www.inoyu.dev" target="_blank" rel="noopener" class="small fw-semibold">www.inoyu.dev <i class="bi bi-box-arrow-up-right"></i></a>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="feature-card h-100">
-                    <span class="badge mb-3 badge-coming-soon">Coming Soon</span>
-                    <h3 class="h6 fw-semibold">Inoyu UI</h3>
-                    <p class="small text-muted mb-3">A commercial-grade user interface for Apache Unomi from Inoyu, with advanced features for managing profiles, segments, rules, and real-time analytics.</p>
                     <a href="https://www.inoyu.dev" target="_blank" rel="noopener" class="small fw-semibold">www.inoyu.dev <i class="bi bi-box-arrow-up-right"></i></a>
                 </div>
             </div>
@@ -125,10 +109,9 @@ structured_data: >
             <div class="col-lg-10">
                 <pre class="mermaid">
 graph LR
-    subgraph Connectors["Connectors"]
-        SF["Salesforce CRM"]
-        MC["MailChimp"]
-        CUSTOM["Custom Groovy"]
+    subgraph Extend["Extend Unomi"]
+        GROOVY["Groovy Actions"]
+        PLUGIN["Java Plugins"]
     end
 
     subgraph Core["Apache Unomi"]
@@ -136,54 +119,50 @@ graph LR
         ENGINE["Core Engine"]
     end
 
-    subgraph Extensions["Extensions & Products"]
-        UI["Unomi UI"]
-        SAAS["Inoyu SaaS"]
-        INOYU_UI["Inoyu UI"]
+    subgraph Extensions["Products & Services"]
+        UI["UI"]
+        SAAS["SaaS"]
         ANALYTICS["Analytics"]
     end
 
-    SF --> API2
-    MC --> API2
-    CUSTOM --> API2
+    GROOVY --> API2
+    PLUGIN --> API2
     API2 --> ENGINE
     ENGINE --> UI
     ENGINE --> SAAS
-    ENGINE --> INOYU_UI
     ENGINE --> ANALYTICS
                 </pre>
             </div>
         </div>
 
-        <div class="row g-4" data-shuffle-group>
-            <div class="col-md-6 col-lg-4">
+        <div class="row g-4">
+            <div class="col-md-6">
                 <div class="feature-card h-100">
                     <div class="d-flex align-items-center mb-3">
-                        <span class="badge badge-success me-2"><i class="bi bi-circle-fill me-1" style="font-size:.5em"></i> Stable</span>
+                        <span class="badge badge-primary me-2"><i class="bi bi-star-fill me-1 badge-dot"></i> Recommended</span>
                     </div>
-                    <h3 class="h6 fw-semibold">Salesforce CRM Connector</h3>
-                    <p class="small text-muted mb-2">Synchronize profiles and contacts between Apache Unomi and Salesforce CRM.</p>
-                    <p class="small text-muted mb-0">Version 1.5.7 &bull; <a href="/manual/1_5_x/index.html">Documentation</a></p>
+                    <h3 class="h6 fw-semibold">Groovy Actions</h3>
+                    <p class="small text-muted mb-2">The easiest way to extend Unomi. Write custom logic in Groovy scripts that are <strong>hot-deployable</strong> &mdash; no compilation, no restart needed. Groovy actions can react to events, update profiles, call external APIs, and integrate with third-party systems like CRMs, email platforms, or any REST service.</p>
+                    <p class="small text-muted mb-2">Start here for most integration needs.</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="https://unomi.apache.org/manual/latest/index.html#_groovy_actions" class="small fw-semibold">Groovy actions guide <i class="bi bi-arrow-right"></i></a>
+                        <a href="https://github.com/apache/unomi/tree/master/extensions/groovy-actions" target="_blank" rel="noopener" class="small fw-semibold text-muted">Source code <i class="bi bi-box-arrow-up-right"></i></a>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6">
                 <div class="feature-card h-100">
                     <div class="d-flex align-items-center mb-3">
-                        <span class="badge badge-warning me-2"><i class="bi bi-circle-fill me-1" style="font-size:.5em"></i> In Development</span>
+                        <div class="feature-icon feature-icon-sm"><i class="bi bi-gear"></i></div>
                     </div>
-                    <h3 class="h6 fw-semibold">MailChimp Connector</h3>
-                    <p class="small text-muted mb-2">Connect mailing lists and campaign data with Unomi profiles.</p>
-                    <p class="small text-muted mb-0">Version {{ site.data.unomi.latest.development.version }} &bull; <a href="/manual/latest/index.html">Documentation</a></p>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-                <div class="feature-card h-100">
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="feature-icon" style="width:2rem;height:2rem;font-size:1rem"><i class="bi bi-plus-lg"></i></div>
+                    <h3 class="h6 fw-semibold">Custom Java Plugins (OSGi)</h3>
+                    <p class="small text-muted mb-2">For advanced needs that go beyond what Groovy actions can do &mdash; such as custom conditions, new persistence types, or deep integration with the Unomi core &mdash; build a full OSGi plugin in Java. This gives you access to the entire Unomi API and service layer.</p>
+                    <p class="small text-muted mb-2">Use this only when Groovy actions are not sufficient.</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <a href="https://unomi.apache.org/manual/latest/index.html#_writing_plugins" class="small fw-semibold">Writing plugins guide <i class="bi bi-arrow-right"></i></a>
+                        <a href="https://unomi.apache.org/manual/latest/index.html#_custom_plugins" class="small fw-semibold">Custom plugins <i class="bi bi-arrow-right"></i></a>
+                        <a href="https://github.com/apache/unomi/tree/master/extensions" target="_blank" rel="noopener" class="small fw-semibold text-muted">Extensions source <i class="bi bi-box-arrow-up-right"></i></a>
                     </div>
-                    <h3 class="h6 fw-semibold">Build Your Own</h3>
-                    <p class="small text-muted mb-2">Create custom connectors using Groovy actions or the OSGi plugin API.</p>
-                    <a href="/manual/latest/index.html" class="small fw-semibold">Read the Plugin Guide <i class="bi bi-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -247,17 +226,4 @@ graph LR
 </section>
 
 <!-- ASF compliance: randomize company ordering on every page load -->
-<script>
-(function() {
-    var groups = document.querySelectorAll('[data-shuffle-group]');
-    groups.forEach(function(container) {
-        var children = Array.from(container.children);
-        // Fisher-Yates shuffle
-        for (var i = children.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            container.appendChild(children[j]);
-            var tmp = children[i]; children[i] = children[j]; children[j] = tmp;
-        }
-    });
-})();
-</script>
+<script src="/assets/js/shuffle.js" defer></script>

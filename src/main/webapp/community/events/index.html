@@ -1,7 +1,30 @@
 ---
 title: Events
 description: "Apache Unomi community events, meetups, and conference talks."
+keywords: "Apache Unomi events, ApacheCon, meetups, conferences, talks, presentations, CDP events"
 layout: default
+structured_data: >
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Apache Unomi Events",
+        "description": "Past and upcoming community events, conference talks, and meetups for the Apache Unomi project.",
+        "url": "https://unomi.apache.org/community/events/",
+        "mainEntity": {
+            "@type": "ItemList",
+            "name": "Apache Unomi Conference Talks & Events",
+            "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Community Over Code EU 2025 — A CDP in an AI-first World", "url": "https://www.youtube.com/watch?v=UrhNhXHugKc" },
+                { "@type": "ListItem", "position": 2, "name": "ApacheCon North America 2024 — Apache Unomi: The Open Source CDP", "url": "https://www.youtube.com/watch?v=YqPkUhBlcrs" },
+                { "@type": "ListItem", "position": 3, "name": "Community Over Code NA 2024 — What's New in the Latest Releases", "url": "https://www.youtube.com/watch?v=_6vfuWocQBs" },
+                { "@type": "ListItem", "position": 4, "name": "Community Over Code NA 2023 — Apache Unomi Past, Present, and Future", "url": "https://www.youtube.com/watch?v=uNbKW29FCnE" },
+                { "@type": "ListItem", "position": 5, "name": "ApacheCon Asia 2021 — Introduction to Apache Unomi", "url": "https://www.youtube.com/watch?v=ynluCYocfG4" },
+                { "@type": "ListItem", "position": 6, "name": "ApacheCon @Home 2020 — Building a CDP with Apache Unomi", "url": "https://www.youtube.com/watch?v=_EXJQJ69niA" }
+            ]
+        }
+    }
+    </script>
 ---
 
 <section class="page-header">
@@ -40,7 +63,7 @@ layout: default
             </div>
             <div class="col-lg-9">
                 <h2 class="h4 mb-4">Upcoming Events</h2>
-                <div class="p-4 rounded-3 mb-5" style="background:var(--unomi-bg-soft);border:1px solid var(--unomi-border)">
+                <div class="p-4 rounded-3 mb-5 info-box">
                     <p class="text-muted mb-2">No events are currently planned.</p>
                     <p class="small text-muted mb-0">Want to organize a meetup or talk about Apache Unomi? Reach out on the <a href="/community/index.html">mailing list</a>.</p>
                 </div>
@@ -53,9 +76,9 @@ layout: default
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="feature-card h-100">
-                                <a href="https://www.youtube.com/watch?v=_6vfuWocQBs" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden" style="aspect-ratio:16/9">
-                                    <img src="/assets/images/videos/coc-2025-_6vfuWocQBs.jpg" alt="From Complaining Customers to Brand Promoters" class="w-100 h-100" style="object-fit:cover" loading="lazy">
-                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white" style="font-size:1.2rem;margin-left:2px"></i></span>
+                                <a href="https://www.youtube.com/watch?v=_6vfuWocQBs" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden video-thumbnail">
+                                    <img src="/assets/images/videos/coc-2025-_6vfuWocQBs.jpg" alt="From Complaining Customers to Brand Promoters" class="w-100 h-100 img-cover" loading="lazy">
+                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white play-icon-sm"></i></span>
                                 </a>
                                 <h4 class="h6 fw-semibold mb-1">From Complaining Customers to Brand Promoters</h4>
                                 <p class="small text-muted mb-0">Real-time AI + customer data demo combining Unomi with Bluesky, Skype, an LLM, an e-commerce site, Inoyu&rsquo;s CDP UI, and HubSpot.</p>
@@ -63,9 +86,9 @@ layout: default
                         </div>
                         <div class="col-md-6">
                             <div class="feature-card h-100">
-                                <a href="https://www.youtube.com/watch?v=ON0EskhpuME" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden" style="aspect-ratio:16/9">
-                                    <img src="/assets/images/videos/coc-2025-ON0EskhpuME.jpg" alt="AI + CDP = Unlimited Personalized Memory" class="w-100 h-100" style="object-fit:cover" loading="lazy">
-                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white" style="font-size:1.2rem;margin-left:2px"></i></span>
+                                <a href="https://www.youtube.com/watch?v=ON0EskhpuME" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden video-thumbnail">
+                                    <img src="/assets/images/videos/coc-2025-ON0EskhpuME.jpg" alt="AI + CDP = Unlimited Personalized Memory" class="w-100 h-100 img-cover" loading="lazy">
+                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white play-icon-sm"></i></span>
                                 </a>
                                 <h4 class="h6 fw-semibold mb-1">AI + CDP = Unlimited Personalized Memory</h4>
                                 <p class="small text-muted mb-0">How combining a Customer Data Platform with an LLM creates unlimited, personalized, and privacy-compliant memory.</p>
@@ -80,9 +103,9 @@ layout: default
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="feature-card h-100">
-                                <a href="https://www.youtube.com/watch?v=uNbKW29FCnE" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden" style="aspect-ratio:16/9">
-                                    <img src="/assets/images/videos/opensearch-uNbKW29FCnE.jpg" alt="Apache Unomi OpenSearch Contribution" class="w-100 h-100" style="object-fit:cover" loading="lazy">
-                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white" style="font-size:1.2rem;margin-left:2px"></i></span>
+                                <a href="https://www.youtube.com/watch?v=uNbKW29FCnE" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden video-thumbnail">
+                                    <img src="/assets/images/videos/opensearch-uNbKW29FCnE.jpg" alt="Apache Unomi OpenSearch Contribution" class="w-100 h-100 img-cover" loading="lazy">
+                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white play-icon-sm"></i></span>
                                 </a>
                                 <h4 class="h6 fw-semibold mb-1">Apache Unomi OpenSearch Contribution</h4>
                                 <p class="small text-muted mb-0">The changes proposed to add OpenSearch support to Apache Unomi, including the dual persistence architecture and new tooling.</p>
@@ -97,9 +120,9 @@ layout: default
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="feature-card h-100">
-                                <a href="https://www.youtube.com/watch?v=YqPkUhBlcrs" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden" style="aspect-ratio:16/9">
-                                    <img src="/assets/images/videos/mcp-demo-YqPkUhBlcrs.jpg" alt="Claude AI integration with Apache Unomi using MCP" class="w-100 h-100" style="object-fit:cover" loading="lazy">
-                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white" style="font-size:1.2rem;margin-left:2px"></i></span>
+                                <a href="https://www.youtube.com/watch?v=YqPkUhBlcrs" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden video-thumbnail">
+                                    <img src="/assets/images/videos/mcp-demo-YqPkUhBlcrs.jpg" alt="Claude AI integration with Apache Unomi using MCP" class="w-100 h-100 img-cover" loading="lazy">
+                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white play-icon-sm"></i></span>
                                 </a>
                                 <h4 class="h6 fw-semibold mb-1">Claude AI + Apache Unomi via Model Context Protocol</h4>
                                 <p class="small text-muted mb-0">Anthropic&rsquo;s Claude Desktop integrated with Apache Unomi using MCP to deliver personalized e-commerce experiences through natural language.</p>
@@ -114,9 +137,9 @@ layout: default
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="feature-card h-100">
-                                <a href="https://www.youtube.com/watch?v=UrhNhXHugKc" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden" style="aspect-ratio:16/9">
-                                    <img src="/assets/images/videos/meetup-2021-UrhNhXHugKc.jpg" alt="First Apache Unomi Meetup" class="w-100 h-100" style="object-fit:cover" loading="lazy">
-                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white" style="font-size:1.2rem;margin-left:2px"></i></span>
+                                <a href="https://www.youtube.com/watch?v=UrhNhXHugKc" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden video-thumbnail">
+                                    <img src="/assets/images/videos/meetup-2021-UrhNhXHugKc.jpg" alt="First Apache Unomi Meetup" class="w-100 h-100 img-cover" loading="lazy">
+                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white play-icon-sm"></i></span>
                                 </a>
                                 <h4 class="h6 fw-semibold mb-1">Full Meetup Recording</h4>
                                 <p class="small text-muted mb-0">State of the Unomi by Serge Huber, how Jahia and Dropsolid use Unomi, Apache Karaf 5 by Jean-Baptiste Onofr&eacute;, and open Q&amp;A.</p>
@@ -136,9 +159,9 @@ layout: default
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="feature-card h-100">
-                                <a href="https://www.youtube.com/watch?v=EyT0_so-ayI" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden" style="aspect-ratio:16/9">
-                                    <img src="/assets/images/videos/feathercast-EyT0_so-ayI.jpg" alt="Feathercast Interview 2020" class="w-100 h-100" style="object-fit:cover" loading="lazy">
-                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white" style="font-size:1.2rem;margin-left:2px"></i></span>
+                                <a href="https://www.youtube.com/watch?v=EyT0_so-ayI" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden video-thumbnail">
+                                    <img src="/assets/images/videos/feathercast-EyT0_so-ayI.jpg" alt="Feathercast Interview 2020" class="w-100 h-100 img-cover" loading="lazy">
+                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white play-icon-sm"></i></span>
                                 </a>
                                 <h4 class="h6 fw-semibold mb-1">Interview of Apache Unomi PMC Serge Huber</h4>
                                 <p class="small text-muted mb-0">Feathercast interview covering the project&rsquo;s vision, use cases, and community.</p>
@@ -153,9 +176,9 @@ layout: default
                     <div class="row g-3">
                         <div class="col-md-6 col-lg-4">
                             <div class="feature-card h-100">
-                                <a href="https://www.youtube.com/watch?v=ut2ReqhMl2Y" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden" style="aspect-ratio:16/9">
-                                    <img src="/assets/images/videos/apachecon-2019-ut2ReqhMl2Y.jpg" alt="Customer Segmentation &amp; Marketing Automation" class="w-100 h-100" style="object-fit:cover" loading="lazy">
-                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white" style="font-size:1.2rem;margin-left:2px"></i></span>
+                                <a href="https://www.youtube.com/watch?v=ut2ReqhMl2Y" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden video-thumbnail">
+                                    <img src="/assets/images/videos/apachecon-2019-ut2ReqhMl2Y.jpg" alt="Customer Segmentation &amp; Marketing Automation" class="w-100 h-100 img-cover" loading="lazy">
+                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white play-icon-sm"></i></span>
                                 </a>
                                 <h4 class="h6 fw-semibold mb-1">Customer Segmentation &amp; Marketing Automation</h4>
                                 <p class="small text-muted mb-0">Michael Ghen demonstrates profiles, conditions, actions, rules, segments, and plugins with live demos.</p>
@@ -163,9 +186,9 @@ layout: default
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="feature-card h-100">
-                                <a href="https://www.youtube.com/watch?v=3VhC3x0GdDQ" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden" style="aspect-ratio:16/9">
-                                    <img src="/assets/images/videos/apachecon-2019-predictionio-3VhC3x0GdDQ.jpg" alt="Adding AI to Unomi using PredictionIO" class="w-100 h-100" style="object-fit:cover" loading="lazy">
-                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white" style="font-size:1.2rem;margin-left:2px"></i></span>
+                                <a href="https://www.youtube.com/watch?v=3VhC3x0GdDQ" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden video-thumbnail">
+                                    <img src="/assets/images/videos/apachecon-2019-predictionio-3VhC3x0GdDQ.jpg" alt="Adding AI to Unomi using PredictionIO" class="w-100 h-100 img-cover" loading="lazy">
+                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white play-icon-sm"></i></span>
                                 </a>
                                 <h4 class="h6 fw-semibold mb-1">Adding AI to Unomi Using PredictionIO</h4>
                                 <p class="small text-muted mb-0">How to integrate Apache PredictionIO with Unomi for AI-driven personalization.</p>
@@ -173,9 +196,9 @@ layout: default
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="feature-card h-100">
-                                <a href="https://www.youtube.com/watch?v=5ts6LuNwH9o" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden" style="aspect-ratio:16/9">
-                                    <img src="/assets/images/videos/apachecon-2019-static-5ts6LuNwH9o.jpg" alt="Unomi Segmentation in Static Website" class="w-100 h-100" style="object-fit:cover" loading="lazy">
-                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white" style="font-size:1.2rem;margin-left:2px"></i></span>
+                                <a href="https://www.youtube.com/watch?v=5ts6LuNwH9o" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden video-thumbnail">
+                                    <img src="/assets/images/videos/apachecon-2019-static-5ts6LuNwH9o.jpg" alt="Unomi Segmentation in Static Website" class="w-100 h-100 img-cover" loading="lazy">
+                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white play-icon-sm"></i></span>
                                 </a>
                                 <h4 class="h6 fw-semibold mb-1">Unomi Segmentation in a Static Website</h4>
                                 <p class="small text-muted mb-0">Apache Unomi segmentation integrated into an existing static website.</p>
@@ -190,9 +213,9 @@ layout: default
                     <div class="row g-3">
                         <div class="col-md-6">
                             <div class="feature-card h-100">
-                                <a href="https://www.youtube.com/watch?v=XO1cLSgeRsw" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden" style="aspect-ratio:16/9">
-                                    <img src="/assets/images/videos/apachecon-2018-XO1cLSgeRsw.jpg" alt="Apache Unomi &mdash; An Open Source CDP" class="w-100 h-100" style="object-fit:cover" loading="lazy">
-                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white" style="font-size:1.2rem;margin-left:2px"></i></span>
+                                <a href="https://www.youtube.com/watch?v=XO1cLSgeRsw" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden video-thumbnail">
+                                    <img src="/assets/images/videos/apachecon-2018-XO1cLSgeRsw.jpg" alt="Apache Unomi &mdash; An Open Source CDP" class="w-100 h-100 img-cover" loading="lazy">
+                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white play-icon-sm"></i></span>
                                 </a>
                                 <h4 class="h6 fw-semibold mb-1">Apache Unomi &mdash; An Open Source Customer Data Platform</h4>
                                 <p class="small text-muted mb-0">Serge Huber presents the architecture, features, and roadmap of Apache Unomi.</p>
@@ -207,9 +230,9 @@ layout: default
                     <div class="row g-3">
                         <div class="col-md-6 col-lg-4">
                             <div class="feature-card h-100">
-                                <a href="https://www.youtube.com/watch?v=y4uNwnVMVyg" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden" style="aspect-ratio:16/9">
-                                    <img src="/assets/images/videos/apachecon-2015-y4uNwnVMVyg.jpg" alt="Apache Unomi Project In-Depth" class="w-100 h-100" style="object-fit:cover" loading="lazy">
-                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white" style="font-size:1.2rem;margin-left:2px"></i></span>
+                                <a href="https://www.youtube.com/watch?v=y4uNwnVMVyg" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden video-thumbnail">
+                                    <img src="/assets/images/videos/apachecon-2015-y4uNwnVMVyg.jpg" alt="Apache Unomi Project In-Depth" class="w-100 h-100 img-cover" loading="lazy">
+                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white play-icon-sm"></i></span>
                                 </a>
                                 <h4 class="h6 fw-semibold mb-1">Apache Unomi Project In-Depth</h4>
                                 <p class="small text-muted mb-0">Serge Huber discusses the project and demonstrates IoT device integration with personalized user experiences.</p>
@@ -217,9 +240,9 @@ layout: default
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="feature-card h-100">
-                                <a href="https://www.youtube.com/watch?v=o0VUkSTKTxc" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden" style="aspect-ratio:16/9">
-                                    <img src="/assets/images/videos/apachecon-2015-keynote-o0VUkSTKTxc.jpg" alt="Keynote - Introducing Apache Unomi" class="w-100 h-100" style="object-fit:cover" loading="lazy">
-                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white" style="font-size:1.2rem;margin-left:2px"></i></span>
+                                <a href="https://www.youtube.com/watch?v=o0VUkSTKTxc" target="_blank" rel="noopener" class="d-block position-relative mb-3 rounded overflow-hidden video-thumbnail">
+                                    <img src="/assets/images/videos/apachecon-2015-keynote-o0VUkSTKTxc.jpg" alt="Keynote - Introducing Apache Unomi" class="w-100 h-100 img-cover" loading="lazy">
+                                    <span class="position-absolute top-50 start-50 translate-middle d-flex align-items-center justify-content-center rounded-circle play-overlay"><i class="bi bi-play-fill text-white play-icon-sm"></i></span>
                                 </a>
                                 <h4 class="h6 fw-semibold mb-1">Keynote &mdash; Introducing Apache Unomi</h4>
                                 <p class="small text-muted mb-0">Opening keynote introducing the Apache Unomi project to the community.</p>

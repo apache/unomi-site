@@ -1,6 +1,7 @@
 ---
 title: Apache Unomi Stories
 description: "How companies and projects use Apache Unomi. Success stories, products built on Unomi, and commercial support providers."
+keywords: "Apache Unomi stories, user stories, customer stories, CDP implementations, success stories, case studies"
 layout: default
 ---
 
@@ -18,7 +19,7 @@ layout: default
     <div class="container">
         <div class="row justify-content-center text-center mb-5">
             <div class="col-lg-8">
-                <div class="p-4 rounded-3" style="background:var(--unomi-primary-light)">
+                <div class="p-4 rounded-3 info-box-primary">
                     <h2 class="h5 mb-2">Looking for integrations, products, and commercial support?</h2>
                     <p class="text-muted mb-3">We&rsquo;ve consolidated all ecosystem information into a single, comprehensive page.</p>
                     <a href="/integrations.html" class="btn btn-primary"><i class="bi bi-puzzle me-2"></i>Visit the Integrations Page</a>
@@ -44,7 +45,7 @@ layout: default
                     <p class="small text-muted mb-3">The initial contributor of Apache Unomi, using it as the engine for their Customer Data Platform and Digital Experience Platform with native GDPR support.</p>
                     <blockquote class="small fst-italic text-muted border-start border-3 border-primary ps-3 mb-3">
                         &ldquo;Apache Unomi is a very important foundation of our products. We love it and are deeply committed to helping our customers succeed with it.&rdquo;
-                        <footer class="mt-1 fw-semibold" style="font-style:normal">&mdash; Serge Huber, Jahia CTO</footer>
+                        <footer class="mt-1 fw-semibold quote-attribution">&mdash; Serge Huber, Jahia CTO</footer>
                     </blockquote>
                     <a href="https://www.jahia.com" target="_blank" rel="noopener" class="small fw-semibold">www.jahia.com <i class="bi bi-box-arrow-up-right"></i></a>
                 </div>
@@ -62,7 +63,7 @@ layout: default
                     <p class="small text-muted mb-3">DXP with enhanced Drupal CMS, Mautic marketing automation, and Unomi CDP for smart segmentation and cross-system marketing.</p>
                     <blockquote class="small fst-italic text-muted border-start border-3 border-primary ps-3 mb-3">
                         &ldquo;Apache Unomi was the puzzle piece that fitted perfectly. It was the obvious CDP to integrate in our DXP solution.&rdquo;
-                        <footer class="mt-1 fw-semibold" style="font-style:normal">&mdash; Mattias Michaux, Director of Engineering</footer>
+                        <footer class="mt-1 fw-semibold quote-attribution">&mdash; Mattias Michaux, Director of Engineering</footer>
                     </blockquote>
                     <a href="https://dropsolid.com/en/dropsolid-experience-cloud" target="_blank" rel="noopener" class="small fw-semibold">dropsolid.com <i class="bi bi-box-arrow-up-right"></i></a>
                 </div>
@@ -91,16 +92,4 @@ layout: default
 </section>
 
 <!-- ASF compliance: randomize company ordering on every page load -->
-<script>
-(function() {
-    var groups = document.querySelectorAll('[data-shuffle-group]');
-    groups.forEach(function(container) {
-        var children = Array.from(container.children);
-        for (var i = children.length - 1; i > 0; i--) {
-            var j = Math.floor(Math.random() * (i + 1));
-            container.appendChild(children[j]);
-            var tmp = children[i]; children[i] = children[j]; children[j] = tmp;
-        }
-    });
-})();
-</script>
+<script src="/assets/js/shuffle.js" defer></script>
