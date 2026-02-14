@@ -55,16 +55,29 @@
 
     /* Overlay & glass */
     --unomi-overlay: rgba(0,0,0,.6);
+    --unomi-shadow-dark: rgba(0,0,0,.2);
     --unomi-glass: rgba(255,255,255,.92);
     --unomi-hover-light: rgba(255,255,255,.1);
+    --unomi-glow-faint: rgba(255,255,255,.08);
 
     /* Text on dark backgrounds */
     --unomi-on-dark: rgba(255,255,255,.8);
     --unomi-on-dark-muted: rgba(255,255,255,.75);
     --unomi-on-dark-subtle: rgba(255,255,255,.85);
-    --unomi-hero-label: rgba(255,255,255,.5);
-    --unomi-hero-muted: rgba(255,255,255,.45);
-    --unomi-hero-link: rgba(255,255,255,.6);
+    --unomi-hero-label: rgba(255,255,255,.6);
+    --unomi-hero-muted: rgba(255,255,255,.7);
+    --unomi-hero-link: rgba(255,255,255,.75);
+
+    /* Brand translucent */
+    --unomi-primary-glow: rgba(109,92,231,.3);
+    --unomi-primary-glow-strong: rgba(109,92,231,.6);
+    --unomi-primary-glow-soft: rgba(109,92,231,.85);
+    --unomi-primary-border-light: rgba(109,92,231,.2);
+    --unomi-hero-accent-glow: rgba(167,139,250,.15);
+    --unomi-hero-accent-ghost: rgba(167,139,250,.08);
+    --unomi-hero-accent-whisper: rgba(167,139,250,.06);
+    --unomi-gradient-start-fade: rgba(30,27,75,.2);
+    --unomi-on-dark-dim: rgba(255,255,255,.65);
 
     /* Gradient anchors */
     --unomi-gradient-start: #312e81;
@@ -139,10 +152,24 @@ a:hover {
     color: var(--unomi-primary-dark);
 }
 
+/* ---------- Focus Indicators (WCAG 2.4.7) ---------- */
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--unomi-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
 /* ---------- Navbar ---------- */
 .navbar {
     padding: 0.75rem 0;
     transition: box-shadow var(--unomi-transition), background var(--unomi-transition);
+    -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
     background: var(--unomi-glass) !important;
 }
@@ -198,34 +225,37 @@ a:hover {
 }
 
 /* ---------- Buttons ---------- */
-.btn-primary {
-    background: var(--unomi-primary);
-    border-color: var(--unomi-primary);
+.btn-primary,
+.btn-outline-primary {
     border-radius: var(--unomi-radius-sm);
     font-weight: 600;
     transition: all var(--unomi-transition);
 }
 
-.btn-primary:hover {
-    background: var(--unomi-primary-dark);
-    border-color: var(--unomi-primary-dark);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(109,92,231,.3);
+.btn-primary {
+    background: var(--unomi-primary);
+    border-color: var(--unomi-primary);
 }
 
 .btn-outline-primary {
     color: var(--unomi-primary);
     border-color: var(--unomi-primary);
-    border-radius: var(--unomi-radius-sm);
-    font-weight: 600;
-    transition: all var(--unomi-transition);
+}
+
+.btn-primary:hover,
+.btn-outline-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px var(--unomi-primary-glow);
+}
+
+.btn-primary:hover {
+    background: var(--unomi-primary-dark);
+    border-color: var(--unomi-primary-dark);
 }
 
 .btn-outline-primary:hover {
     background: var(--unomi-primary);
     border-color: var(--unomi-primary);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(109,92,231,.3);
 }
 
 .btn-lg {
@@ -255,7 +285,7 @@ a:hover {
     right: -20%;
     width: 60%;
     height: 200%;
-    background: radial-gradient(ellipse, rgba(167,139,250,.15) 0%, transparent 70%);
+    background: radial-gradient(ellipse, var(--unomi-hero-accent-glow) 0%, transparent 70%);
     pointer-events: none;
 }
 
@@ -266,7 +296,7 @@ a:hover {
     left: 0;
     right: 0;
     height: 4rem;
-    background: linear-gradient(to bottom, transparent, rgba(30,27,75,.2));
+    background: linear-gradient(to bottom, transparent, var(--unomi-gradient-start-fade));
     pointer-events: none;
 }
 
@@ -290,7 +320,7 @@ a:hover {
 .hero .btn-primary:hover {
     background: var(--unomi-primary-light);
     color: var(--unomi-primary-dark);
-    box-shadow: 0 6px 20px rgba(0,0,0,.2);
+    box-shadow: 0 6px 20px var(--unomi-shadow-dark);
 }
 
 .hero .btn-outline-light {
@@ -397,18 +427,14 @@ a:hover {
 }
 
 /* ---------- Architecture / Mermaid Diagrams ---------- */
-.mermaid {
-    background: var(--unomi-bg-soft);
-    border-radius: var(--unomi-radius);
-    padding: 2rem;
-    border: 1px solid var(--unomi-border);
-}
-
+.mermaid,
 pre.mermaid {
     background: var(--unomi-bg-soft);
     border-radius: var(--unomi-radius);
     padding: 2rem;
     border: 1px solid var(--unomi-border);
+    overflow-x: auto;          /* prevent horizontal page scroll on mobile */
+    -webkit-overflow-scrolling: touch;
 }
 
 /* ---------- Steps / Process ---------- */
@@ -486,7 +512,7 @@ pre.mermaid {
     filter: brightness(.85);
 }
 .feature-card a[href*="youtube"]:hover .rounded-circle {
-    background: rgba(109,92,231,.85) !important;
+    background: var(--unomi-primary-glow-soft) !important;
 }
 
 /* ---------- Integration Cards ---------- */
@@ -569,6 +595,8 @@ pre {
     padding: 1.25rem;
     font-size: 0.85rem;
     overflow-x: auto;
+    max-width: 100%;             /* prevent breaking out of container on mobile */
+    -webkit-overflow-scrolling: touch;
 }
 
 code {
@@ -603,7 +631,7 @@ code {
     right: -10%;
     width: 40%;
     height: 200%;
-    background: radial-gradient(ellipse, rgba(255,255,255,.08) 0%, transparent 70%);
+    background: radial-gradient(ellipse, var(--unomi-glow-faint) 0%, transparent 70%);
     pointer-events: none;
 }
 
@@ -720,6 +748,9 @@ code {
         height: 2rem;
         font-size: 0.8rem;
     }
+
+    .news-item { flex-wrap: wrap; }
+    .news-date { min-width: auto; width: 100%; margin-bottom: .15rem; }
 }
 
 /* ---------- Utility Classes ---------- */
@@ -792,7 +823,7 @@ code {
     flex: 0 0 auto;
     font-size: .75rem;
     font-weight: 600;
-    color: var(--unomi-muted);
+    color: var(--unomi-text-muted);
     font-variant-numeric: tabular-nums;
     min-width: 5.5rem;
 }
@@ -810,19 +841,14 @@ code {
     white-space: nowrap;
 }
 
-@media (max-width: 575.98px) {
-    .news-item { flex-wrap: wrap; }
-    .news-date { min-width: auto; width: 100%; margin-bottom: .15rem; }
-}
-
 /* ---------- Ecosystem marquee ---------- */
 .ecosystem-marquee {
     overflow: hidden;
     position: relative;
     padding: 0.5rem 0 1rem;
     /* Fade edges */
-    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, var(--unomi-text) 5%, var(--unomi-text) 95%, transparent);
+    mask-image: linear-gradient(to right, transparent, var(--unomi-text) 5%, var(--unomi-text) 95%, transparent);
 }
 
 @keyframes marquee-scroll {
@@ -854,7 +880,7 @@ code {
 
 .ecosystem-card-oss {
     background: var(--unomi-primary-light);
-    border-color: rgba(109,92,231,.2);
+    border-color: var(--unomi-primary-border-light);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -909,3 +935,64 @@ code {
 
 /* Tip / callout box */
 .tip-box { background: var(--unomi-tip-bg); border-color: var(--unomi-tip-border); }
+
+/* ---------- Reusable utility classes ---------- */
+
+/* Video thumbnail containers */
+.video-thumbnail  { aspect-ratio: 16/9; }
+.img-cover        { object-fit: cover; }
+.play-icon        { font-size: 1.5rem; margin-left: 2px; }
+.play-icon-sm     { font-size: 1.2rem; margin-left: 2px; }
+
+/* Blockquote attribution (override fst-italic) */
+.quote-attribution { font-style: normal; }
+
+/* Emeritus / retired member cards */
+.card-emeritus { opacity: .75; }
+
+/* Small feature icon variant */
+.feature-icon-sm { width: 2rem; height: 2rem; font-size: 1rem; }
+
+/* Badge status dot */
+.badge-dot { font-size: .5em; }
+
+/* Info / empty-state box */
+.info-box {
+    background: var(--unomi-bg-soft);
+    border: 1px solid var(--unomi-border);
+    border-radius: var(--unomi-radius-sm);
+}
+
+/* Hero illustration max-width */
+.hero-illustration { max-width: 560px; }
+
+/* Large primary icon (e.g. globe icon in CDP section) */
+.icon-lg-primary { font-size: 2rem; color: var(--unomi-primary); }
+
+/* Logo/image max-width variants */
+.mw-220 { max-width: 220px; }
+.mw-234 { max-width: 234px; }
+
+/* Badge status dot (smaller variant for version badges) */
+.badge-dot-sm { font-size: .45em; }
+
+/* CVE badge */
+.badge-cve { font-size: .65rem; }
+
+/* Clickable summary */
+.cursor-pointer { cursor: pointer; }
+
+/* Background accent (light primary) */
+.bg-primary-light { background: var(--unomi-primary-light); }
+
+/* Section without bottom padding (e.g. TOC) */
+.section-flush-bottom { padding-bottom: 0; }
+
+/* Feature icon medium variant (2.5rem) */
+.feature-icon-md { width: 2.5rem; height: 2.5rem; font-size: 1rem; }
+
+/* Navbar brand image */
+.navbar-brand-img { width: auto; }
+
+/* Feather icon inline */
+.feather-icon { height: 1.2em; }
