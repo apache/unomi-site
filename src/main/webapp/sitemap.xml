@@ -1,72 +1,185 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Homepage -->
     <url>
         <loc>https://unomi.apache.org/</loc>
+        <lastmod>2026-02-09</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
+
+    <!-- Primary navigation pages -->
     <url>
         <loc>https://unomi.apache.org/get-started.html</loc>
+        <lastmod>2026-02-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://unomi.apache.org/documentation.html</loc>
+        <lastmod>2026-02-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://unomi.apache.org/download.html</loc>
+        <lastmod>2026-02-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://unomi.apache.org/community/</loc>
+        <loc>https://unomi.apache.org/use-cases.html</loc>
+        <lastmod>2026-02-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://unomi.apache.org/integrations.html</loc>
+        <lastmod>2026-02-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://unomi.apache.org/use-cases.html</loc>
-        <changefreq>monthly</changefreq>
+        <loc>https://unomi.apache.org/tutorial.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>yearly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://unomi.apache.org/resources.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://unomi.apache.org/stories.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
+    <!-- Community section -->
+    <url>
+        <loc>https://unomi.apache.org/community/</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://unomi.apache.org/community/team.html</loc>
+        <lastmod>2026-02-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>https://unomi.apache.org/tutorial.html</loc>
+        <loc>https://unomi.apache.org/community/events/</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://unomi.apache.org/community/events/apachecon/</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <loc>https://unomi.apache.org/community/events/meetups/2021-11-18.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://unomi.apache.org/community/policies.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <loc>https://unomi.apache.org/community/maturity-model-report.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <!-- Contribute section -->
+    <url>
+        <loc>https://unomi.apache.org/contribute/</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://unomi.apache.org/contribute/become-a-committer.html</loc>
+        <lastmod>2026-02-09</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://unomi.apache.org/stories.html</loc>
-        <changefreq>monthly</changefreq>
+        <loc>https://unomi.apache.org/contribute/committer-guide.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://unomi.apache.org/contribute/</loc>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://unomi.apache.org/community/team.html</loc>
-        <changefreq>monthly</changefreq>
+        <loc>https://unomi.apache.org/contribute/testing.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>yearly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://unomi.apache.org/community/events/</loc>
-        <changefreq>monthly</changefreq>
+        <loc>https://unomi.apache.org/contribute/dependencies-guide.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://unomi.apache.org/contribute/release-guide.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>yearly</changefreq>
         <priority>0.4</priority>
     </url>
     <url>
+        <loc>https://unomi.apache.org/contribute/manual-release-guide.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <loc>https://unomi.apache.org/contribute/website.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    <url>
+        <loc>https://unomi.apache.org/contribute/post-commit-guides.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://unomi.apache.org/contribute/post-commit-policies-details.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://unomi.apache.org/contribute/post-commit-test-policies.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://unomi.apache.org/contribute/pre-commit-test-policies.html</loc>
+        <lastmod>2026-02-09</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.3</priority>
+    </url>
+
+    <!-- Other pages -->
+    <url>
         <loc>https://unomi.apache.org/privacy-policy.html</loc>
+        <lastmod>2026-02-09</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.2</priority>
     </url>

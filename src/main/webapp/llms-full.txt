@@ -21,8 +21,8 @@
 ### Runtime Stack
 - **Language**: Java
 - **Runtime Container**: Apache Karaf (OSGi framework)
-- **Data Store**: ElasticSearch (currently 7.x)
-- **API Protocol**: REST over HTTP/HTTPS with JSON payloads
+- **Data Store**: Elasticsearch (9.x). OpenSearch support is in development (committed to main branch, expected in next release)
+- **API Protocols**: REST over HTTP/HTTPS with JSON payloads; GraphQL API for flexible queries
 - **Extension Model**: OSGi bundles, Groovy scripting, JSON descriptors
 
 ### Core Components
@@ -33,6 +33,7 @@
 5. **Scoring Service**: Calculates engagement/lead scores based on configurable scoring plans
 6. **Privacy Service**: Manages consent, anonymization, data export, and profile deletion
 7. **Plugin System**: OSGi-based plugins with JSON metadata for extending conditions, actions, and types
+8. **GraphQL API**: Flexible query interface for profiles, events, segments, and rules with field-level selection
 
 ### Data Flow
 1. External systems (web, mobile, CRM, IoT) send events to the REST API
@@ -53,6 +54,8 @@
 - `/cxs/definitions` - Type definitions
 - `/cxs/cluster` - Cluster management
 - `/cxs/privacy` - Privacy operations (consent, anonymize, delete)
+- `/cxs/context.json` - Context servlet (main entry point for web tracking, returns personalized content)
+- `/graphql` - GraphQL API endpoint for flexible queries
 
 ### Key Concepts
 - **Profile**: A persistent record of a visitor/customer with properties, segments, and scores
@@ -78,13 +81,12 @@ Apache Unomi is the **reference implementation** of the OASIS Customer Data Plat
 
 ## Connectors & Integrations
 
-### Built-in Connectors
-- **Salesforce CRM**: Bidirectional profile/contact sync
-- **MailChimp**: Mailing list and campaign integration
-- **Custom Groovy**: Write connector logic in Groovy scripts
+### Extending Unomi
+- **Groovy Actions (recommended)**: Hot-deployable scripts for custom logic — react to events, update profiles, call external APIs, integrate with CRMs and third-party services. No compilation or restart required. Source: https://github.com/apache/unomi/tree/master/extensions/groovy-actions
+- **Custom Java Plugins (OSGi)**: For advanced needs (custom conditions, persistence types, deep core integration). Full access to the Unomi API. Guide: https://github.com/apache/unomi/blob/master/manual/src/main/asciidoc/writing-plugins.adoc
 
 ### Extension Points
-- Custom actions (Java, Groovy)
+- Custom actions (Groovy recommended, Java for advanced cases)
 - Custom conditions (Java)
 - Custom property types
 - Custom event types
@@ -112,10 +114,9 @@ AI models and autonomous agents require clean, unified, real-time customer data.
 
 ### Products Using Apache Unomi
 - **Jahia jExperience** (https://www.jahia.com): Original contributor, uses Unomi as CDP engine in their DXP
+- **Ninetailed Personalization Platform** (https://ninetailed.io): Content personalization platform built on Unomi
 - **Dropsolid Experience Cloud** (https://dropsolid.com): Integrates Unomi for smart segmentation with Drupal CMS and Mautic
-- **Unomi UI**: Open source (Apache License v2) user interface for Unomi by Inoyu (coming soon)
 - **Inoyu SaaS**: Fully managed cloud-hosted Unomi service (coming soon)
-- **Inoyu UI**: Commercial-grade management interface for Unomi (coming soon)
 
 ### Commercial Support Providers
 - **Inoyu** (https://www.inoyu.dev): Founded by original Unomi developer, CDP implementations and extensions
@@ -125,10 +126,18 @@ AI models and autonomous agents require clean, unified, real-time customer data.
 
 - **Users Mailing List**: users@unomi.apache.org (subscribe: users-subscribe@unomi.apache.org)
 - **Dev Mailing List**: dev@unomi.apache.org (subscribe: dev-subscribe@unomi.apache.org)
-- **Slack**: #unomi on ASF Slack (free signup: https://s.apache.org/slack-invite)
+- **Slack**: #unomi on ASF Slack (https://the-asf.slack.com) — Apache committers sign in directly; others request guest access via users@unomi.apache.org (see https://infra.apache.org/slack.html)
 - **Monthly Meetings**: Online, alternating times for global coverage
 - **JIRA**: https://issues.apache.org/jira/browse/UNOMI
 - **GitHub**: https://github.com/apache/unomi
+
+## Bill of Materials (BOM)
+
+Starting with Unomi 3.0, the project uses a two-layer BOM for dependency management:
+- **unomi-bom** (https://github.com/apache/unomi/blob/master/bom/pom.xml): Main BOM importing Karaf BOM and managing all third-party dependency versions (Jackson, CXF, Elasticsearch, Groovy, GraphQL, etc.)
+- **unomi-bom-artifacts** (https://github.com/apache/unomi/blob/master/bom/artifacts/pom.xml): Manages all Unomi module artifacts for consistent versioning in custom extensions
+
+Extension developers can import `unomi-bom` in their `pom.xml` to automatically align with tested dependency versions.
 
 ## Quick Start (Docker)
 
@@ -136,13 +145,14 @@ AI models and autonomous agents require clean, unified, real-time customer data.
 version: '3.8'
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.1.3
     environment:
       - discovery.type=single-node
+      - xpack.security.enabled=false
     ports:
       - 9200:9200
   unomi:
-    image: apache/unomi:2.7.0
+    image: apache/unomi:3.0.0
     environment:
       - UNOMI_ELASTICSEARCH_ADDRESSES=elasticsearch:9200
     ports:
@@ -154,10 +164,21 @@ services:
 
 Run with `docker-compose up`, verify at https://localhost:9443/cxs/cluster (credentials: karaf/karaf).
 
+## Frequently Asked Questions
+
+- **What is Apache Unomi?** An open source Customer Data Platform (CDP) managed by the Apache Software Foundation. It collects customer data from any source, builds unified profiles, enables real-time segmentation and personalization, and includes built-in GDPR compliance.
+- **How does Unomi differ from proprietary CDPs?** It is 100% open source (Apache License 2.0), self-hosted, vendor-neutral, and extensible through OSGi plugins. No vendor lock-in, no per-profile pricing.
+- **What storage backends are supported?** Elasticsearch (9.x) in the current release. OpenSearch support has been committed to the main branch and is expected in the next release.
+- **Does Unomi have a GraphQL API?** Yes, Unomi 3.0 includes a GraphQL API alongside the REST API for flexible querying of profiles, events, segments, and rules.
+- **Can I use Unomi with AI systems?** Yes. Feed unified customer profiles, segments, and event streams to AI agents, LLMs, chatbots, recommendation engines, and ML models via REST or GraphQL API. Built-in consent management ensures AI only processes consented data.
+- **What is the OASIS CXS standard?** A Customer Data Platform specification from OASIS. Apache Unomi is its reference implementation.
+- **How do I extend Unomi?** Through OSGi bundles (Java), Groovy scripts, JSON descriptors for custom conditions/actions, and REST API extensions.
+- **What is the Bill of Materials (BOM)?** Starting with Unomi 3.0, the project provides a Maven BOM (`unomi-bom`) to centralize dependency versions for extension developers.
+
 ## History
 
 - **2014**: Project started at Jahia
 - **2015**: Entered Apache Incubator
 - **2019**: Graduated to Apache Top-Level Project
 - **2022**: Version 2.0.0 released (major architecture update)
-- **2025**: Version 3.0.0 released (current stable, major upgrade to Karaf and ElasticSearch client)
+- **2025**: Version 3.0.0 released (current stable, major upgrade to Karaf 4.4, new Elasticsearch Java client 9.x, GraphQL API, Bill of Materials for dependency management). OpenSearch support committed to main branch (expected in next release)

@@ -1,6 +1,7 @@
 ---
 title: Contribute | Dependencies guide
 description: "Learn about policies for keeping Apache Unomi dependencies up to date."
+keywords: "Apache Unomi dependencies, BOM, dependency management, Maven, third-party libraries, license compliance"
 layout: default
 ---
 
@@ -50,15 +51,15 @@ layout: default
 
             <p>This picture can become even more complicated during runtime. Runner specific code might be incompatible with dependencies included by certain modules and if these dependencies leak into runtime, a pipeline might end up in a broken state.</p>
 
-            <p>The overall issue is not common to Unomi and well known in the industry as the Diamond <a target="_blank" href="https://en.wikipedia.org/wiki/Dependency_hell">Dependency problem (or Dependency Hell)</a>.</p>
+            <p>The overall issue is not common to Unomi and well known in the industry as the Diamond <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Dependency_hell">Dependency problem (or Dependency Hell)</a>.</p>
 
             <h3>Bill of Materials (BOM)</h3>
 
             <p>Starting with Unomi 3, the project uses a <strong>Bill of Materials (BOM)</strong> to centralize and align all dependency versions across the codebase. The BOM is structured in two layers:</p>
 
             <ul>
-                <li><strong><a target="_blank" href="https://github.com/apache/unomi/blob/master/bom/pom.xml"><code>unomi-bom</code></a></strong> &mdash; The main BOM. It imports the <a target="_blank" href="https://karaf.apache.org/">Apache Karaf</a> BOM, the Unomi artifacts BOM (below), and declares managed versions for all third-party dependencies used across the project: Jackson, CXF, Elasticsearch, OpenSearch, Groovy, GraphQL, Jetty, Kafka, JUnit, and many more. Every module in the Unomi build inherits from this BOM, ensuring consistent library versions everywhere.</li>
-                <li><strong><a target="_blank" href="https://github.com/apache/unomi/blob/master/bom/artifacts/pom.xml"><code>unomi-bom-artifacts</code></a></strong> &mdash; A nested BOM that manages all of Unomi&rsquo;s own module artifacts (API, services, persistence SPI, plugins, extensions, GraphQL, router, shell commands, etc.) with version-aligned declarations. This is especially useful for developers building custom extensions or integrations, as importing this single BOM pulls in consistent versions of all Unomi modules.</li>
+                <li><strong><a target="_blank" rel="noopener" href="https://github.com/apache/unomi/blob/master/bom/pom.xml"><code>unomi-bom</code></a></strong> &mdash; The main BOM. It imports the <a target="_blank" rel="noopener" href="https://karaf.apache.org/">Apache Karaf</a> BOM, the Unomi artifacts BOM (below), and declares managed versions for all third-party dependencies used across the project: Jackson, CXF, Elasticsearch, OpenSearch, Groovy, GraphQL, Jetty, Kafka, JUnit, and many more. Every module in the Unomi build inherits from this BOM, ensuring consistent library versions everywhere.</li>
+                <li><strong><a target="_blank" rel="noopener" href="https://github.com/apache/unomi/blob/master/bom/artifacts/pom.xml"><code>unomi-bom-artifacts</code></a></strong> &mdash; A nested BOM that manages all of Unomi&rsquo;s own module artifacts (API, services, persistence SPI, plugins, extensions, GraphQL, router, shell commands, etc.) with version-aligned declarations. This is especially useful for developers building custom extensions or integrations, as importing this single BOM pulls in consistent versions of all Unomi modules.</li>
             </ul>
 
             <p><strong>Using the BOM in your own project:</strong> If you are building a custom Unomi extension, plugin, or integration, you can import the Unomi BOM in your own <code>pom.xml</code> to avoid having to manually track dependency versions:</p>
@@ -92,7 +93,7 @@ layout: default
 
             <p>This approach ensures your extension always uses dependency versions that have been tested together as part of the Unomi release, significantly reducing the risk of version conflicts at runtime.</p>
 
-            <p>One common solution for the diamond dependency problem is <a target="_blank" href="https://semver.org/">semantic versioning</a>. The basic idea is that dependencies will be versioned in the form <em>x.y.z</em> where <em>x</em> is the <em>major version</em>, <em>y</em> is the <em>minor version</em>, and <em>z</em> is the <em>patch version</em>. A major version change may be backwards incompatible and is expected to be rare. Minor and patch versions may be released more regularly but are expected to be backwards compatible. But in practice, important fixes (such as security patches) might get released in the form of minor or patch version updates and it will be healthy for the Unomi project to depend on recently released minor versions of dependencies.</p>
+            <p>One common solution for the diamond dependency problem is <a target="_blank" rel="noopener" href="https://semver.org/">semantic versioning</a>. The basic idea is that dependencies will be versioned in the form <em>x.y.z</em> where <em>x</em> is the <em>major version</em>, <em>y</em> is the <em>minor version</em>, and <em>z</em> is the <em>patch version</em>. A major version change may be backwards incompatible and is expected to be rare. Minor and patch versions may be released more regularly but are expected to be backwards compatible. But in practice, important fixes (such as security patches) might get released in the form of minor or patch version updates and it will be healthy for the Unomi project to depend on recently released minor versions of dependencies.</p>
 
             <h3>Identifying outdated dependencies</h3>
 
@@ -144,11 +145,11 @@ layout: default
 
             <p><strong>Dependencies of Java SDK components that may cause issues to other components if leaked should be vendored.</strong></p>
 
-            <p><a target="_blank" href="https://www.ardanlabs.com/blog/2013/10/manage-dependencies-with-godep.html">Vendoring</a> is the process of creating copies of third party dependencies. Combined with repackaging, vendoring will allow Unomi components to depend on third party libraries without causing conflicts to other components. Vendoring should be done in a case-by-case basis since this can increase the total number of dependencies deployed in user&rsquo;s enviroment.</p>
+            <p><a target="_blank" rel="noopener" href="https://www.ardanlabs.com/blog/2013/10/manage-dependencies-with-godep.html">Vendoring</a> is the process of creating copies of third party dependencies. Combined with repackaging, vendoring will allow Unomi components to depend on third party libraries without causing conflicts to other components. Vendoring should be done in a case-by-case basis since this can increase the total number of dependencies deployed in user&rsquo;s enviroment.</p>
 
             <h3>Dependency updates and backwards compatibility</h3>
 
-            <p>Unomi releases <a target="_blank" href="https://unomi.apache.org/downloads/">adhere to</a> semantic versioning. Hence, community members should take care when updating dependencies. Minor version updates to dependencies should be backwards compatible in most cases. Some updates to dependencies though may result in backwards incompatible API or functionality changes to Unomi. PR reviewers and committers should take care to detect any dependency updates that could potentially introduce backwards incompatible changes to Unomi before merging and PRs that update dependencies should include a statement regarding this verification in the form of a PR comment. Dependency updates that result in backwards incompatible changes to non-experimental features of Unomi should be held till next major version release of Unomi.</p>
+            <p>Unomi releases <a target="_blank" rel="noopener" href="https://unomi.apache.org/download.html">adhere to</a> semantic versioning. Hence, community members should take care when updating dependencies. Minor version updates to dependencies should be backwards compatible in most cases. Some updates to dependencies though may result in backwards incompatible API or functionality changes to Unomi. PR reviewers and committers should take care to detect any dependency updates that could potentially introduce backwards incompatible changes to Unomi before merging and PRs that update dependencies should include a statement regarding this verification in the form of a PR comment. Dependency updates that result in backwards incompatible changes to non-experimental features of Unomi should be held till next major version release of Unomi.</p>
 
             <p>Any exceptions to this policy should only occur in extreme cases (for example, due to a security vulnerability of an existing dependency that is only fixed in a subsequent major version) and should be discussed in the Unomi dev list. Note that backwards incompatible changes to experimental features may be introduced in a minor version release.</p>
             </div>

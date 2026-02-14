@@ -9,9 +9,9 @@
 - **License**: Apache License 2.0
 - **Language**: Java
 - **Runtime**: Apache Karaf (OSGi)
-- **Storage**: ElasticSearch
-- **API**: REST/JSON
-- **Current Stable Version**: 2.7.0
+- **Storage**: Elasticsearch (9.x); OpenSearch support coming in next release
+- **API**: REST/JSON & GraphQL
+- **Current Stable Version**: 3.0.0
 - **Website**: https://unomi.apache.org
 - **Source Code**: https://github.com/apache/unomi
 - **Issue Tracker**: https://issues.apache.org/jira/browse/UNOMI
@@ -26,7 +26,9 @@
 - **Rules Engine**: Built-in rule engine that triggers actions when conditions are met on events or profiles
 - **Privacy / GDPR**: Consent management, data anonymization, profile deletion, data portability
 - **Plugin Architecture**: Extend functionality through OSGi plugins, Groovy actions, and JSON descriptors
-- **Connectors**: Salesforce CRM, MailChimp, and custom connectors via plugin API
+- **Connectors**: MailChimp and custom connectors via plugin API (Salesforce connector was deprecated)
+- **GraphQL API**: Flexible query API for profiles, events, segments, and rules
+- **Multi-backend**: OpenSearch support is in development (committed to main branch, coming in next release)
 
 ## Use Cases
 
@@ -53,7 +55,7 @@ The fastest way to try Apache Unomi is with Docker:
 docker-compose up
 ```
 
-Using the provided docker-compose.yml with ElasticSearch 7.10.2 and Apache Unomi.
+Using the provided docker-compose.yml with Elasticsearch and Apache Unomi 3.0.0.
 
 Full getting started guide: https://unomi.apache.org/get-started.html
 Docker quick start: https://unomi.apache.org/get-started.html#quickstart
@@ -69,7 +71,7 @@ Docker quick start: https://unomi.apache.org/get-started.html#quickstart
 
 - **Users mailing list**: users@unomi.apache.org (subscribe: users-subscribe@unomi.apache.org)
 - **Dev mailing list**: dev@unomi.apache.org (subscribe: dev-subscribe@unomi.apache.org)
-- **Slack**: #unomi channel on ASF Slack (https://the-asf.slack.com) — anyone can create a free account at https://s.apache.org/slack-invite
+- **Slack**: #unomi channel on ASF Slack (https://the-asf.slack.com) — Apache committers sign in with @apache.org email; others can request a guest invitation via users@unomi.apache.org (see https://infra.apache.org/slack.html)
 - **Monthly meetings**: The community meets monthly online
 - **JIRA**: https://issues.apache.org/jira/browse/UNOMI
 
@@ -77,10 +79,9 @@ Docker quick start: https://unomi.apache.org/get-started.html#quickstart
 
 ### Products Built on Apache Unomi
 - **Jahia jExperience**: CDP and Digital Experience Platform (initial contributor of Unomi) — https://www.jahia.com
+- **Ninetailed Personalization Platform**: Content personalization platform using Unomi — https://ninetailed.io
 - **Dropsolid Experience Cloud**: DXP with Drupal CMS, Mautic, and Unomi CDP — https://dropsolid.com
-- **Unomi UI**: Open source (Apache License v2) user interface for Apache Unomi by Inoyu (coming soon)
 - **Inoyu SaaS**: Fully managed cloud-hosted Unomi service (coming soon)
-- **Inoyu UI**: Commercial-grade management interface for Unomi (coming soon)
 
 ### Commercial Support
 - **Inoyu**: CDP implementations, commercial extensions and support — https://www.inoyu.dev
@@ -88,4 +89,14 @@ Docker quick start: https://unomi.apache.org/get-started.html#quickstart
 
 ## Architecture
 
-Apache Unomi is a REST server. Data sources (web, mobile, CRM, IoT) send events via the REST API. The processing engine stores data in ElasticSearch, evaluates segments and rules in real-time, and outputs personalization decisions, scores, and data exports. All communication is JSON over HTTP/HTTPS.
+Apache Unomi is a REST server. Data sources (web, mobile, CRM, IoT) send events via the REST API. The processing engine stores data in Elasticsearch, evaluates segments and rules in real-time, and outputs personalization decisions, scores, and data exports. All communication is JSON over HTTP/HTTPS. A GraphQL API is also available for flexible querying of profiles, events, segments, and rules.
+
+## Frequently Asked Questions
+
+- **What is Apache Unomi?** An open source Customer Data Platform (CDP) managed by the Apache Software Foundation that unifies customer data, enables real-time segmentation and personalization, and provides built-in GDPR compliance.
+- **How do I get started?** Use Docker Compose for the fastest setup: https://unomi.apache.org/get-started.html#quickstart
+- **What storage does it use?** Elasticsearch (9.x). OpenSearch support is in development and will be available in the next release.
+- **Does it have a GraphQL API?** Yes, Unomi 3.0 includes a GraphQL API alongside the REST API.
+- **Is it GDPR compliant?** Yes, with built-in consent management, data anonymization, profile deletion, and data portability.
+- **Can I use it with AI?** Yes — feed unified customer profiles and event data to AI agents, LLMs, recommendation engines, and predictive models via the REST or GraphQL API.
+- **What is the OASIS CXS standard?** A Customer Data Platform specification from OASIS. Apache Unomi is its reference implementation.

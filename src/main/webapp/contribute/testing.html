@@ -1,6 +1,7 @@
 ---
 title: Contribute | Testing
 description: "Learn how to write tests for Apache Unomi, which tests are appropriate where, and when tests are run."
+keywords: "Apache Unomi testing, unit tests, integration tests, Pax Exam, JUnit, Maven Surefire, CI/CD, GitHub Actions"
 layout: default
 ---
 
@@ -43,11 +44,11 @@ layout: default
 
             <h3 id="testing-scenarios">Testing Scenarios</h3>
 
-            <p>Ideally, all available tests should be run against a pull request (PR) before it's allowed to be committed to Unomi's <a target="_blank" href="https://github.com/apache/unomi">Github</a> repo. This is not possible, however, due to a combination of time and resource constraints. Running all tests for each PR would take hours or even days using available resources, which would slow down development considerably.</p>
+            <p>Ideally, all available tests should be run against a pull request (PR) before it's allowed to be committed to Unomi's <a target="_blank" rel="noopener" href="https://github.com/apache/unomi">Github</a> repo. This is not possible, however, due to a combination of time and resource constraints. Running all tests for each PR would take hours or even days using available resources, which would slow down development considerably.</p>
 
             <p>Thus tests are split into <em>pre-commit</em> and <em>post-commit</em> suites. Pre-commit is fast, while post-commit is comprehensive. As their names imply, pre-commit tests are run on each PR before it is committed, while post-commits run periodically against the master branch (i.e. on already committed PRs).</p>
 
-            <p>Unomi uses <a target="_blank" href="https://github.com/apache/unomi/actions/workflows/unomi-ci-build-tests.yml">GitHub Actions</a> to run pre-commit and post-commit tests.</p>
+            <p>Unomi uses <a target="_blank" rel="noopener" href="https://github.com/apache/unomi/actions/workflows/unomi-ci-build-tests.yml">GitHub Actions</a> to run pre-commit and post-commit tests.</p>
 
             <h4 id="pre-commit">Pre-commit</h4>
 
@@ -61,11 +62,11 @@ layout: default
 
             <h4 id="post-commit">Post-commit</h4>
 
-            <p>Running in post-commit removes the stringent time constraint, which gives us the ability to do more comprehensive testing. In post-commit the full integration test suite is executed against both supported search engines &mdash; <strong>Elasticsearch</strong> and <strong>OpenSearch</strong> &mdash; via the <code>-Pintegration-tests</code> Maven profile. The suite is defined in <a target="_blank" href="https://github.com/apache/unomi/blob/master/itests/src/test/java/org/apache/unomi/itests/AllITs.java"><code>AllITs.java</code></a> and currently contains 30+ test classes covering profiles, segments, events, conditions, rules, privacy, import/export, GraphQL API, JSON Schema validation, health checks, and data migration scenarios.</p>
+            <p>Running in post-commit removes the stringent time constraint, which gives us the ability to do more comprehensive testing. In post-commit the full integration test suite is executed against both supported search engines &mdash; <strong>Elasticsearch</strong> and <strong>OpenSearch</strong> &mdash; via the <code>-Pintegration-tests</code> Maven profile. The suite is defined in <a target="_blank" rel="noopener" href="https://github.com/apache/unomi/blob/master/itests/src/test/java/org/apache/unomi/itests/AllITs.java"><code>AllITs.java</code></a> and currently contains 30+ test classes covering profiles, segments, events, conditions, rules, privacy, import/export, GraphQL API, JSON Schema validation, health checks, and data migration scenarios.</p>
 
-            <p>Adding new integration tests is generally as easy as adding a <code>*IT.java</code> file to the <code>itests/</code> module and registering it in the <code>AllITs.java</code> suite class. New tests should extend <a target="_blank" href="https://github.com/apache/unomi/blob/master/itests/src/test/java/org/apache/unomi/itests/BaseIT.java"><code>BaseIT</code></a>, which provides access to all Unomi OSGi services, an HTTP client for REST API calls, and helper methods for waiting and retrying asynchronous operations.</p>
+            <p>Adding new integration tests is generally as easy as adding a <code>*IT.java</code> file to the <code>itests/</code> module and registering it in the <code>AllITs.java</code> suite class. New tests should extend <a target="_blank" rel="noopener" href="https://github.com/apache/unomi/blob/master/itests/src/test/java/org/apache/unomi/itests/BaseIT.java"><code>BaseIT</code></a>, which provides access to all Unomi OSGi services, an HTTP client for REST API calls, and helper methods for waiting and retrying asynchronous operations.</p>
 
-            <p>Post-commit test results can be found in <a target="_blank" href="https://github.com/apache/unomi/actions/workflows/unomi-ci-build-tests.yml">GitHub Actions</a>.</p>
+            <p>Post-commit test results can be found in <a target="_blank" rel="noopener" href="https://github.com/apache/unomi/actions/workflows/unomi-ci-build-tests.yml">GitHub Actions</a>.</p>
 
             <h3 id="testing-types">Testing Types</h3>
 
@@ -100,18 +101,18 @@ layout: default
             <p>Unomi&rsquo;s integration tests use the following technology stack:</p>
 
             <ul>
-                <li><strong><a target="_blank" href="https://ops4j1.jira.com/wiki/spaces/PAXEXAM4/overview">Pax Exam</a></strong> &mdash; An OSGi testing framework that provisions and manages the Apache Karaf container used during tests. It handles downloading the Unomi distribution, configuring features, and injecting OSGi services into test classes.</li>
-                <li><strong><a target="_blank" href="https://karaf.apache.org/">Apache Karaf</a> Test Support</strong> &mdash; Provides the base class (<code>KarafTestSupport</code>) for container-based integration tests, enabling Karaf shell command execution and OSGi service lookups.</li>
-                <li><strong><a target="_blank" href="https://maven.apache.org/surefire/maven-failsafe-plugin/">Maven Failsafe Plugin</a></strong> &mdash; Executes the integration tests during the <code>integration-test</code> phase and verifies results in the <code>verify</code> phase. Tests follow the <code>*IT.java</code> naming convention.</li>
+                <li><strong><a target="_blank" rel="noopener" href="https://ops4j1.jira.com/wiki/spaces/PAXEXAM4/overview">Pax Exam</a></strong> &mdash; An OSGi testing framework that provisions and manages the Apache Karaf container used during tests. It handles downloading the Unomi distribution, configuring features, and injecting OSGi services into test classes.</li>
+                <li><strong><a target="_blank" rel="noopener" href="https://karaf.apache.org/">Apache Karaf</a> Test Support</strong> &mdash; Provides the base class (<code>KarafTestSupport</code>) for container-based integration tests, enabling Karaf shell command execution and OSGi service lookups.</li>
+                <li><strong><a target="_blank" rel="noopener" href="https://maven.apache.org/surefire/maven-failsafe-plugin/">Maven Failsafe Plugin</a></strong> &mdash; Executes the integration tests during the <code>integration-test</code> phase and verifies results in the <code>verify</code> phase. Tests follow the <code>*IT.java</code> naming convention.</li>
                 <li><strong>Embedded Elasticsearch / Docker OpenSearch</strong> &mdash; The Elasticsearch profile uses the <code>elasticsearch-maven-plugin</code> to start an embedded Elasticsearch instance, while the OpenSearch profile uses the <code>docker-maven-plugin</code> to spin up an OpenSearch container.</li>
-                <li><strong><a target="_blank" href="https://www.jacoco.org/">JaCoCo</a></strong> &mdash; Optionally collects code coverage data during integration test runs.</li>
+                <li><strong><a target="_blank" rel="noopener" href="https://www.jacoco.org/">JaCoCo</a></strong> &mdash; Optionally collects code coverage data during integration test runs.</li>
             </ul>
 
-            <p>All test classes extend <a target="_blank" href="https://github.com/apache/unomi/blob/master/itests/src/test/java/org/apache/unomi/itests/BaseIT.java"><code>BaseIT</code></a>, which provides access to injected Unomi services (ProfileService, RulesService, SegmentService, etc.), a pre-configured HTTP client for REST API testing, and utility methods for polling asynchronous operations.</p>
+            <p>All test classes extend <a target="_blank" rel="noopener" href="https://github.com/apache/unomi/blob/master/itests/src/test/java/org/apache/unomi/itests/BaseIT.java"><code>BaseIT</code></a>, which provides access to injected Unomi services (ProfileService, RulesService, SegmentService, etc.), a pre-configured HTTP client for REST API testing, and utility methods for polling asynchronous operations.</p>
 
             <h4 id="ci">Continuous Integration</h4>
 
-            <p>Unomi uses <strong>GitHub Actions</strong> for continuous integration. The <a target="_blank" href="https://github.com/apache/unomi/blob/master/.github/workflows/unomi-ci-build-tests.yml"><code>unomi-ci-build-tests.yml</code></a> workflow is triggered on every push to <code>master</code> and on pull requests. It runs in two stages:</p>
+            <p>Unomi uses <strong>GitHub Actions</strong> for continuous integration. The <a target="_blank" rel="noopener" href="https://github.com/apache/unomi/blob/master/.github/workflows/unomi-ci-build-tests.yml"><code>unomi-ci-build-tests.yml</code></a> workflow is triggered on every push to <code>master</code> and on pull requests. It runs in two stages:</p>
 
             <ol>
                 <li><strong>Unit tests</strong> &mdash; A full <code>mvn clean install</code> build with a 15-minute timeout. This must pass before integration tests begin.</li>

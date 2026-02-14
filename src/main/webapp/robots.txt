@@ -1,8 +1,6 @@
 # Apache Unomi Website - https://unomi.apache.org
 User-agent: *
 Allow: /
-Disallow: /assets/js/
-Disallow: /assets/css/
 
 # Sitemap
 Sitemap: https://unomi.apache.org/sitemap.xml
