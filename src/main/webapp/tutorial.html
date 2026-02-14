@@ -1,6 +1,7 @@
 ---
 title: Tutorials &mdash; Getting Started with Apache Unomi 3
 description: "Step-by-step tutorials for Apache Unomi 3.0: Docker quick start, manual installation, REST API basics, web tracking integration, and profile personalization."
+keywords: "Apache Unomi tutorial, step by step, beginner guide, CDP tutorial, profiles, events, segments, rules"
 layout: default
 structured_data: >
     <script type="application/ld+json">
@@ -9,24 +10,29 @@ structured_data: >
         "@type": "HowTo",
         "name": "Getting Started with Apache Unomi 3",
         "description": "Learn how to set up and use Apache Unomi 3.0 as a Customer Data Platform with Docker, REST APIs, and web tracking.",
+        "totalTime": "PT30M",
         "step": [
             {
                 "@type": "HowToStep",
+                "position": 1,
                 "name": "Start Unomi with Docker",
                 "text": "Create a docker-compose.yml and run docker-compose up to start Unomi with Elasticsearch."
             },
             {
                 "@type": "HowToStep",
+                "position": 2,
                 "name": "Verify the cluster",
                 "text": "Access https://localhost:9443/cxs/cluster with credentials karaf/karaf to verify the installation."
             },
             {
                 "@type": "HowToStep",
+                "position": 3,
                 "name": "Create a scope and send events",
                 "text": "Use the REST API to create scopes, send events, and query profiles."
             },
             {
                 "@type": "HowToStep",
+                "position": 4,
                 "name": "Integrate the web tracker",
                 "text": "Add the Unomi web tracker to your web pages for automatic event collection and personalization."
             }
@@ -45,7 +51,7 @@ structured_data: >
 </section>
 
 <!-- Table of Contents -->
-<section class="section" style="padding-bottom:0">
+<section class="section section-flush-bottom">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
@@ -89,9 +95,10 @@ structured_data: >
 <pre><code>version: '3.8'
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.1.3
     environment:
       - discovery.type=single-node
+      - xpack.security.enabled=false
     ports:
       - 9200:9200
 
@@ -125,7 +132,7 @@ services:
 <pre><code>curl http://localhost:9200/_cat/health?format=json</code></pre>
 
                 <div class="alert alert-info small" role="alert">
-                    <i class="bi bi-info-circle me-1"></i> This Docker setup is for <strong>development and learning only</strong>. For production deployments, see the <a href="/manual/latest/index.html#_securing_a_production_environment">production security guide</a>.
+                    <i class="bi bi-info-circle me-1"></i> This Docker setup is for <strong>development and learning only</strong>. For production deployments, see the <a href="https://unomi.apache.org/manual/latest/index.html#_securing_a_production_environment">production security guide</a>.
                 </div>
             </div>
         </div>
@@ -148,7 +155,7 @@ services:
                 <h3 class="h6 fw-semibold mt-4 mb-3">Prerequisites</h3>
                 <ul class="small">
                     <li><strong>Java 17</strong> or later &mdash; set <code>JAVA_HOME</code> accordingly. OpenJDK distributions work fine.</li>
-                    <li><strong>Elasticsearch 7.17.x</strong> &mdash; <a href="https://www.elastic.co/downloads/past-releases/elasticsearch-7-17-5" target="_blank" rel="noopener">Download 7.17.5</a></li>
+                    <li><strong>Elasticsearch 9.x</strong> &mdash; <a href="https://www.elastic.co/downloads/elasticsearch" target="_blank" rel="noopener">Download Elasticsearch</a></li>
                 </ul>
 
                 <h3 class="h6 fw-semibold mt-4 mb-3">1. Configure &amp; start Elasticsearch</h3>
@@ -229,7 +236,7 @@ Initializing cluster service endpoint...</code></pre>
 
                 <!-- Send a custom event -->
                 <h3 class="h6 fw-semibold mt-4 mb-3">Send a custom event</h3>
-                <p>Before sending a custom event, register a <strong>JSON Schema</strong> to validate it (required since Unomi 2.x):</p>
+                <p>Before sending a custom event, register a <strong>JSON Schema</strong> to validate it (required since Unomi 2.0):</p>
 <pre><code>curl -X POST http://localhost:8181/cxs/jsonSchema \
   -u karaf:karaf \
   -H "Content-Type: application/json" \
@@ -557,7 +564,7 @@ unomiWebTracker.registerPersonalizationObject({
                             <div class="feature-icon"><i class="bi bi-book"></i></div>
                             <h3 class="h6 fw-semibold mb-2">Full Documentation</h3>
                             <p class="small text-muted mb-2">Dive deeper into segmentation, scoring, conditions, and actions in the comprehensive manual.</p>
-                            <a href="/manual/latest/index.html" class="small fw-semibold">Read the manual <i class="bi bi-arrow-right"></i></a>
+                            <a href="https://unomi.apache.org/manual/latest/index.html" class="small fw-semibold">Read the manual <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -565,7 +572,7 @@ unomiWebTracker.registerPersonalizationObject({
                             <div class="feature-icon"><i class="bi bi-braces"></i></div>
                             <h3 class="h6 fw-semibold mb-2">REST API Reference</h3>
                             <p class="small text-muted mb-2">Explore every endpoint for profiles, events, segments, rules, and more.</p>
-                            <a href="/rest-api-doc/index.html" class="small fw-semibold">Browse the API <i class="bi bi-arrow-right"></i></a>
+                            <a href="https://unomi.apache.org/rest-api-doc/index.html" class="small fw-semibold">Browse the API <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="col-md-6">

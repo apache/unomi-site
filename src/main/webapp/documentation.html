@@ -1,7 +1,28 @@
 ---
 title: Documentation
 description: "Apache Unomi documentation hub. Find the latest manual, REST API reference, Javadoc, tutorials, use cases, migration guides, and security advisories."
+keywords: "Apache Unomi documentation, user manual, REST API, Javadoc, developer guide, configuration"
 layout: default
+structured_data: >
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Apache Unomi Documentation",
+        "description": "Comprehensive documentation for Apache Unomi: user manual, REST API reference, Javadoc, tutorials, migration guides, and security advisories.",
+        "url": "https://unomi.apache.org/documentation.html",
+        "mainEntity": {
+            "@type": "ItemList",
+            "name": "Apache Unomi Documentation Resources",
+            "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Latest Manual", "url": "https://unomi.apache.org/manual/latest/index.html" },
+                { "@type": "ListItem", "position": 2, "name": "REST API Reference", "url": "https://unomi.apache.org/rest-api-doc/index.html" },
+                { "@type": "ListItem", "position": 3, "name": "Java API (Javadoc)", "url": "https://unomi.apache.org/unomi-api/apidocs/index.html" },
+                { "@type": "ListItem", "position": 4, "name": "Tutorials", "url": "https://unomi.apache.org/tutorial.html" }
+            ]
+        }
+    }
+    </script>
 ---
 
 <!-- Page Header -->
@@ -16,6 +37,7 @@ layout: default
 <!-- Quick Links -->
 <section class="section">
     <div class="container">
+        <h2 class="visually-hidden">Quick Links</h2>
         <div class="row g-4">
             <div class="col-md-6 col-lg-3">
                 <a href="/get-started.html" class="feature-card d-block text-decoration-none h-100">
@@ -25,21 +47,21 @@ layout: default
                 </a>
             </div>
             <div class="col-md-6 col-lg-3">
-                <a href="/manual/3_0_x/index.html" class="feature-card d-block text-decoration-none h-100">
+                <a href="https://unomi.apache.org/manual/3_0_x/index.html" class="feature-card d-block text-decoration-none h-100">
                     <div class="feature-icon"><i class="bi bi-book"></i></div>
                     <h3 class="h6 fw-semibold text-dark">Stable Manual <span class="text-muted fw-normal">3.0.x</span></h3>
                     <p class="small text-muted mb-0">The comprehensive guide for the current stable release.</p>
                 </a>
             </div>
             <div class="col-md-6 col-lg-3">
-                <a href="/rest-api-doc/index.html" class="feature-card d-block text-decoration-none h-100">
+                <a href="https://unomi.apache.org/rest-api-doc/index.html" class="feature-card d-block text-decoration-none h-100">
                     <div class="feature-icon"><i class="bi bi-braces"></i></div>
                     <h3 class="h6 fw-semibold text-dark">REST API</h3>
                     <p class="small text-muted mb-0">Complete REST API reference for profiles, events, segments, and more.</p>
                 </a>
             </div>
             <div class="col-md-6 col-lg-3">
-                <a href="/unomi-api/apidocs/index.html" class="feature-card d-block text-decoration-none h-100" target="_blank" rel="noopener">
+                <a href="https://unomi.apache.org/unomi-api/apidocs/index.html" class="feature-card d-block text-decoration-none h-100" target="_blank" rel="noopener">
                     <div class="feature-icon"><i class="bi bi-code-square"></i></div>
                     <h3 class="h6 fw-semibold text-dark">Javadoc</h3>
                     <p class="small text-muted mb-0">Java API documentation for plugin and extension developers.</p>
@@ -65,8 +87,8 @@ layout: default
                 <div class="feature-card h-100">
                     <div class="feature-icon icon-success"><i class="bi bi-box-seam"></i></div>
                     <h3 class="h6 fw-semibold">Installation &amp; Configuration</h3>
-                    <p class="small text-muted mb-2">Docker setup, manual installation, ElasticSearch configuration, and production deployment.</p>
-                    <a href="/manual/latest/index.html#_quick_start" class="small fw-semibold">Read more <i class="bi bi-arrow-right"></i></a>
+                    <p class="small text-muted mb-2">Docker setup, manual installation, Elasticsearch configuration, and production deployment.</p>
+                    <a href="https://unomi.apache.org/manual/latest/index.html#_quick_start" class="small fw-semibold">Installation guide <i class="bi bi-arrow-right"></i></a>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
@@ -74,7 +96,7 @@ layout: default
                     <div class="feature-icon icon-info"><i class="bi bi-braces"></i></div>
                     <h3 class="h6 fw-semibold">REST API &amp; Integration</h3>
                     <p class="small text-muted mb-2">Send events, query profiles, manage segments, and integrate with external systems.</p>
-                    <a href="/rest-api-doc/index.html" class="small fw-semibold">REST API docs <i class="bi bi-arrow-right"></i></a>
+                    <a href="https://unomi.apache.org/rest-api-doc/index.html" class="small fw-semibold">REST API docs <i class="bi bi-arrow-right"></i></a>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
@@ -82,7 +104,7 @@ layout: default
                     <div class="feature-icon icon-amber"><i class="bi bi-shield-lock"></i></div>
                     <h3 class="h6 fw-semibold">Privacy &amp; GDPR</h3>
                     <p class="small text-muted mb-2">Consent management, data portability, anonymization, and profile deletion.</p>
-                    <a href="/manual/latest/index.html" class="small fw-semibold">Read more <i class="bi bi-arrow-right"></i></a>
+                    <a href="https://unomi.apache.org/manual/latest/index.html" class="small fw-semibold">Privacy manual <i class="bi bi-arrow-right"></i></a>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
@@ -90,7 +112,7 @@ layout: default
                     <div class="feature-icon icon-rose"><i class="bi bi-puzzle"></i></div>
                     <h3 class="h6 fw-semibold">Extending Unomi</h3>
                     <p class="small text-muted mb-2">Build plugins, custom actions, rules, conditions, and Groovy connectors.</p>
-                    <a href="/manual/latest/index.html" class="small fw-semibold">Plugin guide <i class="bi bi-arrow-right"></i></a>
+                    <a href="https://unomi.apache.org/manual/latest/index.html" class="small fw-semibold">Plugin guide <i class="bi bi-arrow-right"></i></a>
                 </div>
             </div>
             <div class="col-md-6 col-lg-4">
@@ -130,12 +152,12 @@ layout: default
             <div class="col-md-5">
                 <div class="version-card featured">
                     <div class="d-flex align-items-center mb-2">
-                        <span class="badge badge-success me-2"><i class="bi bi-circle-fill me-1" style="font-size:.45em"></i> Stable</span>
+                        <span class="badge badge-success me-2"><i class="bi bi-circle-fill me-1 badge-dot-sm"></i> Stable</span>
                         <span class="fw-semibold">Recommended</span>
                     </div>
                     <h3 class="h5 fw-bold mb-1">Unomi 3.0.x</h3>
                     <div class="d-flex flex-wrap gap-2 mt-3">
-                        <a href="/manual/3_0_x/index.html" class="btn btn-primary btn-sm">Read Online</a>
+                        <a href="https://unomi.apache.org/manual/3_0_x/index.html" class="btn btn-primary btn-sm">Read Online</a>
                         <a href="https://dist.apache.org/repos/dist/release/unomi/3.0.0/unomi-manual-3_0_x.zip" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">HTML (zip)</a>
                         <a href="https://dist.apache.org/repos/dist/release/unomi/3.0.0/unomi-manual-3_0_x.pdf" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">PDF</a>
                     </div>
@@ -144,11 +166,11 @@ layout: default
             <div class="col-md-5">
                 <div class="version-card">
                     <div class="d-flex align-items-center mb-2">
-                        <span class="badge badge-warning me-2"><i class="bi bi-circle-fill me-1" style="font-size:.45em"></i> Development</span>
+                        <span class="badge badge-warning me-2"><i class="bi bi-circle-fill me-1 badge-dot-sm"></i> Development</span>
                     </div>
                     <h3 class="h5 fw-bold mb-1">Unomi {{ site.data.unomi.latest.development.version }}</h3>
                     <p class="small text-muted mb-2">In development &mdash; may contain unreleased features.</p>
-                    <a href="/manual/latest/index.html" class="btn btn-outline-primary btn-sm">Read Online</a>
+                    <a href="https://unomi.apache.org/manual/latest/index.html" class="btn btn-outline-primary btn-sm">Read Online</a>
                 </div>
             </div>
         </div>
@@ -157,7 +179,7 @@ layout: default
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <details class="mt-3">
-                    <summary class="fw-semibold text-primary" style="cursor:pointer">
+                    <summary class="fw-semibold text-primary cursor-pointer">
                         <i class="bi bi-archive me-1"></i> Archived Versions (2.7.x &ndash; 1.1.x)
                     </summary>
                     <div class="table-responsive mt-3">
@@ -173,7 +195,7 @@ layout: default
                             <tbody>
                                 <tr>
                                     <td class="fw-semibold">2.7.x</td>
-                                    <td><a href="/manual/2_7_x/index.html">Online</a></td>
+                                    <td><a href="https://unomi.apache.org/manual/2_7_x/index.html">Online</a></td>
                                     <td><a href="https://dist.apache.org/repos/dist/release/unomi/2.7.0/unomi-manual-2_7_x.zip" target="_blank" rel="noopener">Download</a></td>
                                     <td><a href="https://dist.apache.org/repos/dist/release/unomi/2.7.0/unomi-manual-2_7_x.pdf" target="_blank" rel="noopener">Download</a></td>
                                 </tr>
@@ -310,7 +332,7 @@ layout: default
                     </table>
                 </div>
                 <p class="small text-muted text-center mt-2">
-                    <a href="/rest-api-doc/index.html">View full REST API documentation <i class="bi bi-arrow-right"></i></a>
+                    <a href="https://unomi.apache.org/rest-api-doc/index.html">View full REST API documentation <i class="bi bi-arrow-right"></i></a>
                 </p>
             </div>
         </div>
@@ -319,31 +341,31 @@ layout: default
 
 <hr class="section-divider">
 
-<!-- ElasticSearch Migration & Security -->
+<!-- Elasticsearch Migration & Security -->
 <section class="section section-alt">
     <div class="container">
         <div class="row g-5">
             <div class="col-lg-6">
-                <h2 class="h4 mb-3"><i class="bi bi-database-gear me-2 text-primary"></i>ElasticSearch Migration</h2>
-                <p class="small text-muted">When migrating between ElasticSearch versions used by Unomi:</p>
+                <h2 class="h4 mb-3"><i class="bi bi-database-gear me-2 text-primary"></i>Elasticsearch Migration</h2>
+                <p class="small text-muted">When migrating between Elasticsearch versions used by Unomi:</p>
                 <ul class="small text-muted">
                     <li class="mb-2"><strong>Standalone:</strong> Copy the data directory and custom <code>elasticsearch.yml</code> settings to the new version.</li>
-                    <li class="mb-2"><strong>Cluster:</strong> Use ElasticSearch <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html" target="_blank" rel="noopener">Snapshot and Restore</a> functionality.</li>
+                    <li class="mb-2"><strong>Cluster:</strong> Use Elasticsearch <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html" target="_blank" rel="noopener">Snapshot and Restore</a> functionality.</li>
                 </ul>
             </div>
             <div class="col-lg-6">
                 <h2 class="h4 mb-3"><i class="bi bi-shield-check me-2 text-primary"></i>Security Advisories</h2>
                 <ul class="list-unstyled small">
                     <li class="d-flex align-items-center mb-2">
-                        <span class="badge bg-danger me-2" style="font-size:.65rem">CVE</span>
+                        <span class="badge bg-danger badge-cve me-2">CVE</span>
                         <a href="/security/cve-2021-31164.txt">CVE-2021-31164</a><span class="text-muted ms-2">&mdash; CRLF Log injection</span>
                     </li>
                     <li class="d-flex align-items-center mb-2">
-                        <span class="badge bg-danger me-2" style="font-size:.65rem">CVE</span>
+                        <span class="badge bg-danger badge-cve me-2">CVE</span>
                         <a href="/security/cve-2020-13942.txt">CVE-2020-13942</a><span class="text-muted ms-2">&mdash; Remote Code Execution</span>
                     </li>
                     <li class="d-flex align-items-center mb-2">
-                        <span class="badge bg-danger me-2" style="font-size:.65rem">CVE</span>
+                        <span class="badge bg-danger badge-cve me-2">CVE</span>
                         <a href="/security/cve-2020-11975.txt">CVE-2020-11975</a><span class="text-muted ms-2">&mdash; Remote Code Execution</span>
                     </li>
                 </ul>
