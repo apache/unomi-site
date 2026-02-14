@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- SEO Meta Tags -->
-    <title>{{ page.title }} | Apache Unomi&trade; &mdash; Open Source Customer Data Platform</title>
+    <title>{{ page.title }} | Apache Unomi&trade;</title>
     <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}Apache Unomi is an open source Customer Data Platform (CDP) for managing customer profiles, personalizing experiences, and respecting visitor privacy (GDPR).{% endif %}">
-    <meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}Apache Unomi, Customer Data Platform, CDP, open source, personalization, GDPR, privacy, customer profiles, segmentation, real-time, REST API, Java, ElasticSearch, OASIS{% endif %}">
+    <meta name="keywords" content="{% if page.keywords %}{{ page.keywords }}{% else %}Apache Unomi, Customer Data Platform, CDP, open source CDP, personalization, GDPR, privacy, customer profiles, segmentation, real-time, REST API, GraphQL, Java, Elasticsearch, OpenSearch, OASIS CXS, AI customer data{% endif %}">
     <meta name="author" content="Apache Unomi Project">
     <meta name="robots" content="{% if page.noindex %}noindex, nofollow{% else %}index, follow{% endif %}">
     <link rel="canonical" href="{{ site.url }}{{ page.url | replace: 'index.html', '' }}">
@@ -17,7 +17,7 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:title" content="{{ page.title }} | Apache Unomi">
     <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}Open source Customer Data Platform for managing profiles and personalizing experiences with built-in privacy.{% endif %}">
-    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url | replace: 'index.html', '' }}">
     <meta property="og:site_name" content="Apache Unomi">
     <meta property="og:image" content="{{ site.url }}/assets/images/apache-unomi-380x85.png">
     <meta property="og:image:width" content="380">
@@ -30,15 +30,16 @@
     <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}Open source Customer Data Platform for managing profiles and personalizing experiences with built-in privacy.{% endif %}">
     <meta name="twitter:image" content="{{ site.url }}/assets/images/apache-unomi-380x85.png">
 
-    <!-- JSON-LD: WebSite with SearchAction (enables sitelinks search box in Google) -->
+    <!-- JSON-LD: WebSite -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Apache Unomi",
-        "alternateName": ["Unomi", "Apache Unomi CDP"],
+        "alternateName": ["Unomi", "Apache Unomi CDP", "You know me"],
         "url": "https://unomi.apache.org",
-        "description": "Apache Unomi is an open source Customer Data Platform (CDP) for managing customer profiles, real-time personalization, and privacy-first data management."
+        "description": "Apache Unomi is an open source Customer Data Platform (CDP) for managing customer profiles, real-time personalization, AI-ready customer data, and privacy-first data management with built-in GDPR compliance.",
+        "inLanguage": "en"
     }
     </script>
 
@@ -108,9 +109,11 @@
             "Privacy management and GDPR compliance",
             "Consent management and data anonymization",
             "Full REST/JSON API",
+            "GraphQL API for flexible querying",
             "Plugin architecture (OSGi, Groovy actions)",
-            "ElasticSearch storage backend",
-            "Connectors (Salesforce, MailChimp, custom)",
+            "Elasticsearch storage backend (OpenSearch support coming soon)",
+            "Connectors (MailChimp, custom via plugin API)",
+            "Bill of Materials (BOM) for dependency management",
             "OASIS CDP standard reference implementation"
         ]
     }
@@ -149,7 +152,7 @@
 
     <!-- Preload critical resources -->
     <link rel="preload" href="/assets/css/unomi.css" as="style">
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="dns-prefetch" href="https://analytics.apache.org">
 
     <!-- Matomo Analytics (privacy-respecting) -->
@@ -177,8 +180,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
           crossorigin="anonymous">
 
-    <!-- Bootstrap Icons 1.11 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons 1.11 — loaded non-blocking (not needed for first paint) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+          rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"></noscript>
 
     <!-- Custom Styles -->
     <link href="/assets/css/unomi.css" rel="stylesheet">
@@ -192,7 +197,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom" aria-label="Main navigation">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/index.html" aria-label="Apache Unomi home">
-                <img src="/assets/images/apache-unomi-380x85.png" alt="Apache Unomi" height="36" style="width:auto">
+                <img src="/assets/images/apache-unomi-380x85.png" alt="Apache Unomi" height="36" class="navbar-brand-img">
             </a>
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
                     aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
@@ -211,7 +216,7 @@
                         <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-3 p-2">
                             <li><a class="dropdown-item rounded-2 py-2" href="/documentation.html">
                                 <i class="bi bi-book me-2 text-primary"></i>Documentation Home</a></li>
-                            <li><a class="dropdown-item rounded-2 py-2" href="/manual/latest/index.html">
+                            <li><a class="dropdown-item rounded-2 py-2" href="https://unomi.apache.org/manual/latest/index.html">
                                 <i class="bi bi-journal-text me-2 text-primary"></i>Latest Manual</a></li>
                             <li><hr class="dropdown-divider my-1"></li>
                             <li><a class="dropdown-item rounded-2 py-2" href="/use-cases.html">
@@ -221,9 +226,9 @@
                             <li><a class="dropdown-item rounded-2 py-2" href="/tutorial.html">
                                 <i class="bi bi-mortarboard me-2 text-primary"></i>Tutorials</a></li>
                             <li><hr class="dropdown-divider my-1"></li>
-                            <li><a class="dropdown-item rounded-2 py-2" href="/rest-api-doc/index.html">
+                            <li><a class="dropdown-item rounded-2 py-2" href="https://unomi.apache.org/rest-api-doc/index.html">
                                 <i class="bi bi-braces me-2 text-primary"></i>REST API</a></li>
-                            <li><a class="dropdown-item rounded-2 py-2" href="/unomi-api/apidocs/index.html">
+                            <li><a class="dropdown-item rounded-2 py-2" href="https://unomi.apache.org/unomi-api/apidocs/index.html">
                                 <i class="bi bi-code-square me-2 text-primary"></i>Javadoc</a></li>
                         </ul>
                     </li>
@@ -235,9 +240,9 @@
                         <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg rounded-3 p-2">
                             <li><a class="dropdown-item rounded-2 py-2" href="/community/index.html">
                                 <i class="bi bi-chat-dots me-2 text-primary"></i>Get Help &amp; Contact</a></li>
-                            <li><a class="dropdown-item rounded-2 py-2" href="mailto:users-subscribe@unomi.apache.org">
-                                <i class="bi bi-envelope me-2 text-primary"></i>Subscribe to Mailing List</a></li>
-                            <li><a class="dropdown-item rounded-2 py-2" href="https://the-asf.slack.com/messages/CBP2Z98Q7/" target="_blank" rel="noopener">
+                            <li><a class="dropdown-item rounded-2 py-2" href="/community/index.html#mailing-lists">
+                                <i class="bi bi-envelope me-2 text-primary"></i>Mailing Lists</a></li>
+                            <li><a class="dropdown-item rounded-2 py-2" href="/community/index.html#slack-access">
                                 <i class="bi bi-slack me-2 text-primary"></i>Slack Channel</a></li>
                             <li><hr class="dropdown-divider my-1"></li>
                             <li><a class="dropdown-item rounded-2 py-2" href="/contribute/index.html">
@@ -267,7 +272,7 @@
                     <li class="nav-item ms-lg-2 d-none d-lg-block">
                         <a class="nav-link px-1 opacity-50" target="_blank" rel="noopener" href="https://www.apache.org"
                            title="Apache Software Foundation" aria-label="Apache Software Foundation">
-                            <img src="/assets/images/feather.svg" alt="" style="height:1.2em" aria-hidden="true">
+                            <img src="/assets/images/feather.svg" alt="" class="feather-icon" aria-hidden="true">
                         </a>
                     </li>
                 </ul>
@@ -284,7 +289,7 @@
     <div class="container">
         <div class="row g-4 pb-4">
             <div class="col-6 col-md-3">
-                <h6 class="text-uppercase fw-semibold mb-3 text-white-50 small">Get Started</h6>
+                <div class="text-uppercase fw-semibold mb-3 text-white-50 small" role="heading" aria-level="2">Get Started</div>
                 <ul class="list-unstyled small">
                     <li class="mb-2"><a href="/get-started.html" class="footer-link">Getting Started</a></li>
                     <li class="mb-2"><a href="/get-started.html#quickstart" class="footer-link">Quick Start</a></li>
@@ -293,16 +298,16 @@
                 </ul>
             </div>
             <div class="col-6 col-md-3">
-                <h6 class="text-uppercase fw-semibold mb-3 text-white-50 small">Documentation</h6>
+                <div class="text-uppercase fw-semibold mb-3 text-white-50 small" role="heading" aria-level="2">Documentation</div>
                 <ul class="list-unstyled small">
                     <li class="mb-2"><a href="/documentation.html" class="footer-link">Documentation Home</a></li>
                     <li class="mb-2"><a href="/use-cases.html" class="footer-link">Use Cases</a></li>
-                    <li class="mb-2"><a href="/rest-api-doc/index.html" class="footer-link">REST API</a></li>
-                    <li class="mb-2"><a href="/unomi-api/apidocs/index.html" class="footer-link">Javadoc</a></li>
+                    <li class="mb-2"><a href="https://unomi.apache.org/rest-api-doc/index.html" class="footer-link">REST API</a></li>
+                    <li class="mb-2"><a href="https://unomi.apache.org/unomi-api/apidocs/index.html" class="footer-link">Javadoc</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md-3">
-                <h6 class="text-uppercase fw-semibold mb-3 text-white-50 small">Community</h6>
+                <div class="text-uppercase fw-semibold mb-3 text-white-50 small" role="heading" aria-level="2">Community</div>
                 <ul class="list-unstyled small">
                     <li class="mb-2"><a href="/community/index.html" class="footer-link">Get Help &amp; Contact</a></li>
                     <li class="mb-2"><a href="mailto:users-subscribe@unomi.apache.org" class="footer-link">Subscribe to Mailing List</a></li>
@@ -311,7 +316,7 @@
                 </ul>
             </div>
             <div class="col-6 col-md-3">
-                <h6 class="text-uppercase fw-semibold mb-3 text-white-50 small">Apache</h6>
+                <div class="text-uppercase fw-semibold mb-3 text-white-50 small" role="heading" aria-level="2">Apache</div>
                 <ul class="list-unstyled small">
                     <li class="mb-2"><a href="https://www.apache.org/licenses/" target="_blank" rel="noopener" class="footer-link">License</a></li>
                     <li class="mb-2"><a href="https://www.apache.org/security/" target="_blank" rel="noopener" class="footer-link">Security</a></li>
@@ -342,12 +347,13 @@
 </footer>
 
 <!-- Bootstrap 5.3.8 JS Bundle (includes Popper) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous" defer></script>
 
-<!-- Mermaid for diagrams -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<!-- Mermaid for diagrams — only loaded on pages that use it (2.75 MB) -->
+{% if page.mermaid %}
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js" defer></script>
 <script>
-    (function() {
+    document.addEventListener('DOMContentLoaded', function() {
         var s = getComputedStyle(document.documentElement);
         var v = function(name) { return s.getPropertyValue(name).trim(); };
         mermaid.initialize({
@@ -364,8 +370,9 @@
                 fontSize: '14px'
             }
         });
-    })();
+    });
 </script>
+{% endif %}
 
 <!-- Smooth scroll + active nav highlighting -->
 <script>
