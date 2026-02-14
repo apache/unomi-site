@@ -1,0 +1,102 @@
+# Apache Unomi - Open Source Customer Data Platform
+
+> Apache Unomi (pronounced "You know me") is a Java open source Customer Data Platform (CDP) hosted at the Apache Software Foundation. It manages customer, lead, and visitor data, enables real-time personalization of customer experiences, and provides built-in privacy management including GDPR compliance. It is the reference implementation of the OASIS Customer Data Platform (CDP) specification.
+
+## Key Facts
+
+- **Project**: Apache Unomi
+- **Type**: Customer Data Platform (CDP)
+- **License**: Apache License 2.0
+- **Language**: Java
+- **Runtime**: Apache Karaf (OSGi)
+- **Storage**: Elasticsearch (9.x); OpenSearch support coming in next release
+- **API**: REST/JSON & GraphQL
+- **Current Stable Version**: 3.0.0
+- **Website**: https://unomi.apache.org
+- **Source Code**: https://github.com/apache/unomi
+- **Issue Tracker**: https://issues.apache.org/jira/browse/UNOMI
+- **Standard**: Reference implementation of OASIS CXS CDP specification
+
+## Core Features
+
+- **Profile Management**: Unified customer profiles aggregated from multiple data sources (web, mobile, CRM, IoT)
+- **Event Tracking**: Collect events from any source via REST API (page views, clicks, logins, custom events)
+- **Real-time Segmentation**: Dynamic audience segments based on profile properties and event history
+- **Scoring**: Lead scoring and engagement scoring with configurable rules
+- **Rules Engine**: Built-in rule engine that triggers actions when conditions are met on events or profiles
+- **Privacy / GDPR**: Consent management, data anonymization, profile deletion, data portability
+- **Plugin Architecture**: Extend functionality through OSGi plugins, Groovy actions, and JSON descriptors
+- **Connectors**: MailChimp and custom connectors via plugin API (Salesforce connector was deprecated)
+- **GraphQL API**: Flexible query API for profiles, events, segments, and rules
+- **Multi-backend**: OpenSearch support is in development (committed to main branch, coming in next release)
+
+## Use Cases
+
+1. **Web Personalization**: Track visitors on CMS-managed websites and personalize content based on profile data and segments
+2. **Mobile Analytics**: Backend for native mobile apps to collect events, track user journeys, and build profiles
+3. **Centralized Profile Management**: Aggregate customer data from CRM, support, commerce, and other systems into unified profiles
+4. **AI & Machine Learning Data Layer**: Serve as the real-time customer data backbone for AI agents, chatbots, recommendation engines, and predictive models — feeding unified profiles, segments, and event streams via REST API with privacy-safe consent management
+
+## CDP in an AI-First World
+
+AI agents and language models are only as good as the data they can access. Apache Unomi provides the real-time, privacy-compliant customer data foundation that AI systems need:
+
+- **Context for AI agents**: Feed rich customer profiles, segments, and behavioral event history to LLMs, support copilots, and autonomous agents via REST API
+- **First-party data advantage**: As third-party cookies disappear, the first-party data collected through your own CDP becomes the most valuable and trustworthy source for AI training and context
+- **Privacy-safe AI**: Built-in GDPR consent management ensures AI systems only process data customers have explicitly consented to share
+- **Real-time decisioning**: AI-powered personalization requires millisecond-level context — Unomi processes events and updates profiles in real time
+- **Open & vendor-neutral**: Unlike proprietary CDPs locked to specific AI vendors, Unomi lets you connect any AI system (OpenAI, Anthropic, local models, custom ML pipelines)
+
+## Getting Started
+
+The fastest way to try Apache Unomi is with Docker:
+
+```
+docker-compose up
+```
+
+Using the provided docker-compose.yml with Elasticsearch and Apache Unomi 3.0.0.
+
+Full getting started guide: https://unomi.apache.org/get-started.html
+Docker quick start: https://unomi.apache.org/get-started.html#quickstart
+
+## Documentation
+
+- Main documentation: https://unomi.apache.org/documentation.html
+- Latest manual: https://unomi.apache.org/manual/latest/index.html
+- REST API reference: https://unomi.apache.org/rest-api-doc/index.html
+- Java API (Javadoc): https://unomi.apache.org/unomi-api/apidocs/index.html
+
+## Community & Support
+
+- **Users mailing list**: users@unomi.apache.org (subscribe: users-subscribe@unomi.apache.org)
+- **Dev mailing list**: dev@unomi.apache.org (subscribe: dev-subscribe@unomi.apache.org)
+- **Slack**: #unomi channel on ASF Slack (https://the-asf.slack.com) — Apache committers sign in with @apache.org email; others can request a guest invitation via users@unomi.apache.org (see https://infra.apache.org/slack.html)
+- **Monthly meetings**: The community meets monthly online
+- **JIRA**: https://issues.apache.org/jira/browse/UNOMI
+
+## Ecosystem
+
+### Products Built on Apache Unomi
+- **Jahia jExperience**: CDP and Digital Experience Platform (initial contributor of Unomi) — https://www.jahia.com
+- **Ninetailed Personalization Platform**: Content personalization platform using Unomi — https://ninetailed.io
+- **Dropsolid Experience Cloud**: DXP with Drupal CMS, Mautic, and Unomi CDP — https://dropsolid.com
+- **Inoyu SaaS**: Fully managed cloud-hosted Unomi service (coming soon)
+
+### Commercial Support
+- **Inoyu**: CDP implementations, commercial extensions and support — https://www.inoyu.dev
+- **Yupiik**: Expert team and Apache contributors — https://www.yupiik.com
+
+## Architecture
+
+Apache Unomi is a REST server. Data sources (web, mobile, CRM, IoT) send events via the REST API. The processing engine stores data in Elasticsearch, evaluates segments and rules in real-time, and outputs personalization decisions, scores, and data exports. All communication is JSON over HTTP/HTTPS. A GraphQL API is also available for flexible querying of profiles, events, segments, and rules.
+
+## Frequently Asked Questions
+
+- **What is Apache Unomi?** An open source Customer Data Platform (CDP) managed by the Apache Software Foundation that unifies customer data, enables real-time segmentation and personalization, and provides built-in GDPR compliance.
+- **How do I get started?** Use Docker Compose for the fastest setup: https://unomi.apache.org/get-started.html#quickstart
+- **What storage does it use?** Elasticsearch (9.x). OpenSearch support is in development and will be available in the next release.
+- **Does it have a GraphQL API?** Yes, Unomi 3.0 includes a GraphQL API alongside the REST API.
+- **Is it GDPR compliant?** Yes, with built-in consent management, data anonymization, profile deletion, and data portability.
+- **Can I use it with AI?** Yes — feed unified customer profiles and event data to AI agents, LLMs, recommendation engines, and predictive models via the REST or GraphQL API.
+- **What is the OASIS CXS standard?** A Customer Data Platform specification from OASIS. Apache Unomi is its reference implementation.

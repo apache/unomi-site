@@ -1,0 +1,11 @@
+# Apache Unomi Website - https://unomi.apache.org
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://unomi.apache.org/sitemap.xml
+
+# AI/LLM Information Files
+# These files provide structured project information optimized for AI systems:
+#   /llms.txt       - Concise project summary and key facts
+#   /llms-full.txt  - Comprehensive technical reference with API details

@@ -1,75 +1,226 @@
 ---
 title: Getting Started
+description: "Get started with Apache Unomi in minutes. Learn what Unomi does, run it with Docker, and start building with the REST API."
+keywords: "Apache Unomi quickstart, getting started, Docker setup, installation guide, CDP setup, first steps"
 layout: default
+mermaid: true
+structured_data: >
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Get Started with Apache Unomi using Docker",
+        "description": "Run Apache Unomi Customer Data Platform in minutes using Docker Compose with Elasticsearch.",
+        "totalTime": "PT5M",
+        "tool": [
+            { "@type": "HowToTool", "name": "Docker" },
+            { "@type": "HowToTool", "name": "Docker Compose" }
+        ],
+        "step": [
+            {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Create a docker-compose.yml file",
+                "text": "Create a docker-compose.yml file with Elasticsearch 9.1.3 and Apache Unomi services configured."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Start the environment",
+                "text": "Run 'docker-compose up' from the same folder and wait for startup to complete (1-2 minutes)."
+            },
+            {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Verify it's running",
+                "text": "Access https://localhost:9443/cxs/cluster with username/password karaf/karaf to verify the server is running."
+            }
+        ]
+    }
+    </script>
 ---
 
-      <div class="container pt-5 pb-5">
-        <!-- in a few words -->
-        <div class="row pb-2 pt-4">
-          <div class="col-md-12">
-            <h5 class="project-heading"><span class="text-muted">Apache Unomi </span>in a few words</h5>
-            <div class="pb-2 pt-2">
-              <p>Apache Unomi is a REST server that manages user profiles and events related to the profiles. It can be used to integrate personalization and profile management within very different systems such as CMS, CRMs, Issue Trackers, native mobile application. It was designed to be easy to integrate with external systems, promoting profile sharing and re-use in very different applications.</p>
-              <p>Basically the server tracks users using different mechanisms (by default cookies), builds a progressively populated profile and associates events that are performed by a user with his profile. Events may range from a click on a page, to a file being downloaded, a native mobile application button being clicked, or anything that can be sent to the server.</p>
-              <p>The server has a built-in rule system that makes it possible to perform any action when an event is collected for a profile. It also has the notion of user segments, making it possible to classify user profiles into dynamic sub-groups, notably to build personalized experiences for specific segments.</p>
-              <p>As Apache Unomi is built as an OSGi application running inside <a target="_blank" href="https://karaf.apache.org">Apache Karaf</a>, it is extremely extensible and built to be scalable. For example it is possible to plugin new conditions, actions, or any other service that may be needed such as beacon tracking or push notifications.</p>
-              <p>Apache Unomi is also the reference implementation of the upcoming <a target="_blank" href="https://www.oasis-open.org/committees/cxs/">OASIS Customer Data Platform specification</a> to help standardize personalization of online experience while promoting ethical web experience management and increased user privacy controls.</p>
-            </div>
-          </div>
-        </div><!-- in a few words -->
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Get Started</p>
+        <h1>Getting Started with Apache Unomi</h1>
+        <p class="lead">From zero to a running Customer Data Platform in minutes.</p>
+    </div>
+</section>
 
-        <!-- what is unique -->
-        <div class="row pb-2 pt-4">
-          <div class="col-md-12">
-            <h5 class="project-heading">What is unique about <span class="text-muted">Apache Unomi</span> ?</h5>
-            <div class="pb-2 pt-2">
-              <p>One of the most unique features of this server is its privacy management features. Using the privacy REST API, it is possible for integrators to build user facing UIs that let them manage their profile, and control how they are being tracked, what data has been collected and even anonymize previously collected data or future data ! Finally there is even the possibility for end-users to delete their profile information completely.</p>
-              <p>It is becoming more and more important to address privacy issues correctly, and it is even becoming more and more of a legal issue since a lot of legislation is now appearing in many countries to make sure that user’s right to privacy is respected.</p>
-              <p>Of course these possibilities have no default UI inside of Apache Unomi so it is left up to the developers to expose them (or not).</p>
+<!-- What is Unomi -->
+<section class="section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <p class="section-label">Overview</p>
+                <h2>What is Apache Unomi?</h2>
+                <p>Apache Unomi is a <strong>REST server</strong> that manages user profiles and events. It integrates personalization and profile management into any system &mdash; CMS, CRM, mobile apps, or custom platforms.</p>
+                <ul class="list-unstyled mt-3">
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2 mt-1"></i>
+                        <span>Tracks users via cookies or custom identifiers and builds rich profiles over time</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2 mt-1"></i>
+                        <span>Built-in rule engine triggers actions when events occur on a profile</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2 mt-1"></i>
+                        <span>Dynamic segmentation classifies profiles into groups for personalization</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2 mt-1"></i>
+                        <span>OSGi plugin architecture on <a href="https://karaf.apache.org" target="_blank" rel="noopener">Apache Karaf</a> &mdash; extensible and scalable</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2 mt-1"></i>
+                        <span>Reference implementation of the <a href="https://www.oasis-open.org/committees/cxs/" target="_blank" rel="noopener">OASIS CDP specification</a></span>
+                    </li>
+                </ul>
             </div>
-          </div>
-        </div><!-- what is unique -->
+            <div class="col-lg-6">
+                <!-- Mermaid: How Unomi works -->
+                <pre class="mermaid">
+graph TD
+    A["👤 Visitor"] -->|Events| B["Apache Unomi"]
+    B --> C["Profile Store"]
+    B --> D["Rules Engine"]
+    D --> E["🎯 Personalization"]
+    D --> F["📊 Segmentation"]
+    D --> G["📈 Scoring"]
+    C --> H["Privacy Controls"]
+                </pre>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <div id="quickstart" class="row featurette pt-4">
-          <div class="col-md-12">
-            <h2 class="featurette-heading">Quick start with Docker</h2>
-            <div class="pb-2 pt-2">
-              <p>Docker images are available for Apache Unomi, this section will provide a few quick steps to get your first Unomi environment started, the only requirement being to have a recent version of Docker installed on your machine.</p>
-              <p>Somewhere on your filesystem, create a file called <code>docker-compose.yml</code>, with the following content:</p>
-              <p>
-                <code>
-                  <pre>
-                    version: '3.8'
-                    services:
-                      elasticsearch:
-                        image: docker.elastic.co/elasticsearch/elasticsearch:7.10.2
-                        environment:
-                          - discovery.type=single-node
-                        ports:
-                          - 9200:9200
-                      unomi:
-                        # Unomi version can be updated based on your needs
-                        image: apache/unomi:{{ site.data.unomi.latest.stable.version }}
-                        environment:
-                          - UNOMI_ELASTICSEARCH_ADDRESSES=elasticsearch:9200
-                          - UNOMI_THIRDPARTY_PROVIDER1_IPADDRESSES=0.0.0.0/0,::1,127.0.0.1
-                        ports:
-                          - 8181:8181
-                          - 9443:9443
-                          - 8102:8102
-                        links:
-                          - elasticsearch
-                        depends_on:
-                          - elasticsearch
-                  </pre>
-                </code>
-              </p>
-              <p>From the same folder, start the environment using <code>docker-compose up</code> and wait for the startup to complete.</p>
-              <p>Try accessing <a target="_blank" href="https://localhost:9443/cxs/cluster">https://localhost:9443/cxs/cluster</a> with username/password: karaf/karaf . You might get a certificate warning in your browser, just accept it despite the warning it is safe.</p>
-              <p>Want to start Unomi manually using Java instead ? You can find a quick start guide <a target="_blank" href="https://unomi.apache.org/manual/latest/index.html#_quick_start">in our documentation</a>. </p>
-              <p>Please note that the above configuration is aimed at discovering Apache Unomi quickly, it is not recommended to use this configuration <a target="_blank" href="https://unomi.apache.org/manual/latest/index.html#_securing_a_production_environment">for production environments.</a></p>
+<hr class="section-divider">
+
+<!-- Privacy highlight -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-4">
+            <div class="col-lg-7">
+                <div class="feature-icon feature-icon-lg mx-auto mb-3 icon-amber">
+                    <i class="bi bi-shield-lock"></i>
+                </div>
+                <h2 class="h4">Privacy as a First-Class Feature</h2>
+                <p class="text-muted">Unomi&rsquo;s privacy REST API lets you build user-facing UIs where visitors can manage their profile, control tracking, view collected data, anonymize past data, or fully delete their profile. Built for a world where GDPR and privacy legislation matter.</p>
             </div>
-          </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Start with Docker -->
+<section class="section" id="quickstart">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-7">
+                <p class="section-label">Quick Start</p>
+                <h2>Run with Docker</h2>
+                <p class="text-muted">The fastest way to try Apache Unomi. Only Docker is required.</p>
+            </div>
         </div>
 
-      </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <!-- Step 1 -->
+                <div class="d-flex mb-4">
+                    <div class="step-number me-3 flex-shrink-0">1</div>
+                    <div class="flex-grow-1">
+                        <h3 class="h6 fw-semibold mb-2">Create a <code>docker-compose.yml</code> file</h3>
+                        <pre><code>version: '3.8'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.1.3
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - 9200:9200
+  unomi:
+    image: apache/unomi:{{ site.data.unomi.latest.stable.version }}
+    environment:
+      - UNOMI_ELASTICSEARCH_ADDRESSES=elasticsearch:9200
+      - UNOMI_THIRDPARTY_PROVIDER1_IPADDRESSES=0.0.0.0/0,::1,127.0.0.1
+    ports:
+      - 8181:8181
+      - 9443:9443
+      - 8102:8102
+    links:
+      - elasticsearch
+    depends_on:
+      - elasticsearch</code></pre>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="d-flex mb-4">
+                    <div class="step-number me-3 flex-shrink-0">2</div>
+                    <div class="flex-grow-1">
+                        <h3 class="h6 fw-semibold mb-2">Start the environment</h3>
+                        <pre><code>docker-compose up</code></pre>
+                        <p class="small text-muted mt-2">Wait for the startup to complete (usually 1&ndash;2 minutes).</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="d-flex mb-4">
+                    <div class="step-number me-3 flex-shrink-0">3</div>
+                    <div class="flex-grow-1">
+                        <h3 class="h6 fw-semibold mb-2">Verify it&rsquo;s running</h3>
+                        <pre><code>curl -k https://localhost:9443/cxs/cluster -u karaf:karaf</code></pre>
+                        <p class="small text-muted mt-2">Default credentials: <code>karaf</code> / <code>karaf</code>. You may see a certificate warning &mdash; this is expected in development.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-2">
+            <div class="col-lg-9">
+                <div class="p-3 rounded-3 bg-primary-light">
+                    <p class="small mb-1"><strong><i class="bi bi-info-circle me-1"></i>Production note:</strong> This configuration is for development only. See the <a href="https://unomi.apache.org/manual/latest/index.html#_securing_a_production_environment">production security guide</a> before deploying.</p>
+                    <p class="small mb-0"><strong>Prefer manual install?</strong> Follow the <a href="https://unomi.apache.org/manual/latest/index.html#_quick_start">manual quick start guide</a> for Java-based installation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Next Steps -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-7">
+                <p class="section-label">What&rsquo;s Next?</p>
+                <h2>Continue your journey</h2>
+            </div>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <a href="/documentation.html" class="feature-card d-block text-decoration-none h-100 text-center">
+                    <div class="feature-icon mx-auto"><i class="bi bi-book"></i></div>
+                    <h3 class="h6 fw-semibold text-dark">Read the Documentation</h3>
+                    <p class="small text-muted mb-0">Dive into the full manual for configuration, APIs, and extending Unomi.</p>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <a href="/use-cases.html" class="feature-card d-block text-decoration-none h-100 text-center">
+                    <div class="feature-icon mx-auto"><i class="bi bi-lightbulb"></i></div>
+                    <h3 class="h6 fw-semibold text-dark">Explore Use Cases</h3>
+                    <p class="small text-muted mb-0">Web personalization, mobile analytics, profile management, and more.</p>
+                </a>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <a href="/community/index.html" class="feature-card d-block text-decoration-none h-100 text-center">
+                    <div class="feature-icon mx-auto"><i class="bi bi-chat-dots"></i></div>
+                    <h3 class="h6 fw-semibold text-dark">Get Help</h3>
+                    <p class="small text-muted mb-0">Join the mailing list, chat on Slack, or attend a monthly community meeting.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,44 +1,46 @@
 ---
-title: Contribute | Manual Release guide
+title: Manual Release Guide
+description: "Manual release guide for Apache Unomi release managers"
+keywords: "Apache Unomi release, manual release guide, Maven release, ASF release process, artifact signing"
 layout: default
 ---
 
-      <!-- Marketing messaging and featurettes
-      ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Contribute</p>
+        <h1>Manual Release Guide</h1>
+    </div>
+</section>
 
-      <div class="container">
-        <!-- CONTRIBUTE -->
-        <div class="row mb-5 mt-5 pt-3">
-          <div class="col-2 sidenav-menu pt-3">
-            <div class="pb-3 text-uppercase"><strong>Contribute</strong></div>
-            <ul class="list-unstyled mb-3">
-              <li><a href="index.html">Get started contributing</a></li>
-              <li class="sidenav-menu-sub-title">Technical Docs</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="testing.html">Testing guide</a></li>
-                  <li><a href="dependencies-guide.html">Dependencies guide</a></li>
-                </ul>
-              </li>
-              <li class="sidenav-menu-sub-title">Policies</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="pre-commit-test-policies.html">Pre-commit test policies</a></li>
-                  <li><a href="post-commit-test-policies.html">Post-commit test policies</a></li>
-                </ul>
-              </li>
-              <li class="sidenav-menu-sub-title">Committers</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="become-a-committer.html">Become a committer</a></li>
-                  <li><a href="committer-guide.html">Committer guide</a></li>
-                  <li><a href="release-guide.html">Release guide</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div class="col-8 pt-3 offset-4">
+<section class="section">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-3">
+                <div class="sidenav-menu">
+                    <div class="menu-title">Contribute</div>
+                    <ul class="list-unstyled mb-3">
+                        <li><a href="index.html">Getting Started</a></li>
+                    </ul>
+                    <div class="menu-title mt-3">Technical Docs</div>
+                    <ul class="list-unstyled mb-3">
+                        <li><a href="testing.html">Testing Guide</a></li>
+                        <li><a href="dependencies-guide.html">Dependencies Guide</a></li>
+                    </ul>
+                    <div class="menu-title mt-3">Policies</div>
+                    <ul class="list-unstyled mb-3">
+                        <li><a href="pre-commit-test-policies.html">Pre-commit Policies</a></li>
+                        <li><a href="post-commit-test-policies.html">Post-commit Policies</a></li>
+                    </ul>
+                    <div class="menu-title mt-3">Committers</div>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="become-a-committer.html">Become a Committer</a></li>
+                        <li><a href="committer-guide.html">Committer Guide</a></li>
+                        <li><a href="release-guide.html">Release Guide</a></li>
+                        <li><a href="manual-release-guide.html" class="active">Manual Release Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
             <h2 id="apache-unomi-release-guide">Manual Apache Unomi Release Guide</h2>
 
             <p>The Apache Unomi project periodically declares and publishes releases. A release is one or more packages of the project artifact(s) that are approved for general public distribution and use. They may come with various degrees of caveat regarding their perceived quality and potential for change, such as "alpha", "beta", "stable", etc.</p>
@@ -47,7 +49,7 @@ layout: default
 
             <p>Each release is executed by a <em>Release Manager</em>, who is selected among the Unomi committers. This document describes the process that the Release Manager follows to perform a release. Any changes to this process should be discussed and adopted on the <a href="../community/index.html">dev@ mailing list</a>.</p>
 
-            <p>Please remember that publishing software has legal consequences. This guide complements the foundation-wide <a href="https://www.apache.org/dev/release.html" target="_blank">Product Release Policy</a> and <a href="https://www.apache.org/dev/release-distribution" target="_blank">Release Distribution Policy</a>.</p>
+            <p>Please remember that publishing software has legal consequences. This guide complements the foundation-wide <a href="https://www.apache.org/dev/release.html" target="_blank" rel="noopener">Product Release Policy</a> and <a href="https://www.apache.org/dev/release-distribution" target="_blank" rel="noopener">Release Distribution Policy</a>.</p>
 
             <h2 id="overview">Overview</h2>
 
@@ -76,7 +78,7 @@ layout: default
 
             <p>In general, the community prefers to have a rotating set of 3-5 Release Managers. Keeping a small core set of managers allows enough people to build expertise in this area and improve processes over time, without Release Managers needing to re-learn the processes for each release. That said, if you are a committer interested in serving the community in this way, please reach out to the community on the dev@ mailing list.</p>
 
-            <p>Basically we will be following the procedure described <a href="https://www.apache.org/dev/publishing-maven-artifacts.html" target="_blank">here</a> with a few more steps and details before and after.</p>
+            <p>Basically we will be following the procedure described <a href="https://www.apache.org/dev/publishing-maven-artifacts.html" target="_blank" rel="noopener">here</a> with a few more steps and details before and after.</p>
 
 
             <h3 id="checklist-to-proceed-to-the-next-step">Checklist to proceed to the next step</h3>
@@ -116,7 +118,7 @@ gpg --verify test.txt.asc test.txt
                       This should tell you which key was used and display the email address.
                   </li>
                   <li>
-                      Make sure your public KEY is available in this files (if not add your key to the files and commit/push):
+                      Make sure your public KEY is available in these files (if not add your key to the files and commit/push):
                       <ol>
                           <li><a href="https://github.com/apache/unomi/blob/master/KEYS">GIT https://github.com/apache/unomi/blob/master/KEYS (cherry-pick to the branches if necessary)</a></li>
                           <li><a href="https://dist.apache.org/repos/dist/dev/unomi/KEYS">SVN https://dist.apache.org/repos/dist/dev/unomi/KEYS</a></li>
@@ -137,7 +139,7 @@ gpg --verify test.txt.asc test.txt
               <li>
                   Update all JIRAs, close the ones that are still not closed, review tickets that can be closed, postpone to another release tickets that are not managed now.
                   You can use this JIRA page: <a href="https://issues.apache.org/jira/projects/UNOMI?selectedItem=com.atlassian.jira.jira-projects-plugin%3Arelease-page&status=unreleased">Unomi JIRA releases</a>.
-                  Then review the list of tickets that need to be updated, also additionally you can check the list of commits since previous release and insure they are closed using fix version: {{ site.data.unomi.next.stable.version }}.
+                  Then review the list of tickets that need to be updated, also additionally you can check the list of commits since previous release and ensure they are closed using fix version: {{ site.data.unomi.next.stable.version }}.
                   Ideally all tickets listed for version: {{ site.data.unomi.next.stable.version }} should be closed or moved to the next version in case they are not finished/started.
               </li>
                 <li>
@@ -150,7 +152,7 @@ gpg --verify test.txt.asc test.txt
             <ol>
               <li>Clone and checkout the project using:
                 <pre class="alert alert-primary"><code>git clone https://gitbox.apache.org/repos/asf/unomi.git</code></pre>
-                 in a separate directory, to make sure you don’t have any additional files in the build
+                 in a separate directory, to make sure you don't have any additional files in the build
                   (such as allCountries.zip or other binary files that should not be there)</li>
                 <li>
                     Simply checkout an existing branch for release
@@ -179,7 +181,7 @@ git checkout -b unomi-{{ site.data.unomi.branch.version }}
               <li>Check that there are no JARs or ZIP files in the source code, you can do this by looking at the generated RAT report here :
                 <pre class="alert alert-primary"><code>less target/unomi-root-{{ site.data.unomi.next.development.version }}.rat</code></pre>
               </li>
-              <li>Check that the KEYS file only contains signatures with @apache.org addresses (if there are non @apache.org don’t remove them because they have
+              <li>Check that the KEYS file only contains signatures with @apache.org addresses (if there are non @apache.org don't remove them because they have
                 been used to sign older releases)
               </li>
               <li>Check the Copyright notice years in the NOTICE file and anywhere else where it might be (by using search and replace)</li>
@@ -190,7 +192,7 @@ gpg: 'echec de la signature : Inappropriate ioctl for device
 gpg: signing failed: Inappropriate ioctl for device</code></pre>
                 you can either try to sign a file like this:
                 <pre class="alert alert-primary"><code>gpg -ab test.txt</code></pre>
-                this will ask for your password and remember it in the agent for a while, or if you want a more permanent solution: <a href="https://dan.cx/2016/11/gpg-inappropriate-ioctl-for-device-errors" target="_blank">https://dan.cx/2016/11/gpg-inappropriate-ioctl-for-device-errors</a>
+                this will ask for your password and remember it in the agent for a while, or if you want a more permanent solution: <a href="https://dan.cx/2016/11/gpg-inappropriate-ioctl-for-device-errors" target="_blank" rel="noopener">https://dan.cx/2016/11/gpg-inappropriate-ioctl-for-device-errors</a>
               </li>
             </ol>
 
@@ -198,8 +200,8 @@ gpg: signing failed: Inappropriate ioctl for device</code></pre>
             <h3 id="publish-repository">Repository</h3>
 
             <ol>
-              <li>Setup server passwords for publishing as document here:
-                <a href="https://www.apache.org/dev/publishing-maven-artifacts.html" target="_blank">https://www.apache.org/dev/publishing-maven-artifacts.html</a> and <a href="https://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords" target="_blank">https://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords</a>
+              <li>Setup server passwords for publishing as documented here:
+                <a href="https://www.apache.org/dev/publishing-maven-artifacts.html" target="_blank" rel="noopener">https://www.apache.org/dev/publishing-maven-artifacts.html</a> and <a href="https://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords" target="_blank" rel="noopener">https://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords</a>
               </li>
               <li>Check into the target directory and unzip the source release and compile it using:
                 <pre class="alert alert-primary"><code>pushd target
@@ -227,14 +229,14 @@ popd</code></pre>
               <li>
                 <pre class="alert alert-primary"><code>mvn -DskipITs=true -DskipTests=true -Drelease.arguments="-Papache-release,integration-tests -DskipITs=true -DskipTests=true" -P integration-tests,docker,\!run-tests release:perform</code></pre>
               </li>
-              <li>If something fails, make sure you first drop the staging repository created here: <a href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache.org/#stagingRepositories</a>.<br>
-If you need to relaunch the <code>release:perform</code> and don’t have a release.properties, create a <code>release.properties</code> file with the following contents:
+              <li>If something fails, make sure you first drop the staging repository created here: <a href="https://repository.apache.org/#stagingRepositories" target="_blank" rel="noopener">https://repository.apache.org/#stagingRepositories</a>.<br>
+If you need to relaunch the <code>release:perform</code> and don't have a release.properties, create a <code>release.properties</code> file with the following contents:
                 <pre class="alert alert-primary"><code>scm.url=scm:git:https://gitbox.apache.org/repos/asf?p=unomi.git
 scm.tag=unomi-root-{{ site.data.unomi.next.stable.version }}
 and run mvn release:perform</code></pre>
               </li>
-              <li>Connect to <a href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache
-                  .org/#stagingRepositories</a> and look for the open staging repositories, you should have two (one for everything and the other for KAR/features) for releases &lt;= 1.2 and just one for versions &gt;= 1.3.0 (because of changes in the Karaf plugins). Close the repositories and given a meaningful comment when closing such as:<br>
+              <li>Connect to <a href="https://repository.apache.org/#stagingRepositories" target="_blank" rel="noopener">https://repository.apache
+                  .org/#stagingRepositories</a> and look for the open staging repositories, you should have two (one for everything and the other for KAR/features) for releases &lt;= 1.2 and just one for versions &gt;= 1.3.0 (because of changes in the Karaf plugins). Close the repositories and give a meaningful comment when closing such as:<br>
                 <strong>Apache Unomi {{ site.data.unomi.next.stable.version }} Release Candidate 1</strong>
               </li>
             </ol>
@@ -250,9 +252,9 @@ mkdir {{ site.data.unomi.next.stable.version }}</code></pre>
               </li>
               <li>
                 Copy all the Zip and Tarbars including ASC (but do not copy the SHA1 or MD5 sum) files from:
-                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/{{ site.data.unomi.next.stable.version }}/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/{{ site.data.unomi.next.stable.version }}/</a>
+                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/{{ site.data.unomi.next.stable.version }}/" target="_blank" rel="noopener">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/{{ site.data.unomi.next.stable.version }}/</a>
                 and
-                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/{{ site.data.unomi.next.stable.version }}/" target="_blank">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/{{ site.data.unomi.next.stable.version }}/</a>
+                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/{{ site.data.unomi.next.stable.version }}/" target="_blank" rel="noopener">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/{{ site.data.unomi.next.stable.version }}/</a>
                   using commands such as : <pre class="alert alert-primary"><code>export REPO_ID=orgapacheunomi-1033
 wget https://repository.apache.org/content/repositories/$REPO_ID/org/apache/unomi/unomi-root/{{ site.data.unomi.next.stable.version }}/unomi-root-{{ site.data.unomi.next.stable.version }}-source-release.zip
 wget https://repository.apache.org/content/repositories/$REPO_ID/org/apache/unomi/unomi-root/{{ site.data.unomi.next.stable.version }}/unomi-root-{{ site.data.unomi.next.stable.version }}-source-release.zip.asc
@@ -287,9 +289,9 @@ svn add {{ site.data.unomi.next.stable.version }}</code></pre>
                 <pre class="alert alert-primary"><code>svn commit -m "Apache {{ site.data.unomi.next.stable.version }} Release (for PMC voting)"</code></pre>
               </li>
                 <li>Send out to the Unomi mailing list a mail to start the voting process, see <a href="#mail-1">[1]</a></li>
-                <li>If the vote is refused or cancelled, peform the following steps to restart the release process:
+                <li>If the vote is refused or cancelled, perform the following steps to restart the release process:
                     <ol>
-                        <li>Drop the release in <a href="https://repository.apache.org/#stagingRepositories" target="_blank">Nexus</a></li>
+                        <li>Drop the release in <a href="https://repository.apache.org/#stagingRepositories" target="_blank" rel="noopener">Nexus</a></li>
                         <li>Remove the tag in Git:
                             <pre class="alert alert-primary"><code>git push --delete origin unomi-root-{{ site.data.unomi.next.stable.version }}
 git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
@@ -318,7 +320,7 @@ git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
                 In JIRA mark the version as released and add a release date
               </li>
               <li>
-                Connect to <a href="https://repository.apache.org/#stagingRepositories" target="_blank">https://repository.apache.org/#stagingRepositories</a> and look for the open staging repositories, you should have one. Select the staging repositoriy and click on <code>release</code>.
+                Connect to <a href="https://repository.apache.org/#stagingRepositories" target="_blank" rel="noopener">https://repository.apache.org/#stagingRepositories</a> and look for the open staging repositories, you should have one. Select the staging repository and click on <code>release</code>.
               </li>
               <li>Update the website (in project `unomi-site`) to point to the new release on the download page by
                   first copying the previous archive release and replacing all the version numbers with the current release
@@ -329,10 +331,10 @@ git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
                   <pre class="alert alert-primary"><code>git clone https://gitbox.apache.org/repos/asf/unomi-site.git</code></pre>
                   Perform any modifications, notably change the versions in the pom.xml file:
                   <pre class="alert alert-primary"><code>    &lt;properties&gt;
-        &lt;latest.stable.version&gt;1.5.4&lt;/latest.stable.version&gt;
-        &lt;next.development.version&gt;1.5.5-SNAPSHOT&lt;/next.development.version&gt;
-        &lt;next.stable.version&gt;1.5.5&lt;/next.stable.version&gt;
-        &lt;latest.development.version&gt;2.0.0-SNAPSHOT&lt;/latest.development.version&gt;
+        &lt;latest.stable.version&gt;3.0.0&lt;/latest.stable.version&gt;
+        &lt;next.development.version&gt;3.1.0-SNAPSHOT&lt;/next.development.version&gt;
+        &lt;next.stable.version&gt;3.1.0&lt;/next.stable.version&gt;
+        &lt;latest.development.version&gt;3.1.0-SNAPSHOT&lt;/latest.development.version&gt;
     &lt;/properties&gt;
 </code></pre>
                  Then modify the index.html, download.html to add the new files. For the documentation see the next step.
@@ -459,12 +461,12 @@ git push origin -f</code></pre>
               <li>Release recorded in reporter.apache.org.</li>
               <li>Release announced on social media.</li>
               <li>Completion declared on the dev@ mailing list.</li>
-                <li>Check that old release where removed from the dist server</li>
+                <li>Check that old releases were removed from the dist server</li>
             </ol>
 
             <h2 id="improve-the-process">Improve the process</h2>
 
-            <p>It is important that we improve the release processes over time. Once you’ve finished the release, please take a step back and look what areas of this process and be improved. Perhaps some part of the process can be simplified. Perhaps parts of this guide can be clarified.</p>
+            <p>It is important that we improve the release processes over time. Once you've finished the release, please take a step back and look at what areas of this process can be improved. Perhaps some part of the process can be simplified. Perhaps parts of this guide can be clarified.</p>
 
             <p>If we have specific ideas, please start a discussion on the dev@ mailing list and/or propose a pull request to update this guide. Thanks!</p>
 
@@ -567,10 +569,10 @@ designed to manage customers, leads and visitors' data and help personalize cust
 experiences.
 
 More details regarding Apache Unomi can be found here:
-http://unomi.apache.org/
+https://unomi.apache.org/
 
 The release artifacts can be downloaded here:
-https://dist.apache.org/repos/dist/release/incubator/unomi/{{ site.data.unomi.next.stable.version }}/
+https://dist.apache.org/repos/dist/release/unomi/{{ site.data.unomi.next.stable.version }}/
 
 All JIRAs completed for this release are tagged with 'FixVersion =
 {{ site.data.unomi.next.stable.version }}'; the JIRA release notes can be found here:
@@ -581,6 +583,7 @@ Thanks!
 The Apache Unomi Team
 
             </code></pre>
-          </div>
+            </div>
         </div>
-      </div>
+    </div>
+</section>

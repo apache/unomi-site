@@ -1,185 +1,721 @@
 ---
-title: Main Page
+title: Open Source Customer Data Platform
+description: "Apache Unomi is an open source CDP that unifies customer data from web, mobile, CRM, and IoT. Privacy-first for AI, personalization, and real-time."
+keywords: "Apache Unomi, Customer Data Platform, CDP, open source CDP, personalization engine, GDPR compliant CDP, customer profiles, segmentation, Java CDP, privacy platform, first-party data, OASIS CXS, AI customer data, CDP for AI, AI agents customer context"
 layout: default
+mermaid: true
+structured_data: >
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is Apache Unomi?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Apache Unomi (pronounced 'You know me') is an open source Customer Data Platform (CDP) written in Java. It manages customer, lead, and visitor data, enables real-time personalization of experiences, and provides built-in privacy management including GDPR compliance. It is hosted at the Apache Software Foundation and is the reference implementation of the OASIS CDP specification."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is a Customer Data Platform (CDP)?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "A Customer Data Platform (CDP) helps organizations collect all customer data from multiple channels and systems — web, mobile, email, in-store, CRM, support, IoT, and more — into a single unified view. It provides a complete picture of each customer, enabling smarter business decisions, more personalized experiences, and better customer service across every touchpoint."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is Apache Unomi free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, Apache Unomi is completely free and open source, released under the Apache License 2.0. You can download, use, modify, and distribute it freely. Commercial support is available from third-party companies."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What technologies does Apache Unomi use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Apache Unomi is built in Java, runs on Apache Karaf (OSGi runtime), uses Elasticsearch for data storage, and communicates via a REST/JSON API. It has a plugin architecture supporting OSGi bundles and Groovy actions."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does a CDP like Apache Unomi help with AI and machine learning?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "AI models and agents are only as good as the data they can access. Apache Unomi serves as the real-time customer data foundation for AI systems — feeding unified profiles, segments, and behavioral event streams to LLMs, chatbots, recommendation engines, and predictive models via its REST API. Its built-in GDPR consent management ensures AI systems only process data customers have explicitly consented to share, making it a privacy-safe data layer for AI-first architectures."
+                }
+            }
+        ]
+    }
+    </script>
 ---
 
-<div class="container-fluid product pt-5 pb-5 mx-auto">
-    <div class="row pt-5 pb-5">
-        <div class="container">
-            <div class="col pt-5 mx-auto text-left">
-                <h1 class="display-5">Apache Unomi&trade;: The Open Source Customer Data Platform</h1>
-                <p class="lead">Apache Unomi&trade; (pronounced "You know me") is a Java Open Source customer data
-                    platform, a Java server designed to manage customers, leads and visitors data and help personalize
-                    customers experiences while also offering features to respect visitor privacy rules (such as
-                    GDPR)</p>
-                <div class="pt-4">
-                    <a class="btn btn-primary btn-lg" href="get-started.html">Learn more</a>&nbsp;&nbsp;
-                    <a class="btn btn-primary btn-lg" href="download.html">Download</a>
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+                <p class="section-label mb-3 text-hero-link">Apache Unomi&trade;</p>
+                <h1 class="display-title mb-4">The Open Source<br><span class="text-hero-accent">Customer Data Platform</span></h1>
+                <p class="lead mb-4">Unify data from web, mobile, CRM, support systems, and more. The privacy-first data foundation for AI agents, personalization engines, and real-time customer intelligence &mdash; built on open standards.</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a class="btn btn-primary btn-lg" href="/get-started.html">
+                        <i class="bi bi-rocket-takeoff me-2"></i>Get Started
+                    </a>
+                    <a class="btn btn-outline-light btn-lg" href="/documentation.html">
+                        <i class="bi bi-book me-2"></i>Read the Docs
+                    </a>
+                </div>
+                <p class="small mt-3 text-hero-muted">
+                    Latest: v{{ site.data.unomi.latest.stable.version }} &bull;
+                    <a href="/download.html" class="text-hero-link">Download</a> &bull;
+                    <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener" class="text-hero-link">Apache 2.0 License</a>
+                </p>
+            </div>
+            <div class="col-lg-6 text-center">
+                <!-- Inline SVG Illustration: Data flowing into a unified profile -->
+                <svg viewBox="0 0 520 440" fill="none" xmlns="http://www.w3.org/2000/svg" class="illustration w-100 hero-illustration" role="img" aria-label="Customer data platform illustration showing data flowing into unified profiles">
+                    <defs>
+                        <style>
+                            /* Pulse animation for background circles */
+                            @keyframes svg-pulse-outer { 0%,100%{r:170;opacity:.08} 50%{r:178;opacity:.12} }
+                            @keyframes svg-pulse-inner { 0%,100%{r:120;opacity:.06} 50%{r:126;opacity:.1} }
+                            .bg-outer { animation: svg-pulse-outer 4s ease-in-out infinite; }
+                            .bg-inner { animation: svg-pulse-inner 4s ease-in-out infinite 0.5s; }
+
+                            /* Flowing dash animation for connector lines */
+                            @keyframes svg-dash-flow { 0%{stroke-dashoffset:20} 100%{stroke-dashoffset:0} }
+                            .flow-line { animation: svg-dash-flow 1.5s linear infinite; }
+                            .flow-line-out { animation: svg-dash-flow 1.8s linear infinite reverse; }
+
+                            /* Gentle float for data source cards */
+                            @keyframes svg-float-1 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+                            @keyframes svg-float-2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+                            .src-tl { animation: svg-float-1 3.5s ease-in-out infinite; }
+                            .src-tr { animation: svg-float-2 3.8s ease-in-out infinite 0.4s; }
+                            .src-bl { animation: svg-float-2 3.6s ease-in-out infinite 0.8s; }
+                            .src-br { animation: svg-float-1 3.4s ease-in-out infinite 1.2s; }
+
+                            /* Glow pulse on central profile */
+                            @keyframes svg-glow { 0%,100%{opacity:.9;filter:drop-shadow(0 0 6px var(--unomi-primary-glow))} 50%{opacity:1;filter:drop-shadow(0 0 14px var(--unomi-primary-glow-strong))} }
+                            .profile-node { animation: svg-glow 3s ease-in-out infinite; }
+
+                            /* Traveling data dot along path */
+                            @keyframes svg-dot-tl { 0%{cx:140;cy:72;opacity:0} 10%{opacity:.9} 90%{opacity:.9} 100%{cx:200;cy:180;opacity:0} }
+                            @keyframes svg-dot-tr { 0%{cx:380;cy:72;opacity:0} 10%{opacity:.9} 90%{opacity:.9} 100%{cx:320;cy:180;opacity:0} }
+                            @keyframes svg-dot-bl { 0%{cx:140;cy:342;opacity:0} 10%{opacity:.9} 90%{opacity:.9} 100%{cx:200;cy:240;opacity:0} }
+                            @keyframes svg-dot-br { 0%{cx:380;cy:342;opacity:0} 10%{opacity:.9} 90%{opacity:.9} 100%{cx:320;cy:240;opacity:0} }
+                            .dot-tl { animation: svg-dot-tl 2.5s ease-in-out infinite; }
+                            .dot-tr { animation: svg-dot-tr 2.5s ease-in-out infinite 0.6s; }
+                            .dot-bl { animation: svg-dot-bl 2.5s ease-in-out infinite 1.2s; }
+                            .dot-br { animation: svg-dot-br 2.5s ease-in-out infinite 1.8s; }
+
+                            /* Output badges subtle bounce */
+                            @keyframes svg-bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+                            .out-seg { animation: svg-bounce 3s ease-in-out infinite 0.5s; }
+                            .out-score { animation: svg-bounce 3s ease-in-out infinite 1s; }
+
+                            /* Respect reduced motion */
+                            @media (prefers-reduced-motion: reduce) {
+                                .bg-outer,.bg-inner,.flow-line,.flow-line-out,.src-tl,.src-tr,.src-bl,.src-br,
+                                .profile-node,.dot-tl,.dot-tr,.dot-bl,.dot-br,.out-seg,.out-score { animation: none !important; }
+                            }
+                        </style>
+                    </defs>
+
+                    <!-- Background circles (pulsing) -->
+                    <circle cx="260" cy="210" r="170" fill="var(--unomi-hero-accent-ghost)" class="bg-outer"/>
+                    <circle cx="260" cy="210" r="120" fill="var(--unomi-hero-accent-whisper)" class="bg-inner"/>
+
+                    <!-- Connector lines (flowing dashes) -->
+                    <line x1="140" y1="72" x2="200" y2="180" stroke="var(--unomi-hero-accent)" stroke-width="2.5" stroke-dasharray="6 4" opacity=".5" class="flow-line"/>
+                    <line x1="380" y1="72" x2="320" y2="180" stroke="var(--unomi-hero-accent)" stroke-width="2.5" stroke-dasharray="6 4" opacity=".5" class="flow-line"/>
+                    <line x1="140" y1="342" x2="200" y2="240" stroke="var(--unomi-hero-accent)" stroke-width="2.5" stroke-dasharray="6 4" opacity=".5" class="flow-line"/>
+                    <line x1="380" y1="342" x2="320" y2="240" stroke="var(--unomi-hero-accent)" stroke-width="2.5" stroke-dasharray="6 4" opacity=".5" class="flow-line"/>
+                    <line x1="235" y1="270" x2="195" y2="390" stroke="var(--unomi-accent)" stroke-width="2" stroke-dasharray="5 3" opacity=".45" class="flow-line-out"/>
+                    <line x1="285" y1="270" x2="325" y2="390" stroke="var(--unomi-accent)" stroke-width="2" stroke-dasharray="5 3" opacity=".45" class="flow-line-out"/>
+
+                    <!-- Traveling data dots (initial cx/cy match 0% keyframe; opacity 0 until animation starts) -->
+                    <circle cx="140" cy="72" r="5" fill="var(--unomi-hero-accent)" opacity="0" class="dot-tl"/>
+                    <circle cx="380" cy="72" r="5" fill="var(--unomi-hero-accent)" opacity="0" class="dot-tr"/>
+                    <circle cx="140" cy="342" r="5" fill="var(--unomi-hero-accent)" opacity="0" class="dot-bl"/>
+                    <circle cx="380" cy="342" r="5" fill="var(--unomi-hero-accent)" opacity="0" class="dot-br"/>
+
+                    <!-- Central profile node (glowing) -->
+                    <g class="profile-node">
+                        <rect x="200" y="150" width="120" height="120" rx="24" fill="var(--unomi-primary)" opacity=".9"/>
+                        <circle cx="260" cy="185" r="20" fill="var(--unomi-white)" opacity=".9"/>
+                        <path d="M232 220 a28 20 0 0 1 56 0" fill="var(--unomi-white)" opacity=".7"/>
+                        <text x="260" y="258" text-anchor="middle" fill="var(--unomi-white)" font-size="14" font-weight="700" font-family="Inter,sans-serif">PROFILE</text>
+                    </g>
+
+                    <!-- Web data source (floating) -->
+                    <g class="src-tl">
+                        <rect x="30" y="40" width="110" height="64" rx="14" fill="var(--unomi-gradient-start)" opacity=".85"/>
+                        <text x="85" y="68" text-anchor="middle" fill="var(--unomi-white)" font-size="15" font-weight="600" font-family="Inter,sans-serif">Web</text>
+                        <text x="85" y="88" text-anchor="middle" fill="var(--unomi-on-dark-dim)" font-size="12" font-family="Inter,sans-serif">Events</text>
+                    </g>
+
+                    <!-- Mobile data source (floating) -->
+                    <g class="src-tr">
+                        <rect x="380" y="40" width="110" height="64" rx="14" fill="var(--unomi-gradient-start)" opacity=".85"/>
+                        <text x="435" y="68" text-anchor="middle" fill="var(--unomi-white)" font-size="15" font-weight="600" font-family="Inter,sans-serif">Mobile</text>
+                        <text x="435" y="88" text-anchor="middle" fill="var(--unomi-on-dark-dim)" font-size="12" font-family="Inter,sans-serif">App Data</text>
+                    </g>
+
+                    <!-- CRM / Support source (floating) -->
+                    <g class="src-bl">
+                        <rect x="30" y="310" width="110" height="64" rx="14" fill="var(--unomi-gradient-start)" opacity=".85"/>
+                        <text x="85" y="338" text-anchor="middle" fill="var(--unomi-white)" font-size="15" font-weight="600" font-family="Inter,sans-serif">CRM</text>
+                        <text x="85" y="358" text-anchor="middle" fill="var(--unomi-on-dark-dim)" font-size="12" font-family="Inter,sans-serif">Support</text>
+                    </g>
+
+                    <!-- IoT / Systems source (floating) -->
+                    <g class="src-br">
+                        <rect x="380" y="310" width="110" height="64" rx="14" fill="var(--unomi-gradient-start)" opacity=".85"/>
+                        <text x="435" y="338" text-anchor="middle" fill="var(--unomi-white)" font-size="15" font-weight="600" font-family="Inter,sans-serif">IoT</text>
+                        <text x="435" y="358" text-anchor="middle" fill="var(--unomi-on-dark-dim)" font-size="12" font-family="Inter,sans-serif">Devices</text>
+                    </g>
+
+                    <!-- Output: Segment (bouncing) -->
+                    <g class="out-seg">
+                        <rect x="155" y="392" width="82" height="36" rx="10" fill="var(--unomi-accent)" opacity=".75"/>
+                        <text x="196" y="415" text-anchor="middle" fill="var(--unomi-white)" font-size="13" font-weight="700" font-family="Inter,sans-serif">Segment</text>
+                    </g>
+
+                    <!-- Output: AI Agent (bouncing) -->
+                    <g class="out-score">
+                        <rect x="283" y="392" width="82" height="36" rx="10" fill="var(--unomi-accent)" opacity=".75"/>
+                        <text x="324" y="415" text-anchor="middle" fill="var(--unomi-white)" font-size="13" font-weight="700" font-family="Inter,sans-serif">AI Agent</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- What is a CDP -->
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-8">
+                <p class="section-label">Why a Customer Data Platform?</p>
+                <h2 class="mb-3">Unify your customer data.<br>Personalize every experience.</h2>
+                <p class="lead">Organizations collect data from many channels and systems &mdash; web, mobile, email, in-store, CRM, support desks, IoT devices, and more. A CDP brings it all together into a single customer view, enabling smarter decisions, better experiences, and seamless service across every touchpoint.</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card text-center">
+                    <div class="feature-icon feature-icon-lg mx-auto">
+                        <i class="bi bi-person-bounding-box"></i>
+                    </div>
+                    <h3 class="h6 fw-semibold mb-2">Unified Profiles</h3>
+                    <p class="small text-muted mb-0">Consolidate customer data from every touchpoint into rich, persistent profiles.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card text-center">
+                    <div class="feature-icon feature-icon-lg mx-auto">
+                        <i class="bi bi-bullseye"></i>
+                    </div>
+                    <h3 class="h6 fw-semibold mb-2">Segmentation &amp; Scoring</h3>
+                    <p class="small text-muted mb-0">Build dynamic audience segments and lead scoring rules in real time.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card text-center">
+                    <div class="feature-icon feature-icon-lg mx-auto">
+                        <i class="bi bi-shield-lock"></i>
+                    </div>
+                    <h3 class="h6 fw-semibold mb-2">Privacy Built In</h3>
+                    <p class="small text-muted mb-0">GDPR consent management, data portability, and privacy controls as first-class features.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="feature-card text-center">
+                    <div class="feature-icon feature-icon-lg mx-auto">
+                        <i class="bi bi-puzzle"></i>
+                    </div>
+                    <h3 class="h6 fw-semibold mb-2">Extensible</h3>
+                    <p class="small text-muted mb-0">Plugin architecture with REST API, Groovy actions, and connectors to integrate anything.</p>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
-
-<!-- Marketing messaging and featurettes
-================================================== -->
-<!-- Wrap the rest of the page in another container to center all the content. -->
-
-<div class="container marketing pt-5">
-
-    <h1 class="mb-5">News</h1>
-
-    <div class="row">
-        <div class="col-lg-6 pl-5">
-            <h3>Version 3.0.0 released!</h3>
-            <h4>Changes in 3.0.0 (since 3.0.0)</h4>
-
-            <h2>Task</h2>
-            <ul>
-                <li>[<a href='https://issues.apache.org/jira/browse/UNOMI-876'>UNOMI-876</a>] - Upgrade to the latest stable version of Karaf
-                </li>
-                <li>[<a href='https://issues.apache.org/jira/browse/UNOMI-901'>UNOMI-901</a>] - Replace elasticsearch-rest-high-level-client with elasticsearch-java client
-                </li>
-            </ul>
-            <h2>Bug</h2>
-            <ul>
-                <li>[<a href='https://issues.apache.org/jira/browse/UNOMI-915'>UNOMI-915</a>] - Error on build with apache-release profile
-                </li>
-                <li>[<a href='https://issues.apache.org/jira/browse/UNOMI-916'>UNOMI-916</a>] - Fix release compliancy issues
-                </li>
-            </ul>
-
-        </div><!-- /.col-lg-8 -->
-        <div class="col-lg-6 my-auto mx-auto">
-        </div><!-- /.col-lg-4 -->
-    </div><!-- /.row -->
-
-    <hr class="featurette-divider">
-
-    <div class="row featurette">
-        <div class="col-md-12">
-            <h2 class="featurette-heading">Why would you need a <span class="text-muted">Customer Data Platform</span> ?
-            </h2>
-            <p>Organizations collect data from multiple sources and channels - sales, web, emails, mobile, brick and
-                mortar - and all of this data is spread across different departments and technologies. As a result, many
-                professionals are lacking the data they need to do their job, especially data analysts and
-                marketers.</p>
-            <p>A customer data platform helps business users collect all the customer data in one place, providing a
-                complete view of the customers. When the data is collected, the customer data platform will also play a
-                key role in choosing which content or offer is more relevant to a customer.</p>
+<!-- CDP in the AI Era -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-8">
+                <p class="section-label">AI-Ready Data</p>
+                <h2 class="mb-3">Your CDP is the foundation<br>for an AI-first world</h2>
+                <p class="lead">AI agents, copilots, and recommendation engines are only as good as the data they operate on. A CDP gives them what they need: clean, unified, real-time customer context &mdash; with privacy built in.</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon"><i class="bi bi-robot"></i></div>
+                    <h3 class="h6 fw-semibold mb-2">Feed AI Agents with Context</h3>
+                    <p class="small text-muted mb-0">LLMs and autonomous agents need customer context to be relevant. Unomi&rsquo;s REST API feeds real-time profiles, segments, and event history to any AI system &mdash; chatbots, support copilots, or recommendation engines.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon"><i class="bi bi-database-lock"></i></div>
+                    <h3 class="h6 fw-semibold mb-2">First-Party Data Is King</h3>
+                    <p class="small text-muted mb-0">Third-party cookies are gone. Privacy regulations are tightening. The most valuable AI training and context data is first-party data you collect and control through your own CDP.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon"><i class="bi bi-shield-check"></i></div>
+                    <h3 class="h6 fw-semibold mb-2">Privacy-Safe AI</h3>
+                    <p class="small text-muted mb-0">AI processing customer data raises serious privacy concerns. Unomi&rsquo;s GDPR consent management ensures your AI systems only use data customers have explicitly consented to share.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row g-4 mt-1 justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon"><i class="bi bi-lightning-charge"></i></div>
+                    <h3 class="h6 fw-semibold mb-2">Real-Time Decisioning</h3>
+                    <p class="small text-muted mb-0">AI-powered personalization requires millisecond-level customer context. Unomi processes events and updates profiles in real time, so your models always work with the freshest data.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="feature-card h-100">
+                    <div class="feature-icon"><i class="bi bi-plug"></i></div>
+                    <h3 class="h6 fw-semibold mb-2">Plug In Any AI</h3>
+                    <p class="small text-muted mb-0">Unlike proprietary CDPs that lock you into specific vendors, Unomi is open. Connect OpenAI, Anthropic, local models, or custom ML pipelines &mdash; your choice, your infrastructure.</p>
+                </div>
+            </div>
         </div>
     </div>
+</section>
 
-    <div class="row featurette pt-5">
-        <div class="col-md-12">
-            <h2 class="featurette-heading">The <span class="text-muted">Apache Unomi&trade;</span> advantage ?</h2>
-            <p>Each organization is unique and will always have specific needs, this is why Apache Unomi&trade; has been
-                designed to be extended and to ease the integration of external data. The embedded features such as
-                segmentation, scoring and built-in privacy will be appreciated by business users while horizontal
-                scalability and open source positioning will be loved by developers and architects. </p>
-            <p>Apache Unomi&trade; is also the reference implementation of the upcoming OASIS Context Server Customer
-                Data Platform (CDP) standard (<a target="_blank" href="https://www.oasis-open.org/committees/cxs/">https://www.oasis-open.org/committees/cxs/</a>)
-                to help standardize personalization of customer experience while promoting ethical web experience
-                management and increased user privacy controls. </p>
+<!-- Architecture Diagram (Mermaid) -->
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-8">
+                <p class="section-label">Architecture</p>
+                <h2 class="mb-3">How Apache Unomi works</h2>
+                <p class="lead">All communication happens via REST/JSON. Data flows in from any source, gets unified into profiles, and drives real-time decisions.</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <pre class="mermaid">
+graph LR
+    subgraph Sources["Data Sources"]
+        WEB["🌐 Web"]
+        MOB["📱 Mobile"]
+        CRM["💼 CRM"]
+        IOT["📡 IoT"]
+    end
+
+    subgraph Unomi["Apache Unomi"]
+        API["REST API"]
+        PE["Processing Engine"]
+        PROF["Profile Store"]
+        SEG["Segmentation"]
+        RULES["Rules Engine"]
+    end
+
+    subgraph Outputs["Actions"]
+        PERS["🎯 Personalization"]
+        SCORE["📊 Scoring"]
+        EXPORT["📤 Data Export"]
+        AIAGENT["🤖 AI Agents"]
+    end
+
+    WEB --> API
+    MOB --> API
+    CRM --> API
+    IOT --> API
+    API --> PE
+    PE --> PROF
+    PE --> SEG
+    PE --> RULES
+    SEG --> PERS
+    RULES --> SCORE
+    PROF --> EXPORT
+    PROF --> AIAGENT
+    SEG --> AIAGENT
+                </pre>
+            </div>
         </div>
     </div>
+</section>
 
-    <div class="row featurette pt-5">
-        <div class="col-md-12">
-            <h2 class="featurette-heading">Business cases based on <span class="text-muted">Apache Unomi&trade;</span> ?
-            </h2>
-            <ul>
-                <li>Build a web personalization software to adapt the content on your website to your audience</li>
-                <li>Collect data from mobile application and feed Apache Unomi&trade; to track and understand your
-                    customers’ journeys
-                </li>
-                <li>Connect the beacons deployed in your stores to Apache Unomi&trade; and consolidate the profile of
-                    your customers and leads across all these channels
-                </li>
-                <li>Automatically push profiles from Apache Unomi&trade; to your CRM when a lead reach a given number of
-                    points in one of your scoring plans
-                </li>
-            </ul>
+<!-- For Developers & Business Users -->
+<section class="section">
+    <div class="container">
+        <div class="row g-5 align-items-start">
+            <div class="col-lg-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="feature-icon me-3"><i class="bi bi-code-slash"></i></div>
+                    <h2 class="h4 mb-0">For Developers</h2>
+                </div>
+                <ul class="list-unstyled mt-3">
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2 mt-1"></i>
+                        <span>Elasticsearch backend with dynamic, schema-free data structures</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2 mt-1"></i>
+                        <span>Horizontally scalable &mdash; built on Apache Karaf&trade; OSGi runtime</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2 mt-1"></i>
+                        <span>Full REST API &mdash; easy to integrate from any language or platform</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2 mt-1"></i>
+                        <span>Plugin architecture with JSON descriptors &mdash; extend without forking</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2 mt-1"></i>
+                        <span>Reference implementation of the <a href="https://www.oasis-open.org/committees/cxs/" target="_blank" rel="noopener">OASIS CDP standard</a></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <div class="d-flex align-items-center mb-3">
+                    <div class="feature-icon me-3 icon-success"><i class="bi bi-bar-chart-line"></i></div>
+                    <h2 class="h4 mb-0">For Business &amp; IT Leaders</h2>
+                </div>
+                <ul class="list-unstyled mt-3">
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="bi bi-check-circle-fill me-2 mt-1 text-success-var"></i>
+                        <span>First-party data collection &mdash; own your customer data</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="bi bi-check-circle-fill me-2 mt-1 text-success-var"></i>
+                        <span>Persistent, unified profiles across anonymous and identified visitors</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="bi bi-check-circle-fill me-2 mt-1 text-success-var"></i>
+                        <span>Built-in GDPR consent management and privacy controls</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="bi bi-check-circle-fill me-2 mt-1 text-success-var"></i>
+                        <span>Real-time segmentation and scoring for immediate decisioning</span>
+                    </li>
+                    <li class="d-flex align-items-start mb-3">
+                        <i class="bi bi-check-circle-fill me-2 mt-1 text-success-var"></i>
+                        <span>Open source &amp; open standard &mdash; no vendor lock-in</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
+</section>
 
-    <div class="row featurette pt-5">
-        <div class="col-md-12">
-            <h2 class="featurette-heading"><span class="text-muted">Apache Unomi&trade;</span> logical architecture</h2>
-            <p>All communication is done using HTTP REST requests and JSON data formats.</p>
+<!-- Quick Start Steps -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-7">
+                <p class="section-label">Quick Start</p>
+                <h2 class="mb-3">Up and running in minutes</h2>
+            </div>
         </div>
-    </div>
-
-    <div class="row featurette">
-        <div class="col-md-12">
-            <img src="assets/images/unomi-logical-architecture-diagram.png"
-                 alt="Apache Unomi logical architecture diagram" class="img-fluid"/>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="step-number mx-auto mb-3">1</div>
+                    <h3 class="h6 fw-semibold mb-2">Download</h3>
+                    <p class="small text-muted">Grab the latest release or use our Docker image to spin up instantly.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="step-number mx-auto mb-3">2</div>
+                    <h3 class="h6 fw-semibold mb-2">Configure</h3>
+                    <p class="small text-muted">Point to your Elasticsearch instance and customize settings as needed.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="step-number mx-auto mb-3">3</div>
+                    <h3 class="h6 fw-semibold mb-2">Integrate</h3>
+                    <p class="small text-muted">Use the REST API to send events, query profiles, and build personalized experiences.</p>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <div class="row featurette pt-5">
-        <div class="col-md-6">
-            <h2>For developers</h2>
-            <ul>
-                <li>Uses ElasticSearch for data storage, dynamic data structure</li>
-                <li>Highly scalable architecture</li>
-                <li>Very simple to deploy and install (simply unzip &amp; run)</li>
-                <li>Uses Apache Karaf&trade; as the OSGi runtime</li>
-                <li>Full &amp; simple REST API</li>
-                <li>Extensible through plugin architecture (using OSGi &amp; simple JSON descriptors)</li>
-                <li>Apache Open Source project</li>
-            </ul>
-        </div>
-        <div class="col-md-6">
-            <h2>For IT stakeholders and business users</h2>
-            <ul>
-                <li>First-Party Data Collection and Ownership</li>
-                <li>Persistent and consolidated profiles for all your audience (customers &amp; leads), storing
-                    anonymous and personally identifiable information
-                </li>
-                <li>Regulation-proof and privacy management built-in</li>
-                <li>Real-Time Decisioning (Scoring logics, segmentation)</li>
-                <li>Open standard, easy integration and extension</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="row featurette pt-5">
-        <div class="col-md-12">
-            <h2 class="featurette-heading">Articles &amp; slides</h2>
-            <p>Checkout the latest <a href="resources.html#articlesAndSlides">articles and slides</a></p>
-        </div>
-    </div>
-
-    <div class="row featurette mb-5 pt-5">
-        <div class="col-md-7">
-            <h2 class="featurette-heading">Apache & OpenSource.</h2>
-            <p>
-                Unomi&trade; is your project ! Unomi&trade; is an Apache Software Foundation project, available under
-                the Apache v2 license.
-                It's a complete open community, always listening proposals and comments.
-                Sources, mailing lists, issue tracker: it's fully open, you can access directly.
-                We also love contributions : don't hesitate to contribute.
-            </p>
-            <p>
-                <a href="community/index.html">Be Involved In The Community</a> |
-                <a href="contribute/index.html">How To Contribute</a>
-            </p>
-        </div>
-        <div class="col-md-5 align-items-center">
-            <a href="https://apache.org" target="_blank">
-                <img class="featurette-image img-fluid mx-auto" src="assets/images/asf_logo_wide.svg"
-                     alt="Apache Software Foundation">
+        <div class="text-center mt-4">
+            <a href="/get-started.html" class="btn btn-primary">
+                <i class="bi bi-rocket-takeoff me-2"></i>Follow the Getting Started Guide
             </a>
-            <br><br><br>
-            <a href="https://events.apache.org/x/current-event.html" target="_blank">
-                <img class="featurette-image img-fluid mx-auto"
-                     src="https://www.apache.org/events/current-event-234x60.png" alt="Community over Code"/>
-            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Ecosystem teaser -->
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-7">
+                <p class="section-label">Ecosystem</p>
+                <h2 class="mb-3">Trusted by innovative companies</h2>
+                <p class="lead">Apache Unomi powers customer data platforms, digital experience solutions, and personalization engines worldwide.</p>
+            </div>
         </div>
     </div>
 
-    <!-- /END THE FEATURETTES -->
+    <!-- Horizontal scrolling marquee -->
+    <div class="ecosystem-marquee" aria-label="Companies using Apache Unomi">
+        <div class="ecosystem-track" id="ecosystemTrack">
+            <!-- Cards are duplicated in JS for seamless loop -->
+            <div class="ecosystem-card" data-company>
+                <span class="badge badge-primary mb-2">Digital Experience</span>
+                <h3 class="h6 fw-semibold mb-1">Jahia jExperience</h3>
+                <p class="small text-muted mb-2">The original contributor of Apache Unomi, powering their CDP and Digital Experience Platform.</p>
+                <a href="https://www.jahia.com" target="_blank" rel="noopener" class="small fw-semibold">www.jahia.com <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div class="ecosystem-card" data-company>
+                <span class="badge badge-primary mb-2">Personalization</span>
+                <h3 class="h6 fw-semibold mb-1">Ninetailed</h3>
+                <p class="small text-muted mb-2">Complete visitor view, segment discovery, and personalization recommendations &mdash; powered by Unomi.</p>
+                <a href="https://ninetailed.io" target="_blank" rel="noopener" class="small fw-semibold">ninetailed.io <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div class="ecosystem-card" data-company>
+                <span class="badge badge-primary mb-2">DXP &amp; Marketing</span>
+                <h3 class="h6 fw-semibold mb-1">Dropsolid Experience Cloud</h3>
+                <p class="small text-muted mb-2">DXP platform using Unomi for smart segmentation and cross-system marketing integration.</p>
+                <a href="https://dropsolid.com" target="_blank" rel="noopener" class="small fw-semibold">dropsolid.com <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div class="ecosystem-card" data-company>
+                <span class="badge badge-primary mb-2">CDP Solutions</span>
+                <h3 class="h6 fw-semibold mb-1">Inoyu</h3>
+                <p class="small text-muted mb-2">Founded by the original Unomi developer, delivering innovative CDP implementations and commercial extensions.</p>
+                <a href="https://www.inoyu.dev" target="_blank" rel="noopener" class="small fw-semibold">www.inoyu.dev <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div class="ecosystem-card" data-company>
+                <span class="badge badge-primary mb-2">Expert Services</span>
+                <h3 class="h6 fw-semibold mb-1">Yupiik</h3>
+                <p class="small text-muted mb-2">Deep Apache expertise. Core contributors to Karaf, ActiveMQ, Camel, and Unomi with professional services.</p>
+                <a href="https://www.yupiik.com" target="_blank" rel="noopener" class="small fw-semibold">www.yupiik.com <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <!-- "Hidden gems" teaser card -->
+            <div class="ecosystem-card ecosystem-card-oss" data-company>
+                <div class="text-center">
+                    <i class="bi bi-globe2 d-block mb-2 icon-lg-primary"></i>
+                    <h3 class="h6 fw-semibold mb-2">And many more&hellip;</h3>
+                    <p class="small text-muted mb-0">Countless teams around the world build on Apache Unomi without ever telling us. That&rsquo;s the beauty of open source &mdash; anyone can adopt it freely and make it their own.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-</div><!-- /.container -->
+    <div class="container">
+        <div class="text-center mt-4">
+            <a href="/integrations.html" class="btn btn-outline-primary">View All Integrations &amp; Partners <i class="bi bi-arrow-right ms-1"></i></a>
+        </div>
+    </div>
+</section>
+
+<script>
+(function() {
+    // Shuffle company cards on load, then duplicate for seamless loop
+    var track = document.getElementById('ecosystemTrack');
+    if (!track) return;
+    var cards = Array.from(track.querySelectorAll('[data-company]'));
+    // Fisher-Yates shuffle
+    for (var i = cards.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        track.appendChild(cards[j]);
+        var tmp = cards[i]; cards[i] = cards[j]; cards[j] = tmp;
+    }
+    // Duplicate cards for seamless infinite scroll
+    cards = Array.from(track.querySelectorAll('[data-company]'));
+    cards.forEach(function(c) { track.appendChild(c.cloneNode(true)); });
+
+    // Pause on hover
+    track.addEventListener('mouseenter', function() { track.style.animationPlayState = 'paused'; });
+    track.addEventListener('mouseleave', function() { track.style.animationPlayState = 'running'; });
+
+    // Respect prefers-reduced-motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        track.style.animation = 'none';
+        track.style.justifyContent = 'center';
+        track.style.flexWrap = 'wrap';
+    }
+})();
+</script>
+
+<!-- Latest News — capped at 10 most recent items (releases + articles + events), newest first.
+     To add a news item, copy any <div class="news-item"> block and update date, icon, and content.
+     Icon classes:  bi-rocket-takeoff = release,  bi-journal-richtext = blog/article,
+                    bi-calendar-event = event,  bi-megaphone = announcement,  bi-camera-video = video -->
+<section class="section" id="news">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <p class="section-label">News</p>
+                <h2 class="mb-4">What&rsquo;s New</h2>
+
+                <div class="news-item">
+                    <span class="news-date">2025-11-10</span>
+                    <i class="bi bi-rocket-takeoff news-icon text-success-var"></i>
+                    <div>
+                        <strong class="small">Apache Unomi {{ site.data.unomi.latest.stable.version }} released</strong>
+                        <span class="small text-muted">&mdash; Karaf upgrade, new ES Java client, bug fixes.</span>
+                        <a href="/download.html" class="news-link">Download</a>
+                        <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12355172" target="_blank" rel="noopener" class="news-link">Release notes</a>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">2025-09-30</span>
+                    <i class="bi bi-calendar-event news-icon"></i>
+                    <div>
+                        <strong class="small">2 talks at Community Over Code NA 2025</strong>
+                        <span class="small text-muted">&mdash; AI + CDP demos in Minneapolis.</span>
+                        <a href="/community/events/index.html#coc-2025" class="news-link">Watch talks</a>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">2025-09-02</span>
+                    <i class="bi bi-rocket-takeoff news-icon"></i>
+                    <div>
+                        <strong class="small">Apache Unomi 2.7.0 released</strong>
+                        <span class="small text-muted">&mdash; Bug fixes and Groovy action improvements.</span>
+                        <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12354778" target="_blank" rel="noopener" class="news-link">Release notes</a>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">2025-08-15</span>
+                    <i class="bi bi-journal-richtext news-icon"></i>
+                    <div>
+                        <a href="https://medium.com/@otavio/customizing-the-user-experience-of-your-product-with-open-source-tech-218e27415179" target="_blank" rel="noopener" class="small fw-semibold">Customizing the User Experience with Open Source Tech</a>
+                        <span class="small text-muted">&mdash; Medium article on personalized experiences with Unomi.</span>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">2025-06-10</span>
+                    <i class="bi bi-rocket-takeoff news-icon"></i>
+                    <div>
+                        <strong class="small">Apache Unomi 2.6.1 released</strong>
+                        <span class="small text-muted">&mdash; Maintenance release with stability improvements.</span>
+                        <a href="/download.html#archives" class="news-link">Archives</a>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">2025-01-15</span>
+                    <i class="bi bi-camera-video news-icon"></i>
+                    <div>
+                        <strong class="small">OpenSearch contribution presentation</strong>
+                        <span class="small text-muted">&mdash; Presentation on the upcoming OpenSearch persistence support.</span>
+                        <a href="/community/events/index.html#opensearch-2025" class="news-link">Watch</a>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">2024-12-10</span>
+                    <i class="bi bi-camera-video news-icon"></i>
+                    <div>
+                        <strong class="small">Claude AI + MCP + Unomi demo</strong>
+                        <span class="small text-muted">&mdash; Live demo of an AI agent querying real-time customer data.</span>
+                        <a href="/community/events/index.html#mcp-demo-2024" class="news-link">Watch</a>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">2021-11-18</span>
+                    <i class="bi bi-people news-icon"></i>
+                    <div>
+                        <strong class="small">First Apache Unomi Community Meetup</strong>
+                        <span class="small text-muted">&mdash; Online meetup with roadmap, demo, and Q&amp;A.</span>
+                        <a href="/community/events/index.html#meetup-2021" class="news-link">Details</a>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">2020-06-01</span>
+                    <i class="bi bi-mic news-icon"></i>
+                    <div>
+                        <strong class="small">Feathercast interview &mdash; What is Apache Unomi?</strong>
+                        <span class="small text-muted">&mdash; ASF podcast episode introducing the project.</span>
+                        <a href="/community/events/index.html#feathercast-2020" class="news-link">Listen</a>
+                    </div>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">2019-09-09</span>
+                    <i class="bi bi-calendar-event news-icon"></i>
+                    <div>
+                        <strong class="small">ApacheCon NA 2019 &amp; Chicago Roadshow</strong>
+                        <span class="small text-muted">&mdash; 2 talks on digital marketing &amp; CDP architecture.</span>
+                        <a href="/community/events/index.html#apachecon-2019" class="news-link">Watch talks</a>
+                    </div>
+                </div>
+
+                <div class="text-center mt-3">
+                    <a href="/community/events/index.html" class="small fw-semibold text-decoration-none">View all events &amp; past talks <i class="bi bi-arrow-right"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Apache & Open Source -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="row g-5 align-items-center justify-content-center">
+            <div class="col-md-5 col-lg-4 text-center">
+                <a href="https://apache.org" target="_blank" rel="noopener">
+                    <img src="/assets/images/asf_logo_wide.svg" alt="Apache Software Foundation" class="img-fluid mb-3 mw-220">
+                </a>
+                <a href="https://events.apache.org/x/current-event.html" target="_blank" rel="noopener" class="d-block">
+                    <img src="https://www.apache.org/events/current-event-234x60.png" alt="Apache Events" class="img-fluid mw-234">
+                </a>
+            </div>
+            <div class="col-md-7 col-lg-5">
+                <h2 class="h4 fw-bold mb-3">Apache &amp; Open Source</h2>
+                <p class="text-muted">Apache Unomi is <strong>your project</strong>. As an Apache Software Foundation project released under the Apache v2 license, it&rsquo;s built by a complete open community &mdash; always listening to proposals and comments. Sources, mailing lists, issue tracker: it&rsquo;s fully open and you can access everything directly.</p>
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                    <a href="/community/index.html" class="btn btn-primary btn-sm"><i class="bi bi-people me-1"></i> Get Involved</a>
+                    <a href="/contribute/index.html" class="btn btn-outline-primary btn-sm"><i class="bi bi-code-slash me-1"></i> How to Contribute</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Community CTA -->
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="cta-banner text-center">
+                    <h2 class="h3 mb-3">Join the Apache Unomi Community</h2>
+                    <p class="mb-4">Get help, share ideas, and connect with developers and users around the world.</p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="mailto:users-subscribe@unomi.apache.org" class="btn btn-light btn-lg fw-semibold">
+                            <i class="bi bi-envelope-heart me-2"></i>Subscribe to Mailing List
+                        </a>
+                        <a href="/community/index.html" class="btn btn-outline-light btn-lg fw-semibold">
+                            <i class="bi bi-chat-dots me-2"></i>All Contact Options
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

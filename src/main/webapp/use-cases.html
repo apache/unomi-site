@@ -1,44 +1,199 @@
 ---
 title: Use Cases
+description: "Apache Unomi use cases: web personalization, mobile analytics, profile management, and data backbone for AI agents and machine learning."
+keywords: "Apache Unomi use cases, web personalization, mobile analytics, customer profiles, AI CDP, machine learning, segmentation"
 layout: default
+mermaid: true
+structured_data: >
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How can Apache Unomi be used for AI and machine learning?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Apache Unomi serves as the real-time customer data backbone for AI agents, chatbots, recommendation engines, and predictive models. It provides unified profiles, segments, and event data via REST API with built-in consent management to ensure AI only processes data customers have explicitly consented to share."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does Apache Unomi work for web personalization?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Apache Unomi integrates with CMS platforms to track visitors, build profiles, define real-time segments, and deliver personalized content. A lightweight JavaScript tracker sends events, while the context servlet returns matching personalization rules for the current visitor."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can Apache Unomi be used as a mobile analytics backend?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. Native mobile apps send events to the Unomi REST API to track user journeys, build profiles, and compute segments. This enables personalized mobile experiences based on real-time behavioral data."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does Apache Unomi handle centralized profile management?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Unomi aggregates customer data from CRM, support, commerce, and other systems into unified profiles. It resolves multiple identities across touchpoints and provides a single customer view via REST API."
+                }
+            }
+        ]
+    }
+    </script>
 ---
 
-    <div class="container pt-5 pb-2">
-      <div class="jumbotron p-3 p-md-5 text-white bg-primary">
-        <div class="col-md-12 px-0">
-          <h1 class="display-5 font-italic">Apache Unomi has several use cases for what you need!</h1>
-          <p class="lead my-3">Apache Unomi is a REST server that manages user profiles and events related to the profiles. It can be used to integrate personalization and profile management within very different systems such as CMS, CRMs, Issue Trackers, native mobile application. It was designed to be easy to integrate with external systems, promoting profile sharing and re-use in very different applications.</p>
-          <p class="lead mb-0">Let's start !</p>
-        </div>
-      </div>
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Use Cases</p>
+        <h1>What Can You Build with Unomi?</h1>
+        <p class="lead">Apache Unomi is a flexible CDP that adapts to many architectures. Here are the most common use cases.</p>
     </div>
+</section>
 
-      <div class="container">
-
-        <!-- use-cases -->
-        <div class="row pb-4 pt-4 border-bottom">
-            <div class="col-md-12">
-              <h5 class="project-heading pb-4">Use cases</h5>
-
-              <h3 class="font-italic">Use Apache Unomi as a <span class="text-muted">personalization service</span> for a Web CMS</h3>
-              <div class="pb-2 pt-2">
-                <p>In this use case Apache Unomi is used to track all the users that visits the sites being managed by the CMS. The sites may also contain personalized content elements that will use the profile information coming from Apache Unomi to change their display based on the user. It will also send events (such as login events for example) back to the server using simple AJAX calls to the Apache Unomi REST API.</p>
-                <p>The Web CMS can also build UIs to expose the privacy management feature to end-users of the platform, and will of course build UIs to perform administration tasks such as profile, segments, goals, rules management.</p>
-              </div>
-
-              <h3 class="font-italic">Use Apache Unomi as an <span class="text-muted">analytics service</span> for a native mobile application</h3>
-              <div class="pb-2 pt-2">
-                <p>In this case the server is used as a back-end for a native mobile application that will authenticate a user and then send events to the server when the user performs certains tasks within the app. Tasks may include pressing a button, getting close to a location (using GPS or beacons), etc…</p>
-                <p>The application may also include a UI to expose the privacy management features of Apache Unomi.</p>
-              </div>
-
-              <h3 class="font-italic">Use Apache Unomi as a <span class="text-muted">centralized profile management system</span></h3>
-              <div class="pb-2 pt-2">
-                <p>In this use case the server is used a centralized profile management system, making it easy to aggregate different profile information that may be stored in different systems such as CRMs, Issue tracking systems, forums, CMS, … One way of achieving this is to make sure that “anonymous” profiles are merged when an event such as a login happens and a unique cross-system identifier (usually the email address) is detected on each system.</p>
-                <p>In this case connectors to all the different systems will need to be developped (and hopefully contributed back to the Apache Unomi community), so that the centralization of the information is managed by an Open Source and standards compliant server community.</p>
-              </div>
+<!-- Use Case 1: AI-Powered Customer Intelligence -->
+<section class="section">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <span class="badge badge-primary mb-3">AI &amp; Machine Learning</span>
+                <h2>Data backbone for AI agents &amp; copilots</h2>
+                <p class="text-muted">In an AI-first world, models are only as good as the data they can access. Use Unomi as the real-time customer data layer that feeds AI agents, chatbots, recommendation engines, and predictive models with rich, privacy-compliant context.</p>
+                <ul class="list-unstyled small">
+                    <li class="d-flex align-items-start mb-2"><i class="bi bi-check2 text-primary me-2 mt-1"></i><span>Feed customer profiles and segments to LLMs for context-aware responses</span></li>
+                    <li class="d-flex align-items-start mb-2"><i class="bi bi-check2 text-primary me-2 mt-1"></i><span>Power recommendation engines with real-time behavioral data</span></li>
+                    <li class="d-flex align-items-start mb-2"><i class="bi bi-check2 text-primary me-2 mt-1"></i><span>Use rules to trigger AI workflows when specific events occur</span></li>
+                    <li class="d-flex align-items-start mb-2"><i class="bi bi-check2 text-primary me-2 mt-1"></i><span>Built-in consent management ensures AI only processes consented data</span></li>
+                </ul>
             </div>
-        </div><!-- use-cases -->
+            <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="mermaid">
+graph TD
+    U["Apache Unomi"] -->|Profiles &amp; Segments| AI["🤖 AI Agent / LLM"]
+    U -->|Event Stream| ML["📊 ML Pipeline"]
+    AI -->|Personalized Actions| APP["🌐 App / Website"]
+    ML -->|Predictions| U
+    APP -->|Events| U
+                </pre>
+            </div>
+        </div>
+    </div>
+</section>
 
-      </div><!-- /.container -->
+<hr class="section-divider">
 
+<!-- Use Case 2: Web Personalization -->
+<section class="section">
+    <div class="container">
+        <div class="row g-5 align-items-center flex-lg-row-reverse">
+            <div class="col-lg-6">
+                <span class="badge badge-primary mb-3">Web Personalization</span>
+                <h2>Personalization service for a Web CMS</h2>
+                <p class="text-muted">Track every visitor across your CMS-managed sites. Use profile data to personalize content elements in real time &mdash; showing different banners, offers, or articles based on who the visitor is.</p>
+                <ul class="list-unstyled small">
+                    <li class="d-flex align-items-start mb-2"><i class="bi bi-check2 text-primary me-2 mt-1"></i><span>Track page views, clicks, logins, and custom events via AJAX calls</span></li>
+                    <li class="d-flex align-items-start mb-2"><i class="bi bi-check2 text-primary me-2 mt-1"></i><span>Build user-facing privacy management UIs</span></li>
+                    <li class="d-flex align-items-start mb-2"><i class="bi bi-check2 text-primary me-2 mt-1"></i><span>Manage profiles, segments, goals, and rules from admin interfaces</span></li>
+                </ul>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="mermaid">
+graph TD
+    V["🌐 Visitor"] -->|Page view| CMS["Web CMS"]
+    CMS -->|Event| U["Apache Unomi"]
+    U -->|Profile + Segments| CMS
+    CMS -->|Personalized Content| V
+                </pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- Use Case 3: Mobile Analytics -->
+<section class="section">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <span class="badge badge-primary mb-3">Mobile Analytics</span>
+                <h2>Analytics service for mobile apps</h2>
+                <p class="text-muted">Use Unomi as the backend for native mobile applications. Authenticate users, then send events for button taps, GPS proximity, beacon interactions, and other app actions.</p>
+                <ul class="list-unstyled small">
+                    <li class="d-flex align-items-start mb-2"><i class="bi bi-check2 text-primary me-2 mt-1"></i><span>REST API works from any mobile SDK or language</span></li>
+                    <li class="d-flex align-items-start mb-2"><i class="bi bi-check2 text-primary me-2 mt-1"></i><span>Track GPS, beacons, and in-app events</span></li>
+                    <li class="d-flex align-items-start mb-2"><i class="bi bi-check2 text-primary me-2 mt-1"></i><span>Expose privacy controls to app users</span></li>
+                </ul>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="mermaid">
+graph LR
+    M["📱 Mobile App"] -->|Auth + Events| U["Apache Unomi"]
+    U --> P["Profile Store"]
+    U --> S["Segmentation"]
+    U --> SC["Scoring"]
+    B["📡 Beacons"] -->|Proximity| M
+                </pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- Use Case 4: Centralized Profile Management -->
+<section class="section">
+    <div class="container">
+        <div class="row g-5 align-items-center flex-lg-row-reverse">
+            <div class="col-lg-6">
+                <span class="badge badge-primary mb-3">Centralized Profiles</span>
+                <h2>Centralized profile management</h2>
+                <p class="text-muted">Aggregate customer data from CRMs, issue trackers, forums, CMS, and any other system into one unified profile. Anonymous profiles merge automatically when a shared identifier (like an email) is detected.</p>
+                <ul class="list-unstyled small">
+                    <li class="d-flex align-items-start mb-2"><i class="bi bi-check2 text-primary me-2 mt-1"></i><span>Merge anonymous and identified profiles automatically</span></li>
+                    <li class="d-flex align-items-start mb-2"><i class="bi bi-check2 text-primary me-2 mt-1"></i><span>Build connectors to CRM, support, and commerce systems</span></li>
+                    <li class="d-flex align-items-start mb-2"><i class="bi bi-check2 text-primary me-2 mt-1"></i><span>Open standards-compliant &mdash; community-driven connectors</span></li>
+                </ul>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                <pre class="mermaid">
+graph TD
+    CRM["💼 CRM"] --> U["Apache Unomi"]
+    FORUM["💬 Forum"] --> U
+    CMS2["🌐 CMS"] --> U
+    SHOP["🛒 Commerce"] --> U
+    U --> PROFILE["Unified Profile"]
+    PROFILE --> SEG["Segments"]
+    PROFILE --> EXPORT["Export / Sync"]
+                </pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section section-alt">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="cta-banner text-center">
+                    <h3 class="h4 mb-3">Ready to try it?</h3>
+                    <p class="mb-4">Get Apache Unomi running in minutes with Docker, then explore the REST API.</p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <a href="/get-started.html#quickstart" class="btn btn-light fw-semibold">
+                            <i class="bi bi-rocket-takeoff me-2"></i>Quick Start
+                        </a>
+                        <a href="/integrations.html" class="btn btn-outline-light fw-semibold">
+                            <i class="bi bi-puzzle me-2"></i>See Real-World Integrations
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

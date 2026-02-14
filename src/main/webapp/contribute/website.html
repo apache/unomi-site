@@ -1,55 +1,57 @@
 ---
-title: Contribute | Website
+title: Website Guide
+description: "Guide for contributing to the Apache Unomi website, including Jekyll setup, content editing, and publishing."
+keywords: "Apache Unomi website, contribute website, Jekyll, site development, documentation"
 layout: default
 ---
 
-      <!-- Marketing messaging and featurettes
-      ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Contribute</p>
+        <h1>Website Guide</h1>
+    </div>
+</section>
 
-      <div class="container">
-        <!-- CONTRIBUTE -->
-        <div class="row mb-5 mt-5 pt-3">
-          <div class="col-2 sidenav-menu pt-3">
-            <div class="pb-3 text-uppercase"><strong>Contribute</strong></div>
-            <ul class="list-unstyled mb-3">
-              <li><a href="index.html">Get started contributing</a></li>
-              <li class="sidenav-menu-sub-title">Technical Docs</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="testing.html">Testing guide</a></li>
-                  <li><a href="dependencies-guide.html">Dependencies guide</a></li>
-                </ul>
-              </li>
-              <li class="sidenav-menu-sub-title">Policies</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="pre-commit-test-policies.html">Pre-commit test policies</a></li>
-                  <li><a href="post-commit-test-policies.html">Post-commit test policies</a></li>
-                </ul>
-              </li>
-              <li class="sidenav-menu-sub-title">Committers</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="become-a-committer.html">Become a committer</a></li>
-                  <li><a href="committer-guide.html">Committer guide</a></li>
-                  <li><a href="release-guide.html">Release guide</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div class="col-8 pt-3 offset-4">
+<section class="section">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-3">
+                <div class="sidenav-menu">
+                    <div class="menu-title">Contribute</div>
+                    <ul class="list-unstyled mb-3">
+                        <li><a href="index.html">Getting Started</a></li>
+                    </ul>
+                    <div class="menu-title mt-3">Technical Docs</div>
+                    <ul class="list-unstyled mb-3">
+                        <li><a href="testing.html">Testing Guide</a></li>
+                        <li><a href="dependencies-guide.html">Dependencies Guide</a></li>
+                        <li><a href="website.html" class="active">Website Guide</a></li>
+                    </ul>
+                    <div class="menu-title mt-3">Policies</div>
+                    <ul class="list-unstyled mb-3">
+                        <li><a href="pre-commit-test-policies.html">Pre-commit Policies</a></li>
+                        <li><a href="post-commit-test-policies.html">Post-commit Policies</a></li>
+                    </ul>
+                    <div class="menu-title mt-3">Committers</div>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="become-a-committer.html">Become a Committer</a></li>
+                        <li><a href="committer-guide.html">Committer Guide</a></li>
+                        <li><a href="release-guide.html">Release Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
             <h2 class="pb-1">Website Contributions</h2>
 
             <p>Contributions to the website require the same steps as contributions to the main repository, so start with the instructions for <a href="index.html">Contributing Code</a>.</p>
 
-            <p>The Unomi website is in the <a target="_blank" href="https://github.com/apache/unomi-site">Unomi Site GitHub mirror</a> repository in the <code>asf-site</code> branch (<em>not</em> <code>master</code>).</p>
+            <p>The Unomi website is in the <a target="_blank" rel="noopener" href="https://github.com/apache/unomi-site">Unomi Site GitHub mirror</a> repository in the <code>asf-site</code> branch (<em>not</em> <code>master</code>).</p>
 
-            <p>Issues are tracked in the <a target="_blank" href="https://issues.apache.org/jira/issues/?jql=project%20%3D%20UNOMI%20AND%20component%20%3D%20website">website</a> component in JIRA.</p>
+            <p>Issues are tracked in the <a target="_blank" rel="noopener" href="https://issues.apache.org/jira/issues/?jql=project%20%3D%20UNOMI%20AND%20component%20%3D%20website">website</a> component in JIRA.</p>
 
             <h3 id="one-time-setup">One-time Setup</h3>
 
-            <p>The <a target="_blank" href="https://github.com/apache/unomi-site/blob/asf-site/README.md">README file</a> in the website repository has more information on how to set up the required dependencies for your development environment.</p>
+            <p>The <a target="_blank" rel="noopener" href="https://github.com/apache/unomi-site/blob/asf-site/README.md">README file</a> in the website repository has more information on how to set up the required dependencies for your development environment.</p>
 
             <p>The general guidelines for cloning a repository can be adjusted to use the <code>asf-site</code> branch of <code>unomi-site</code>:</p>
 
@@ -76,7 +78,7 @@ layout: default
 
             <p class="alert alert-primary"><code>$ git checkout -- content</code></p>
 
-            <p>When you are ready, submit a pull request using the <a target="_blank" href="https://github.com/apache/unomi-site">Unomi Site GitHub mirror</a>, including the JIRA issue as usual.</p>
+            <p>When you are ready, submit a pull request using the <a target="_blank" rel="noopener" href="https://github.com/apache/unomi-site">Unomi Site GitHub mirror</a>, including the JIRA issue as usual.</p>
 
             <p>During review, committers will patch in your PR, generate the static <code>content/</code>, and review the changes.</p>
 
@@ -85,6 +87,7 @@ layout: default
             <p>We have a bot that runs tests and merges changes to the website. When the pull request is fully ready to be merged, a committer can comment</p>
 
             <p class="alert alert-primary"><code>@asfgit merge</code></p>
-          </div>
+            </div>
         </div>
-      </div>
+    </div>
+</section>

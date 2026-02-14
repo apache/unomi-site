@@ -1,46 +1,45 @@
 ---
 title: Contribute | Post-commit test policies
+description: "Learn about Apache Unomi post-commit test policies and requirements."
+keywords: "Apache Unomi testing, post-commit tests, test policies, CI testing, quality assurance"
 layout: default
 ---
 
-      <!-- Marketing messaging and featurettes
-      ================================================== -->
-      <!-- Wrap the rest of the page in another container to center all the content. -->
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Contribute</p>
+        <h1>Post-commit tests policies</h1>
+    </div>
+</section>
 
-      <div class="container">
-        <!-- CONTRIBUTE -->
-        <div class="row mb-5 mt-5 pt-3">
-          <div class="col-2 sidenav-menu pt-3">
-            <div class="pb-3 text-uppercase"><strong>Contribute</strong></div>
-            <ul class="list-unstyled mb-3">
-              <li><a href="index.html">Get started contributing</a></li>
-              <li class="sidenav-menu-sub-title">Technical Docs</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="testing.html">Testing guide</a></li>
-                  <li><a href="dependencies-guide.html">Dependencies guide</a></li>
-                </ul>
-              </li>
-              <li class="sidenav-menu-sub-title">Policies</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="pre-commit-test-policies.html">Pre-commit test policies</a></li>
-                  <li><a href="post-commit-test-policies.html">Post-commit test policies</a></li>
-                </ul>
-              </li>
-              <li class="sidenav-menu-sub-title">Committers</li>
-              <li>
-                <ul class="list-unstyled sidenav-menu-sub-list">
-                  <li><a href="become-a-committer.html">Become a committer</a></li>
-                  <li><a href="committer-guide.html">Committer guide</a></li>
-                  <li><a href="release-guide.html">Release guide</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-          <div class="col-8 pt-3 offset-4">
-            <h2>Post-commit tests policies</h2>
-
+<section class="section">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-3">
+                <div class="sidenav-menu">
+                    <div class="menu-title">Contribute</div>
+                    <ul class="list-unstyled mb-3">
+                        <li><a href="index.html">Getting Started</a></li>
+                    </ul>
+                    <div class="menu-title mt-3">Technical Docs</div>
+                    <ul class="list-unstyled mb-3">
+                        <li><a href="testing.html">Testing Guide</a></li>
+                        <li><a href="dependencies-guide.html">Dependencies Guide</a></li>
+                    </ul>
+                    <div class="menu-title mt-3">Policies</div>
+                    <ul class="list-unstyled mb-3">
+                        <li><a href="pre-commit-test-policies.html">Pre-commit Policies</a></li>
+                        <li><a href="post-commit-test-policies.html" class="active">Post-commit Policies</a></li>
+                    </ul>
+                    <div class="menu-title mt-3">Committers</div>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="become-a-committer.html">Become a Committer</a></li>
+                        <li><a href="committer-guide.html">Committer Guide</a></li>
+                        <li><a href="release-guide.html">Release Guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-9">
             <p>Post-commit tests validate that Unomi works correctly in a live environment. The tests also catch errors that are hard to predict in the design and implementation stages</p>
 
             <p>Even though post-commit tests run after the code is merged into the repository,  it is important that the tests pass reliably. Jenkins executes post-commit tests against the HEAD of the master branch. If post-commit tests fail, there is a problem with the HEAD build. In addition, post-commit tests are time consuming to run, and it is often hard to triage test failures.</p>
@@ -64,7 +63,7 @@ layout: default
             <h4>I found a test failure</h4>
 
             <ol>
-              <li>Create a <a target="_blank" href="https://issues.apache.org/jira/issues/?jql=project%20%3D%20UNOMI%20AND%20component%20%3D%20test-failures">JIRA issue</a> and assign it to yourself.</li>
+              <li>Create a <a target="_blank" rel="noopener" href="https://issues.apache.org/jira/issues/?jql=project%20%3D%20UNOMI%20AND%20component%20%3D%20test-failures">JIRA issue</a> and assign it to yourself.</li>
               <li>Do high level triage of the failure.</li>
               <li><a href="post-commit-guides.html#find_specialist">Assign the JIRA issue to a relevant person</a>.</li>
             </ol>
@@ -94,6 +93,7 @@ layout: default
             <ul>
               <li><a href="testing.html#best_practices">Best practices for writing tests</a></li>
             </ul>
-          </div>
+            </div>
         </div>
-      </div>
+    </div>
+</section>

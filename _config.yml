@@ -2,3 +2,5 @@ source: src/main/webapp
 destination: target/site
 name: Apache Unomi website
 title: Apache Unomi&trade; Open Source Customer Data Platform
+url: https://unomi.apache.org
+description: "Apache Unomi is an open source Customer Data Platform (CDP) that unifies data from web, mobile, CRM, support systems, IoT, and more — the privacy-first data foundation for AI agents, personalization engines, and real-time customer intelligence."
