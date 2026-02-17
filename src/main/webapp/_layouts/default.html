@@ -152,7 +152,6 @@
 
     <!-- Preload critical resources -->
     <link rel="preload" href="/assets/css/unomi.css" as="style">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="dns-prefetch" href="https://analytics.apache.org">
 
     <!-- Matomo Analytics (privacy-respecting) -->
@@ -171,19 +170,16 @@
         })();
     </script>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Fonts (self-hosted Inter) -->
+    <link href="/assets/css/inter.css" rel="stylesheet">
 
-    <!-- Bootstrap 5.3.8 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-          crossorigin="anonymous">
+    <!-- Bootstrap 5.3.8 CSS (self-hosted) -->
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Bootstrap Icons 1.11 — loaded non-blocking (not needed for first paint) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    <!-- Bootstrap Icons 1.11.3 (self-hosted) — loaded non-blocking -->
+    <link href="/assets/css/bootstrap-icons.min.css"
           rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"></noscript>
+    <noscript><link href="/assets/css/bootstrap-icons.min.css" rel="stylesheet"></noscript>
 
     <!-- Custom Styles -->
     <link href="/assets/css/unomi.css" rel="stylesheet">
@@ -346,12 +342,12 @@
     </div>
 </footer>
 
-<!-- Bootstrap 5.3.8 JS Bundle (includes Popper) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous" defer></script>
+<!-- Bootstrap 5.3.8 JS Bundle (self-hosted, includes Popper) -->
+<script src="/assets/js/vendor/bootstrap.bundle.min.js" defer></script>
 
-<!-- Mermaid for diagrams — only loaded on pages that use it (2.75 MB) -->
+<!-- Mermaid for diagrams — only loaded on pages that use it -->
 {% if page.mermaid %}
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js" defer></script>
+<script src="/assets/js/vendor/mermaid.min.js" defer></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var s = getComputedStyle(document.documentElement);
