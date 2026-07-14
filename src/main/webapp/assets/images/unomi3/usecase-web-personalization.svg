@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 640 280" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Visitor events flow through a CMS into Unomi, returning personalized content">
+  <defs>
+<style>
+  svg {
+    --unomi-primary: #6d5ce7;
+    --unomi-primary-dark: #5a48c9;
+    --unomi-primary-light: #ede9fe;
+    --unomi-accent: #00cec9;
+    --unomi-hero-accent: #a78bfa;
+    --unomi-text: #1e293b;
+    --unomi-text-muted: #64748b;
+    --unomi-white: #ffffff;
+    --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0;
+    --unomi-on-dark: rgba(255,255,255,.85);
+    --unomi-success: #059669;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes dash-flow { to { stroke-dashoffset: -24; } }
+  @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+  .flow { stroke-dasharray: 6 5; animation: dash-flow 1.6s linear infinite; }
+  .float { animation: float-y 3.2s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .flow,.float { animation: none !important; }
+  }
+</style>
+</defs>
+  <rect width="640" height="280" rx="20" fill="var(--unomi-bg-soft)"/>
+  <text x="32" y="36" fill="var(--unomi-text)" font-size="15" font-weight="700">Web personalization</text>
+  <text x="32" y="56" fill="var(--unomi-text-muted)" font-size="12">Visitor → CMS → Unomi → personalized page</text>
+
+  <g class="float">
+    <rect x="40" y="110" width="110" height="60" rx="14" fill="var(--unomi-primary)"/>
+    <text x="95" y="145" text-anchor="middle" fill="var(--unomi-white)" font-size="13" font-weight="600">Visitor</text>
+  </g>
+  <line x1="160" y1="140" x2="210" y2="140" stroke="var(--unomi-primary)" stroke-width="2" class="flow"/>
+  <text x="185" y="128" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="10">page view</text>
+
+  <g class="float" style="animation-delay:.2s">
+    <rect x="220" y="110" width="120" height="60" rx="14" fill="var(--unomi-primary-dark)"/>
+    <text x="280" y="145" text-anchor="middle" fill="var(--unomi-white)" font-size="13" font-weight="600">Web CMS</text>
+  </g>
+  <line x1="350" y1="140" x2="400" y2="140" stroke="var(--unomi-accent)" stroke-width="2" class="flow"/>
+  <text x="375" y="128" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="10">events</text>
+
+  <g class="float" style="animation-delay:.4s">
+    <rect x="410" y="90" width="190" height="100" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-primary)" stroke-width="2"/>
+    <text x="505" y="130" text-anchor="middle" fill="var(--unomi-text)" font-size="14" font-weight="700">Apache Unomi</text>
+    <text x="505" y="154" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">Profile · Segments</text>
+    <text x="505" y="174" text-anchor="middle" fill="var(--unomi-accent)" font-size="11" font-weight="600">API key auth (3.1)</text>
+  </g>
+
+  <path d="M505 190 C505 230 280 230 280 170" stroke="var(--unomi-accent)" stroke-width="2" fill="none" class="flow"/>
+  <text x="400" y="248" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">personalized content</text>
+</svg>

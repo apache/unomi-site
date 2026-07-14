@@ -1,0 +1,35 @@
+---
+title: Migrating from Unomi 2.x to Unomi 3
+description: "Unomi 3 retains 100% of documented 2.x OpenAPI paths and offers V2 compatibility mode for phased client auth migration."
+keywords: "Unomi 3 migration, V2 compatibility mode, OpenAPI stability, upgrade from Unomi 2"
+layout: default
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Upgrades</p>
+        <h1>Migrating from Unomi 2.x to Unomi 3</h1>
+        <p class="lead">Familiar REST map, additive APIs, and an optional V2 compatibility bridge.</p>
+    </div>
+</section>
+<section class="section">
+    <div class="container col-lg-8">
+        <h2 class="h4 mb-3">The API stays familiar</h2>
+        <p>Unomi 3 does not rip out the 2.x REST map. In the OpenAPI specs tracked for testing, <strong>every one of the 119 Unomi 2.x paths is still present in 3.1</strong> &mdash; new capabilities (tenants, tasks, &hellip;) are <strong>additive</strong>.</p>
+        <p>Native Unomi 3.1 authentication expects tenant API keys. For a calm cutover, enable <strong>V2 compatibility mode</strong> so existing clients keep working while you migrate traffic, then disable the mode when ready.</p>
+
+        <img src="/assets/images/unomi3/api-stability-v2compat.svg" class="img-fluid my-4" alt="API stability and V2 compatibility"/>
+<h2 class="h4 mt-5 mb-3">Migration paths</h2>
+        <ol>
+            <li><strong>2.x → 3.0</strong> &mdash; Java 17+ minimum, QueryBuilder ID renames, ES7→ES9 data migration</li>
+            <li><strong>3.0 → 3.1</strong> &mdash; tenant auth model, new APIs</li>
+            <li><strong>V2 compatibility mode</strong> &mdash; phased client transition</li>
+            <li>Optional <strong>Elasticsearch → OpenSearch</strong> migration</li>
+        </ol>
+        <p>Follow the official manual chapters (including V2 compatibility) rather than duplicating long procedures here:</p>
+        <p><a class="btn btn-primary" href="https://unomi.apache.org/manual/latest/index.html">Open the manual</a>
+           <a class="btn btn-outline-primary ms-2" href="/blog/introducing-apache-unomi-3.html">Unomi 3 intro</a></p>
+        <p class="small text-muted mt-4">Path stability does not mean authentication never changes. Prefer tenant API keys in 3.1; use compatibility mode as the bridge.</p>
+        <p><a href="/blog/">&larr; All posts</a></p>
+    </div>
+</section>

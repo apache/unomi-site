@@ -24,6 +24,7 @@ structured_data: >
         <p class="section-label text-hero-label">Download</p>
         <h1>Download Apache Unomi</h1>
         <p class="lead">Get the latest stable release or browse the archive of previous versions.</p>
+        <p class="text-hero-muted">Apache Unomi <strong>{{ site.data.unomi.latest.stable.version }}</strong> is the current stable release of the <strong>Unomi 3</strong> line &mdash; multi-tenancy, OpenSearch, task scheduling, V2 compatibility, and the Elasticsearch 9 platform from 3.0. Requires <strong>Java 17+</strong> (runtime baseline). Read <a href="/blog/introducing-apache-unomi-3.html">Introducing Unomi 3</a> for the story.</p>
     </div>
 </section>
 
@@ -67,7 +68,7 @@ structured_data: >
                         <a href="https://www.apache.org/dist/unomi/{{ site.data.unomi.latest.stable.version }}/unomi-{{ site.data.unomi.latest.stable.version }}-src.zip.sha512" target="_blank" rel="noopener">SHA512</a>
                     </p>
 
-                    <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12355172" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">
+                    <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version={{ site.data.unomi.latest.stable.jira_version_id }}" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">
                         <i class="bi bi-journal-text me-1"></i> Release Notes
                     </a>
                 </div>
@@ -83,7 +84,7 @@ structured_data: >
             <div class="col-lg-5">
                 <div class="feature-icon mb-3"><i class="bi bi-rocket-takeoff"></i></div>
                 <h2 class="h5 fw-semibold">Installation</h2>
-                <p class="small text-muted">Get up and running quickly with our <a href="/get-started.html#quickstart">Docker Quick Start</a> or follow the <a href="https://unomi.apache.org/manual/latest/index.html#_quick_start" target="_blank" rel="noopener">manual installation guide</a>.</p>
+                <p class="small text-muted">Try Unomi with Docker via the <a href="/get-started.html#quickstart">Getting Started</a> guide or follow the <a href="{{ site.data.unomi.manual.quick_start }}" target="_blank" rel="noopener">manual installation guide</a>.</p>
             </div>
             <div class="col-lg-5">
                 <div class="feature-icon mb-3"><i class="bi bi-shield-check"></i></div>
@@ -114,6 +115,7 @@ gpg --verify unomi-{{ site.data.unomi.latest.stable.version }}-bin.tar.gz.asc \
                             <tr><th>Version</th><th>Binary</th><th>Source</th><th>Notes</th></tr>
                 </thead>
                   <tbody>
+                                                        <tr><td class="fw-semibold">3.0.0</td><td><a href="https://archive.apache.org/dist/unomi/3.0.0/unomi-3.0.0-bin.tar.gz" target="_blank" rel="noopener">tar.gz</a> &bull; <a href="https://archive.apache.org/dist/unomi/3.0.0/unomi-3.0.0-bin.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://archive.apache.org/dist/unomi/3.0.0/unomi-3.0.0-src.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12355172" target="_blank" rel="noopener">Notes</a></td></tr>
                             <tr><td class="fw-semibold">2.7.0</td><td><a href="https://archive.apache.org/dist/unomi/2.7.0/unomi-2.7.0-bin.tar.gz" target="_blank" rel="noopener">tar.gz</a> &bull; <a href="https://archive.apache.org/dist/unomi/2.7.0/unomi-2.7.0-bin.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://archive.apache.org/dist/unomi/2.7.0/unomi-2.7.0-src.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12354778" target="_blank" rel="noopener">Notes</a></td></tr>
                             <tr><td class="fw-semibold">2.6.1</td><td><a href="https://archive.apache.org/dist/unomi/2.6.1/unomi-2.6.1-bin.tar.gz" target="_blank" rel="noopener">tar.gz</a> &bull; <a href="https://archive.apache.org/dist/unomi/2.6.1/unomi-2.6.1-bin.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://archive.apache.org/dist/unomi/2.6.1/unomi-2.6.1-src.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12354778" target="_blank" rel="noopener">Notes</a></td></tr>
                             <tr><td class="fw-semibold">2.6.0</td><td><a href="https://archive.apache.org/dist/unomi/2.6.0/unomi-2.6.0-bin.tar.gz" target="_blank" rel="noopener">tar.gz</a> &bull; <a href="https://archive.apache.org/dist/unomi/2.6.0/unomi-2.6.0-bin.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://archive.apache.org/dist/unomi/2.6.0/unomi-2.6.0-src.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12354778" target="_blank" rel="noopener">Notes</a></td></tr>

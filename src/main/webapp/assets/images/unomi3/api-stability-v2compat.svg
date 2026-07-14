@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 840 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Unomi 3 API stability: all 119 OpenAPI 2.x paths retained plus V2 compatibility mode">
+  <defs>
+<style>
+  svg {
+    --unomi-primary: #6d5ce7;
+    --unomi-primary-dark: #5a48c9;
+    --unomi-primary-light: #ede9fe;
+    --unomi-primary-subtle: #f5f3ff;
+    --unomi-accent: #00cec9;
+    --unomi-hero-accent: #a78bfa;
+    --unomi-text: #1e293b;
+    --unomi-text-muted: #64748b;
+    --unomi-white: #ffffff;
+    --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0;
+    --unomi-success: #059669;
+    --unomi-success-bg: #ecfdf5;
+    --unomi-amber: #d97706;
+    --unomi-amber-bg: #fef3c7;
+    --unomi-info: #2563eb;
+    --unomi-info-bg: #dbeafe;
+    --unomi-on-dark: rgba(255,255,255,.85);
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes dash-flow { to { stroke-dashoffset: -24; } }
+  @keyframes pulse-soft { 0%,100%{opacity:.55} 50%{opacity:.9} }
+  @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+  @keyframes glow { 0%,100%{filter:drop-shadow(0 0 4px rgba(109,92,231,.35))} 50%{filter:drop-shadow(0 0 10px rgba(109,92,231,.55))} }
+  @keyframes dot-move { 0%{offset-distance:0%;opacity:0} 10%{opacity:1} 90%{opacity:1} 100%{offset-distance:100%;opacity:0} }
+  .flow { stroke-dasharray: 6 5; animation: dash-flow 1.6s linear infinite; }
+  .pulse { animation: pulse-soft 3s ease-in-out infinite; }
+  .float { animation: float-y 3.2s ease-in-out infinite; }
+  .glow { animation: glow 3s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .flow,.pulse,.float,.glow { animation: none !important; }
+  }
+</style>
+</defs>
+  <rect width="840" height="320" rx="20" fill="var(--unomi-bg-soft)"/>
+  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">Stable REST · additive growth</text>
+  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">119 / 119 documented 2.x OpenAPI paths retained in 3.1</text>
+
+  <!-- outer 3.1 surface -->
+  <rect x="40" y="90" width="480" height="190" rx="20" fill="var(--unomi-primary-light)" stroke="var(--unomi-primary)" stroke-width="2" class="pulse"/>
+  <text x="60" y="118" fill="var(--unomi-primary-dark)" font-size="13" font-weight="700">Unomi 3.1 OpenAPI surface</text>
+  <text x="60" y="138" fill="var(--unomi-text-muted)" font-size="12">131 paths · 179 operations</text>
+
+  <!-- inner 2.x retained -->
+  <rect x="70" y="158" width="300" height="96" rx="14" fill="var(--unomi-white)" stroke="var(--unomi-success)" stroke-width="2.5"/>
+  <text x="220" y="195" text-anchor="middle" fill="var(--unomi-success)" font-size="28" font-weight="700">119 / 119</text>
+  <text x="220" y="222" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="600">2.x paths retained (100%)</text>
+
+  <!-- additive badge -->
+  <g class="float">
+    <rect x="390" y="170" width="110" height="72" rx="14" fill="var(--unomi-accent)" opacity=".92"/>
+    <text x="445" y="202" text-anchor="middle" fill="var(--unomi-white)" font-size="22" font-weight="700">+12</text>
+    <text x="445" y="224" text-anchor="middle" fill="var(--unomi-white)" font-size="11">new paths</text>
+  </g>
+
+  <!-- V2 bridge panel -->
+  <rect x="560" y="90" width="240" height="190" rx="20" fill="var(--unomi-white)" stroke="var(--unomi-amber)" stroke-width="2"/>
+  <rect x="560" y="90" width="240" height="40" rx="20" fill="var(--unomi-amber-bg)"/>
+  <rect x="560" y="110" width="240" height="20" fill="var(--unomi-amber-bg)"/>
+  <text x="680" y="116" text-anchor="middle" fill="var(--unomi-amber)" font-size="13" font-weight="700">V2 compatibility mode</text>
+  <text x="680" y="168" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="600">Phased client migration</text>
+  <text x="680" y="192" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="12">legacy auth bridge</text>
+  <text x="680" y="214" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="12">+ default tenant</text>
+  <text x="680" y="248" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">disable when ready</text>
+
+  <line x1="520" y1="185" x2="560" y2="185" stroke="var(--unomi-amber)" stroke-width="2" class="flow"/>
+</svg>

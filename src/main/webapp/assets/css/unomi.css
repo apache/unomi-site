@@ -334,6 +334,15 @@ textarea:focus-visible,
     transform: translateY(-1px);
 }
 
+/* Same contrast guards for homepage hero */
+.hero .text-muted,
+.hero .text-secondary,
+.hero .text-body,
+.hero .text-dark {
+    color: var(--unomi-hero-muted) !important;
+}
+
+
 /* ---------- Sections ---------- */
 .section {
     padding: 5rem 0;
@@ -789,6 +798,24 @@ code {
 .page-header .lead {
     color: var(--unomi-on-dark-muted);
     max-width: 40rem;
+}
+
+/* Bootstrap muted/body/dark utilities are for light surfaces — force contrast on purple headers */
+.page-header .text-muted,
+.page-header .text-secondary,
+.page-header .text-body,
+.page-header .text-dark {
+    color: var(--unomi-hero-muted) !important;
+}
+
+.page-header a:not(.btn) {
+    color: var(--unomi-hero-link);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.page-header a:not(.btn):hover {
+    color: var(--unomi-white);
 }
 
 /* ---------- Version badges ---------- */
