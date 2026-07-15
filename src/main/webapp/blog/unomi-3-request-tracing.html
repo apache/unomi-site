@@ -1,0 +1,168 @@
+---
+title: Request tracing with explain=true in Unomi 3
+description: "Debug context and eventcollector requests with explain=true &mdash; admin-gated requestTracing trees, verified curl examples, and what 403 means for public API keys."
+keywords: "Unomi explain, requestTracing, Unomi tracing, UNOMI-873, eventcollector explain, context.json explain"
+layout: default
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Unomi 3 &middot; Debugging</p>
+        <h1>Request tracing with <code>explain=true</code></h1>
+        <p class="lead">See condition evaluations, rule actions, and timings on <code>/cxs/context.json</code> and <code>/cxs/eventcollector</code>.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container col-lg-8">
+        <p>When a rule &ldquo;should have fired&rdquo; or a session update looks wrong, guessing from logs is slow.
+            Unomi 3 adds query-parameter tracing (
+            <a href="https://issues.apache.org/jira/browse/UNOMI-873">UNOMI-873</a>
+            /
+            <a href="https://github.com/apache/unomi/pull/775">#775</a>):
+            append <code>explain=true</code> and the response includes a <code>requestTracing</code> tree.</p>
+
+        <img src="/assets/images/unomi3/request-tracing.svg" class="img-fluid my-4" alt="explain=true producing a requestTracing tree of conditions and actions"/>
+
+        <h2 class="h4 mt-4 mb-3">Where it works</h2>
+        <ul>
+            <li><code>POST</code>/<code>GET</code> <code>/cxs/context.json</code> and <code>/cxs/context.js</code></li>
+            <li><code>POST</code>/<code>GET</code> <code>/cxs/eventcollector</code></li>
+        </ul>
+
+        <h2 class="h4 mt-5 mb-3">Capabilities</h2>
+        <ul>
+            <li><strong>Opt-in per request</strong> &mdash; <code>?explain=true</code> enables tracing for that call only</li>
+            <li><strong>Response field</strong> &mdash; <code>requestTracing</code> on <code>ContextResponse</code> / <code>EventCollectorResponse</code></li>
+            <li><strong>Hierarchical tree</strong> &mdash; nested <code>TraceNode</code> children for nested work</li>
+            <li><strong>Per-node fields</strong> &mdash; <code>operationType</code>, <code>description</code>, <code>context</code>, <code>result</code>, <code>startTime</code>, <code>endTime</code>, <code>traces[]</code>, <code>children[]</code></li>
+            <li><strong>What gets traced</strong> &mdash; request processing, event validation, rule evaluation, condition evaluation (property/boolean/&hellip;), action execution (visit counters, segment eval, age, &hellip;), personalization / content-filter evaluation on context requests</li>
+            <li><strong>Timings</strong> &mdash; wall-clock start/end on every node for latency hunting</li>
+            <li><strong>Auth gate</strong> &mdash; <code>ROLE_UNOMI_ADMIN</code> / <code>ROLE_UNOMI_TENANT_ADMIN</code> only; public API key alone returns HTTP 403</li>
+            <li><strong>Low overhead when off</strong> &mdash; tracer disabled unless <code>explain=true</code>; reset after the request</li>
+            <li><strong>Programmatic API</strong> &mdash; <code>TracerService</code> / <code>RequestTracer</code> for services that start nested operations</li>
+            <li><strong>IT coverage</strong> &mdash; authorized explain success + unauthorized 403 paths</li>
+        </ul>
+
+        <h2 class="h4 mt-5 mb-3">Auth: tenant admin, not the public key</h2>
+        <p>Tracing is restricted to <strong>ADMINISTRATOR</strong> / <strong>TENANT_ADMINISTRATOR</strong>.
+            In practice that means authenticate with the tenant <strong>private</strong> API key (Basic <code>tenantId:privateApiKey</code>), not the public track key.</p>
+        <p>We verified the following against a local <strong>Unomi 3.1.0-SNAPSHOT</strong> (HTTPS). Public-key + <code>explain=true</code> returned HTTP <strong>403</strong> with:</p>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>{"errorMessage":"Insufficient privileges to access tracing information"}</code></pre>
+        <p>Integration coverage: <code>EventsCollectorIT#testEventsCollectorWithExplain</code> and <code>#testEventsCollectorWithExplainUnauthorized</code>.</p>
+
+        <h2 class="h4 mt-5 mb-3">Example: event collector</h2>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>curl -X POST 'http://localhost:8181/cxs/eventcollector?explain=true' \
+  -u 'YOUR_TENANT_ID:YOUR_PRIVATE_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d @- <<'EOF'
+{
+  "sessionId": "trace-demo-1",
+  "events": [
+    {
+      "eventType": "view",
+      "scope": "myscope",
+      "source": {
+        "itemType": "site",
+        "scope": "myscope",
+        "itemId": "mysite"
+      },
+      "target": {
+        "itemType": "page",
+        "scope": "myscope",
+        "itemId": "homepage"
+      }
+    }
+  ]
+}
+EOF</code></pre>
+        <p>Verified excerpt (trimmed) from a live 3.1 response &mdash; session create, condition checks, visit counters:</p>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>{
+  "updated": 6,
+  "requestTracing": {
+    "operationType": "event-collection",
+    "description": "Event collection request processed successfully",
+    "startTime": 1784099217601,
+    "endTime": 1784099217629,
+    "traces": [
+      "Sending event: sessionCreated - Context: &hellip;",
+      "Processing event for profile: &hellip;"
+    ],
+    "children": [
+      {
+        "operationType": "condition-evaluation",
+        "description": "Condition evaluation completed",
+        "result": "true",
+        "children": [
+          {
+            "operationType": "boolean",
+            "description": "OR condition succeeded on subcondition",
+            "result": "true"
+          }
+        ]
+      },
+      {
+        "operationType": "action-execution",
+        "description": "Action execution completed",
+        "children": [
+          {
+            "operationType": "increment-property",
+            "description": "Property incremented successfully",
+            "traces": [
+              "Processing property increment - Context: {propertyName=nbOfVisits, &hellip;}",
+              "Property increment result - Context: {newValue=1, isUpdated=true}"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+
+        <h2 class="h4 mt-5 mb-3">Example: context.json</h2>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>curl -X POST \
+  'http://localhost:8181/cxs/context.json?sessionId=trace-demo-1&amp;explain=true' \
+  -u 'YOUR_TENANT_ID:YOUR_PRIVATE_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d @- <<'EOF'
+{
+  "source": {
+    "itemId": "homepage",
+    "itemType": "page",
+    "scope": "myscope"
+  },
+  "requiredProfileProperties": ["*"],
+  "requireSegments": true
+}
+EOF</code></pre>
+        <p>Live trace root on the same stack:</p>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>"requestTracing": {
+  "operationType": "context-request",
+  "description": "Context request processed successfully",
+  "children": [
+    { "operationType": "condition-evaluation", &hellip; },
+    { "operationType": "action-execution",
+      "children": [
+        { "operationType": "evaluate-age", "description": "No changes needed" },
+        { "operationType": "evaluate-segments", "description": "No changes needed" }
+      ]
+    }
+  ]
+}</code></pre>
+
+        <h2 class="h4 mt-5 mb-3">How to read the tree</h2>
+        <ul>
+            <li><strong>Timings</strong> &mdash; subtract <code>endTime - startTime</code> on hot nodes when hunting latency</li>
+            <li><strong>Conditions</strong> &mdash; look for <code>result: false</code> on rules you expected to match</li>
+            <li><strong>Actions</strong> &mdash; <code>increment-property</code>, <code>evaluate-segments</code>, visit helpers show whether profile state actually changed</li>
+        </ul>
+        <p>For save-time condition checks (before runtime), use condition validation in the manual; tracing is the runtime companion.</p>
+
+        <p class="mt-4">
+            <a class="btn btn-primary" href="{{ site.data.unomi.manual.published_latest }}#_request_tracing_explain">Manual: explain / tracing</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-3-manual.html">Manual improvements</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-3-task-scheduler.html">Task scheduler</a>
+        </p>
+        <p><a href="/blog/">&larr; All posts</a></p>
+    </div>
+</section>

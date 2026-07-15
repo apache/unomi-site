@@ -1,0 +1,102 @@
+---
+title: Unomi 3 manual — PlantUML, branded theme, deeper docs
+description: "How the Apache Unomi 3 manual gained PlantUML/GraphViz diagrams, an Unomi-branded HTML/PDF theme, and major content expansions for migrations, multi-tenancy, and platform upgrades."
+keywords: "Apache Unomi manual, PlantUML AsciiDoc, Unomi 3 documentation, AsciiDoctor diagrams, Unomi CSS theme"
+layout: default
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Unomi 3 &middot; Documentation</p>
+        <h1>Unomi 3 manual: diagrams, theme, and depth</h1>
+        <p class="lead">PlantUML in AsciiDoc, a brand-aligned HTML/PDF look, and chapters that finally match the Unomi 3 platform.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container col-lg-8">
+        <p>Shipping Unomi 3 without a manual that looks and reads like Unomi 3 would leave operators guessing. Over several
+            <a href="https://issues.apache.org/jira/browse/UNOMI-882">UNOMI-882</a>
+            and
+            <a href="https://issues.apache.org/jira/browse/UNOMI-960">UNOMI-960</a>
+            efforts, the project rebuilt how the official manual is
+            <em>authored</em>,
+            <em>rendered</em>, and
+            <em>navigated</em>
+            &mdash; from diagram toolchain to CSS theme to whole new chapters.</p>
+
+        <img src="/assets/images/unomi3/manual-plantuml-theme.svg" class="img-fluid my-4" alt="AsciiDoc PlantUML source builds into a branded Unomi 3 manual with diagrams"/>
+
+        <h2 class="h4 mt-4 mb-3">PlantUML (and GraphViz) in the build</h2>
+        <p><a href="https://github.com/apache/unomi/pull/753">#753</a> wired
+            <strong>AsciiDoctor Diagram</strong>
+            into <code>manual/pom.xml</code>: <code>asciidoctorj-diagram</code> + PlantUML, with GraphViz available via
+            <code>GRAPHVIZ_DOT</code> / <code>graphvizdot</code>. CI installs GraphViz so HTML and PDF builds stay reproducible.</p>
+        <p>Diagrams live
+            <strong>in the AsciiDoc</strong>
+            as <code>[plantuml]</code> blocks &mdash; reviewable in pull requests, regenerated on every docs build, no orphaned PNGs in git.
+            Tip today has on the order of
+            <strong>62 PlantUML diagrams</strong>
+            across ~24 chapters (architecture C4, sequences, upgrade flows, condition evaluation, scheduler, past-event strategies, and more).</p>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>[plantuml]
+----
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+Container(unomi, "Apache Unomi")
+Component(restApi, "REST API", "JAX-RS")
+@enduml
+----</code></pre>
+        <p class="small text-muted">Local tip: install GraphViz (<code>brew install graphviz</code> / <code>apt-get install graphviz</code>), then
+            <code>cd manual &amp;&amp; mvn -ntp clean install</code>.
+            <code>build.sh</code> also checks for <code>dot</code>.</p>
+
+        <h2 class="h4 mt-5 mb-3">Branded HTML &amp; PDF theme</h2>
+        <p>A later slice of
+            <a href="https://github.com/apache/unomi/pull/821">#821</a>
+            (UNOMI-960) replaced the default AsciiDoctor chrome with an
+            <strong>Unomi-branded</strong>
+            stylesheet that tracks
+            <a href="https://unomi.apache.org/">unomi.apache.org</a>:</p>
+        <ul>
+            <li><strong>Design tokens</strong> &mdash; <code>--unomi-primary</code> (<code>#6d5ce7</code>), accent purple, Inter typography</li>
+            <li><strong>Site nav &amp; footer</strong> via docinfo, version badge, hero cover for the HTML book</li>
+            <li><strong>Responsive UX</strong> &mdash; burger nav + bottom TOC sheet under 1024px; desktop sidebar TOC from 1024px</li>
+            <li><strong>PDF</strong> &mdash; dedicated <code>unomi-theme.yml</code> under <code>manual/src/theme/</code> with matching brand assets</li>
+        </ul>
+        <p>Reading the published manual should feel continuous with the project website, not like a separate default book skin.</p>
+
+        <h2 class="h4 mt-5 mb-3">Content that matches Unomi 3</h2>
+        <p><a href="https://github.com/apache/unomi/pull/783">#783</a> synced the book to
+            <strong>Apache Unomi 3.x</strong>
+            and expanded (or heavily refreshed) material that operators actually need:</p>
+        <ul>
+            <li><strong>Platform story</strong> &mdash; architecture, security, configuration, clustering, data structures</li>
+            <li><strong>3.1 product</strong> &mdash; multi-tenancy, task scheduler, OpenSearch notes, condition validation / evaluation, property types</li>
+            <li><strong>Migrations</strong> &mdash; 2.x&rarr;3.0, 3.0&rarr;3.1, ES7&rarr;ES9, Elasticsearch&rarr;OpenSearch, V2 compatibility mode, script authoring</li>
+            <li><strong>Platform upgrades</strong> &mdash; dedicated <code>upgrades/</code> runbooks (Java, Karaf, Elasticsearch, Log4j, CXF/Jackson/Jetty, dependency hygiene, ITs)</li>
+            <li><strong>Day-to-day APIs</strong> &mdash; request examples (including explain/tracing), GraphQL, shell commands, JavaScript tracker guide, recipes</li>
+            <li><strong>Reference depth</strong> &mdash; conditions guide and builtin type catalogs (UNOMI-960), past-event conditions, profile tracking</li>
+        </ul>
+        <p>&ldquo;What&rsquo;s new&rdquo; for 3.1 now points readers straight into these chapters instead of leaving gaps between release notes and the old 2.x-shaped manual.</p>
+
+        <h2 class="h4 mt-5 mb-3">How to add a diagram</h2>
+        <ol>
+            <li>Edit the relevant <code>.adoc</code> under <code>manual/src/main/asciidoc/</code></li>
+            <li>Add a <code>[plantuml]</code> (or GraphViz) block next to the prose it illustrates</li>
+            <li>Build the manual module (GraphViz required for some diagrams)</li>
+            <li>Review the generated PNG in the PR like any other source change</li>
+        </ol>
+        <p>Website promotional diagrams stay animated SVG / Mermaid on
+            <a href="/blog/">unomi.apache.org</a>;
+            the
+            <strong>manual</strong>
+            sticks to PlantUML&rarr;PNG so AsciiDoctor HTML/PDF stay self-contained.</p>
+
+        <p class="mt-4">
+            <a class="btn btn-primary" href="{{ site.data.unomi.manual.published_latest }}">Open the latest manual</a>
+            <a class="btn btn-outline-primary ms-2" href="{{ site.data.unomi.manual.whats_new }}">What&rsquo;s new in 3.1</a>
+            <a class="btn btn-outline-primary ms-2" href="https://github.com/apache/unomi/tree/master/manual/src/main/asciidoc">Browse AsciiDoc on GitHub</a>
+        </p>
+        <p><a href="/blog/">&larr; All posts</a></p>
+    </div>
+</section>

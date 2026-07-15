@@ -1,0 +1,75 @@
+---
+title: Elasticsearch 9 and OpenSearch in Unomi 3
+description: "Unomi 3 runs on Elasticsearch 9 by default and ships a first-class OpenSearch persistence distribution — same SPI, migrate guide, and build flags."
+keywords: "Unomi OpenSearch, Elasticsearch 9, Apache Unomi persistence, UNOMI-828, migrate Elasticsearch to OpenSearch"
+layout: default
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Unomi 3 &middot; Operations</p>
+        <h1>Elasticsearch 9 and OpenSearch in Unomi 3</h1>
+        <p class="lead">One CDP runtime, two supported search backends &mdash; pick the distribution that matches your ops constraints.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container col-lg-8">
+        <p>Unomi 3 modernized the search tier on both sides of the fork.
+            Elasticsearch moved to the <strong>9.x Java API client</strong> (the legacy High Level REST Client path is gone), and
+            <a href="https://issues.apache.org/jira/browse/UNOMI-828">UNOMI-828</a>
+            /
+            <a href="https://github.com/apache/unomi/pull/715">#715</a>
+            made <strong>OpenSearch a first-class persistence module</strong> with its own distribution packaging.</p>
+
+        <img src="/assets/images/unomi3/opensearch-dual.svg" class="img-fluid my-4" alt="Elasticsearch 9 and OpenSearch dual backends sharing Unomi PersistenceService SPI"/>
+
+        <h2 class="h4 mt-4 mb-3">Capabilities</h2>
+        <ul>
+            <li><strong>Dual distributions</strong> &mdash; <code>unomi-distribution-elasticsearch</code> and <code>unomi-distribution-opensearch</code></li>
+            <li><strong>Shared PersistenceService SPI</strong> &mdash; profiles, events, segments, rules, clustering, and the task scheduler stay on the same application paths</li>
+            <li><strong>Elasticsearch 9 Java API client</strong> &mdash; HLRC retired; config prefix <code>org.apache.unomi.elasticsearch.*</code></li>
+            <li><strong>OpenSearch module</strong> &mdash; <code>persistence-opensearch</code>; config prefix <code>org.apache.unomi.opensearch.*</code> (addresses, cluster name, credentials, SSL, index prefix)</li>
+            <li><strong>Build flags</strong> &mdash; Maven / <code>build.sh --use-opensearch</code>; IT matrix can run either engine</li>
+            <li><strong>Docker / env</strong> &mdash; <code>UNOMI_DISTRIBUTION=...</code> selects packaging</li>
+            <li><strong>Migration guide</strong> &mdash; documented ES &rarr; OpenSearch path (index naming, clients, verification)</li>
+            <li><strong>Version pins in 3.1</strong> &mdash; Elasticsearch 9.4.x line and OpenSearch 3.7.x companion pins in the reactor</li>
+        </ul>
+
+        <h2 class="h4 mt-4 mb-3">What you choose</h2>
+        <ul>
+            <li><strong>Elasticsearch</strong> &mdash; <code>persistence-elasticsearch</code>, config prefix <code>org.apache.unomi.elasticsearch.*</code> (addresses, cluster name, credentials, SSL, index prefix)</li>
+            <li><strong>OpenSearch</strong> &mdash; <code>persistence-opensearch</code>, config prefix <code>org.apache.unomi.opensearch.*</code> with the same conceptual shape</li>
+        </ul>
+        <p>Both implement the Unomi <code>PersistenceService</code> SPI, so profiles, events, segments, rules, clustering, and the task scheduler stay on the same application paths.</p>
+
+        <h2 class="h4 mt-5 mb-3">Build and run flavors</h2>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code># Maven / build.sh
+./build.sh
+./build.sh --use-opensearch
+./build.sh --integration-tests --use-opensearch
+
+# Docker distribution hint
+UNOMI_DISTRIBUTION=unomi-distribution-elasticsearch
+UNOMI_DISTRIBUTION=unomi-distribution-opensearch</code></pre>
+
+        <h2 class="h4 mt-5 mb-3">Migrating engines</h2>
+        <p>Moving an existing deployment from Elasticsearch to OpenSearch is documented as its own migration path (index naming, client settings, verification).
+            Start from
+            <a href="{{ site.data.unomi.manual.es_to_os }}">Migrate from Elasticsearch to OpenSearch</a>
+            in the Unomi 3 manual.</p>
+
+        <h2 class="h4 mt-5 mb-3">Why it matters</h2>
+        <p>Regulated and cloud-restricted environments often need an OpenSearch footprint; others stay on Elasticsearch.
+            Unomi 3 stops treating that as a fork of the product &mdash; it is a packaging and configuration choice on a shared SPI, alongside the
+            <a href="/blog/unomi-3-platform-foundation.html">platform foundation</a>
+            upgrade (Java 17, Karaf 4.4, persistence clustering).</p>
+
+        <p class="mt-4">
+            <a class="btn btn-primary" href="{{ site.data.unomi.manual.es_to_os }}">Manual: ES to OpenSearch</a>
+            <a class="btn btn-outline-primary ms-2" href="{{ site.data.unomi.manual.published_latest }}#_configuration">Manual: configuration</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-3-build-sh.html">build.sh</a>
+        </p>
+        <p><a href="/blog/">&larr; All posts</a></p>
+    </div>
+</section>

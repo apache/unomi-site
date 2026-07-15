@@ -45,26 +45,26 @@
   <!-- Unit track -->
   <g>
     <rect x="40" y="90" width="360" height="210" rx="18" fill="var(--unomi-success-bg)" stroke="var(--unomi-success)" stroke-width="2"/>
-    <text x="60" y="122" fill="var(--unomi-success)" font-size="14" font-weight="700">UNIT · seconds</text>
+    <text x="60" y="122" fill="var(--unomi-success)" font-size="14" font-weight="700">UNIT | seconds</text>
     <rect x="60" y="140" width="320" height="44" rx="12" fill="var(--unomi-white)" class="glow"/>
     <text x="220" y="168" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="600">InMemoryPersistenceServiceImpl</text>
-    <text x="80" y="210" fill="var(--unomi-text)" font-size="12">→ TestHelper wires real *ServiceImpl</text>
-    <text x="80" y="232" fill="var(--unomi-text)" font-size="12">→ conditions · refresh simulation</text>
-    <text x="80" y="254" fill="var(--unomi-text)" font-size="12">→ no Docker · no Karaf boot</text>
-    <text x="80" y="280" fill="var(--unomi-success)" font-size="12" font-weight="600">Independent · high-signal</text>
+    <text x="80" y="210" fill="var(--unomi-text)" font-size="12">-> TestHelper wires real *ServiceImpl</text>
+    <text x="80" y="232" fill="var(--unomi-text)" font-size="12">-> conditions | refresh simulation</text>
+    <text x="80" y="254" fill="var(--unomi-text)" font-size="12">-> no Docker | no Karaf boot</text>
+    <text x="80" y="280" fill="var(--unomi-success)" font-size="12" font-weight="600">Independent | high-signal</text>
   </g>
 
   <!-- IT track -->
   <g>
     <rect x="440" y="90" width="360" height="210" rx="18" fill="var(--unomi-info-bg)" stroke="var(--unomi-info)" stroke-width="2"/>
-    <text x="460" y="122" fill="var(--unomi-info)" font-size="14" font-weight="700">INTEGRATION · minutes+</text>
+    <text x="460" y="122" fill="var(--unomi-info)" font-size="14" font-weight="700">INTEGRATION | minutes+</text>
     <rect x="460" y="140" width="140" height="44" rx="12" fill="var(--unomi-white)" class="float"/>
     <text x="530" y="168" text-anchor="middle" fill="var(--unomi-text)" font-size="12" font-weight="600">Karaf</text>
     <rect x="620" y="140" width="160" height="44" rx="12" fill="var(--unomi-white)" class="float" style="animation-delay:.4s"/>
     <text x="700" y="168" text-anchor="middle" fill="var(--unomi-text)" font-size="12" font-weight="600">ES / OpenSearch</text>
-    <text x="480" y="210" fill="var(--unomi-text)" font-size="12">→ Pax Exam + Docker stack</text>
-    <text x="480" y="232" fill="var(--unomi-text)" font-size="12">→ full REST · clustering · tenants</text>
-    <text x="480" y="254" fill="var(--unomi-text)" font-size="12">→ proves the live platform</text>
+    <text x="480" y="210" fill="var(--unomi-text)" font-size="12">-> Pax Exam + Docker stack</text>
+    <text x="480" y="232" fill="var(--unomi-text)" font-size="12">-> full REST | clustering | tenants</text>
+    <text x="480" y="254" fill="var(--unomi-text)" font-size="12">-> proves the live platform</text>
     <text x="480" y="280" fill="var(--unomi-info)" font-size="12" font-weight="600">End-to-end confidence</text>
   </g>
 </svg>

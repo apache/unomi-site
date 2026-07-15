@@ -1,0 +1,116 @@
+---
+title: Unomi 3 Karaf shell commands
+description: "Unomi 3 expands the unomi:* Karaf shell &mdash; unified unomi:crud, tenant session context, cache ops, task scheduler commands, and list-invalid-objects (UNOMI-879 / 880)."
+keywords: "Unomi shell, unomi:crud, Karaf shell, unomi:cache, unomi:task-list, tenant-set, UNOMI-879, UNOMI-880"
+layout: default
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Unomi 3 &middot; Operator experience</p>
+        <h1>Karaf shell commands in Unomi 3</h1>
+        <p class="lead"><code>unomi:crud</code>, tenant session context, cache tools, and task commands &mdash; operate without leaving SSH.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container col-lg-8">
+        <p>The Unomi Karaf shell (<code>ssh -p 8102 karaf@localhost</code>, namespace <code>unomi:</code>) has always been the fastest way to inspect rules, tail events, and manage lifecycle.
+            Unomi 3 (
+            <a href="https://issues.apache.org/jira/browse/UNOMI-879">UNOMI-879</a>
+            /
+            <a href="https://issues.apache.org/jira/browse/UNOMI-880">UNOMI-880</a>
+            /
+            <a href="https://github.com/apache/unomi/pull/755">#755</a>
+            /
+            <a href="https://github.com/apache/unomi/pull/763">#763</a>)
+            widens that toolkit for multi-tenancy, caches, and the cluster-aware scheduler &mdash; with a unified CRUD surface instead of one-off list/view/remove commands for every type.</p>
+
+        <img src="/assets/images/unomi3/shell-commands.svg" class="img-fluid my-4" alt="Unomi 3 shell: crud, tenant, cache, and task command families"/>
+
+        <h2 class="h4 mt-4 mb-3">Capabilities at a glance</h2>
+        <ul>
+            <li><strong>Unified <code>unomi:crud</code></strong> &mdash; <code>create</code> / <code>read</code> / <code>update</code> / <code>delete</code> / <code>list</code> / <code>help</code> for many object types</li>
+            <li><strong>JSON or file input</strong> &mdash; inline JSON, <code>file://</code> paths, or positional id + body patterns</li>
+            <li><strong>Tabular + CSV lists</strong> &mdash; ASCII tables with <code>--csv</code> and <code>-n</code> / <code>--max-entries</code></li>
+            <li><strong>Completers</strong> &mdash; operation, type, and id completion for faster operator workflows</li>
+            <li><strong>Tenant session</strong> &mdash; <code>unomi:tenant-get</code> / <code>unomi:tenant-set</code> so following commands run in a tenant (or <code>system</code>)</li>
+            <li><strong>Tenant &amp; API key CRUD</strong> &mdash; create/list/update tenants and API keys from the shell</li>
+            <li><strong>Cache management</strong> &mdash; <code>unomi:cache</code> stats, reset, clear, inspect, view, remove, watch, filters by tenant/type, CSV</li>
+            <li><strong>Scheduler ops</strong> &mdash; <code>unomi:task-list|show|cancel|retry|purge|executor</code> (see
+                <a href="/blog/unomi-3-task-scheduler.html">task scheduler</a>)</li>
+            <li><strong>Validation assist</strong> &mdash; <code>unomi:list-invalid-objects</code> for rules/segments/goals/campaigns/scoring with unresolved types</li>
+            <li><strong>Classic live debugging</strong> &mdash; <code>rule-tail</code>, <code>rule-watch</code>, <code>event-tail</code>, <code>rule-reset-stats</code></li>
+            <li><strong>Lifecycle</strong> &mdash; <code>setup</code>, <code>migrate</code>, <code>start</code>, <code>stop</code>, <code>version</code></li>
+            <li><strong>Definition deploy</strong> &mdash; <code>deploy-definition</code> / <code>undeploy-definition</code> with bundle/type wildcards</li>
+            <li><strong>Extension types</strong> &mdash; e.g. JSON Schema via <code>unomi:crud ... schema</code> when the extension is installed</li>
+        </ul>
+
+        <h2 class="h4 mt-5 mb-3">Connect and discover</h2>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>ssh -p 8102 karaf@localhost
+# default user/pass: karaf/karaf  (change etc/users.properties ASAP)
+
+unomi:&lt;TAB&gt;          # list commands
+help unomi:crud
+help unomi:cache</code></pre>
+
+        <h2 class="h4 mt-5 mb-3">Tenant context first</h2>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>unomi:tenant-set acme
+unomi:tenant-get
+# subsequent CRUD / cache commands use this tenant</code></pre>
+
+        <h2 class="h4 mt-5 mb-3">Unified CRUD</h2>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>unomi:crud help rule
+unomi:crud list rule --csv -n 50
+unomi:crud read rule my-rule-id
+unomi:crud create rule --file /tmp/rule.json
+unomi:crud update rule my-rule-id -d='{"itemId":"my-rule-id","enabled":false}'
+unomi:crud delete rule my-rule-id
+
+unomi:crud list tenant
+unomi:crud create apikey -d='{"tenantId":"acme","keyType":"PRIVATE"}'
+unomi:crud list profile -n 20
+unomi:crud list schema          # when json-schema extension is present</code></pre>
+
+        <h3 class="h6 mt-4 mb-2">Object types registered for <code>unomi:crud</code></h3>
+        <p class="small text-muted"><code>actiontype</code>, <code>apikey</code>, <code>campaign</code>, <code>campaignevent</code>, <code>conditiontype</code>, <code>consent</code>, <code>event</code>, <code>goal</code>, <code>persona</code>, <code>profile</code>, <code>profilealias</code>, <code>propertytype</code>, <code>rule</code>, <code>rulestats</code>, <code>scope</code>, <code>scoring</code>, <code>segment</code>, <code>session</code>, <code>tenant</code>, <code>topic</code>, plus extension types such as <code>schema</code>.</p>
+
+        <h2 class="h4 mt-5 mb-3">Cache</h2>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>unomi:cache --stats
+unomi:cache --stats --detailed --tenant acme
+unomi:cache --stats --type profile --csv
+unomi:cache --clear --tenant acme
+unomi:cache --inspect
+unomi:cache --view --id ENTRY_ID --type &hellip; --tenant acme
+unomi:cache --remove --id ENTRY_ID --type &hellip; --tenant acme
+unomi:cache --watch 5</code></pre>
+
+        <h2 class="h4 mt-5 mb-3">Scheduler (shell twin of REST)</h2>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>unomi:task-list -s RUNNING
+unomi:task-list -t profile-purge --limit 20
+unomi:task-show TASK_ID
+unomi:task-retry TASK_ID --reset
+unomi:task-cancel TASK_ID
+unomi:task-purge --days 14 --force
+unomi:task-executor</code></pre>
+
+        <h2 class="h4 mt-5 mb-3">Still there: live debugging &amp; lifecycle</h2>
+        <ul>
+            <li><code>rule-list|view|remove|reset-stats|tail|watch</code></li>
+            <li><code>event-tail|view|list|search</code></li>
+            <li><code>action-list|view</code>, <code>condition-list|view</code></li>
+            <li><code>profile-list|view|remove</code>, <code>segment-*</code>, <code>session-*</code></li>
+            <li><code>list-invalid-objects</code></li>
+            <li><code>deploy-definition</code> / <code>undeploy-definition</code></li>
+            <li><code>setup</code>, <code>migrate</code>, <code>start</code>, <code>stop</code>, <code>version</code></li>
+        </ul>
+        <p>Many day-to-day inspect/edit flows now go through <code>unomi:crud</code>; the dedicated list/view/remove commands remain useful for scripting habits and live tails.</p>
+
+        <p class="mt-4">
+            <a class="btn btn-primary" href="{{ site.data.unomi.manual.published_latest }}#_shell_commands">Manual: shell commands</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-3-task-scheduler.html">Task scheduler</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-3-multitenancy.html">Multi-tenancy</a>
+        </p>
+        <p><a href="/blog/">&larr; All posts</a></p>
+    </div>
+</section>

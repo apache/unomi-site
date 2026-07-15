@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 840 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Unomi 3 Karaf shell: unomi:crud, tenant context, cache, and task commands">
+  <defs><style>
+  svg {
+    --unomi-primary: #6d5ce7;
+    --unomi-primary-dark: #5a48c9;
+    --unomi-primary-light: #ede9fe;
+    --unomi-accent: #00cec9;
+    --unomi-text: #1e293b;
+    --unomi-text-muted: #64748b;
+    --unomi-white: #ffffff;
+    --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0;
+    --unomi-success: #059669;
+    --unomi-success-bg: #ecfdf5;
+    --unomi-amber: #d97706;
+    --unomi-amber-bg: #fef3c7;
+    --unomi-info: #2563eb;
+    --unomi-info-bg: #dbeafe;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes dash-flow { to { stroke-dashoffset: -24; } }
+  @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+  @keyframes glow { 0%,100%{filter:drop-shadow(0 0 4px rgba(109,92,231,.35))} 50%{filter:drop-shadow(0 0 10px rgba(109,92,231,.55))} }
+  .flow { stroke-dasharray: 6 5; animation: dash-flow 1.6s linear infinite; }
+  .float { animation: float-y 3.2s ease-in-out infinite; }
+  .glow { animation: glow 3s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .flow,.float,.glow { animation: none !important; }
+  }
+</style></defs>
+  <rect width="840" height="400" rx="20" fill="var(--unomi-bg-soft)"/>
+  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">Karaf shell: unomi:*</text>
+  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">Unified CRUD, tenant session, cache ops, and task scheduler commands</text>
+
+  <rect x="40" y="95" width="250" height="70" rx="14" fill="var(--unomi-primary)" class="glow"/>
+  <text x="165" y="125" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">ssh -p 8102</text>
+  <text x="165" y="148" text-anchor="middle" fill="rgba(255,255,255,.85)" font-size="11">karaf@localhost</text>
+
+  <path d="M300 130 H360" stroke="var(--unomi-primary)" stroke-width="3" class="flow"/>
+
+  <g class="float">
+    <rect x="370" y="90" width="200" height="100" rx="14" fill="var(--unomi-info-bg)" stroke="var(--unomi-info)" stroke-width="2"/>
+    <text x="470" y="125" text-anchor="middle" fill="var(--unomi-info)" font-size="13" font-weight="700">unomi:crud</text>
+    <text x="470" y="150" text-anchor="middle" fill="var(--unomi-text)" font-size="11">create read update</text>
+    <text x="470" y="172" text-anchor="middle" fill="var(--unomi-text)" font-size="11">delete list help</text>
+  </g>
+
+  <g class="float" style="animation-delay:.25s">
+    <rect x="590" y="90" width="210" height="100" rx="14" fill="var(--unomi-success-bg)" stroke="var(--unomi-success)" stroke-width="2"/>
+    <text x="695" y="125" text-anchor="middle" fill="var(--unomi-success)" font-size="13" font-weight="700">tenant-get / set</text>
+    <text x="695" y="150" text-anchor="middle" fill="var(--unomi-text)" font-size="11">session tenant context</text>
+    <text x="695" y="172" text-anchor="middle" fill="var(--unomi-text)" font-size="11">for CRUD + cache</text>
+  </g>
+
+  <g class="float" style="animation-delay:.5s">
+    <rect x="40" y="230" width="250" height="130" rx="14" fill="var(--unomi-amber-bg)" stroke="var(--unomi-amber)" stroke-width="2"/>
+    <text x="165" y="270" text-anchor="middle" fill="var(--unomi-amber)" font-size="13" font-weight="700">unomi:cache</text>
+    <text x="165" y="298" text-anchor="middle" fill="var(--unomi-text)" font-size="11">stats | clear | inspect</text>
+    <text x="165" y="322" text-anchor="middle" fill="var(--unomi-text)" font-size="11">view | remove | watch</text>
+    <text x="165" y="346" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">per tenant / type</text>
+  </g>
+
+  <g class="float" style="animation-delay:.75s">
+    <rect x="310" y="230" width="250" height="130" rx="14" fill="var(--unomi-primary-light)" stroke="var(--unomi-primary)" stroke-width="2"/>
+    <text x="435" y="270" text-anchor="middle" fill="var(--unomi-primary-dark)" font-size="13" font-weight="700">unomi:task-*</text>
+    <text x="435" y="298" text-anchor="middle" fill="var(--unomi-text)" font-size="11">list show cancel</text>
+    <text x="435" y="322" text-anchor="middle" fill="var(--unomi-text)" font-size="11">retry purge executor</text>
+    <text x="435" y="346" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">UNOMI-879 / 880</text>
+  </g>
+
+  <g class="float" style="animation-delay:1s">
+    <rect x="580" y="230" width="220" height="130" rx="14" fill="#0f172a"/>
+    <text x="690" y="270" text-anchor="middle" fill="#94a3b8" font-size="12" font-weight="700">Also</text>
+    <text x="690" y="298" text-anchor="middle" fill="#34d399" font-size="11">list-invalid-objects</text>
+    <text x="690" y="322" text-anchor="middle" fill="#a78bfa" font-size="11">rule-tail | event-tail</text>
+    <text x="690" y="346" text-anchor="middle" fill="#94a3b8" font-size="11">lifecycle | deploy</text>
+  </g>
+</svg>

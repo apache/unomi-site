@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 840 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Unomi 3 platform foundation: Java 17, Karaf 4.4, ES9, persistence clustering">
+  <defs>
+<style>
+  svg {
+    --unomi-primary: #6d5ce7;
+    --unomi-primary-dark: #5a48c9;
+    --unomi-primary-light: #ede9fe;
+    --unomi-primary-subtle: #f5f3ff;
+    --unomi-accent: #00cec9;
+    --unomi-hero-accent: #a78bfa;
+    --unomi-text: #1e293b;
+    --unomi-text-muted: #64748b;
+    --unomi-white: #ffffff;
+    --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0;
+    --unomi-success: #059669;
+    --unomi-success-bg: #ecfdf5;
+    --unomi-amber: #d97706;
+    --unomi-amber-bg: #fef3c7;
+    --unomi-info: #2563eb;
+    --unomi-info-bg: #dbeafe;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes dash-flow { to { stroke-dashoffset: -24; } }
+  @keyframes pulse-soft { 0%,100%{opacity:.55} 50%{opacity:.9} }
+  @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+  @keyframes glow { 0%,100%{filter:drop-shadow(0 0 4px rgba(109,92,231,.35))} 50%{filter:drop-shadow(0 0 10px rgba(109,92,231,.55))} }
+  .flow { stroke-dasharray: 6 5; animation: dash-flow 1.6s linear infinite; }
+  .pulse { animation: pulse-soft 3s ease-in-out infinite; }
+  .float { animation: float-y 3.2s ease-in-out infinite; }
+  .glow { animation: glow 3s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .flow,.pulse,.float,.glow { animation: none !important; }
+  }
+</style>
+  </defs>
+  <rect width="840" height="400" rx="20" fill="var(--unomi-bg-soft)"/>
+  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">Platform foundation (3.0 floor)</text>
+  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">The runtime that makes multi-tenancy and ops tooling possible</text>
+
+  <g class="float">
+    <rect x="40" y="100" width="175" height="120" rx="14" fill="var(--unomi-primary-light)" stroke="var(--unomi-primary)" stroke-width="2"/>
+    <text x="127" y="145" text-anchor="middle" fill="var(--unomi-primary-dark)" font-size="14" font-weight="700">Java 17+</text>
+    <text x="127" y="172" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">Java 11 retired</text>
+    <text x="127" y="196" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">installer baseline</text>
+  </g>
+  <g class="float" style="animation-delay:.2s">
+    <rect x="235" y="100" width="175" height="120" rx="14" fill="var(--unomi-info-bg)" stroke="var(--unomi-info)" stroke-width="2"/>
+    <text x="322" y="145" text-anchor="middle" fill="var(--unomi-info)" font-size="14" font-weight="700">Karaf 4.4</text>
+    <text x="322" y="172" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">OSGi runtime</text>
+    <text x="322" y="196" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">4.4.11 in 3.1</text>
+  </g>
+  <g class="float" style="animation-delay:.4s">
+    <rect x="430" y="100" width="175" height="120" rx="14" fill="var(--unomi-amber-bg)" stroke="var(--unomi-amber)" stroke-width="2"/>
+    <text x="517" y="145" text-anchor="middle" fill="var(--unomi-amber)" font-size="14" font-weight="700">Search 9.x</text>
+    <text x="517" y="172" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">ES Java API client</text>
+    <text x="517" y="196" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">OpenSearch option</text>
+  </g>
+  <g class="float" style="animation-delay:.6s">
+    <rect x="625" y="100" width="175" height="120" rx="14" fill="var(--unomi-success-bg)" stroke="var(--unomi-success)" stroke-width="2"/>
+    <text x="712" y="145" text-anchor="middle" fill="var(--unomi-success)" font-size="14" font-weight="700">Clustering</text>
+    <text x="712" y="172" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">No Cellar/Hazelcast</text>
+    <text x="712" y="196" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">index heartbeats</text>
+  </g>
+
+  <rect x="40" y="250" width="760" height="110" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-border)" stroke-width="2"/>
+  <text x="60" y="290" fill="var(--unomi-primary-dark)" font-size="14" font-weight="700">Persistence-based cluster nodes</text>
+  <text x="60" y="318" fill="var(--unomi-text)" font-size="12">ClusterNode docs in Elasticsearch / OpenSearch | heartbeats + stats | peer discovery via shared index</text>
+  <text x="60" y="342" fill="var(--unomi-text-muted)" font-size="12">UNOMI-877 | also powers cluster-aware task scheduler locks</text>
+
+</svg>

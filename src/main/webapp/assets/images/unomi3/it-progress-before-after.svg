@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 840 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Before and after Unomi integration test console output: noisy downloads versus progress bar with ETA">
+  <defs>
+<style>
+  svg {
+    --unomi-primary: #6d5ce7;
+    --unomi-primary-dark: #5a48c9;
+    --unomi-primary-light: #ede9fe;
+    --unomi-primary-subtle: #f5f3ff;
+    --unomi-accent: #00cec9;
+    --unomi-hero-accent: #a78bfa;
+    --unomi-text: #1e293b;
+    --unomi-text-muted: #64748b;
+    --unomi-white: #ffffff;
+    --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0;
+    --unomi-success: #059669;
+    --unomi-success-bg: #ecfdf5;
+    --unomi-amber: #d97706;
+    --unomi-amber-bg: #fef3c7;
+    --unomi-danger: #dc2626;
+    --unomi-danger-bg: #fef2f2;
+    --unomi-info: #2563eb;
+    --unomi-info-bg: #dbeafe;
+    --term-bg: #0f172a;
+    --term-muted: #94a3b8;
+    --term-noise: #64748b;
+    --term-ok: #34d399;
+    --term-warn: #fbbf24;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes dash-flow { to { stroke-dashoffset: -24; } }
+  @keyframes pulse-soft { 0%,100%{opacity:.55} 50%{opacity:.9} }
+  @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+  @keyframes bar-grow {
+    0% { width: 42px; }
+    50% { width: 118px; }
+    100% { width: 42px; }
+  }
+  @keyframes scroll-noise {
+    0% { transform: translateY(0); opacity: .9; }
+    100% { transform: translateY(-28px); opacity: .9; }
+  }
+  .flow { stroke-dasharray: 6 5; animation: dash-flow 1.6s linear infinite; }
+  .pulse { animation: pulse-soft 3s ease-in-out infinite; }
+  .float { animation: float-y 3.2s ease-in-out infinite; }
+  .bar-fill { animation: bar-grow 4.5s ease-in-out infinite; }
+  .noise-scroll { animation: scroll-noise 3.8s linear infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .flow,.pulse,.float,.bar-fill,.noise-scroll { animation: none !important; }
+  }
+</style>
+    <clipPath id="beforeClip">
+      <rect x="56" y="148" width="328" height="196" rx="8"/>
+    </clipPath>
+    <clipPath id="afterClip">
+      <rect x="456" y="148" width="328" height="196" rx="8"/>
+    </clipPath>
+  </defs>
+
+  <rect width="840" height="420" rx="20" fill="var(--unomi-bg-soft)"/>
+  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">IT execution you can read</text>
+  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">Progress bars, quieter Maven/Docker noise, and signal when a long suite is moving</text>
+
+  <g>
+    <rect x="40" y="92" width="360" height="280" rx="18" fill="var(--unomi-danger-bg)" stroke="var(--unomi-danger)" stroke-width="2"/>
+    <text x="60" y="122" fill="var(--unomi-danger)" font-size="14" font-weight="700">BEFORE</text>
+    <text x="140" y="122" fill="var(--unomi-text-muted)" font-size="12">transfer spam | no ETA</text>
+
+    <rect x="56" y="138" width="328" height="212" rx="12" fill="var(--term-bg)"/>
+    <circle cx="74" cy="154" r="4" fill="#f87171"/>
+    <circle cx="88" cy="154" r="4" fill="#fbbf24"/>
+    <circle cx="102" cy="154" r="4" fill="#4ade80"/>
+    <text x="118" y="158" fill="var(--term-muted)" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">ci | itests (old)</text>
+
+    <g clip-path="url(#beforeClip)">
+      <g class="noise-scroll" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10">
+        <text x="68" y="178" fill="var(--term-noise)">Downloading from central: junit.jar</text>
+        <text x="68" y="194" fill="var(--term-noise)">Progress (1): 4.1/384 kB</text>
+        <text x="68" y="210" fill="var(--term-noise)">Progress (1): 48/384 kB</text>
+        <text x="68" y="226" fill="var(--term-noise)">Progress (2): 128 kB | 3.2/512 kB</text>
+        <text x="68" y="242" fill="var(--term-noise)">Downloaded from central: junit.jar</text>
+        <text x="68" y="258" fill="var(--term-noise)">Downloading from central: hamcrest.jar</text>
+        <text x="68" y="274" fill="var(--term-noise)">Progress (1): 7.2/45 kB</text>
+        <text x="68" y="290" fill="var(--term-noise)">[INFO] --- docker:start (elasticsearch)</text>
+        <text x="68" y="306" fill="var(--term-noise)">... thousands of identical lines ...</text>
+        <text x="68" y="322" fill="var(--term-noise)">Downloading from central: bundle.jar</text>
+        <text x="68" y="338" fill="var(--term-noise)">Progress (1): 16/902 kB</text>
+        <text x="68" y="354" fill="var(--term-muted)">Tests run: ???  ETA: unknown</text>
+      </g>
+    </g>
+  </g>
+
+  <g>
+    <rect x="440" y="92" width="360" height="280" rx="18" fill="var(--unomi-success-bg)" stroke="var(--unomi-success)" stroke-width="2"/>
+    <text x="460" y="122" fill="var(--unomi-success)" font-size="14" font-weight="700">AFTER</text>
+    <text x="528" y="122" fill="var(--unomi-text-muted)" font-size="12">progress | ETA | slowest CSV</text>
+
+    <rect x="456" y="138" width="328" height="212" rx="12" fill="var(--term-bg)"/>
+    <circle cx="474" cy="154" r="4" fill="#f87171"/>
+    <circle cx="488" cy="154" r="4" fill="#fbbf24"/>
+    <circle cx="502" cy="154" r="4" fill="#4ade80"/>
+    <text x="518" y="158" fill="var(--term-muted)" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">ci | itests (Unomi 3)</text>
+
+    <g clip-path="url(#afterClip)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10">
+      <text x="468" y="182" fill="var(--unomi-accent)">Apache Unomi  |  Integration tests</text>
+      <text x="468" y="200" fill="var(--term-muted)">Total tests: 412  |  Search: Elasticsearch</text>
+
+      <rect x="468" y="216" width="304" height="28" rx="6" fill="#1e293b" stroke="#334155"/>
+      <rect x="472" y="220" width="118" height="20" rx="4" fill="var(--term-ok)" class="bar-fill float"/>
+      <text x="478" y="234" fill="#0f172a" font-size="9" font-weight="700">38%</text>
+
+      <text x="468" y="268" fill="var(--term-ok)">Progress: 38.11% (157/412)</text>
+      <text x="468" y="284" fill="var(--term-warn)">ETA: 18m 42s  |  OK: 157  Failed: 0</text>
+      <text x="468" y="310" fill="var(--term-muted)">Maven: -B -ntp  |  Docker logs to files</text>
+      <text x="468" y="326" fill="var(--unomi-hero-accent)">Top 10 slowest - CSV at finish</text>
+    </g>
+  </g>
+
+  <path d="M 408 232 L 432 232" stroke="var(--unomi-primary)" stroke-width="2.5" stroke-linecap="round" class="flow"/>
+  <path d="M 424 224 L 436 232 L 424 240" fill="var(--unomi-primary)" class="pulse"/>
+</svg>

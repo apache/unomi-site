@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 840 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Unomi 3.1 OpenAPI enrichment: Javadoc packs merge into CXF openapi.json">
+  <defs>
+<style>
+  svg {
+    --unomi-primary: #6d5ce7;
+    --unomi-primary-dark: #5a48c9;
+    --unomi-primary-light: #ede9fe;
+    --unomi-primary-subtle: #f5f3ff;
+    --unomi-accent: #00cec9;
+    --unomi-hero-accent: #a78bfa;
+    --unomi-text: #1e293b;
+    --unomi-text-muted: #64748b;
+    --unomi-white: #ffffff;
+    --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0;
+    --unomi-success: #059669;
+    --unomi-success-bg: #ecfdf5;
+    --unomi-amber: #d97706;
+    --unomi-amber-bg: #fef3c7;
+    --unomi-info: #2563eb;
+    --unomi-info-bg: #dbeafe;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes dash-flow { to { stroke-dashoffset: -24; } }
+  @keyframes pulse-soft { 0%,100%{opacity:.55} 50%{opacity:.9} }
+  @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+  @keyframes glow { 0%,100%{filter:drop-shadow(0 0 4px rgba(109,92,231,.35))} 50%{filter:drop-shadow(0 0 10px rgba(109,92,231,.55))} }
+  .flow { stroke-dasharray: 6 5; animation: dash-flow 1.6s linear infinite; }
+  .pulse { animation: pulse-soft 3s ease-in-out infinite; }
+  .float { animation: float-y 3.2s ease-in-out infinite; }
+  .glow { animation: glow 3s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .flow,.pulse,.float,.glow { animation: none !important; }
+  }
+</style>
+  </defs>
+  <rect width="840" height="400" rx="20" fill="var(--unomi-bg-soft)"/>
+  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">Richer OpenAPI from Javadoc</text>
+  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">Unomi 3.1: build-time packs + runtime CXF merge (UNOMI-963)</text>
+
+  <g class="float">
+    <rect x="40" y="100" width="220" height="240" rx="14" fill="var(--unomi-amber-bg)" stroke="var(--unomi-amber)" stroke-width="2"/>
+    <text x="150" y="140" text-anchor="middle" fill="var(--unomi-amber)" font-size="13" font-weight="700">1. Sources</text>
+    <text x="150" y="172" text-anchor="middle" fill="var(--unomi-text)" font-size="12">JAX-RS endpoints</text>
+    <text x="150" y="198" text-anchor="middle" fill="var(--unomi-text)" font-size="12">@param / @return</text>
+    <text x="150" y="224" text-anchor="middle" fill="var(--unomi-text)" font-size="12">@api.status</text>
+    <text x="150" y="250" text-anchor="middle" fill="var(--unomi-text)" font-size="12">@api.example</text>
+    <text x="150" y="290" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">rest + extensions</text>
+  </g>
+
+  <path d="M275 220 H325" stroke="var(--unomi-primary)" stroke-width="3" class="flow"/>
+
+  <g class="float" style="animation-delay:.3s">
+    <rect x="335" y="100" width="170" height="240" rx="14" fill="var(--unomi-primary)" class="glow"/>
+    <text x="420" y="160" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">Maven Mojo</text>
+    <text x="420" y="190" text-anchor="middle" fill="rgba(255,255,255,.9)" font-size="11">enrichment pack</text>
+    <text x="420" y="220" text-anchor="middle" fill="rgba(255,255,255,.9)" font-size="11">META-INF/...</text>
+    <text x="420" y="250" text-anchor="middle" fill="rgba(255,255,255,.9)" font-size="11">openapi-doc.json</text>
+    <text x="420" y="300" text-anchor="middle" fill="rgba(255,255,255,.75)" font-size="11">per module JAR</text>
+  </g>
+
+  <path d="M520 220 H570" stroke="var(--unomi-primary)" stroke-width="3" class="flow"/>
+
+  <g class="float" style="animation-delay:.6s">
+    <rect x="580" y="100" width="220" height="240" rx="14" fill="var(--unomi-success-bg)" stroke="var(--unomi-success)" stroke-width="2"/>
+    <text x="690" y="140" text-anchor="middle" fill="var(--unomi-success)" font-size="13" font-weight="700">2. Runtime</text>
+    <text x="690" y="172" text-anchor="middle" fill="var(--unomi-text)" font-size="12">CXF OpenApiFeature</text>
+    <text x="690" y="198" text-anchor="middle" fill="var(--unomi-text)" font-size="12">merge all packs</text>
+    <text x="690" y="224" text-anchor="middle" fill="var(--unomi-text)" font-size="12">/cxs/openapi.json</text>
+    <text x="690" y="262" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">summaries | statuses</text>
+    <text x="690" y="286" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">examples | schemas</text>
+    <text x="690" y="318" text-anchor="middle" fill="var(--unomi-primary-dark)" font-size="12" font-weight="600">Agent / IDE friendly</text>
+  </g>
+
+</svg>

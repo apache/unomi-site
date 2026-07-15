@@ -598,14 +598,34 @@ pre, code {
 }
 
 pre {
-    background: var(--unomi-text);
-    color: var(--unomi-border);
+    background: var(--unomi-text);           /* slate-800 */
+    color: #f1f5f9;                          /* high-contrast light slate */
     border-radius: var(--unomi-radius-sm);
     padding: 1.25rem;
     font-size: 0.85rem;
     overflow-x: auto;
     max-width: 100%;             /* prevent breaking out of container on mobile */
     -webkit-overflow-scrolling: touch;
+}
+
+pre code {
+    color: inherit;
+    background: transparent;
+    font-size: inherit;
+    padding: 0;
+}
+
+/* Light surface variant (opt-in) — keep text dark for contrast */
+pre.code-block-light,
+pre.bg-light {
+    background: var(--unomi-bg-soft) !important;
+    color: var(--unomi-text) !important;
+    border: 1px solid var(--unomi-border);
+}
+
+pre.code-block-light code,
+pre.bg-light code {
+    color: inherit;
 }
 
 code {
