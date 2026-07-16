@@ -201,6 +201,30 @@ textarea:focus-visible,
     background: var(--unomi-primary-light);
 }
 
+/* Compact "New" indicator on nav items (e.g. Blog) */
+.nav-badge-new {
+    display: inline-block;
+    margin-left: 0.4rem;
+    padding: 0.15em 0.4em;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    vertical-align: 0.12em;
+    text-transform: uppercase;
+    color: var(--unomi-primary-dark);
+    background: var(--unomi-primary-light);
+    border: 1px solid var(--unomi-primary-border-light);
+    border-radius: 0.25rem;
+}
+
+.navbar-nav .nav-link:hover .nav-badge-new,
+.navbar-nav .nav-link.active .nav-badge-new {
+    color: var(--unomi-primary-dark);
+    background: var(--unomi-white);
+    border-color: var(--unomi-primary-border-light);
+}
+
 .dropdown-menu {
     min-width: 16rem;
     border: 1px solid var(--unomi-border);

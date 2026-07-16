@@ -50,30 +50,117 @@ layout: default
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>ssh -p 8102 karaf@localhost
 # default user/pass: karaf/karaf  (change etc/users.properties ASAP)
 
-unomi:&lt;TAB&gt;          # list commands
-help unomi:crud
-help unomi:cache</code></pre>
+unomi:&lt;TAB&gt;              # list commands
+unomi:crud help profile  # type cheat-sheet (also: rule, session, event, tenant, ...)
+unomi:version
+unomi:cache --stats</code></pre>
 
         <h2 class="h4 mt-5 mb-3">Tenant context first</h2>
-        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>unomi:tenant-set acme
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code># Create a tenant (generates public + private API keys)
+unomi:crud create tenant '{"itemId":"acme","name":"Acme Corp"}'
+unomi:crud list tenant
+
+unomi:tenant-set acme
 unomi:tenant-get
 # subsequent CRUD / cache commands use this tenant</code></pre>
 
         <h2 class="h4 mt-5 mb-3">Unified CRUD</h2>
-        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>unomi:crud help rule
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code># Verbs: create | read | update | delete | list | help
+# Bodies are positional JSON or a file:// URL (not --file / -d flags)
+
+unomi:crud help rule
 unomi:crud list rule --csv -n 50
 unomi:crud read rule my-rule-id
-unomi:crud create rule --file /tmp/rule.json
-unomi:crud update rule my-rule-id -d='{"itemId":"my-rule-id","enabled":false}'
+
+# Rules use metadata for name/enabled (not top-level name/enabled)
+unomi:crud create rule file:///tmp/rule.json
+unomi:crud create rule '{"itemId":"my-rule-id","metadata":{"id":"my-rule-id","name":"My rule","enabled":true},"condition":{"type":"matchAllCondition","parameterValues":{}},"actions":[]}'
+unomi:crud update rule my-rule-id '{"itemId":"my-rule-id","metadata":{"id":"my-rule-id","name":"My rule","enabled":false},"condition":{"type":"matchAllCondition","parameterValues":{}},"actions":[]}'
 unomi:crud delete rule my-rule-id
 
-unomi:crud list tenant
-unomi:crud create apikey -d='{"tenantId":"acme","keyType":"PRIVATE"}'
+unomi:crud create apikey '{"tenantId":"acme","keyType":"PRIVATE"}'
+# plaintext key is printed once &mdash; store it immediately
+
 unomi:crud list profile -n 20
 unomi:crud list schema          # when json-schema extension is present</code></pre>
 
         <h3 class="h6 mt-4 mb-2">Object types registered for <code>unomi:crud</code></h3>
         <p class="small text-muted"><code>actiontype</code>, <code>apikey</code>, <code>campaign</code>, <code>campaignevent</code>, <code>conditiontype</code>, <code>consent</code>, <code>event</code>, <code>goal</code>, <code>persona</code>, <code>profile</code>, <code>profilealias</code>, <code>propertytype</code>, <code>rule</code>, <code>rulestats</code>, <code>scope</code>, <code>scoring</code>, <code>segment</code>, <code>session</code>, <code>tenant</code>, <code>topic</code>, plus extension types such as <code>schema</code>.</p>
+        <p class="small text-muted mb-0">Use <code>unomi:crud help &lt;type&gt;</code> for the property cheat-sheet of that type (required fields, optional maps, common event types).</p>
+
+        <h2 class="h4 mt-5 mb-3">Profiles, sessions, and events</h2>
+        <p>Day-to-day operator work often means inspecting or patching customer data in a tenant.
+            Set the tenant once, then use the same <code>unomi:crud</code> verbs on <code>profile</code>, <code>session</code>, and <code>event</code>.</p>
+
+        <h3 class="h6 mt-4 mb-2">Profiles</h3>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code># Discover shape + recent profiles (sorted by lastUpdated / lastVisit)
+unomi:crud help profile
+unomi:crud list profile -n 20
+unomi:crud list profile --csv -n 50
+
+# Full JSON dump of one profile
+unomi:crud read profile PROFILE_ID
+
+# Create (top-level keys become profile properties; itemId is the profile id)
+unomi:crud create profile '{"itemId":"demo-ada","firstName":"Ada","lastName":"Lovelace","email":"ada@example.com"}'
+
+# Or from a file
+unomi:crud create profile file:///tmp/profile-ada.json
+
+# Update replaces the profile properties map with the JSON you pass
+# (include every property you want to keep)
+unomi:crud update profile demo-ada '{"firstName":"Ada","lastName":"Lovelace","email":"ada@apache.org","company":"Analytical Engines"}'
+
+# Remove
+unomi:crud delete profile demo-ada</code></pre>
+        <p class="small text-muted">There are no separate <code>profile-list</code> / <code>profile-view</code> commands in Unomi 3 &mdash; use <code>unomi:crud list|read|delete profile</code>.</p>
+
+        <h3 class="h6 mt-4 mb-2">Sessions</h3>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>unomi:crud help session
+unomi:crud list session -n 20
+unomi:crud read session SESSION_ID
+
+# Create a session bound to a profile (ISO-8601 timestamps)
+unomi:crud create session '{"itemId":"demo-session-1","profileId":"demo-ada","scope":"myscope","timeStamp":"2026-07-15T10:00:00Z","properties":{"origin":"shell-demo"}}'
+
+# Update session metadata / properties (full session document)
+unomi:crud update session demo-session-1 '{"itemId":"demo-session-1","profileId":"demo-ada","scope":"myscope","timeStamp":"2026-07-15T10:00:00Z","lastEventDate":"2026-07-15T10:05:00Z","properties":{"origin":"shell-demo","channel":"web"}}'
+
+unomi:crud delete session demo-session-1</code></pre>
+        <p class="small text-muted">Required fields for create: <code>itemId</code>, <code>profileId</code>, <code>timeStamp</code>, <code>scope</code>. Use <code>unomi:crud list|read session</code> (the old <code>session-list</code> / <code>session-view</code> commands are gone).</p>
+
+        <h3 class="h6 mt-4 mb-2">Events</h3>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>unomi:crud help event
+unomi:crud list event -n 50
+unomi:crud read event EVENT_ID
+
+# Send / persist a view event (create goes through EventService.send)
+unomi:crud create event '{"itemId":"demo-event-1","eventType":"view","scope":"myscope","profileId":"demo-ada","sessionId":"demo-session-1","source":{"itemType":"site","scope":"myscope","itemId":"mysite"},"target":{"itemType":"page","scope":"myscope","itemId":"homepage"},"properties":{"pageInfo":{"pagePath":"/home"}},"persistent":true}'
+
+# Re-send / update the same event id with new properties
+unomi:crud update event demo-event-1 '{"itemId":"demo-event-1","eventType":"view","scope":"myscope","profileId":"demo-ada","sessionId":"demo-session-1","source":{"itemType":"site","scope":"myscope","itemId":"mysite"},"target":{"itemType":"page","scope":"myscope","itemId":"checkout"},"properties":{"pageInfo":{"pagePath":"/checkout"}},"persistent":true}'
+
+unomi:crud delete event demo-event-1
+
+# Prefer file:// for larger payloads
+unomi:crud create event file:///tmp/view-event.json</code></pre>
+        <p class="small text-muted">Common <code>eventType</code> values include <code>view</code>, <code>form</code>, <code>login</code>, <code>identify</code>, <code>modifyConsent</code>, <code>sessionCreated</code>, <code>profileUpdated</code>.
+            For live traffic use <code>unomi:event-tail</code>; for history use <code>unomi:crud list|read event</code> (legacy <code>event-list</code> / <code>event-search</code> were replaced by CRUD).</p>
+
+        <h3 class="h6 mt-4 mb-2">Typical inspect loop</h3>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>unomi:tenant-set acme
+
+# Who showed up recently?
+unomi:crud list profile -n 10
+
+# Open one profile, then its latest sessions / events
+unomi:crud read profile demo-ada
+unomi:crud list session -n 10
+unomi:crud list event -n 20
+
+# Live: watch events and rule hits while you reproduce in the browser
+unomi:event-tail
+unomi:rule-tail</code></pre>
 
         <h2 class="h4 mt-5 mb-3">Cache</h2>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>unomi:cache --stats
@@ -81,8 +168,8 @@ unomi:cache --stats --detailed --tenant acme
 unomi:cache --stats --type profile --csv
 unomi:cache --clear --tenant acme
 unomi:cache --inspect
-unomi:cache --view --id ENTRY_ID --type &hellip; --tenant acme
-unomi:cache --remove --id ENTRY_ID --type &hellip; --tenant acme
+unomi:cache --view --id ENTRY_ID --type TYPE --tenant acme
+unomi:cache --remove --id ENTRY_ID --type TYPE --tenant acme
 unomi:cache --watch 5</code></pre>
 
         <h2 class="h4 mt-5 mb-3">Scheduler (shell twin of REST)</h2>
@@ -95,16 +182,16 @@ unomi:task-purge --days 14 --force
 unomi:task-executor</code></pre>
 
         <h2 class="h4 mt-5 mb-3">Still there: live debugging &amp; lifecycle</h2>
+        <p>Dedicated list/view/remove commands for profiles, sessions, events, rules, segments, actions, and conditions were folded into <code>unomi:crud</code>.
+            What remains as first-class commands:</p>
         <ul>
-            <li><code>rule-list|view|remove|reset-stats|tail|watch</code></li>
-            <li><code>event-tail|view|list|search</code></li>
-            <li><code>action-list|view</code>, <code>condition-list|view</code></li>
-            <li><code>profile-list|view|remove</code>, <code>segment-*</code>, <code>session-*</code></li>
-            <li><code>list-invalid-objects</code></li>
-            <li><code>deploy-definition</code> / <code>undeploy-definition</code></li>
-            <li><code>setup</code>, <code>migrate</code>, <code>start</code>, <code>stop</code>, <code>version</code></li>
+            <li><code>unomi:rule-reset-stats</code>, <code>unomi:rule-tail</code>, <code>unomi:rule-watch RULE_ID&hellip;</code></li>
+            <li><code>unomi:event-tail</code> (live stream; Ctrl+C to stop)</li>
+            <li><code>unomi:list-invalid-objects</code></li>
+            <li><code>unomi:deploy-definition</code> / <code>unomi:undeploy-definition</code></li>
+            <li><code>unomi:setup</code>, <code>unomi:migrate</code>, <code>unomi:start</code>, <code>unomi:stop</code>, <code>unomi:version</code></li>
         </ul>
-        <p>Many day-to-day inspect/edit flows now go through <code>unomi:crud</code>; the dedicated list/view/remove commands remain useful for scripting habits and live tails.</p>
+        <p>Day-to-day inspect/edit for profiles, sessions, events, rules, segments, and the rest goes through <code>unomi:crud</code>; use the tails when you need a live console feed.</p>
 
         <p class="mt-4">
             <a class="btn btn-primary" href="{{ site.data.unomi.manual.published_latest }}#_shell_commands">Manual: shell commands</a>
