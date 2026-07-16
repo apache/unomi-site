@@ -193,13 +193,22 @@ services:
 docker compose up
 ```
 
-Create a tenant, then call context with the public API key:
+Create a tenant, regenerate API keys for plaintext secrets, create a scope, then call context with the public API key:
 
 ```
 curl -X POST http://localhost:8181/cxs/tenants \
   --user karaf:karaf \
   -H "Content-Type: application/json" \
   -d '{"requestedId":"default","properties":{"name":"Default Tenant"}}'
+
+curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PUBLIC' --user karaf:karaf
+curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' --user karaf:karaf
+# Save plainTextKey from each response (tenant create only returns maskedKey)
+
+curl -X POST http://localhost:8181/cxs/scopes \
+  -u 'default:YOUR_PRIVATE_API_KEY' \
+  -H "Content-Type: application/json" \
+  -d '{"itemId":"default","itemType":"scope","metadata":{"id":"default","name":"Default scope"}}'
 
 curl -X POST "http://localhost:8181/cxs/context.json?sessionId=1234" \
   -H "Content-Type: application/json" \

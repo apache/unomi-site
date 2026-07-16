@@ -69,10 +69,11 @@ The fastest way to try Apache Unomi 3.1 is with Docker Compose (Elasticsearch 9.
 docker compose up
 ```
 
-Then create a tenant (`POST /cxs/tenants` as `karaf:karaf`) and save the returned API keys:
+Then create a tenant (`POST /cxs/tenants` as `karaf:karaf`), regenerate keys via `POST /cxs/tenants/{id}/apikeys?type=PUBLIC|PRIVATE` (save each `plainTextKey` — create only returns `maskedKey`), and create a scope before context/events:
 
 - **Public key** → header `X-Unomi-Api-Key` for `/cxs/context.json` and `/cxs/eventcollector`
 - **Private key** → basic auth `tenantId:privateApiKey` for admin APIs (scopes, rules, schemas, searches)
+- **Scope** → `POST /cxs/scopes` before any context or event that references that scope id
 
 System admin (`karaf:karaf`) is for tenant management and cluster operations, not for public context/event calls in native 3.1 mode.
 

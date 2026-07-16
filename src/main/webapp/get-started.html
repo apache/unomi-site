@@ -32,7 +32,7 @@ structured_data: >
                 "@type": "HowToStep",
                 "position": 3,
                 "name": "Create a tenant",
-                "text": "POST /cxs/tenants as karaf/karaf and save the public and private API keys from the response."
+                "text": "POST /cxs/tenants as karaf/karaf, then POST /cxs/tenants/{id}/apikeys?type=PUBLIC and type=PRIVATE and save each plainTextKey."
             },
             {
                 "@type": "HowToStep",
@@ -229,7 +229,7 @@ volumes:
                     <div class="step-number me-3 flex-shrink-0">3</div>
                     <div class="flex-grow-1">
                         <h3 class="h6 fw-semibold mb-2">Create a tenant (required in 3.1)</h3>
-                        <p class="small text-muted">System admin credentials create tenants. Save both API keys from the JSON response.</p>
+                        <p class="small text-muted">System admin credentials create tenants. Creation stores hashed keys only (<code>maskedKey</code> in the response) &mdash; regenerate each key once and save <code>plainTextKey</code> immediately.</p>
                         <pre><code>curl -X POST http://localhost:8181/cxs/tenants \
   --user karaf:karaf \
   -H "Content-Type: application/json" \
@@ -239,10 +239,16 @@ volumes:
       "name": "Default Tenant",
       "description": "Default tenant for quick start"
     }
-  }'</code></pre>
+  }'
+
+# One-time plaintext secrets (replaces any existing key of that type)
+curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PUBLIC' \
+  --user karaf:karaf
+curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
+  --user karaf:karaf</code></pre>
                         <ul class="small text-muted mt-2 mb-0">
-                            <li><strong>PUBLIC</strong> key &mdash; use as <code>X-Unomi-Api-Key</code> on <code>/cxs/context.json</code> and <code>/cxs/eventcollector</code></li>
-                            <li><strong>PRIVATE</strong> key &mdash; basic auth <code>default:&lt;private-key&gt;</code> for admin APIs (scopes, rules, schemas, &hellip;)</li>
+                            <li><strong>PUBLIC</strong> <code>plainTextKey</code> &mdash; use as <code>X-Unomi-Api-Key</code> on <code>/cxs/context.json</code> and <code>/cxs/eventcollector</code></li>
+                            <li><strong>PRIVATE</strong> <code>plainTextKey</code> &mdash; basic auth <code>default:&lt;private-key&gt;</code> for admin APIs (scopes, rules, schemas, &hellip;)</li>
                         </ul>
                     </div>
                 </div>
@@ -254,6 +260,15 @@ volumes:
                         <h3 class="h6 fw-semibold mb-2">Verify cluster &amp; request context</h3>
                         <p class="small text-muted mb-2">Cluster (system admin):</p>
                         <pre><code>curl -k https://localhost:9443/cxs/cluster -u karaf:karaf</code></pre>
+                        <p class="small text-muted mt-3 mb-2">Create a scope before context or events (schema validation rejects unknown scopes):</p>
+                        <pre><code>curl -X POST http://localhost:8181/cxs/scopes \
+  -u "default:YOUR_PRIVATE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "itemId": "default",
+    "itemType": "scope",
+    "metadata": { "id": "default", "name": "Default scope" }
+  }'</code></pre>
                         <p class="small text-muted mt-3 mb-2">First context request (public API key required):</p>
                         <pre><code>curl -X POST "http://localhost:8181/cxs/context.json?sessionId=1234" \
   -H "Content-Type: application/json" \

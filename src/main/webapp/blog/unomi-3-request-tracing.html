@@ -51,7 +51,21 @@ layout: default
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>{"errorMessage":"Insufficient privileges to access tracing information"}</code></pre>
         <p>Integration coverage: <code>EventsCollectorIT#testEventsCollectorWithExplain</code> and <code>#testEventsCollectorWithExplainUnauthorized</code>.</p>
 
+        <h2 class="h4 mt-5 mb-3">Prerequisite: create the scope</h2>
+        <p>JSON Schema validation rejects events whose <code>scope</code> is unknown for the tenant
+            (<code>Unknown scope value &hellip; for value myscope</code>). Create the scope first:</p>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>curl -X POST http://localhost:8181/cxs/scopes \
+  -u 'YOUR_TENANT_ID:YOUR_PRIVATE_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "itemId": "myscope",
+    "itemType": "scope",
+    "metadata": { "id": "myscope", "name": "My scope" }
+  }'</code></pre>
+
         <h2 class="h4 mt-5 mb-3">Example: event collector</h2>
+        <p class="small text-muted">Include <code>target.properties.pageInfo</code> (at least <code>referringURL</code> / <code>pagePath</code>).
+            Built-in rules such as <code>sessionReferrer</code> read those fields; omitting them still works but logs noisy WARNs.</p>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>curl -X POST 'http://localhost:8181/cxs/eventcollector?explain=true' \
   -u 'YOUR_TENANT_ID:YOUR_PRIVATE_API_KEY' \
   -H 'Content-Type: application/json' \
@@ -70,7 +84,17 @@ layout: default
       "target": {
         "itemType": "page",
         "scope": "myscope",
-        "itemId": "homepage"
+        "itemId": "homepage",
+        "properties": {
+          "pageInfo": {
+            "pageID": "homepage",
+            "pagePath": "/home",
+            "pageName": "Home",
+            "destinationURL": "https://example.com/home",
+            "referringURL": "https://example.com/",
+            "language": "en"
+          }
+        }
       }
     }
   ]

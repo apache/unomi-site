@@ -56,8 +56,11 @@ unomi:version
 unomi:cache --stats</code></pre>
 
         <h2 class="h4 mt-5 mb-3">Tenant context first</h2>
-        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code># Create a tenant (generates public + private API keys)
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code># Create a tenant (hashed keys are stored; plaintext only via create apikey)
 unomi:crud create tenant '{"itemId":"acme","name":"Acme Corp"}'
+unomi:crud create apikey '{"tenantId":"acme","keyType":"PUBLIC"}'
+unomi:crud create apikey '{"tenantId":"acme","keyType":"PRIVATE"}'
+# plaintext key is printed once for each create apikey &mdash; store it immediately
 unomi:crud list tenant
 
 unomi:tenant-set acme
@@ -115,6 +118,13 @@ unomi:crud update profile demo-ada '{"firstName":"Ada","lastName":"Lovelace","em
 unomi:crud delete profile demo-ada</code></pre>
         <p class="small text-muted">There are no separate <code>profile-list</code> / <code>profile-view</code> commands in Unomi 3 &mdash; use <code>unomi:crud list|read|delete profile</code>.</p>
 
+        <h3 class="h6 mt-4 mb-2">Scope first</h3>
+        <p class="small text-muted">Sessions and events must reference a scope that already exists for the tenant.
+            Without it, event schema validation logs <code>Unknown scope value</code> and rejects the payload.</p>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code># Scope name lives under metadata (not a top-level "name" field)
+unomi:crud create scope '{"itemId":"myscope","metadata":{"id":"myscope","name":"My scope"}}'
+unomi:crud list scope</code></pre>
+
         <h3 class="h6 mt-4 mb-2">Sessions</h3>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>unomi:crud help session
 unomi:crud list session -n 20
@@ -134,11 +144,10 @@ unomi:crud delete session demo-session-1</code></pre>
 unomi:crud list event -n 50
 unomi:crud read event EVENT_ID
 
-# Send / persist a view event (create goes through EventService.send)
-unomi:crud create event '{"itemId":"demo-event-1","eventType":"view","scope":"myscope","profileId":"demo-ada","sessionId":"demo-session-1","source":{"itemType":"site","scope":"myscope","itemId":"mysite"},"target":{"itemType":"page","scope":"myscope","itemId":"homepage"},"properties":{"pageInfo":{"pagePath":"/home"}},"persistent":true}'
+# View events: put pageInfo under target.properties (built-in sessionReferrer reads referringURL there)
+unomi:crud create event '{"itemId":"demo-event-1","eventType":"view","scope":"myscope","profileId":"demo-ada","sessionId":"demo-session-1","source":{"itemType":"site","scope":"myscope","itemId":"mysite"},"target":{"itemType":"page","scope":"myscope","itemId":"homepage","properties":{"pageInfo":{"pagePath":"/home","pageName":"Home","destinationURL":"https://example.com/home","referringURL":"https://example.com/","language":"en"}}},"persistent":true}'
 
-# Re-send / update the same event id with new properties
-unomi:crud update event demo-event-1 '{"itemId":"demo-event-1","eventType":"view","scope":"myscope","profileId":"demo-ada","sessionId":"demo-session-1","source":{"itemType":"site","scope":"myscope","itemId":"mysite"},"target":{"itemType":"page","scope":"myscope","itemId":"checkout"},"properties":{"pageInfo":{"pagePath":"/checkout"}},"persistent":true}'
+unomi:crud update event demo-event-1 '{"itemId":"demo-event-1","eventType":"view","scope":"myscope","profileId":"demo-ada","sessionId":"demo-session-1","source":{"itemType":"site","scope":"myscope","itemId":"mysite"},"target":{"itemType":"page","scope":"myscope","itemId":"checkout","properties":{"pageInfo":{"pagePath":"/checkout","pageName":"Checkout","destinationURL":"https://example.com/checkout","referringURL":"https://example.com/home","language":"en"}}},"persistent":true}'
 
 unomi:crud delete event demo-event-1
 

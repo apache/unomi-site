@@ -22,7 +22,7 @@ structured_data: >
                 "@type": "HowToStep",
                 "position": 2,
                 "name": "Create a tenant",
-                "text": "POST /cxs/tenants as karaf/karaf and save the public and private API keys."
+                "text": "POST /cxs/tenants as karaf/karaf, then regenerate PUBLIC and PRIVATE keys via /cxs/tenants/{id}/apikeys and save each plainTextKey."
             },
             {
                 "@type": "HowToStep",
@@ -145,7 +145,7 @@ services:
             <div class="col-lg-10">
                 <span class="badge badge-primary mb-3">Step 2 &middot; Unomi 3.1</span>
                 <h2>Create a Tenant</h2>
-                <p class="text-muted">In Unomi 3.1, data lives under a <strong>tenant</strong>. Create one with the system admin user, then use the returned API keys for everything else.</p>
+                <p class="text-muted">In Unomi 3.1, data lives under a <strong>tenant</strong>. Create one with the system admin user, then regenerate API keys to obtain the one-time plaintext values.</p>
 <pre><code>curl -X POST http://localhost:8181/cxs/tenants \
   --user karaf:karaf \
   -H "Content-Type: application/json" \
@@ -155,8 +155,14 @@ services:
       "name": "Default Tenant",
       "description": "Tutorial tenant"
     }
-  }'</code></pre>
-                <p class="small text-muted mt-3">From the response, copy:</p>
+  }'
+
+# Tenant create only returns maskedKey. Regenerate to get plainTextKey (shown once):
+curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PUBLIC' \
+  --user karaf:karaf
+curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
+  --user karaf:karaf</code></pre>
+                <p class="small text-muted mt-3">From each apikeys response, copy <code>plainTextKey</code>:</p>
                 <ul class="small">
                     <li><code>YOUR_PUBLIC_API_KEY</code> &mdash; header <code>X-Unomi-Api-Key</code> for <code>/cxs/context.json</code> and <code>/cxs/eventcollector</code></li>
                     <li><code>YOUR_PRIVATE_API_KEY</code> &mdash; basic auth <code>default:YOUR_PRIVATE_API_KEY</code> for scopes, rules, schemas, searches</li>
@@ -200,7 +206,7 @@ karaf@root()&gt; unomi:start</code></pre>
                 <p>Create a tenant as in <a href="#create-tenant">Step 2</a>, then call context with <code>X-Unomi-Api-Key</code>. Cluster check: <code>https://localhost:9443/cxs/cluster</code> (<code>karaf</code>/<code>karaf</code>).</p>
 
                 <div class="alert alert-info small" role="alert">
-                    <i class="bi bi-terminal me-1"></i> <strong>Tip:</strong> SSH console <code>ssh -p 8102 karaf@localhost</code> &mdash; <code>profile-list</code>, <code>event-tail</code>, <code>rule-list</code>. Full detail: <a href="https://unomi.apache.org/manual/latest/index.html#_quick_start">manual quick start</a>.
+                    <i class="bi bi-terminal me-1"></i> <strong>Tip:</strong> SSH console <code>ssh -p 8102 karaf@localhost</code> &mdash; <code>unomi:crud list profile</code>, <code>unomi:event-tail</code>, <code>unomi:crud list rule</code>. Full detail: <a href="/blog/unomi-3-shell-commands.html">shell commands post</a> &middot; <a href="https://unomi.apache.org/manual/latest/index.html#_quick_start">manual quick start</a>.
                 </div>
             </div>
         </div>
@@ -220,27 +226,10 @@ karaf@root()&gt; unomi:start</code></pre>
                 <h2>Your First API Calls</h2>
                 <p class="text-muted">With Unomi 3.1 running and a tenant created, explore the REST API. Replace <code>YOUR_PUBLIC_API_KEY</code> / <code>YOUR_PRIVATE_API_KEY</code> with values from <a href="#create-tenant">Step 2</a>.</p>
 
-                <!-- Read context -->
-                <h3 class="h6 fw-semibold mt-4 mb-3">Read the current context</h3>
-                <p>The <code>/cxs/context.json</code> endpoint is the primary public endpoint. In 3.1 it requires a <strong>public API key</strong>:</p>
-<pre><code>curl -X POST "http://localhost:8181/cxs/context.json?sessionId=1234" \
-  -H "Content-Type: application/json" \
-  -H "X-Unomi-Api-Key: YOUR_PUBLIC_API_KEY" \
-  --data-raw '{
-    "source": {
-      "itemId": "homepage",
-      "itemType": "page",
-      "scope": "default"
-    },
-    "requiredProfileProperties": ["*"],
-    "requiredSessionProperties": ["*"],
-    "requireSegments": true,
-    "requireScores": true
-  }'</code></pre>
-
-                <!-- Create a scope -->
+                <!-- Create a scope first -->
                 <h3 class="h6 fw-semibold mt-4 mb-3">Create a scope</h3>
-                <p>Events in Unomi must be associated with a <strong>scope</strong>. Create one before sending events:</p>
+                <p>Context requests and events must use a <strong>scope</strong> that already exists for the tenant.
+                    Schema validation rejects unknown scopes (<code>Unknown scope value</code> in the logs):</p>
 <pre><code>curl -X POST http://localhost:8181/cxs/scopes \
   -u "default:YOUR_PRIVATE_API_KEY" \
   -H "Content-Type: application/json" \
@@ -251,6 +240,24 @@ karaf@root()&gt; unomi:start</code></pre>
       "id": "my-website",
       "name": "My Website Scope"
     }
+  }'</code></pre>
+
+                <!-- Read context -->
+                <h3 class="h6 fw-semibold mt-4 mb-3">Read the current context</h3>
+                <p>The <code>/cxs/context.json</code> endpoint is the primary public endpoint. In 3.1 it requires a <strong>public API key</strong>:</p>
+<pre><code>curl -X POST "http://localhost:8181/cxs/context.json?sessionId=1234" \
+  -H "Content-Type: application/json" \
+  -H "X-Unomi-Api-Key: YOUR_PUBLIC_API_KEY" \
+  --data-raw '{
+    "source": {
+      "itemId": "homepage",
+      "itemType": "page",
+      "scope": "my-website"
+    },
+    "requiredProfileProperties": ["*"],
+    "requiredSessionProperties": ["*"],
+    "requireSegments": true,
+    "requireScores": true
   }'</code></pre>
 
                 <!-- Send a custom event -->
@@ -341,7 +348,7 @@ karaf@root()&gt; unomi:start</code></pre>
   -u "default:YOUR_PRIVATE_API_KEY"</code></pre>
 
                 <div class="alert alert-info small" role="alert">
-                    <i class="bi bi-terminal me-1"></i> <strong>SSH Console shortcuts:</strong> <code>event-tail</code> watches events in real time, <code>event-list</code> shows recent events, <code>profile-list</code> lists recently modified profiles, <code>profile-view PROFILE_UUID</code> shows profile details.
+                    <i class="bi bi-terminal me-1"></i> <strong>SSH Console shortcuts:</strong> <code>unomi:event-tail</code> watches events in real time, <code>unomi:crud list event</code> / <code>unomi:crud list profile</code> list recent items, <code>unomi:crud read profile PROFILE_UUID</code> shows profile details.
                 </div>
             </div>
         </div>
@@ -383,6 +390,7 @@ karaf@root()&gt; unomi:start</code></pre>
         "pageName": document.title,
         "pagePath": document.location.pathname,
         "destinationURL": document.location.origin + document.location.pathname,
+        "referringURL": document.referrer || document.location.origin + "/",
         "language": "en",
         "categories": [],
         "tags": []
@@ -489,7 +497,7 @@ const unomiWebTracker = useTracker();
       }
     }]
   }'</code></pre>
-                <p class="small text-muted">After creating this rule, reload your tracked page a few times, then check the profile with <code>profile-view PROFILE_UUID</code> in the SSH console to see the counter increase.</p>
+                <p class="small text-muted">After creating this rule, reload your tracked page a few times, then check the profile with <code>unomi:crud read profile PROFILE_UUID</code> in the SSH console to see the counter increase.</p>
 
                 <!-- Copy event properties to profile -->
                 <h3 class="h6 fw-semibold mt-4 mb-3">Map event data to a profile</h3>
@@ -667,7 +675,7 @@ karaf@root()&gt; log:set DEBUG org.apache.unomi.schema.impl.SchemaServiceImpl
 
 # Watch logs in real-time
 karaf@root()&gt; log:tail</code></pre>
-                    <p class="small text-muted mb-0">Useful commands: <code>event-tail</code>, <code>event-list</code>, <code>rule-list</code>, <code>rule-tail</code>, <code>profile-list</code>, <code>profile-view &lt;ID&gt;</code></p>
+                    <p class="small text-muted mb-0">Useful commands: <code>unomi:event-tail</code>, <code>unomi:rule-tail</code>, <code>unomi:crud list event|rule|profile</code>, <code>unomi:crud read profile &lt;ID&gt;</code></p>
                 </div>
             </div>
         </div>
