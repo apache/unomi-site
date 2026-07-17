@@ -8,3 +8,7 @@ Gemfile.lock
 .bundle/
 vendor/bundle/
 .netlify/
+
+# Local env (secrets)
+.env.local
+.env*.local
