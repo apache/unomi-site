@@ -3,6 +3,7 @@ title: Richer OpenAPI docs in Unomi 3.1
 description: "How Unomi 3.1 enriches /cxs/openapi.json from JAX-RS Javadoc — summaries, statuses, examples, and schemas without duplicating Swagger annotations (UNOMI-963)."
 keywords: "Unomi OpenAPI, openapi.json, UNOMI-963, CXF OpenAPI, Javadoc enrichment, Unomi 3.1 REST"
 layout: default
+date: 2026-07-15 13:58:00 +0000
 ---
 
 <section class="page-header">
@@ -10,6 +11,12 @@ layout: default
         <p class="section-label text-hero-label">Unomi 3.1 &middot; Developer experience</p>
         <h1>Richer OpenAPI docs from Javadoc</h1>
         <p class="lead">Unomi 3.1 ships an enriched <code>/cxs/openapi.json</code> &mdash; summaries, status codes, examples, and schema notes merged from endpoint Javadoc.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
     </div>
 </section>
 

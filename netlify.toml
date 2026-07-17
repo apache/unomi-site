@@ -1,0 +1,13 @@
+# Personal/community staging only (see preview.sh).
+# Production for unomi.apache.org is Maven scm-publish, not Netlify.
+
+[build]
+  publish = "target/site"
+  # Built by preview.sh (Docker Jekyll) before deploy — do not rely on Netlify CI.
+  command = "echo 'Build with ./preview.sh locally; Netlify only hosts the static output.'"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"

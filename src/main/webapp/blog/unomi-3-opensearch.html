@@ -3,6 +3,7 @@ title: Elasticsearch 9 and OpenSearch in Unomi 3
 description: "Unomi 3 runs on Elasticsearch 9 by default and ships a first-class OpenSearch persistence distribution — same SPI, migrate guide, and build flags."
 keywords: "Unomi OpenSearch, Elasticsearch 9, Apache Unomi persistence, UNOMI-828, migrate Elasticsearch to OpenSearch"
 layout: default
+date: 2026-06-29 10:52:00 +0000
 ---
 
 <section class="page-header">
@@ -10,6 +11,12 @@ layout: default
         <p class="section-label text-hero-label">Unomi 3 &middot; Operations</p>
         <h1>Elasticsearch 9 and OpenSearch in Unomi 3</h1>
         <p class="lead">One CDP runtime, two supported search backends &mdash; pick the distribution that matches your ops constraints.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
     </div>
 </section>
 

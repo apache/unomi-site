@@ -3,6 +3,7 @@ title: Request tracing with explain=true in Unomi 3
 description: "Debug context and eventcollector requests with explain=true &mdash; admin-gated requestTracing trees, verified curl examples, and what 403 means for public API keys."
 keywords: "Unomi explain, requestTracing, Unomi tracing, UNOMI-873, eventcollector explain, context.json explain"
 layout: default
+date: 2026-07-05 13:23:00 +0000
 ---
 
 <section class="page-header">
@@ -10,6 +11,12 @@ layout: default
         <p class="section-label text-hero-label">Unomi 3 &middot; Debugging</p>
         <h1>Request tracing with <code>explain=true</code></h1>
         <p class="lead">See condition evaluations, rule actions, and timings on <code>/cxs/context.json</code> and <code>/cxs/eventcollector</code>.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
     </div>
 </section>
 

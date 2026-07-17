@@ -6,3 +6,4 @@ target/
 /.mvn/wrapper/maven-wrapper.jar
 Gemfile.lock
 .bundle/
+.netlify/

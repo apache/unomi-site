@@ -3,6 +3,7 @@ title: Unomi 3 Karaf shell commands
 description: "Unomi 3 expands the unomi:* Karaf shell &mdash; unified unomi:crud, tenant session context, cache ops, task scheduler commands, and list-invalid-objects (UNOMI-879 / 880)."
 keywords: "Unomi shell, unomi:crud, Karaf shell, unomi:cache, unomi:task-list, tenant-set, UNOMI-879, UNOMI-880"
 layout: default
+date: 2026-07-01 11:59:00 +0000
 ---
 
 <section class="page-header">
@@ -10,6 +11,12 @@ layout: default
         <p class="section-label text-hero-label">Unomi 3 &middot; Operator experience</p>
         <h1>Karaf shell commands in Unomi 3</h1>
         <p class="lead"><code>unomi:crud</code>, tenant session context, cache tools, and task commands &mdash; operate without leaving SSH.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
     </div>
 </section>
 

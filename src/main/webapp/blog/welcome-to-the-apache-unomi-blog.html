@@ -3,6 +3,7 @@ title: Welcome to the Apache Unomi Blog
 description: "The Apache Unomi project launches an official blog — Unomi 3 deep dives, AI/CDP guidance, and community updates."
 keywords: "Apache Unomi blog, Unomi 3, community"
 layout: default
+date: 2026-06-17 09:10:00 +0000
 ---
 
 <section class="page-header">
@@ -10,6 +11,12 @@ layout: default
         <p class="section-label text-hero-label">Blog</p>
         <h1>Welcome to the Apache Unomi Blog</h1>
         <p class="lead">Longer-form writing for Unomi 3, AI/CDP builders, and the community.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
     </div>
 </section>
 <section class="section">

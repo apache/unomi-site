@@ -3,6 +3,7 @@ title: One entry point — Unomi 3 build.sh
 description: "How Apache Unomi 3 replaced scattered build scripts with a single build.sh — preflight checks, CI mode, integration tests, deploy, and Windows build.ps1 parity."
 keywords: "Unomi build.sh, Apache Unomi developer experience, UNOMI-887, Maven CI, OpenSearch integration tests"
 layout: default
+date: 2026-07-11 11:44:00 +0000
 ---
 
 <section class="page-header">
@@ -10,6 +11,12 @@ layout: default
         <p class="section-label text-hero-label">Unomi 3 &middot; Developer experience</p>
         <h1>One entry point: <code>build.sh</code></h1>
         <p class="lead">Preflight, build, test, and deploy &mdash; the same script locally and on GitHub Actions.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
     </div>
 </section>
 

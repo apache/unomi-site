@@ -245,6 +245,11 @@
     <priority>0.75</priority>
   </url>
   <url>
+  <url>
+    <loc>https://unomi.apache.org/blog/unomi-3-in-numbers.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
     <loc>https://unomi.apache.org/blog/unomi-3-shell-commands.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

@@ -1,0 +1,139 @@
+---
+title: Unomi 3 in numbers
+description: "Unomi 1 vs 2 vs 3 in numbers — lines of code, tests, contributors, ASF downloads, and unomi.apache.org Matomo visits."
+keywords: "Unomi 3 metrics, lines of code, unit tests, integration tests, contributors, downloads, website visits, Matomo, Apache Unomi statistics"
+layout: default
+date: 2026-07-17 10:00:00 +0000
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Unomi 3 &middot; Metrics</p>
+        <h1>Unomi 3 in numbers</h1>
+        <p class="lead">How the codebase, tests, community, downloads, and website traffic grew from Unomi 1 through Unomi 3.1.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
+    </div>
+</section>
+
+<section class="section">
+    <div class="container col-lg-8">
+        <p>Unomi 3 is not only new features &mdash; multi-tenancy, OpenSearch, shell CRUD, tracing, and the task scheduler.
+            It is also a step-change in how much of the platform is covered by automated tests, and how the Java surface area evolved across a decade of releases.</p>
+        <p>The charts below use <strong>release tags</strong> as waypoints:
+            Unomi&nbsp;1 = <code>unomi-root-1.9.1</code>,
+            Unomi&nbsp;2 = <code>unomi-root-2.7.0</code>,
+            Unomi&nbsp;3.0 = <code>unomi-root-3.0.1</code>,
+            Unomi&nbsp;3.1 = current <code>master</code> (work in progress after 3.0.1).
+            Counts are physical lines of code and approximate JUnit <code>@Test</code> annotations from the git tree at each tag.</p>
+
+        <img src="/assets/images/unomi3/numbers-hero.svg" class="img-fluid my-4" alt="Unomi 3 headline metrics: 181k Java LOC, 1148 unit tests, 388 IT tests, 77 contributors"/>
+
+        <h2 class="h4 mt-5 mb-3">Lines of code</h2>
+        <p>Production Java grew from about <strong>45k</strong> lines in late Unomi&nbsp;1 to about <strong>70k</strong> in Unomi&nbsp;2 and <strong>71k</strong> at Unomi&nbsp;3.0.1 &mdash; then jumped to about <strong>118k</strong> on the 3.1 line.
+            Test Java stayed modest through 3.0 (~12k) and then leapt to about <strong>63k</strong> with the unit harness, multi-tenancy coverage, and related work.</p>
+        <img src="/assets/images/unomi3/numbers-loc.svg" class="img-fluid my-4" alt="Stacked bar chart of Java production and test lines of code across Unomi 1, 2, 3.0, and 3.1"/>
+        <p class="small text-muted">Methodology: physical line counts over <code>.java</code> (and primary companion sources for totals elsewhere) from <code>git archive</code> at each tag; paths under <code>target/</code> excluded.
+            &ldquo;Main&rdquo; is everything outside <code>src/test/</code> and <code>itests/</code>; &ldquo;Tests&rdquo; is those trees.</p>
+
+        <h2 class="h4 mt-5 mb-3">Unit and integration tests</h2>
+        <p>Integration tests have been Unomi&rsquo;s historical strength &mdash; growing from roughly <strong>128</strong> IT <code>@Test</code> methods in 1.9.1 to about <strong>388</strong> on 3.1.
+            The dramatic change is on the unit side: from a few dozen methods through Unomi&nbsp;2 to about <strong>1,148</strong> on 3.1, driven by the in-memory persistence harness and denser service-level coverage.</p>
+        <img src="/assets/images/unomi3/numbers-tests.svg" class="img-fluid my-4" alt="Grouped bars of unit versus integration @Test method counts across Unomi versions"/>
+        <ul>
+            <li><strong>Unit classes</strong> &mdash; 11 &rarr; 12 &rarr; 15 &rarr; <strong>66</strong></li>
+            <li><strong>IT classes</strong> &mdash; 25 &rarr; 44 &rarr; 43 &rarr; <strong>63</strong></li>
+            <li><strong>Test / main Java ratio</strong> &mdash; ~0.19 in 1.x, ~0.17 in 2.x, ~<strong>0.53</strong> on 3.1</li>
+        </ul>
+        <p>That ratio shift is intentional: Unomi&nbsp;3 invests in fast feedback for rules, persistence, and tenancy while keeping the heavier IT suite for end-to-end confidence.
+            See also
+            <a href="/blog/unomi-3-unit-testing-harness.html">the unit testing harness</a>
+            and
+            <a href="/blog/unomi-3-it-execution.html">clearer IT execution</a>.</p>
+
+        <h2 class="h4 mt-5 mb-3">Contributors</h2>
+        <p>The project has grown to <strong>77</strong> unique authors on the master ancestry (name-based; some people appear under multiple spellings), with about <strong>2,769</strong> commits through current <code>master</code>.
+            Late Unomi&nbsp;1 already had a broad base (~62 authors); Unomi&nbsp;2 and&nbsp;3 continue that trajectory rather than restarting it.</p>
+        <img src="/assets/images/unomi3/numbers-contributors.svg" class="img-fluid my-4" alt="Line chart of cumulative unique contributors from Unomi 1 through 3.1"/>
+        <p class="small text-muted">Top committers historically include Serge Huber, Thomas Draier, Abdelkader Midani, Sergiy Shyrkov, and many others who shaped incubating 1.x through the 3.x platform leap.</p>
+
+        <h2 class="h4 mt-5 mb-3">Downloads</h2>
+        <p>Apache Infra publishes monthly CDN hit logs for Unomi on
+            <a href="https://infra-reports.apache.org/download_stats/unomi/">infra-reports.apache.org</a>
+            (hosts <code>dlcdn.apache.org</code> and <code>downloads.apache.org</code>).
+            From July&nbsp;2023 through mid-July&nbsp;2026 that is about
+            <strong>43k</strong> software-package hits in total (binary + source archives) &mdash;
+            that figure <em>includes</em> bots.
+            Of those, about <strong>25k</strong> (~58%) are identifiable as bots or scripts
+            (Python Requests, scrapers, GPTBot, curl/wget, HeadlessChrome, and similar),
+            leaving about <strong>18k</strong> from recognizable human browsers
+            (the purple series below).
+            ASF&rsquo;s coarse UA labels will miss some bots, so the human count is likely still a bit high.</p>
+        <img src="/assets/images/unomi3/numbers-downloads.svg" class="img-fluid my-4" alt="Cumulative Unomi software package downloads: human browsers only, all packages including bots, and known bots, July 2023 through July 2026"/>
+        <p class="small text-muted">Methodology: classify each file&rsquo;s <code>useragents</code> labels into human browsers vs known bots/scripts
+            (plus a small unknown bucket), then cumulate over the available months.
+            Solid purple = human browsers only (bots excluded);
+            solid teal = all software-package hits (bots included);
+            dotted muted purple = identified bots/scripts only.
+            Manuals/PDFs are excluded from all three series. Stats start mid-2023; July&nbsp;2026 is partial.
+            Vertical markers: teal <strong>2.7.0</strong> (Sep&nbsp;2025 release), amber <strong>3.0</strong> (Nov&nbsp;2025),
+            and purple <strong>Site refresh</strong> (Feb&nbsp;2026 website modernization).
+            Bot detection is only as good as the coarse UA labels ASF publishes &mdash; some automated clients
+            (or bots spoofing a normal browser) will not be flagged, so the human series is a best-effort lower-noise estimate,
+            not a guarantee of bot-free traffic.</p>
+
+        <h3 class="h5 mt-4 mb-3">Where downloads come from</h3>
+        <p>Country totals use the same bot filter: each file&rsquo;s <code>cca2</code> hits are scaled by that file&rsquo;s human-browser share
+            (ASF does not publish a full country&times;UA cross-tab).
+            After filtering, the densest human-attributed package volume is
+            <strong>Brazil</strong> (~24%), <strong>China</strong> (~18%), <strong>Russia</strong> (~17%),
+            the <strong>United States</strong> (~12%), and <strong>Germany</strong> (~8%),
+            with a long tail across Europe and Asia (~102 countries with attributed human traffic).</p>
+        <img src="/assets/images/unomi3/numbers-downloads-map.svg" class="img-fluid my-4" alt="World map of human Unomi software package downloads by country with bots excluded"/>
+        <p class="small text-muted">Map colors use a log scale. Geo still comes from CDN IP attribution, so mirrors, cloud egress, and VPNs can skew rankings
+            even after UA filtering. Hover a country in a supporting browser for its estimate.</p>
+
+        <h2 class="h4 mt-5 mb-3">Website visitors</h2>
+        <p>Separately from CDN package logs, ASF runs
+            <a href="https://analytics.apache.org/index.php?module=CoreHome&amp;action=index&amp;idSite=61&amp;period=day&amp;date=yesterday">Matomo analytics</a>
+            for <a href="https://unomi.apache.org">unomi.apache.org</a> (site id&nbsp;61).
+            Across the available reporting window that is about
+            <strong>29k</strong> visits and <strong>63k</strong> actions,
+            with roughly <strong>2.2</strong> actions per visit, about
+            <strong>91</strong> seconds average time on site, and a
+            <strong>67%</strong> bounce rate.
+            Monthly series in Matomo are populated from January&nbsp;2025 onward
+            (the site record was created mid-2024; earlier months are empty in the API).</p>
+        <img src="/assets/images/unomi3/numbers-visits.svg" class="img-fluid my-4" alt="Monthly visits to unomi.apache.org from ASF Matomo, January 2025 through July 2026"/>
+        <p>Traffic is mostly <strong>desktop</strong> (~88%), arrives primarily via
+            <strong>direct entry</strong> and <strong>search engines</strong>,
+            and is led by visitors attributed to the <strong>United States</strong> (~45%),
+            then China, India, and the United Kingdom.
+            Top content is the home page, Getting Started, Documentation, Use Cases, and Download.</p>
+        <img src="/assets/images/unomi3/numbers-visits-countries.svg" class="img-fluid my-4" alt="Top visitor countries for unomi.apache.org from ASF Matomo"/>
+        <p class="small text-muted">Source:
+            <a href="https://analytics.apache.org/index.php?module=CoreHome&amp;action=index&amp;idSite=61">analytics.apache.org</a>
+            (public Matomo Reporting API). Matomo applies its own bot filtering, so country mix here will not match CDN download geography.
+            Figures are visits (not unique visitors for the full range &mdash; Matomo disables that metric on long ranges).</p>
+
+        <h2 class="h4 mt-5 mb-3">What the numbers mean</h2>
+        <ul>
+            <li><strong>3.0 was the platform cut</strong> &mdash; LOC and IT counts look close to late 2.x; the runtime floor (Java&nbsp;17, ES9, clustering) landed without ballooning the tree.</li>
+            <li><strong>3.1 is the product + quality leap</strong> &mdash; multi-tenancy and ops features arrive together with a much denser unit suite.</li>
+            <li><strong>Community continuity</strong> &mdash; contributor growth is cumulative; Unomi remains a long-running ASF codebase with steady authorship.</li>
+            <li><strong>Steady distribution</strong> &mdash; after excluding known bots/scripts (~58% of package hits), human browser downloads still show continuous uptake across three years of logged CDN data.</li>
+            <li><strong>Site interest holds</strong> &mdash; Matomo shows a steady ~1.5&ndash;1.9k visits/month through 2025&ndash;2026, concentrated on getting-started and docs paths.</li>
+        </ul>
+
+        <p class="mt-4">
+            <a class="btn btn-primary" href="/blog/introducing-apache-unomi-3.html">Introducing Unomi 3</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-3-unit-testing-harness.html">Unit harness</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-3-platform-foundation.html">Platform foundation</a>
+        </p>
+        <p><a href="/blog/">&larr; All posts</a></p>
+    </div>
+</section>

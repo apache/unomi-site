@@ -3,6 +3,7 @@ title: Cluster-aware task scheduler in Unomi 3.1
 description: "Unomi 3.1 durable task scheduler — full capability list: persistence, cluster locks, lifecycle, fluent builder, REST ops, shell, metrics, resume, and built-in jobs."
 keywords: "Unomi task scheduler, /cxs/tasks, unomi:task-list, Unomi 3.1, profile-purge, cluster tasks, TaskExecutor"
 layout: default
+date: 2026-07-03 12:16:00 +0000
 ---
 
 <section class="page-header">
@@ -10,6 +11,12 @@ layout: default
         <p class="section-label text-hero-label">Unomi 3.1 &middot; Operations</p>
         <h1>Cluster-aware task scheduler</h1>
         <p class="lead">Durable background work with persistence, locks, retry/resume, REST, shell, and a plugin-friendly fluent API.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
     </div>
 </section>
 

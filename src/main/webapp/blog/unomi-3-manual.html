@@ -3,6 +3,7 @@ title: Unomi 3 manual — PlantUML, branded theme, deeper docs
 description: "How the Apache Unomi 3 manual gained PlantUML/GraphViz diagrams, an Unomi-branded HTML/PDF theme, and major content expansions for migrations, multi-tenancy, and platform upgrades."
 keywords: "Apache Unomi manual, PlantUML AsciiDoc, Unomi 3 documentation, AsciiDoctor diagrams, Unomi CSS theme"
 layout: default
+date: 2026-07-13 12:51:00 +0000
 ---
 
 <section class="page-header">
@@ -10,6 +11,12 @@ layout: default
         <p class="section-label text-hero-label">Unomi 3 &middot; Documentation</p>
         <h1>Unomi 3 manual: diagrams, theme, and depth</h1>
         <p class="lead">PlantUML in AsciiDoc, a brand-aligned HTML/PDF look, and chapters that finally match the Unomi 3 platform.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
     </div>
 </section>
 

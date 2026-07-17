@@ -3,6 +3,7 @@ title: Unomi 3 platform foundation
 description: "What Unomi 3.0 changed under the hood — Java 17, Karaf 4.4, Elasticsearch 9, and persistence-based clustering without Cellar or Hazelcast."
 keywords: "Unomi 3 platform, Java 17, Karaf 4.4, UNOMI-877, persistence clustering, Elasticsearch 9"
 layout: default
+date: 2026-06-27 09:45:00 +0000
 ---
 
 <section class="page-header">
@@ -10,6 +11,12 @@ layout: default
         <p class="section-label text-hero-label">Unomi 3 &middot; Platform</p>
         <h1>Unomi 3 platform foundation</h1>
         <p class="lead">The 3.0 runtime floor &mdash; Java 17, Karaf 4.4, Elasticsearch 9, and clustering without Cellar or Hazelcast.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
     </div>
 </section>
 

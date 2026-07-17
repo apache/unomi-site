@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 840 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Top visitor countries for unomi.apache.org from ASF Matomo">
+  <defs><style>
+  svg {
+    --unomi-primary: #6d5ce7; --unomi-primary-dark: #5a48c9; --unomi-accent: #00cec9;
+    --unomi-text: #1e293b; --unomi-text-muted: #64748b; --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0; --unomi-amber: #d97706;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes fade-up { from { opacity: 0; } to { opacity: 1; } }
+  .fade { animation: fade-up 0.7s ease-out both; }
+  @media (prefers-reduced-motion: reduce) { .fade { animation: none !important; } }
+</style></defs>
+  <rect width="840" height="420" rx="20" fill="var(--unomi-bg-soft)"/>
+  <text class="fade" x="40" y="36" fill="var(--unomi-text)" font-size="18" font-weight="700">Visitors by country</text>
+  <text class="fade" style="animation-delay:.08s" x="40" y="56" fill="var(--unomi-text-muted)" font-size="12">ASF Matomo geo for unomi.apache.org - tracking window through Jul 2026</text>
+  <g class="fade" style="animation-delay:.15s">
+  <text x="40" y="90" fill="var(--unomi-text)" font-size="13" font-weight="600">United States</text>
+  <text x="800" y="90" text-anchor="end" fill="var(--unomi-text-muted)" font-size="12">12,941 (45%)</text>
+  <rect x="40" y="96" width="520.0" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.85"/>
+  <rect x="40" y="96" width="520" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.08"/>
+
+  <text x="40" y="126" fill="var(--unomi-text)" font-size="13" font-weight="600">China</text>
+  <text x="800" y="126" text-anchor="end" fill="var(--unomi-text-muted)" font-size="12">2,127 (7%)</text>
+  <rect x="40" y="132" width="85.5" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.85"/>
+  <rect x="40" y="132" width="520" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.08"/>
+
+  <text x="40" y="162" fill="var(--unomi-text)" font-size="13" font-weight="600">India</text>
+  <text x="800" y="162" text-anchor="end" fill="var(--unomi-text-muted)" font-size="12">1,658 (6%)</text>
+  <rect x="40" y="168" width="66.6" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.85"/>
+  <rect x="40" y="168" width="520" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.08"/>
+
+  <text x="40" y="198" fill="var(--unomi-text)" font-size="13" font-weight="600">United Kingdom</text>
+  <text x="800" y="198" text-anchor="end" fill="var(--unomi-text-muted)" font-size="12">1,320 (5%)</text>
+  <rect x="40" y="204" width="53.0" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.85"/>
+  <rect x="40" y="204" width="520" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.08"/>
+
+  <text x="40" y="234" fill="var(--unomi-text)" font-size="13" font-weight="600">Vietnam</text>
+  <text x="800" y="234" text-anchor="end" fill="var(--unomi-text-muted)" font-size="12">809 (3%)</text>
+  <rect x="40" y="240" width="32.5" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.85"/>
+  <rect x="40" y="240" width="520" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.08"/>
+
+  <text x="40" y="270" fill="var(--unomi-text)" font-size="13" font-weight="600">Russia</text>
+  <text x="800" y="270" text-anchor="end" fill="var(--unomi-text-muted)" font-size="12">707 (2%)</text>
+  <rect x="40" y="276" width="28.4" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.85"/>
+  <rect x="40" y="276" width="520" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.08"/>
+
+  <text x="40" y="306" fill="var(--unomi-text)" font-size="13" font-weight="600">France</text>
+  <text x="800" y="306" text-anchor="end" fill="var(--unomi-text-muted)" font-size="12">700 (2%)</text>
+  <rect x="40" y="312" width="28.1" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.85"/>
+  <rect x="40" y="312" width="520" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.08"/>
+
+  <text x="40" y="342" fill="var(--unomi-text)" font-size="13" font-weight="600">Germany</text>
+  <text x="800" y="342" text-anchor="end" fill="var(--unomi-text-muted)" font-size="12">672 (2%)</text>
+  <rect x="40" y="348" width="27.0" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.85"/>
+  <rect x="40" y="348" width="520" height="10" rx="5" fill="var(--unomi-primary)" fill-opacity="0.08"/>
+</g>
+  <text x="40" y="400" fill="var(--unomi-text-muted)" font-size="11">Desktop-heavy traffic (~88%) · mostly direct and search · Matomo bot filtering differs from CDN download logs</text>
+</svg>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 840 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Stacked bar chart of Java lines of code from Unomi 1 through Unomi 3.1">
+  <defs><style>
+  svg {
+    --unomi-primary: #6d5ce7;
+    --unomi-primary-dark: #5a48c9;
+    --unomi-primary-light: #ede9fe;
+    --unomi-primary-subtle: #f5f3ff;
+    --unomi-accent: #00cec9;
+    --unomi-accent-dark: #0d9488;
+    --unomi-hero-accent: #a78bfa;
+    --unomi-text: #1e293b;
+    --unomi-text-muted: #64748b;
+    --unomi-white: #ffffff;
+    --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0;
+    --unomi-success: #059669;
+    --unomi-success-bg: #ecfdf5;
+    --unomi-amber: #d97706;
+    --unomi-amber-bg: #fef3c7;
+    --unomi-info: #2563eb;
+    --unomi-info-bg: #dbeafe;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes grow-bar { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes dash-flow { to { stroke-dashoffset: -20; } }
+  @keyframes pulse-dot { 0%,100%{opacity:.7;r:5} 50%{opacity:1;r:7} }
+  .bar { transform-box: fill-box; transform-origin: bottom; animation: grow-bar 0.9s ease-out both; }
+  .fade { animation: fade-up 0.7s ease-out both; }
+  .flow { stroke-dasharray: 5 4; animation: dash-flow 1.8s linear infinite; }
+  .dot { animation: pulse-dot 2.4s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .bar,.fade,.flow,.dot { animation: none !important; }
+  }
+</style></defs>
+  <rect width="840" height="420" rx="20" fill="var(--unomi-bg-soft)"/>
+  <text class="fade" x="40" y="36" fill="var(--unomi-text)" font-size="18" font-weight="700">Java lines of code</text>
+  <text class="fade" style="animation-delay:.08s" x="40" y="58" fill="var(--unomi-text-muted)" font-size="12">Physical LOC at release tags (production stacked on tests)</text>
+  <line x1="70" y1="330.0" x2="780" y2="330.0" stroke="var(--unomi-border)" stroke-width="1"/><text x="64" y="334.0" text-anchor="end" fill="var(--unomi-text-muted)" font-size="10">0</text><line x1="70" y1="270.0" x2="780" y2="270.0" stroke="var(--unomi-border)" stroke-width="1"/><text x="64" y="274.0" text-anchor="end" fill="var(--unomi-text-muted)" font-size="10">46k</text><line x1="70" y1="210.0" x2="780" y2="210.0" stroke="var(--unomi-border)" stroke-width="1"/><text x="64" y="214.0" text-anchor="end" fill="var(--unomi-text-muted)" font-size="10">93k</text><line x1="70" y1="150.0" x2="780" y2="150.0" stroke="var(--unomi-border)" stroke-width="1"/><text x="64" y="154.0" text-anchor="end" fill="var(--unomi-text-muted)" font-size="10">139k</text><line x1="70" y1="90.0" x2="780" y2="90.0" stroke="var(--unomi-border)" stroke-width="1"/><text x="64" y="94.0" text-anchor="end" fill="var(--unomi-text-muted)" font-size="10">185k</text>
+  
+  <g class="fade" style="animation-delay:0.10s">
+    <rect class="bar" style="animation-delay:0.10s" x="110" y="318.7" width="70" height="11.3" rx="4" fill="var(--unomi-accent)"/>
+    <rect class="bar" style="animation-delay:0.15s" x="110" y="260.1" width="70" height="58.6" rx="4" fill="var(--unomi-primary)"/>
+    <text x="145.0" y="250.1" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="700">54k</text>
+    <text x="145.0" y="354" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="700">Unomi 1</text>
+    <text x="145.0" y="372" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">1.9.1</text>
+  </g>
+  <g class="fade" style="animation-delay:0.22s">
+    <rect class="bar" style="animation-delay:0.22s" x="290" y="314.8" width="70" height="15.2" rx="4" fill="var(--unomi-accent)"/>
+    <rect class="bar" style="animation-delay:0.27s" x="290" y="223.9" width="70" height="90.9" rx="4" fill="var(--unomi-primary)"/>
+    <text x="325.0" y="213.9" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="700">82k</text>
+    <text x="325.0" y="354" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="700">Unomi 2</text>
+    <text x="325.0" y="372" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">2.7.0</text>
+  </g>
+  <g class="fade" style="animation-delay:0.34s">
+    <rect class="bar" style="animation-delay:0.34s" x="470" y="314.4" width="70" height="15.6" rx="4" fill="var(--unomi-accent)"/>
+    <rect class="bar" style="animation-delay:0.39s" x="470" y="221.7" width="70" height="92.6" rx="4" fill="var(--unomi-primary)"/>
+    <text x="505.0" y="211.7" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="700">83k</text>
+    <text x="505.0" y="354" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="700">Unomi 3.0</text>
+    <text x="505.0" y="372" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">3.0.1</text>
+  </g>
+  <g class="fade" style="animation-delay:0.46s">
+    <rect class="bar" style="animation-delay:0.46s" x="650" y="248.6" width="70" height="81.4" rx="4" fill="var(--unomi-accent)"/>
+    <rect class="bar" style="animation-delay:0.51s" x="650" y="95.6" width="70" height="153.0" rx="4" fill="var(--unomi-primary)"/>
+    <text x="685.0" y="85.6" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="700">181k</text>
+    <text x="685.0" y="354" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="700">Unomi 3.1</text>
+    <text x="685.0" y="372" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">HEAD</text>
+  </g>
+  <g class="fade" style="animation-delay:.6s">
+    <rect x="40" y="385" width="14" height="14" rx="3" fill="var(--unomi-primary)"/>
+    <text x="62" y="396" fill="var(--unomi-text)" font-size="12">Production (main)</text>
+    <rect x="200" y="385" width="14" height="14" rx="3" fill="var(--unomi-accent)"/>
+    <text x="222" y="396" fill="var(--unomi-text)" font-size="12">Tests</text>
+    <text x="780" y="396" text-anchor="end" fill="var(--unomi-text-muted)" font-size="11">~3.4x total Java since Unomi 1</text>
+  </g>
+</svg>
