@@ -11,7 +11,7 @@
 - **Runtime**: Apache Karaf (OSGi)
 - **Storage**: Elasticsearch (9.x); OpenSearch support coming in next release
 - **API**: REST/JSON & GraphQL
-- **Current Stable Version**: 3.0.0
+- **Current Stable Version**: 3.0.1
 - **Website**: https://unomi.apache.org
 - **Source Code**: https://github.com/apache/unomi
 - **Issue Tracker**: https://issues.apache.org/jira/browse/UNOMI
@@ -55,7 +55,7 @@ The fastest way to try Apache Unomi is with Docker:
 docker-compose up
 ```
 
-Using the provided docker-compose.yml with Elasticsearch and Apache Unomi 3.0.0.
+Using the provided docker-compose.yml with Elasticsearch and Apache Unomi 3.0.1.
 
 Full getting started guide: https://unomi.apache.org/get-started.html
 Docker quick start: https://unomi.apache.org/get-started.html#quickstart

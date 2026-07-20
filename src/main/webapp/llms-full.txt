@@ -13,7 +13,7 @@
 - **Website**: https://unomi.apache.org
 - **Source Code**: https://github.com/apache/unomi
 - **Issue Tracker**: https://issues.apache.org/jira/browse/UNOMI
-- **Current Stable Version**: 3.0.0 (released November 10, 2025)
+- **Current Stable Version**: 3.0.1 (released July 20, 2026)
 - **Development Version**: 3.1.0-SNAPSHOT
 
 ## Technical Architecture
@@ -152,7 +152,7 @@ services:
     ports:
       - 9200:9200
   unomi:
-    image: apache/unomi:3.0.0
+    image: apache/unomi:3.0.1
     environment:
       - UNOMI_ELASTICSEARCH_ADDRESSES=elasticsearch:9200
     ports:
@@ -181,4 +181,5 @@ Run with `docker-compose up`, verify at https://localhost:9443/cxs/cluster (cred
 - **2015**: Entered Apache Incubator
 - **2019**: Graduated to Apache Top-Level Project
 - **2022**: Version 2.0.0 released (major architecture update)
-- **2025**: Version 3.0.0 released (current stable, major upgrade to Karaf 4.4, new Elasticsearch Java client 9.x, GraphQL API, Bill of Materials for dependency management). OpenSearch support committed to main branch (expected in next release)
+- **2025**: Version 3.0.0 released (major upgrade to Karaf 4.4, new Elasticsearch Java client 9.x, GraphQL API, Bill of Materials for dependency management). OpenSearch support committed to main branch (expected in next major release)
+- **2026**: Version 3.0.1 released (current stable, small bug fix in context endpoint)
