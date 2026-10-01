@@ -14,9 +14,9 @@ next:
     version: 3.2.0-SNAPSHOT
 previous:
   stable:
-    version: 3.0.0
-    date: 2025-11-10
-    jira_version_id: "12355172"
+    version: 3.0.1
+    date: 2026-07-20
+    jira_version_id: "12357201"
 branch:
   version: master
 doc:

@@ -12,7 +12,7 @@
 - **Source Code**: https://github.com/apache/unomi
 - **Issue Tracker**: https://issues.apache.org/jira/browse/UNOMI
 - **Current Stable Version**: 3.1.0 — Unomi 3 product leap (multi-tenancy, OpenSearch, tasks, V2 compat)
-- **Previous stable**: 3.0.0 (2025-11-10) — platform foundation
+- **Previous stable**: 3.0.1 (2026-07-20) — 3.0 maintenance line
 - **Development**: 3.2.0-SNAPSHOT
 - **Runtime baseline**: Java 17+
 
