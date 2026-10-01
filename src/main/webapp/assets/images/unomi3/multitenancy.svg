@@ -39,7 +39,7 @@
 </style>
 </defs>
   <rect width="840" height="300" rx="20" fill="var(--unomi-primary-subtle)"/>
-  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">Multi-tenancy in Unomi 3.1</text>
+  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">Multi-tenancy in Unomi 4.0</text>
   <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">Public / private API keys → tenant boundary → isolated profiles &amp; events</text>
 
   <!-- clients -->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 840 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Unomi 3 platform foundation: Java 17, Karaf 4.4, ES9, persistence clustering">
+     aria-label="Unomi 4 platform foundation: Java 17, Karaf 4.4, ES9, persistence clustering">
   <defs>
 <style>
   svg {
@@ -50,7 +50,7 @@
     <rect x="235" y="100" width="175" height="120" rx="14" fill="var(--unomi-info-bg)" stroke="var(--unomi-info)" stroke-width="2"/>
     <text x="322" y="145" text-anchor="middle" fill="var(--unomi-info)" font-size="14" font-weight="700">Karaf 4.4</text>
     <text x="322" y="172" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">OSGi runtime</text>
-    <text x="322" y="196" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">4.4.11 in 3.1</text>
+    <text x="322" y="196" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">4.4.11 in 4.0</text>
   </g>
   <g class="float" style="animation-delay:.4s">
     <rect x="430" y="100" width="175" height="120" rx="14" fill="var(--unomi-amber-bg)" stroke="var(--unomi-amber)" stroke-width="2"/>

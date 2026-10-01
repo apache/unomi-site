@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 840 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Unomi 3 in numbers: lines of code, tests, and contributors at a glance">
+     aria-label="Unomi 4 in numbers: lines of code, tests, and contributors at a glance">
   <defs><style>
   svg {
     --unomi-primary: #6d5ce7;
@@ -40,8 +40,8 @@
     </linearGradient>
   </defs>
   <rect width="840" height="400" rx="20" fill="url(#heroGrad)"/>
-  <text class="fade" x="40" y="42" fill="var(--unomi-text)" font-size="20" font-weight="700">Unomi 3 in numbers</text>
-  <text class="fade" style="animation-delay:.1s" x="40" y="66" fill="var(--unomi-text-muted)" font-size="13">From 1.x to 3.1 - codebase, tests, and community growth</text>
+  <text class="fade" x="40" y="42" fill="var(--unomi-text)" font-size="20" font-weight="700">Unomi 4 in numbers</text>
+  <text class="fade" style="animation-delay:.1s" x="40" y="66" fill="var(--unomi-text-muted)" font-size="13">From 1.x to 4.0 - codebase, tests, and community growth</text>
 
   <g class="fade" style="animation-delay:.15s">
     <rect x="40" y="100" width="175" height="150" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-primary)" stroke-width="2"/>
@@ -70,5 +70,5 @@
 
   <rect x="40" y="280" width="760" height="90" rx="14" fill="var(--unomi-white)" stroke="var(--unomi-border)" stroke-width="2"/>
   <text x="60" y="318" fill="var(--unomi-primary-dark)" font-size="14" font-weight="700">The story in one line</text>
-  <text x="60" y="344" fill="var(--unomi-text)" font-size="13">Production code nearly tripled since 1.x - test code grew ~7x, with the steepest climb after Unomi 3.0 into 3.1.</text>
+  <text x="60" y="344" fill="var(--unomi-text)" font-size="13">Production code nearly tripled since 1.x - test code grew ~7x, with the steepest climb after Unomi 3.0 into 4.0.</text>
 </svg>

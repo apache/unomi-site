@@ -1,16 +1,16 @@
 ---
-title: Richer OpenAPI docs in Unomi 3.1
-description: "How Unomi 3.1 enriches /cxs/openapi.json from JAX-RS Javadoc — summaries, statuses, examples, and schemas without duplicating Swagger annotations (UNOMI-963)."
-keywords: "Unomi OpenAPI, openapi.json, UNOMI-963, CXF OpenAPI, Javadoc enrichment, Unomi 3.1 REST"
+title: Richer OpenAPI docs in Unomi 4.0
+description: "How Unomi 4.0 enriches /cxs/openapi.json from JAX-RS Javadoc — summaries, statuses, examples, and schemas without duplicating Swagger annotations (UNOMI-963)."
+keywords: "Unomi OpenAPI, openapi.json, UNOMI-963, CXF OpenAPI, Javadoc enrichment, Unomi 4.0 REST"
 layout: default
 date: 2026-07-15 13:58:00 +0000
 ---
 
 <section class="page-header">
     <div class="container">
-        <p class="section-label text-hero-label">Unomi 3.1 &middot; Developer experience</p>
+        <p class="section-label text-hero-label">Unomi 4.0 &middot; Developer experience</p>
         <h1>Richer OpenAPI docs from Javadoc</h1>
-        <p class="lead">Unomi 3.1 ships an enriched <code>/cxs/openapi.json</code> &mdash; summaries, status codes, examples, and schema notes merged from endpoint Javadoc.</p>
+        <p class="lead">Unomi 4.0 ships an enriched <code>/cxs/openapi.json</code> &mdash; summaries, status codes, examples, and schema notes merged from endpoint Javadoc.</p>
         {% if page.date %}
         <p class="small text-muted mt-2 mb-0">
             <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
@@ -23,7 +23,7 @@ date: 2026-07-15 13:58:00 +0000
 <section class="section">
     <div class="container col-lg-8">
         <p>Stock CXF OpenAPI generation is a great skeleton and a thin reading experience: operation ids, parameter names, and &ldquo;default response.&rdquo;
-            Unomi 3.1 (
+            Unomi 4.0 (
             <a href="https://issues.apache.org/jira/browse/UNOMI-963">UNOMI-963</a>)
             keeps a <strong>single source of truth in Javadoc</strong> and merges richer documentation into the live OpenAPI document at runtime.</p>
 
@@ -53,12 +53,12 @@ date: 2026-07-15 13:58:00 +0000
             <li><strong>Single source of truth</strong> &mdash; no duplicate Swagger annotation tax on every method</li>
         </ul>
 
-        <h2 class="h4 mt-5 mb-3">Try it on a running 3.1 server</h2>
+        <h2 class="h4 mt-5 mb-3">Try it on a running 4.0 server</h2>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>curl -u karaf:karaf http://localhost:8181/cxs/openapi.json | jq '.paths["/tenants/{tenantId}"].get'</code></pre>
         <p>Compare operation descriptions, response maps, and examples against a 2.x or early-3.0 baseline &mdash; the inventory stays stable; the documentation density is what changes.</p>
 
         <h2 class="h4 mt-5 mb-3">Why publish this with 3.1</h2>
-        <p>Unomi 3 kept the REST surface familiar for migrations. Enrichment makes that surface
+        <p>Unomi 4 kept the REST surface familiar for migrations. Enrichment makes that surface
             <em>discoverable</em>
             for contributors, customer engineers, and LLM / agent tooling that already prefer OpenAPI over tribal knowledge.
             It pairs with the
@@ -68,7 +68,7 @@ date: 2026-07-15 13:58:00 +0000
             investments: docs you can read, traces you can run, schemas you can generate clients from.</p>
 
         <p class="mt-4">
-            <a class="btn btn-primary" href="{{ site.data.unomi.manual.published_latest }}">Unomi 3.1 manual</a>
+            <a class="btn btn-primary" href="{{ site.data.unomi.manual.published_latest }}">Unomi 4.0 manual</a>
             <a class="btn btn-outline-primary ms-2" href="/blog/migrating-to-unomi-3.html">API stability / migrate</a>
             <a class="btn btn-outline-primary ms-2" href="https://issues.apache.org/jira/browse/UNOMI-963">UNOMI-963</a>
         </p>

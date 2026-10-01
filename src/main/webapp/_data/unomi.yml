@@ -1,17 +1,17 @@
 latest:
   stable:
-    version: 3.1.0
+    version: 4.0.0
     # Set to the real GA calendar date when you publish the site with the release.
     date: 2026-07-14
     jira_version_id: "12356384"
   development:
-    version: 3.2.0-SNAPSHOT
+    version: 4.1.0-SNAPSHOT
 next:
-  # Next version for contrib release-guide templates (post-3.1.0).
+  # Next version for contrib release-guide templates (post-4.0.0).
   stable:
-    version: 3.2.0
+    version: 4.1.0
   development:
-    version: 3.2.0-SNAPSHOT
+    version: 4.1.0-SNAPSHOT
 previous:
   stable:
     version: 3.0.1
@@ -20,12 +20,12 @@ previous:
 branch:
   version: master
 doc:
-  # Published docs folder name (manual/3_1_x) after docs are deployed with the release.
-  version: 3_1_x
+  # Published docs folder name (manual/4_0_x) after docs are deployed with the release.
+  version: 4_0_x
 manual:
-  published_stable: "https://unomi.apache.org/manual/3_1_x/index.html"
+  published_stable: "https://unomi.apache.org/manual/4_0_x/index.html"
   published_latest: "https://unomi.apache.org/manual/latest/index.html"
-  whats_new: "https://unomi.apache.org/manual/latest/index.html#_whats_new_3_1"
+  whats_new: "https://unomi.apache.org/manual/latest/index.html#_whats_new_4_0"
   quick_start: "https://unomi.apache.org/manual/latest/index.html#_quick_start"
   multitenancy: "https://unomi.apache.org/manual/latest/index.html#_multitenancy"
   v2_compat: "https://unomi.apache.org/manual/latest/index.html#_v2_compatibility_mode"

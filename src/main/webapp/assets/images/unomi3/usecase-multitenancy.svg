@@ -44,7 +44,7 @@
 
   <g class="float" style="animation-delay:.3s">
     <rect x="260" y="90" width="200" height="120" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-accent)" stroke-width="2.5"/>
-    <text x="360" y="135" text-anchor="middle" fill="var(--unomi-text)" font-size="14" font-weight="700">Apache Unomi 3.1</text>
+    <text x="360" y="135" text-anchor="middle" fill="var(--unomi-text)" font-size="14" font-weight="700">Apache Unomi 4.0</text>
     <text x="360" y="160" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="12">Tenant isolation</text>
     <text x="360" y="182" text-anchor="middle" fill="var(--unomi-accent)" font-size="12" font-weight="600">API keys</text>
   </g>

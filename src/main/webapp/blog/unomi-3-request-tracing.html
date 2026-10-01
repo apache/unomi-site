@@ -1,5 +1,5 @@
 ---
-title: Request tracing with explain=true in Unomi 3
+title: Request tracing with explain=true in Unomi 4
 description: "Debug context and eventcollector requests with explain=true &mdash; admin-gated requestTracing trees, verified curl examples, and what 403 means for public API keys."
 keywords: "Unomi explain, requestTracing, Unomi tracing, UNOMI-873, eventcollector explain, context.json explain"
 layout: default
@@ -8,7 +8,7 @@ date: 2026-07-05 13:23:00 +0000
 
 <section class="page-header">
     <div class="container">
-        <p class="section-label text-hero-label">Unomi 3 &middot; Debugging</p>
+        <p class="section-label text-hero-label">Unomi 4 &middot; Debugging</p>
         <h1>Request tracing with <code>explain=true</code></h1>
         <p class="lead">See condition evaluations, rule actions, and timings on <code>/cxs/context.json</code> and <code>/cxs/eventcollector</code>.</p>
         {% if page.date %}
@@ -23,7 +23,7 @@ date: 2026-07-05 13:23:00 +0000
 <section class="section">
     <div class="container col-lg-8">
         <p>When a rule &ldquo;should have fired&rdquo; or a session update looks wrong, guessing from logs is slow.
-            Unomi 3 adds query-parameter tracing (
+            Unomi 4 adds query-parameter tracing (
             <a href="https://issues.apache.org/jira/browse/UNOMI-873">UNOMI-873</a>
             /
             <a href="https://github.com/apache/unomi/pull/775">#775</a>):
@@ -54,7 +54,7 @@ date: 2026-07-05 13:23:00 +0000
         <h2 class="h4 mt-5 mb-3">Auth: tenant admin, not the public key</h2>
         <p>Tracing is restricted to <strong>ADMINISTRATOR</strong> / <strong>TENANT_ADMINISTRATOR</strong>.
             In practice that means authenticate with the tenant <strong>private</strong> API key (Basic <code>tenantId:privateApiKey</code>), not the public track key.</p>
-        <p>We verified the following against a local <strong>Unomi 3.1.0-SNAPSHOT</strong> (HTTPS). Public-key + <code>explain=true</code> returned HTTP <strong>403</strong> with:</p>
+        <p>We verified the following against a local <strong>Unomi 4.0.0-SNAPSHOT</strong> (HTTPS). Public-key + <code>explain=true</code> returned HTTP <strong>403</strong> with:</p>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>{"errorMessage":"Insufficient privileges to access tracing information"}</code></pre>
         <p>Integration coverage: <code>EventsCollectorIT#testEventsCollectorWithExplain</code> and <code>#testEventsCollectorWithExplainUnauthorized</code>.</p>
 
@@ -107,7 +107,7 @@ date: 2026-07-05 13:23:00 +0000
   ]
 }
 EOF</code></pre>
-        <p>Verified excerpt (trimmed) from a live 3.1 response &mdash; session create, condition checks, visit counters:</p>
+        <p>Verified excerpt (trimmed) from a live 4.0 response &mdash; session create, condition checks, visit counters:</p>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>{
   "updated": 6,
   "requestTracing": {

@@ -11,9 +11,9 @@
 - **Website**: https://unomi.apache.org
 - **Source Code**: https://github.com/apache/unomi
 - **Issue Tracker**: https://issues.apache.org/jira/browse/UNOMI
-- **Current Stable Version**: 3.1.0 — Unomi 3 product leap (multi-tenancy, OpenSearch, tasks, V2 compat)
+- **Current Stable Version**: 4.0.0 — Unomi 4 product leap (multi-tenancy, OpenSearch, tasks, V2 compat)
 - **Previous stable**: 3.0.1 (2026-07-20) — 3.0 maintenance line
-- **Development**: 3.2.0-SNAPSHOT
+- **Development**: 4.1.0-SNAPSHOT
 - **Runtime baseline**: Java 17+
 
 ## Technical Architecture
@@ -21,32 +21,32 @@
 ### Runtime Stack
 - **Language**: Java
 - **Runtime Container**: Apache Karaf 4.4 (OSGi framework)
-- **Data Store**: Elasticsearch 9.x (e.g. 9.4.3) or OpenSearch 3.x (Unomi 3.1)
+- **Data Store**: Elasticsearch 9.x (e.g. 9.4.3) or OpenSearch 3.x (Unomi 4.0)
 - **API Protocols**: REST over HTTP/HTTPS with JSON payloads; GraphQL API for flexible queries
 - **Extension Model**: OSGi bundles, Groovy scripting, JSON descriptors
 - **Clustering**: Persistence-based cluster registry/heartbeats (Elasticsearch or OpenSearch; not Karaf Cellar)
 
 ### Core Components
-1. **Tenant Service** (Unomi 3.1): Tenant isolation, public/private API keys, usage and event-retention APIs
+1. **Tenant Service** (Unomi 4.0): Tenant isolation, public/private API keys, usage and event-retention APIs
 2. **Profile Service**: Manages persistent customer/visitor profiles (tenant-scoped)
 3. **Event Service**: Collects, validates, and processes events from all data sources
 4. **Segment Service**: Evaluates dynamic segment definitions against profiles in real-time
 5. **Rules Engine**: Condition-action rules that fire when events match conditions
 6. **Scoring Service**: Calculates engagement/lead scores based on configurable scoring plans
 7. **Privacy Service**: Manages consent, anonymization, data export, and profile deletion
-8. **Task Scheduler** (Unomi 3.1): Cluster-aware background tasks (`/cxs/tasks`)
+8. **Task Scheduler** (Unomi 4.0): Cluster-aware background tasks (`/cxs/tasks`)
 9. **Plugin System**: OSGi-based plugins with JSON metadata for extending conditions, actions, and types
 10. **GraphQL API**: Flexible query interface for profiles, events, segments, and rules with field-level selection
 
 ### Data Flow
-1. External systems (web, mobile, CRM, IoT, AI agents) send events to the REST API with **tenant resolution** (public API key header or private-key basic auth in native 3.1 mode)
+1. External systems (web, mobile, CRM, IoT, AI agents) send events to the REST API with **tenant resolution** (public API key header or private-key basic auth in native 4.0 mode)
 2. Events are validated (JSON Schema) and associated with a profile (identified by cookie, ID, or custom identifier)
 3. Rules engine evaluates conditions and triggers actions (update profile, send to segment, etc.)
 4. Segments are re-evaluated in real-time when profile properties change
 5. Scores are recalculated based on segment membership and event history
 6. External systems query profiles and segments to deliver personalized experiences
 
-### Authentication (Unomi 3.1)
+### Authentication (Unomi 4.0)
 
 | Audience | Credential | Typical use |
 |---|---|---|
@@ -62,7 +62,7 @@ Optional **V2 compatibility mode** helps phase older Unomi 2.x clients during up
 - `/cxs/tenants/{tenantId}/purge/events` - Event retention purge
 - `/cxs/profiles` - Profile CRUD operations
 - `/cxs/events` - Event collection and querying
-- `/cxs/eventcollector` - Public event collector (requires public API key in 3.1)
+- `/cxs/eventcollector` - Public event collector (requires public API key in 4.0)
 - `/cxs/segments` - Segment management
 - `/cxs/rules` - Rules management
 - `/cxs/scoring` - Scoring plans
@@ -73,10 +73,10 @@ Optional **V2 compatibility mode** helps phase older Unomi 2.x clients during up
 - `/cxs/tasks` - Cluster-aware task scheduler
 - `/cxs/cluster` - Cluster management
 - `/cxs/privacy` - Privacy operations (consent, anonymize, delete)
-- `/cxs/context.json` - Context servlet (main public entry for web tracking; requires public API key in 3.1)
+- `/cxs/context.json` - Context servlet (main public entry for web tracking; requires public API key in 4.0)
 - `/graphql` - GraphQL API endpoint for flexible queries
 
-OpenAPI stability note: all **119** documented Unomi 2.x OpenAPI paths remain present in 3.1; new capabilities are additive.
+OpenAPI stability note: all **119** documented Unomi 2.x OpenAPI paths remain present in 4.0; new capabilities are additive.
 
 ### Key Concepts
 - **Tenant**: Isolated data space (profiles, events, segments, rules, schemas) with public and private API keys
@@ -99,7 +99,7 @@ Apache Unomi is the **reference implementation** of the OASIS Customer Data Plat
 - Profile deletion (complete removal of all profile data)
 - Data portability (export profile data in JSON)
 - Server-side DoNotTrack support
-- Configurable data retention policies (including tenant event purge APIs in 3.1)
+- Configurable data retention policies (including tenant event purge APIs in 4.0)
 - Cookie-less tracking option
 
 ## Connectors & Integrations
@@ -117,12 +117,12 @@ Apache Unomi is the **reference implementation** of the OASIS Customer Data Plat
 
 ## CDP in an AI-First World
 
-**Message hierarchy:** (1) Apache Unomi 3 major release · (2) Multi-tenancy platform leap · (3) AI agents as customer-memory use case.
+**Message hierarchy:** (1) Apache Unomi 4 major release · (2) Multi-tenancy platform leap · (3) AI agents as customer-memory use case.
 
 AI models and autonomous agents require clean, unified, real-time customer data. Apache Unomi serves as the **customer data backbone for AI-first architectures**. Unomi is **not an LLM** — it is privacy-first customer memory agents query and update.
 
 ### Why a CDP Matters for AI
-- **Context is everything**: LLMs, chatbots, support copilots, and recommendation engines need real customer context via REST (`/cxs/context.json`, `/cxs/profiles`) with tenant API keys in 3.1.
+- **Context is everything**: LLMs, chatbots, support copilots, and recommendation engines need real customer context via REST (`/cxs/context.json`, `/cxs/profiles`) with tenant API keys in 4.0.
 - **First-party data advantage**: Privacy regulations restrict data sharing; first-party CDP data is the defensible source for AI context.
 - **Privacy-safe AI processing**: Consent management, anonymization, and deletion gate what agents may access.
 - **Real-time feedback loop**: Events → profiles → AI → events; Unomi processes this pipeline in real time.
@@ -162,7 +162,7 @@ Starting with Unomi 3.0, the project uses a two-layer BOM for dependency managem
 - **unomi-bom** (https://github.com/apache/unomi/blob/master/bom/pom.xml): Main BOM importing Karaf BOM and managing all third-party dependency versions
 - **unomi-bom-artifacts** (https://github.com/apache/unomi/blob/master/bom/artifacts/pom.xml): Manages all Unomi module artifacts for custom extensions
 
-## Quick Start (Docker — Unomi 3.1)
+## Quick Start (Docker — Unomi 4.0)
 
 Elasticsearch path (OpenSearch compose: https://unomi.apache.org/get-started.html#quickstart):
 
@@ -177,7 +177,7 @@ services:
     ports:
       - 9200:9200
   unomi:
-    image: apache/unomi:3.1.0
+    image: apache/unomi:4.0.0
     environment:
       - UNOMI_ELASTICSEARCH_ADDRESSES=elasticsearch:9200
       - UNOMI_THIRDPARTY_PROVIDER1_IPADDRESSES=0.0.0.0/0,::1,127.0.0.1
@@ -222,11 +222,11 @@ Guides: https://unomi.apache.org/get-started.html · https://unomi.apache.org/tu
 ## Frequently Asked Questions
 
 - **What is Apache Unomi?** An open source Customer Data Platform (CDP) managed by the Apache Software Foundation.
-- **What is Unomi 3 vs 3.1?** 3.0 is the platform foundation (ES9 client, Karaf 4.4, Java 17+, persistence clustering). 3.1 is the product leap: multi-tenancy/API keys (major platform refactor), OpenSearch, task scheduler, V2 compatibility mode, stronger tests.
+- **What is Unomi 4 vs 3.1?** 3.0 is the platform foundation (ES9 client, Karaf 4.4, Java 17+, persistence clustering). 4.0 is the product leap: multi-tenancy/API keys (major platform refactor), OpenSearch, task scheduler, V2 compatibility mode, stronger tests.
 - **How does Unomi differ from proprietary CDPs?** 100% open source (Apache License 2.0), self-hosted, vendor-neutral, extensible through OSGi plugins.
-- **What storage backends are supported?** Elasticsearch 9.x and OpenSearch 3.x (Unomi 3.1).
+- **What storage backends are supported?** Elasticsearch 9.x and OpenSearch 3.x (Unomi 4.0).
 - **Does Unomi have a GraphQL API?** Yes, alongside REST.
-- **Can I use Unomi with AI systems?** Yes — privacy-first customer memory for agents (not an LLM), via REST/GraphQL with consent gates and tenant API keys in 3.1.
+- **Can I use Unomi with AI systems?** Yes — privacy-first customer memory for agents (not an LLM), via REST/GraphQL with consent gates and tenant API keys in 4.0.
 - **What is the OASIS CXS standard?** A CDP specification from OASIS; Apache Unomi is its reference implementation.
 - **How do I extend Unomi?** OSGi bundles (Java), Groovy scripts, JSON descriptors, REST extensions.
 - **What is the Bill of Materials (BOM)?** Maven BOM (`unomi-bom`) since Unomi 3.0 for extension dependency alignment.
@@ -238,9 +238,10 @@ Guides: https://unomi.apache.org/get-started.html · https://unomi.apache.org/tu
 - **2019**: Graduated to Apache Top-Level Project
 - **2022**: Version 2.0.0 released (major architecture update)
 - **2025**: Version 3.0.0 released (Unomi 3 foundation — Karaf 4.4, Elasticsearch Java client 9.x, GraphQL API, BOM, persistence clustering)
-- **2026**: Version 3.1.0 released (current stable — multi-tenancy major refactor, OpenSearch 3.x, cluster task scheduler, V2 API compatibility)
+- **2026**: Version 3.0.1 released (3.0 maintenance line)
+- **2026**: Version 4.0.0 released (current stable — multi-tenancy major refactor, OpenSearch 3.x, cluster task scheduler, V2 API compatibility)
 
-## Unomi 3 Blog (UNOMI-932)
+## Unomi 4 Blog (UNOMI-932)
 
 - https://unomi.apache.org/blog/
 - https://unomi.apache.org/blog/welcome-to-the-apache-unomi-blog.html

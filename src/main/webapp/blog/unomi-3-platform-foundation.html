@@ -1,15 +1,15 @@
 ---
-title: Unomi 3 platform foundation
+title: Unomi 4 platform foundation
 description: "What Unomi 3.0 changed under the hood — Java 17, Karaf 4.4, Elasticsearch 9, and persistence-based clustering without Cellar or Hazelcast."
-keywords: "Unomi 3 platform, Java 17, Karaf 4.4, UNOMI-877, persistence clustering, Elasticsearch 9"
+keywords: "Unomi 4 platform, Java 17, Karaf 4.4, UNOMI-877, persistence clustering, Elasticsearch 9"
 layout: default
 date: 2026-06-27 09:45:00 +0000
 ---
 
 <section class="page-header">
     <div class="container">
-        <p class="section-label text-hero-label">Unomi 3 &middot; Platform</p>
-        <h1>Unomi 3 platform foundation</h1>
+        <p class="section-label text-hero-label">Unomi 4 &middot; Platform</p>
+        <h1>Unomi 4 platform foundation</h1>
         <p class="lead">The 3.0 runtime floor &mdash; Java 17, Karaf 4.4, Elasticsearch 9, and clustering without Cellar or Hazelcast.</p>
         {% if page.date %}
         <p class="small text-muted mt-2 mb-0">
@@ -22,15 +22,15 @@ date: 2026-06-27 09:45:00 +0000
 
 <section class="section">
     <div class="container col-lg-8">
-        <p>Before multi-tenancy and the Unomi 3.1 product leap could stick, the project needed a boring, modern runtime.
+        <p>Before multi-tenancy and the Unomi 4.0 product leap could stick, the project needed a boring, modern runtime.
             That is what the 3.0 line delivered: fewer legacies, clearer installers, and a cluster model that matches how Unomi already stores data.</p>
 
-        <img src="/assets/images/unomi3/platform-foundation.svg" class="img-fluid my-4" alt="Unomi 3 platform tiles: Java 17, Karaf 4.4, search clients, persistence clustering"/>
+        <img src="/assets/images/unomi3/platform-foundation.svg" class="img-fluid my-4" alt="Unomi 4 platform tiles: Java 17, Karaf 4.4, search clients, persistence clustering"/>
 
         <h2 class="h4 mt-4 mb-3">Baseline upgrades</h2>
         <ul>
-            <li><strong>Java 17+</strong> &mdash; Java 11 is retired for Unomi 3 installers and CI</li>
-            <li><strong>Apache Karaf 4.4</strong> &mdash; continued into 3.1 with current patch lines (for example 4.4.11)</li>
+            <li><strong>Java 17+</strong> &mdash; Java 11 is retired for Unomi 4 installers and CI</li>
+            <li><strong>Apache Karaf 4.4</strong> &mdash; continued into 4.0 with current patch lines (for example 4.4.11)</li>
             <li><strong>Elasticsearch 9</strong> &mdash; Java API client; HLRC retired; OpenSearch as a peer distribution (see
                 <a href="/blog/unomi-3-opensearch.html">Elasticsearch 9 and OpenSearch</a>)</li>
             <li><strong>Log / dependency pins</strong> &mdash; platform bump PRs keep Log4j and client stacks on supported lines</li>
@@ -50,7 +50,7 @@ date: 2026-06-27 09:45:00 +0000
         <p class="mt-4">
             <a class="btn btn-primary" href="{{ site.data.unomi.manual.published_latest }}#_clustering">Manual: clustering</a>
             <a class="btn btn-outline-primary ms-2" href="{{ site.data.unomi.manual.whats_new }}">What&rsquo;s new</a>
-            <a class="btn btn-outline-primary ms-2" href="/blog/introducing-apache-unomi-3.html">Introducing Unomi 3</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/introducing-apache-unomi-3.html">Introducing Unomi 4</a>
         </p>
         <p><a href="/blog/">&larr; All posts</a></p>
     </div>

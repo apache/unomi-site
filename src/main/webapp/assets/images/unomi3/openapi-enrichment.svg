@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 840 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Unomi 3.1 OpenAPI enrichment: Javadoc packs merge into CXF openapi.json">
+     aria-label="Unomi 4.0 OpenAPI enrichment: Javadoc packs merge into CXF openapi.json">
   <defs>
 <style>
   svg {
@@ -38,7 +38,7 @@
   </defs>
   <rect width="840" height="400" rx="20" fill="var(--unomi-bg-soft)"/>
   <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">Richer OpenAPI from Javadoc</text>
-  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">Unomi 3.1: build-time packs + runtime CXF merge (UNOMI-963)</text>
+  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">Unomi 4.0: build-time packs + runtime CXF merge (UNOMI-963)</text>
 
   <g class="float">
     <rect x="40" y="100" width="220" height="240" rx="14" fill="var(--unomi-amber-bg)" stroke="var(--unomi-amber)" stroke-width="2"/>

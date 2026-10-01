@@ -1,6 +1,6 @@
 ---
 title: Faster Unomi service unit tests — InMemoryPersistenceServiceImpl
-description: "How Unomi 3’s in-memory PersistenceService test harness lets Profile, Event, Rules, and Segment services run real unit tests in seconds without Karaf or Elasticsearch."
+description: "How Unomi 4’s in-memory PersistenceService test harness lets Profile, Event, Rules, and Segment services run real unit tests in seconds without Karaf or Elasticsearch."
 keywords: "Unomi unit tests, InMemoryPersistenceServiceImpl, UNOMI-881, Unomi TestHelper, Surefire"
 layout: default
 date: 2026-07-07 09:30:00 +0000
@@ -8,7 +8,7 @@ date: 2026-07-07 09:30:00 +0000
 
 <section class="page-header">
     <div class="container">
-        <p class="section-label text-hero-label">Unomi 3 &middot; Quality</p>
+        <p class="section-label text-hero-label">Unomi 4 &middot; Quality</p>
         <h1>Faster service unit tests</h1>
         <p class="lead"><code>InMemoryPersistenceServiceImpl</code> &mdash; a full PersistenceService on the test classpath so service logic no longer waits on Karaf.</p>
         {% if page.date %}
@@ -79,7 +79,7 @@ date: 2026-07-07 09:30:00 +0000
         </div>
         <p>ITs prove the live stack (and pair with the
             <a href="/blog/unomi-3-it-execution.html">clearer IT console</a>).
-            The harness is why Unomi 3 could grow high-signal <code>@Test</code> coverage around services without waiting on Docker every time.</p>
+            The harness is why Unomi 4 could grow high-signal <code>@Test</code> coverage around services without waiting on Docker every time.</p>
 
         <p class="mt-4">
             <a class="btn btn-primary" href="https://github.com/apache/unomi/blob/master/services/src/test/java/org/apache/unomi/services/impl/InMemoryPersistenceServiceImpl.java">View on GitHub</a>

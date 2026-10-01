@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 900 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="AI agents read and write customer context through Apache Unomi 3">
+     aria-label="AI agents read and write customer context through Apache Unomi 4">
   <defs>
 <style>
   svg {
@@ -32,7 +32,7 @@
 </style>
 </defs>
   <rect width="900" height="320" rx="20" fill="var(--unomi-primary-subtle)"/>
-  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">AI agents ↔ Apache Unomi 3</text>
+  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">AI agents ↔ Apache Unomi 4</text>
   <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">Retrieve context · store memory · summarize profiles · build segments — with consent</text>
 
   <!-- Agent -->
@@ -52,7 +52,7 @@
 
   <!-- Unomi core -->
   <rect x="350" y="90" width="220" height="180" rx="18" fill="var(--unomi-white)" stroke="var(--unomi-primary)" stroke-width="2"/>
-  <text x="460" y="125" text-anchor="middle" fill="var(--unomi-text)" font-size="15" font-weight="700">Unomi 3 CDP</text>
+  <text x="460" y="125" text-anchor="middle" fill="var(--unomi-text)" font-size="15" font-weight="700">Unomi 4 CDP</text>
   <text x="460" y="150" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="12">REST · GraphQL</text>
   <text x="460" y="178" text-anchor="middle" fill="var(--unomi-text)" font-size="12">profiles · events</text>
   <text x="460" y="200" text-anchor="middle" fill="var(--unomi-text)" font-size="12">segments · rules</text>

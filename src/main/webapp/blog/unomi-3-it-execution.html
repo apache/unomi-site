@@ -1,15 +1,15 @@
 ---
-title: Clearer integration test runs in Unomi 3
-description: "How Unomi 3 improved IT execution — live progress bars with ETA, quieter Maven and Docker output, and tooling for diagnosing long CI suites."
-keywords: "Unomi 3 integration tests, ProgressListener, CI logs, Apache Unomi IT, build.sh"
+title: Clearer integration test runs in Unomi 4
+description: "How Unomi 4 improved IT execution — live progress bars with ETA, quieter Maven and Docker output, and tooling for diagnosing long CI suites."
+keywords: "Unomi 4 integration tests, ProgressListener, CI logs, Apache Unomi IT, build.sh"
 layout: default
 date: 2026-07-09 10:37:00 +0000
 ---
 
 <section class="page-header">
     <div class="container">
-        <p class="section-label text-hero-label">Unomi 3 &middot; Quality</p>
-        <h1>Clearer integration test runs in Unomi 3</h1>
+        <p class="section-label text-hero-label">Unomi 4 &middot; Quality</p>
+        <h1>Clearer integration test runs in Unomi 4</h1>
         <p class="lead">Progress bars, quieter CI output, and tools that turn a 90&ndash;minute suite into something you can actually follow.</p>
         {% if page.date %}
         <p class="small text-muted mt-2 mb-0">
@@ -31,7 +31,7 @@ date: 2026-07-09 10:37:00 +0000
             <em>how far</em>
             or
             <em>what was left</em>.</p>
-        <p>Unomi 3 invested in the
+        <p>Unomi 4 invested in the
             <strong>execution experience</strong>
             of that suite: live progress, quieter logs, and developer tooling around archives and memory. The goal is not fewer tests &mdash; it is being able to watch (and debug) the ones we already run.</p>
 
@@ -65,7 +65,7 @@ Progress (1): 7.2/45 kB
 ... thousands of similar lines ...
 # Suite still running - no % complete, no ETA, no live fail list</code></pre>
 
-        <p class="small text-muted mb-2 mt-4"><strong>After</strong> &mdash; same class of job on Unomi 3 tip (e.g.
+        <p class="small text-muted mb-2 mt-4"><strong>After</strong> &mdash; same class of job on Unomi 4 tip (e.g.
             <a href="https://github.com/apache/unomi/actions/runs/29200354118">run #29200354118</a>,
             2026-07-12). Transfer UI suppressed; <code>ProgressListener</code> owns the &ldquo;are we stuck?&rdquo; question. Format from
             <a href="https://issues.apache.org/jira/browse/UNOMI-912">UNOMI-912</a>:</p>
@@ -86,16 +86,16 @@ Rank,Test Name,Duration (ms)
 ./build.sh --ci --integration-tests</code></pre>
         <p>After a run, see <code>itests/README.md</code> for <code>archive-it-run.sh</code>, <code>compare-it-runs.sh</code>, <code>kt.sh</code>, and memory sampling. On Actions, download the <code>it-memory-metrics-*</code> artifact from a completed IT job.</p>
 
-        <h2 class="h4 mt-5 mb-3">How this fits the Unomi 3 quality story</h2>
+        <h2 class="h4 mt-5 mb-3">How this fits the Unomi 4 quality story</h2>
         <p>Progress and cleaner logs make the
             <em>long</em>
-            path usable. Unomi 3 also added a
+            path usable. Unomi 4 also added a
             <em>short</em>
             path &mdash; the in-memory persistence harness for fast service unit tests without Karaf or Docker. Different layers, same idea: confidence without guessing.</p>
 
         <p class="mt-4">
             <a class="btn btn-primary" href="https://github.com/apache/unomi/tree/master/itests">Browse itests on GitHub</a>
-            <a class="btn btn-outline-primary ms-2" href="/blog/introducing-apache-unomi-3.html">Unomi 3 intro</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/introducing-apache-unomi-3.html">Unomi 4 intro</a>
             <a class="btn btn-outline-primary ms-2" href="/contribute/testing.html">Contribute &middot; Testing</a>
         </p>
         <p><a href="/blog/">&larr; All posts</a></p>

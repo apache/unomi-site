@@ -101,7 +101,7 @@
     <circle cx="474" cy="154" r="4" fill="#f87171"/>
     <circle cx="488" cy="154" r="4" fill="#fbbf24"/>
     <circle cx="502" cy="154" r="4" fill="#4ade80"/>
-    <text x="518" y="158" fill="var(--term-muted)" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">ci | itests (Unomi 3)</text>
+    <text x="518" y="158" fill="var(--term-muted)" font-size="10" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">ci | itests (Unomi 4)</text>
 
     <g clip-path="url(#afterClip)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10">
       <text x="468" y="182" fill="var(--unomi-accent)">Apache Unomi  |  Integration tests</text>

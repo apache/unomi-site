@@ -1,21 +1,21 @@
 ---
-title: Tutorials &mdash; Getting Started with Apache Unomi 3.1
-description: "Step-by-step tutorials for Apache Unomi 3.1: Docker (Elasticsearch or OpenSearch), tenants and API keys, REST API, web tracking, and personalization."
-keywords: "Apache Unomi 3.1 tutorial, API keys, multi-tenancy, Docker, OpenSearch, CDP tutorial, profiles, events, segments, rules"
+title: Tutorials &mdash; Getting Started with Apache Unomi 4.0
+description: "Step-by-step tutorials for Apache Unomi 4.0: Docker (Elasticsearch or OpenSearch), tenants and API keys, REST API, web tracking, and personalization."
+keywords: "Apache Unomi 4.0 tutorial, API keys, multi-tenancy, Docker, OpenSearch, CDP tutorial, profiles, events, segments, rules"
 layout: default
 structured_data: >
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "HowTo",
-        "name": "Getting Started with Apache Unomi 3.1",
-        "description": "Learn how to set up and use Apache Unomi 3.1 as a Customer Data Platform with Docker, tenants, API keys, REST APIs, and web tracking.",
+        "name": "Getting Started with Apache Unomi 4.0",
+        "description": "Learn how to set up and use Apache Unomi 4.0 as a Customer Data Platform with Docker, tenants, API keys, REST APIs, and web tracking.",
         "totalTime": "PT30M",
         "step": [
             {
                 "@type": "HowToStep",
                 "position": 1,
-                "name": "Start Unomi 3.1 with Docker",
+                "name": "Start Unomi 4.0 with Docker",
                 "text": "Create a docker-compose.yml and run docker compose up with Elasticsearch 9.4.3 or OpenSearch 3.x."
             },
             {
@@ -45,7 +45,7 @@ structured_data: >
 <section class="page-header">
     <div class="container">
         <p class="section-label text-hero-label">Tutorials</p>
-        <h1>Getting Started with Apache Unomi 3.1</h1>
+        <h1>Getting Started with Apache Unomi 4.0</h1>
         <p class="lead">From zero to a running CDP with multi-tenancy and API keys. Pick the path that suits you.</p>
     </div>
 </section>
@@ -88,7 +88,7 @@ structured_data: >
             <div class="col-lg-10">
                 <span class="badge badge-primary mb-3">Step 1</span>
                 <h2>Quick Start with Docker</h2>
-                <p class="text-muted">The fastest way to get Unomi 3.1 running. You only need <a href="https://docs.docker.com/get-docker/" target="_blank" rel="noopener">Docker</a>. Full compose options (including OpenSearch) are on the <a href="/get-started.html#quickstart">Getting Started</a> page.</p>
+                <p class="text-muted">The fastest way to get Unomi 4.0 running. You only need <a href="https://docs.docker.com/get-docker/" target="_blank" rel="noopener">Docker</a>. Full compose options (including OpenSearch) are on the <a href="/get-started.html#quickstart">Getting Started</a> page.</p>
 
                 <h3 class="h6 fw-semibold mt-4 mb-3">Create <code>docker-compose.yml</code> (Elasticsearch)</h3>
 <pre><code>version: '3.8'
@@ -137,15 +137,15 @@ services:
 <hr class="section-divider">
 
 <!-- ============================================================ -->
-<!-- Create Tenant (Unomi 3.1) -->
+<!-- Create Tenant (Unomi 4.0) -->
 <!-- ============================================================ -->
 <section id="create-tenant" class="section">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <span class="badge badge-primary mb-3">Step 2 &middot; Unomi 3.1</span>
+                <span class="badge badge-primary mb-3">Step 2 &middot; Unomi 4.0</span>
                 <h2>Create a Tenant</h2>
-                <p class="text-muted">In Unomi 3.1, data lives under a <strong>tenant</strong>. Create one with the system admin user, then regenerate API keys to obtain the one-time plaintext values.</p>
+                <p class="text-muted">In Unomi 4.0, data lives under a <strong>tenant</strong>. Create one with the system admin user, then regenerate API keys to obtain the one-time plaintext values.</p>
 <pre><code>curl -X POST http://localhost:8181/cxs/tenants \
   --user karaf:karaf \
   -H "Content-Type: application/json" \
@@ -168,7 +168,7 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
                     <li><code>YOUR_PRIVATE_API_KEY</code> &mdash; basic auth <code>default:YOUR_PRIVATE_API_KEY</code> for scopes, rules, schemas, searches</li>
                 </ul>
                 <div class="alert alert-warning small" role="alert">
-                    <i class="bi bi-exclamation-triangle me-1"></i> Public endpoints reject requests without a valid public API key. Do not use <code>karaf:karaf</code> for context or event collector calls in native 3.1 mode.
+                    <i class="bi bi-exclamation-triangle me-1"></i> Public endpoints reject requests without a valid public API key. Do not use <code>karaf:karaf</code> for context or event collector calls in native 4.0 mode.
                 </div>
                 <p class="small mb-0">More: <a href="/get-started.html#auth">Getting Started auth table</a> &middot; <a href="/blog/unomi-3-multitenancy.html">Multi-tenancy post</a></p>
             </div>
@@ -185,7 +185,7 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
             <div class="col-lg-10">
                 <span class="badge badge-primary mb-3">Alternative to Docker</span>
                 <h2>Manual Installation</h2>
-                <p class="text-muted">Prefer running Unomi 3.1 on your machine? Match the versions used in the project quick start.</p>
+                <p class="text-muted">Prefer running Unomi 4.0 on your machine? Match the versions used in the project quick start.</p>
 
                 <h3 class="h6 fw-semibold mt-4 mb-3">Prerequisites</h3>
                 <ul class="small">
@@ -224,7 +224,7 @@ karaf@root()&gt; unomi:start</code></pre>
             <div class="col-lg-10">
                 <span class="badge badge-primary mb-3">Step 3</span>
                 <h2>Your First API Calls</h2>
-                <p class="text-muted">With Unomi 3.1 running and a tenant created, explore the REST API. Replace <code>YOUR_PUBLIC_API_KEY</code> / <code>YOUR_PRIVATE_API_KEY</code> with values from <a href="#create-tenant">Step 2</a>.</p>
+                <p class="text-muted">With Unomi 4.0 running and a tenant created, explore the REST API. Replace <code>YOUR_PUBLIC_API_KEY</code> / <code>YOUR_PRIVATE_API_KEY</code> with values from <a href="#create-tenant">Step 2</a>.</p>
 
                 <!-- Create a scope first -->
                 <h3 class="h6 fw-semibold mt-4 mb-3">Create a scope</h3>
@@ -244,7 +244,7 @@ karaf@root()&gt; unomi:start</code></pre>
 
                 <!-- Read context -->
                 <h3 class="h6 fw-semibold mt-4 mb-3">Read the current context</h3>
-                <p>The <code>/cxs/context.json</code> endpoint is the primary public endpoint. In 3.1 it requires a <strong>public API key</strong>:</p>
+                <p>The <code>/cxs/context.json</code> endpoint is the primary public endpoint. In 4.0 it requires a <strong>public API key</strong>:</p>
 <pre><code>curl -X POST "http://localhost:8181/cxs/context.json?sessionId=1234" \
   -H "Content-Type: application/json" \
   -H "X-Unomi-Api-Key: YOUR_PUBLIC_API_KEY" \
@@ -366,7 +366,7 @@ karaf@root()&gt; unomi:start</code></pre>
             <div class="col-lg-10">
                 <span class="badge badge-primary mb-3">Step 4</span>
                 <h2>Web Tracking Tutorial</h2>
-                <p class="text-muted">Collect page views and enable personalization. Unomi 3.1 public endpoints require your tenant <strong>public API key</strong> on every context / event request.</p>
+                <p class="text-muted">Collect page views and enable personalization. Unomi 4.0 public endpoints require your tenant <strong>public API key</strong> on every context / event request.</p>
                 <div class="alert alert-info small" role="alert">
                     <i class="bi bi-key me-1"></i> If your tracker build accepts an API key option, set it to <code>YOUR_PUBLIC_API_KEY</code>. Otherwise ensure requests send header <code>X-Unomi-Api-Key</code> (see the <a href="https://unomi.apache.org/manual/latest/index.html#_how_to_build_a_javascript_web_tracker">JavaScript tracker guide</a> in the manual).
                 </div>
@@ -410,7 +410,7 @@ karaf@root()&gt; unomi:start</code></pre>
     }
   };
 
-  // Unomi 3.1: ensure public endpoints receive the tenant public API key
+  // Unomi 4.0: ensure public endpoints receive the tenant public API key
   var originalOpen = XMLHttpRequest.prototype.open;
   var originalSend = XMLHttpRequest.prototype.send;
   XMLHttpRequest.prototype.open = function() {
@@ -602,7 +602,7 @@ unomiWebTracker.registerPersonalizationObject({
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <h2>Next Steps</h2>
-                <p class="text-muted mb-4">You now have a working Unomi 3.1 environment with a tenant, event tracking, profile management, rules, and personalization. Here&rsquo;s where to go next.</p>
+                <p class="text-muted mb-4">You now have a working Unomi 4.0 environment with a tenant, event tracking, profile management, rules, and personalization. Here&rsquo;s where to go next.</p>
 
                 <div class="row g-4">
                     <div class="col-md-6">

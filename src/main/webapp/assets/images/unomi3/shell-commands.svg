@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 840 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Unomi 3 Karaf shell: unomi:crud, tenant context, cache, and task commands">
+     aria-label="Unomi 4 Karaf shell: unomi:crud, tenant context, cache, and task commands">
   <defs><style>
   svg {
     --unomi-primary: #6d5ce7;

@@ -1,16 +1,16 @@
 ---
-title: Unomi 3 in numbers
+title: Unomi 4 in numbers
 description: "Unomi 1 vs 2 vs 3 in numbers — lines of code, tests, contributors, ASF downloads, and unomi.apache.org Matomo visits."
-keywords: "Unomi 3 metrics, lines of code, unit tests, integration tests, contributors, downloads, website visits, Matomo, Apache Unomi statistics"
+keywords: "Unomi 4 metrics, lines of code, unit tests, integration tests, contributors, downloads, website visits, Matomo, Apache Unomi statistics"
 layout: default
 date: 2026-07-17 10:00:00 +0000
 ---
 
 <section class="page-header">
     <div class="container">
-        <p class="section-label text-hero-label">Unomi 3 &middot; Metrics</p>
-        <h1>Unomi 3 in numbers</h1>
-        <p class="lead">How the codebase, tests, community, downloads, and website traffic grew from Unomi 1 through Unomi 3.1.</p>
+        <p class="section-label text-hero-label">Unomi 4 &middot; Metrics</p>
+        <h1>Unomi 4 in numbers</h1>
+        <p class="lead">How the codebase, tests, community, downloads, and website traffic grew from Unomi 1 through Unomi 4.0.</p>
         {% if page.date %}
         <p class="small text-muted mt-2 mb-0">
             <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
@@ -22,7 +22,7 @@ date: 2026-07-17 10:00:00 +0000
 
 <section class="section">
     <div class="container col-lg-8">
-        <p>Unomi 3 is not only new features &mdash; multi-tenancy, OpenSearch, shell CRUD, tracing, and the task scheduler.
+        <p>Unomi 4 is not only new features &mdash; multi-tenancy, OpenSearch, shell CRUD, tracing, and the task scheduler.
             It is also a step-change in how much of the platform is covered by automated tests, and how the Java surface area evolved across a decade of releases.</p>
         <p>The charts below use <strong>release tags</strong> as waypoints:
             Unomi&nbsp;1 = <code>unomi-root-1.9.1</code>,
@@ -31,18 +31,18 @@ date: 2026-07-17 10:00:00 +0000
             Unomi&nbsp;3.1 = current <code>master</code> (work in progress after 3.0.1).
             Counts are physical lines of code and approximate JUnit <code>@Test</code> annotations from the git tree at each tag.</p>
 
-        <img src="/assets/images/unomi3/numbers-hero.svg" class="img-fluid my-4" alt="Unomi 3 headline metrics: 181k Java LOC, 1148 unit tests, 388 IT tests, 77 contributors"/>
+        <img src="/assets/images/unomi3/numbers-hero.svg" class="img-fluid my-4" alt="Unomi 4 headline metrics: 181k Java LOC, 1148 unit tests, 388 IT tests, 77 contributors"/>
 
         <h2 class="h4 mt-5 mb-3">Lines of code</h2>
-        <p>Production Java grew from about <strong>45k</strong> lines in late Unomi&nbsp;1 to about <strong>70k</strong> in Unomi&nbsp;2 and <strong>71k</strong> at Unomi&nbsp;3.0.1 &mdash; then jumped to about <strong>118k</strong> on the 3.1 line.
+        <p>Production Java grew from about <strong>45k</strong> lines in late Unomi&nbsp;1 to about <strong>70k</strong> in Unomi&nbsp;2 and <strong>71k</strong> at Unomi&nbsp;3.0.1 &mdash; then jumped to about <strong>118k</strong> on the 4.0 line.
             Test Java stayed modest through 3.0 (~12k) and then leapt to about <strong>63k</strong> with the unit harness, multi-tenancy coverage, and related work.</p>
         <img src="/assets/images/unomi3/numbers-loc.svg" class="img-fluid my-4" alt="Stacked bar chart of Java production and test lines of code across Unomi 1, 2, 3.0, and 3.1"/>
         <p class="small text-muted">Methodology: physical line counts over <code>.java</code> (and primary companion sources for totals elsewhere) from <code>git archive</code> at each tag; paths under <code>target/</code> excluded.
             &ldquo;Main&rdquo; is everything outside <code>src/test/</code> and <code>itests/</code>; &ldquo;Tests&rdquo; is those trees.</p>
 
         <h2 class="h4 mt-5 mb-3">Unit and integration tests</h2>
-        <p>Integration tests have been Unomi&rsquo;s historical strength &mdash; growing from roughly <strong>128</strong> IT <code>@Test</code> methods in 1.9.1 to about <strong>388</strong> on 3.1.
-            The dramatic change is on the unit side: from a few dozen methods through Unomi&nbsp;2 to about <strong>1,148</strong> on 3.1, driven by the in-memory persistence harness and denser service-level coverage.</p>
+        <p>Integration tests have been Unomi&rsquo;s historical strength &mdash; growing from roughly <strong>128</strong> IT <code>@Test</code> methods in 1.9.1 to about <strong>388</strong> on 4.0.
+            The dramatic change is on the unit side: from a few dozen methods through Unomi&nbsp;2 to about <strong>1,148</strong> on 4.0, driven by the in-memory persistence harness and denser service-level coverage.</p>
         <img src="/assets/images/unomi3/numbers-tests.svg" class="img-fluid my-4" alt="Grouped bars of unit versus integration @Test method counts across Unomi versions"/>
         <ul>
             <li><strong>Unit classes</strong> &mdash; 11 &rarr; 12 &rarr; 15 &rarr; <strong>66</strong></li>
@@ -130,7 +130,7 @@ date: 2026-07-17 10:00:00 +0000
         </ul>
 
         <p class="mt-4">
-            <a class="btn btn-primary" href="/blog/introducing-apache-unomi-3.html">Introducing Unomi 3</a>
+            <a class="btn btn-primary" href="/blog/introducing-apache-unomi-3.html">Introducing Unomi 4</a>
             <a class="btn btn-outline-primary ms-2" href="/blog/unomi-3-unit-testing-harness.html">Unit harness</a>
             <a class="btn btn-outline-primary ms-2" href="/blog/unomi-3-platform-foundation.html">Platform foundation</a>
         </p>

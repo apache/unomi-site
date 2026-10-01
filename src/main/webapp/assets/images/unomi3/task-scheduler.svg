@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 840 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Unomi 3.1 cluster-aware task scheduler with REST and shell">
+     aria-label="Unomi 4.0 cluster-aware task scheduler with REST and shell">
   <defs>
 <style>
   svg {

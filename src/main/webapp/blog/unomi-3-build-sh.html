@@ -1,6 +1,6 @@
 ---
-title: One entry point — Unomi 3 build.sh
-description: "How Apache Unomi 3 replaced scattered build scripts with a single build.sh — preflight checks, CI mode, integration tests, deploy, and Windows build.ps1 parity."
+title: One entry point — Unomi 4 build.sh
+description: "How Apache Unomi 4 replaced scattered build scripts with a single build.sh — preflight checks, CI mode, integration tests, deploy, and Windows build.ps1 parity."
 keywords: "Unomi build.sh, Apache Unomi developer experience, UNOMI-887, Maven CI, OpenSearch integration tests"
 layout: default
 date: 2026-07-11 11:44:00 +0000
@@ -8,7 +8,7 @@ date: 2026-07-11 11:44:00 +0000
 
 <section class="page-header">
     <div class="container">
-        <p class="section-label text-hero-label">Unomi 3 &middot; Developer experience</p>
+        <p class="section-label text-hero-label">Unomi 4 &middot; Developer experience</p>
         <h1>One entry point: <code>build.sh</code></h1>
         <p class="lead">Preflight, build, test, and deploy &mdash; the same script locally and on GitHub Actions.</p>
         {% if page.date %}
@@ -22,7 +22,7 @@ date: 2026-07-11 11:44:00 +0000
 
 <section class="section">
     <div class="container col-lg-8">
-        <p>Before Unomi 3, contributors juggled several ad-hoc scripts (<code>buildAndRun.sh</code>, <code>compileDeploy.sh</code>, and friends).
+        <p>Before Unomi 4, contributors juggled several ad-hoc scripts (<code>buildAndRun.sh</code>, <code>compileDeploy.sh</code>, and friends).
             <a href="https://issues.apache.org/jira/browse/UNOMI-887">UNOMI-887</a>
             /
             <a href="https://github.com/apache/unomi/pull/737">#737</a>
@@ -74,7 +74,7 @@ date: 2026-07-11 11:44:00 +0000
             <a href="/blog/unomi-3-it-execution.html">clearer IT console</a>
             and
             <a href="/blog/unomi-3-manual.html">manual</a>
-            investments in Unomi 3.</p>
+            investments in Unomi 4.</p>
 
         <p class="mt-4">
             <a class="btn btn-primary" href="https://github.com/apache/unomi/blob/master/build.sh">View build.sh on GitHub</a>

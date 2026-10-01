@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 840 280" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Apache Unomi 3 journey from 2.x platform foundation to 3.1 product features">
+     aria-label="Apache Unomi 4 journey from 2.x platform foundation to 4.0 product features">
   <defs>
 <style>
   svg {
@@ -44,8 +44,8 @@
     </linearGradient>
   </defs>
   <rect width="840" height="280" rx="20" fill="url(#j-bg)"/>
-  <text x="40" y="42" fill="var(--unomi-text)" font-size="18" font-weight="700">Apache Unomi 3 — release journey</text>
-  <text x="40" y="64" fill="var(--unomi-text-muted)" font-size="13">One major story: platform (3.0) + product leap (3.1)</text>
+  <text x="40" y="42" fill="var(--unomi-text)" font-size="18" font-weight="700">Apache Unomi 4 — release journey</text>
+  <text x="40" y="64" fill="var(--unomi-text-muted)" font-size="13">One major story: platform (3.0) + product leap (4.0)</text>
 
   <!-- spine -->
   <line x1="80" y1="160" x2="760" y2="160" stroke="var(--unomi-primary)" stroke-width="3" class="flow" opacity=".45"/>
@@ -67,7 +67,7 @@
     <text x="380" y="204" text-anchor="middle" fill="var(--unomi-on-dark)" font-size="11">persistence clustering</text>
   </g>
 
-  <!-- 3.1 -->
+  <!-- 4.0 -->
   <g class="float" style="animation-delay:.6s">
     <rect x="560" y="90" width="220" height="140" rx="18" fill="var(--unomi-white)" stroke="var(--unomi-accent)" stroke-width="2.5"/>
     <rect x="560" y="90" width="220" height="36" rx="18" fill="var(--unomi-accent)"/>

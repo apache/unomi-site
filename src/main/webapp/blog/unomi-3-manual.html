@@ -1,16 +1,16 @@
 ---
-title: Unomi 3 manual — PlantUML, branded theme, deeper docs
-description: "How the Apache Unomi 3 manual gained PlantUML/GraphViz diagrams, an Unomi-branded HTML/PDF theme, and major content expansions for migrations, multi-tenancy, and platform upgrades."
-keywords: "Apache Unomi manual, PlantUML AsciiDoc, Unomi 3 documentation, AsciiDoctor diagrams, Unomi CSS theme"
+title: Unomi 4 manual — PlantUML, branded theme, deeper docs
+description: "How the Apache Unomi 4 manual gained PlantUML/GraphViz diagrams, an Unomi-branded HTML/PDF theme, and major content expansions for migrations, multi-tenancy, and platform upgrades."
+keywords: "Apache Unomi manual, PlantUML AsciiDoc, Unomi 4 documentation, AsciiDoctor diagrams, Unomi CSS theme"
 layout: default
 date: 2026-07-13 12:51:00 +0000
 ---
 
 <section class="page-header">
     <div class="container">
-        <p class="section-label text-hero-label">Unomi 3 &middot; Documentation</p>
-        <h1>Unomi 3 manual: diagrams, theme, and depth</h1>
-        <p class="lead">PlantUML in AsciiDoc, a brand-aligned HTML/PDF look, and chapters that finally match the Unomi 3 platform.</p>
+        <p class="section-label text-hero-label">Unomi 4 &middot; Documentation</p>
+        <h1>Unomi 4 manual: diagrams, theme, and depth</h1>
+        <p class="lead">PlantUML in AsciiDoc, a brand-aligned HTML/PDF look, and chapters that finally match the Unomi 4 platform.</p>
         {% if page.date %}
         <p class="small text-muted mt-2 mb-0">
             <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
@@ -22,7 +22,7 @@ date: 2026-07-13 12:51:00 +0000
 
 <section class="section">
     <div class="container col-lg-8">
-        <p>Shipping Unomi 3 without a manual that looks and reads like Unomi 3 would leave operators guessing. Over several
+        <p>Shipping Unomi 4 without a manual that looks and reads like Unomi 4 would leave operators guessing. Over several
             <a href="https://issues.apache.org/jira/browse/UNOMI-882">UNOMI-882</a>
             and
             <a href="https://issues.apache.org/jira/browse/UNOMI-960">UNOMI-960</a>
@@ -32,7 +32,7 @@ date: 2026-07-13 12:51:00 +0000
             <em>navigated</em>
             &mdash; from diagram toolchain to CSS theme to whole new chapters.</p>
 
-        <img src="/assets/images/unomi3/manual-plantuml-theme.svg" class="img-fluid my-4" alt="AsciiDoc PlantUML source builds into a branded Unomi 3 manual with diagrams"/>
+        <img src="/assets/images/unomi3/manual-plantuml-theme.svg" class="img-fluid my-4" alt="AsciiDoc PlantUML source builds into a branded Unomi 4 manual with diagrams"/>
 
         <h2 class="h4 mt-4 mb-3">PlantUML (and GraphViz) in the build</h2>
         <p><a href="https://github.com/apache/unomi/pull/753">#753</a> wired
@@ -72,9 +72,9 @@ Component(restApi, "REST API", "JAX-RS")
         </ul>
         <p>Reading the published manual should feel continuous with the project website, not like a separate default book skin.</p>
 
-        <h2 class="h4 mt-5 mb-3">Content that matches Unomi 3</h2>
+        <h2 class="h4 mt-5 mb-3">Content that matches Unomi 4</h2>
         <p><a href="https://github.com/apache/unomi/pull/783">#783</a> synced the book to
-            <strong>Apache Unomi 3.x</strong>
+            <strong>Apache Unomi 4.x</strong>
             and expanded (or heavily refreshed) material that operators actually need:</p>
         <ul>
             <li><strong>Platform story</strong> &mdash; architecture, security, configuration, clustering, data structures</li>
@@ -84,7 +84,7 @@ Component(restApi, "REST API", "JAX-RS")
             <li><strong>Day-to-day APIs</strong> &mdash; request examples (including explain/tracing), GraphQL, shell commands, JavaScript tracker guide, recipes</li>
             <li><strong>Reference depth</strong> &mdash; conditions guide and builtin type catalogs (UNOMI-960), past-event conditions, profile tracking</li>
         </ul>
-        <p>&ldquo;What&rsquo;s new&rdquo; for 3.1 now points readers straight into these chapters instead of leaving gaps between release notes and the old 2.x-shaped manual.</p>
+        <p>&ldquo;What&rsquo;s new&rdquo; for 4.0 now points readers straight into these chapters instead of leaving gaps between release notes and the old 2.x-shaped manual.</p>
 
         <h2 class="h4 mt-5 mb-3">How to add a diagram</h2>
         <ol>
@@ -101,7 +101,7 @@ Component(restApi, "REST API", "JAX-RS")
 
         <p class="mt-4">
             <a class="btn btn-primary" href="{{ site.data.unomi.manual.published_latest }}">Open the latest manual</a>
-            <a class="btn btn-outline-primary ms-2" href="{{ site.data.unomi.manual.whats_new }}">What&rsquo;s new in 3.1</a>
+            <a class="btn btn-outline-primary ms-2" href="{{ site.data.unomi.manual.whats_new }}">What&rsquo;s new in 4.0</a>
             <a class="btn btn-outline-primary ms-2" href="https://github.com/apache/unomi/tree/master/manual/src/main/asciidoc">Browse AsciiDoc on GitHub</a>
         </p>
         <p><a href="/blog/">&larr; All posts</a></p>

@@ -1,6 +1,6 @@
 ---
-title: Unomi 3 Karaf shell commands
-description: "Unomi 3 expands the unomi:* Karaf shell &mdash; unified unomi:crud, tenant session context, cache ops, task scheduler commands, and list-invalid-objects (UNOMI-879 / 880)."
+title: Unomi 4 Karaf shell commands
+description: "Unomi 4 expands the unomi:* Karaf shell &mdash; unified unomi:crud, tenant session context, cache ops, task scheduler commands, and list-invalid-objects (UNOMI-879 / 880)."
 keywords: "Unomi shell, unomi:crud, Karaf shell, unomi:cache, unomi:task-list, tenant-set, UNOMI-879, UNOMI-880"
 layout: default
 date: 2026-07-01 11:59:00 +0000
@@ -8,8 +8,8 @@ date: 2026-07-01 11:59:00 +0000
 
 <section class="page-header">
     <div class="container">
-        <p class="section-label text-hero-label">Unomi 3 &middot; Operator experience</p>
-        <h1>Karaf shell commands in Unomi 3</h1>
+        <p class="section-label text-hero-label">Unomi 4 &middot; Operator experience</p>
+        <h1>Karaf shell commands in Unomi 4</h1>
         <p class="lead"><code>unomi:crud</code>, tenant session context, cache tools, and task commands &mdash; operate without leaving SSH.</p>
         {% if page.date %}
         <p class="small text-muted mt-2 mb-0">
@@ -23,7 +23,7 @@ date: 2026-07-01 11:59:00 +0000
 <section class="section">
     <div class="container col-lg-8">
         <p>The Unomi Karaf shell (<code>ssh -p 8102 karaf@localhost</code>, namespace <code>unomi:</code>) has always been the fastest way to inspect rules, tail events, and manage lifecycle.
-            Unomi 3 (
+            Unomi 4 (
             <a href="https://issues.apache.org/jira/browse/UNOMI-879">UNOMI-879</a>
             /
             <a href="https://issues.apache.org/jira/browse/UNOMI-880">UNOMI-880</a>
@@ -33,7 +33,7 @@ date: 2026-07-01 11:59:00 +0000
             <a href="https://github.com/apache/unomi/pull/763">#763</a>)
             widens that toolkit for multi-tenancy, caches, and the cluster-aware scheduler &mdash; with a unified CRUD surface instead of one-off list/view/remove commands for every type.</p>
 
-        <img src="/assets/images/unomi3/shell-commands.svg" class="img-fluid my-4" alt="Unomi 3 shell: crud, tenant, cache, and task command families"/>
+        <img src="/assets/images/unomi3/shell-commands.svg" class="img-fluid my-4" alt="Unomi 4 shell: crud, tenant, cache, and task command families"/>
 
         <h2 class="h4 mt-4 mb-3">Capabilities at a glance</h2>
         <ul>
@@ -123,7 +123,7 @@ unomi:crud update profile demo-ada '{"firstName":"Ada","lastName":"Lovelace","em
 
 # Remove
 unomi:crud delete profile demo-ada</code></pre>
-        <p class="small text-muted">There are no separate <code>profile-list</code> / <code>profile-view</code> commands in Unomi 3 &mdash; use <code>unomi:crud list|read|delete profile</code>.</p>
+        <p class="small text-muted">There are no separate <code>profile-list</code> / <code>profile-view</code> commands in Unomi 4 &mdash; use <code>unomi:crud list|read|delete profile</code>.</p>
 
         <h3 class="h6 mt-4 mb-2">Scope first</h3>
         <p class="small text-muted">Sessions and events must reference a scope that already exists for the tenant.

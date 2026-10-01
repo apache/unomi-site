@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 840 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Unomi 3 API stability: all 119 OpenAPI 2.x paths retained plus V2 compatibility mode">
+     aria-label="Unomi 4 API stability: all 119 OpenAPI 2.x paths retained plus V2 compatibility mode">
   <defs>
 <style>
   svg {
@@ -40,11 +40,11 @@
 </defs>
   <rect width="840" height="320" rx="20" fill="var(--unomi-bg-soft)"/>
   <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">Stable REST · additive growth</text>
-  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">119 / 119 documented 2.x OpenAPI paths retained in 3.1</text>
+  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">119 / 119 documented 2.x OpenAPI paths retained in 4.0</text>
 
-  <!-- outer 3.1 surface -->
+  <!-- outer 4.0 surface -->
   <rect x="40" y="90" width="480" height="190" rx="20" fill="var(--unomi-primary-light)" stroke="var(--unomi-primary)" stroke-width="2" class="pulse"/>
-  <text x="60" y="118" fill="var(--unomi-primary-dark)" font-size="13" font-weight="700">Unomi 3.1 OpenAPI surface</text>
+  <text x="60" y="118" fill="var(--unomi-primary-dark)" font-size="13" font-weight="700">Unomi 4.0 OpenAPI surface</text>
   <text x="60" y="138" fill="var(--unomi-text-muted)" font-size="12">131 paths · 179 operations</text>
 
   <!-- inner 2.x retained -->

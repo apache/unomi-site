@@ -1,15 +1,15 @@
 ---
-title: Getting Started with Apache Unomi 3.1
-description: "Get started with Apache Unomi 3.1 in minutes. Docker with Elasticsearch or OpenSearch, create a tenant, use API keys, and call the REST API."
-keywords: "Apache Unomi 3.1 quickstart, getting started, Docker, OpenSearch, multi-tenancy, API keys, CDP setup"
+title: Getting Started with Apache Unomi 4.0
+description: "Get started with Apache Unomi 4.0 in minutes. Docker with Elasticsearch or OpenSearch, create a tenant, use API keys, and call the REST API."
+keywords: "Apache Unomi 4.0 quickstart, getting started, Docker, OpenSearch, multi-tenancy, API keys, CDP setup"
 layout: default
 structured_data: >
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "HowTo",
-        "name": "How to Get Started with Apache Unomi 3.1 using Docker",
-        "description": "Run Apache Unomi 3.1 with Docker Compose (Elasticsearch or OpenSearch), create a tenant, and call the REST API with API keys.",
+        "name": "How to Get Started with Apache Unomi 4.0 using Docker",
+        "description": "Run Apache Unomi 4.0 with Docker Compose (Elasticsearch or OpenSearch), create a tenant, and call the REST API with API keys.",
         "totalTime": "PT10M",
         "tool": [
             { "@type": "HowToTool", "name": "Docker" },
@@ -20,7 +20,7 @@ structured_data: >
                 "@type": "HowToStep",
                 "position": 1,
                 "name": "Create a docker-compose.yml file",
-                "text": "Create a docker-compose.yml with Elasticsearch 9.4.3 or OpenSearch 3.x and Apache Unomi 3.1."
+                "text": "Create a docker-compose.yml with Elasticsearch 9.4.3 or OpenSearch 3.x and Apache Unomi 4.0."
             },
             {
                 "@type": "HowToStep",
@@ -48,8 +48,8 @@ structured_data: >
 <!-- Page Header -->
 <section class="page-header">
     <div class="container">
-        <p class="section-label text-hero-label">Get Started &middot; Unomi 3.1</p>
-        <h1>Getting Started with Apache Unomi 3.1</h1>
+        <p class="section-label text-hero-label">Get Started &middot; Unomi 4.0</p>
+        <h1>Getting Started with Apache Unomi 4.0</h1>
         <p class="lead">From zero to a running Customer Data Platform &mdash; with multi-tenancy and API keys.</p>
     </div>
 </section>
@@ -61,7 +61,7 @@ structured_data: >
         <div class="row justify-content-center">
             <div class="col-lg-9">
                 <p class="section-label">Prerequisites</p>
-                <h2 class="h4 mb-3">What you need for Unomi 3.1</h2>
+                <h2 class="h4 mb-3">What you need for Unomi 4.0</h2>
                 <ul class="list-unstyled small mb-0">
                     <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i><strong>Docker</strong> (recommended path) &mdash; or <strong>Java 17+</strong> for a manual install</li>
                     <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i><strong>Elasticsearch 9.x</strong> (e.g. 9.4.3) <em>or</em> <strong>OpenSearch 3.x</strong></li>
@@ -87,7 +87,7 @@ structured_data: >
                     </li>
                     <li class="d-flex align-items-start mb-3">
                         <i class="bi bi-check-circle-fill text-primary me-2 mt-1"></i>
-                        <span><strong>Multi-tenancy</strong> (Unomi 3.1) &mdash; isolate profiles, events, segments, rules, and schemas per tenant</span>
+                        <span><strong>Multi-tenancy</strong> (Unomi 4.0) &mdash; isolate profiles, events, segments, rules, and schemas per tenant</span>
                     </li>
                     <li class="d-flex align-items-start mb-3">
                         <i class="bi bi-check-circle-fill text-primary me-2 mt-1"></i>
@@ -133,7 +133,7 @@ structured_data: >
         <div class="row justify-content-center text-center mb-5">
             <div class="col-lg-8">
                 <p class="section-label">Quick Start</p>
-                <h2>Run Unomi 3.1 with Docker</h2>
+                <h2>Run Unomi 4.0 with Docker</h2>
                 <p class="text-muted">The fastest way to try Apache Unomi. Only Docker is required. Choose Elasticsearch or OpenSearch.</p>
             </div>
         </div>
@@ -228,7 +228,7 @@ volumes:
                 <div class="d-flex mb-4">
                     <div class="step-number me-3 flex-shrink-0">3</div>
                     <div class="flex-grow-1">
-                        <h3 class="h6 fw-semibold mb-2">Create a tenant (required in 3.1)</h3>
+                        <h3 class="h6 fw-semibold mb-2">Create a tenant (required in 4.0)</h3>
                         <p class="small text-muted">System admin credentials create tenants. Creation stores hashed keys only (<code>maskedKey</code> in the response) &mdash; regenerate each key once and save <code>plainTextKey</code> immediately.</p>
                         <pre><code>curl -X POST http://localhost:8181/cxs/tenants \
   --user karaf:karaf \
@@ -291,7 +291,7 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
                 <div class="p-3 rounded-3 bg-primary-light">
                     <p class="small mb-1"><strong><i class="bi bi-info-circle me-1"></i>Production note:</strong> This configuration is for development only. See the <a href="{{ site.data.unomi.manual.security }}">production security guide</a> before deploying.</p>
                     <p class="small mb-1"><strong>Manual install?</strong> Java 17+, Elasticsearch 9.4.3 or OpenSearch 3.x &mdash; follow the <a href="{{ site.data.unomi.manual.quick_start }}">manual quick start</a> (same tenant + API key steps).</p>
-                    <p class="small mb-0"><strong>Upgrading from 2.x?</strong> See <a href="/blog/migrating-to-unomi-3.html">Migrating to Unomi 3</a> and optional <a href="{{ site.data.unomi.manual.v2_compat }}">V2 compatibility mode</a>.</p>
+                    <p class="small mb-0"><strong>Upgrading from 2.x?</strong> See <a href="/blog/migrating-to-unomi-3.html">Migrating to Unomi 4</a> and optional <a href="{{ site.data.unomi.manual.v2_compat }}">V2 compatibility mode</a>.</p>
                 </div>
             </div>
         </div>
@@ -303,7 +303,7 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-9">
-                <p class="section-label">Unomi 3.1 authentication</p>
+                <p class="section-label">Unomi 4.0 authentication</p>
                 <h2 class="h4 mb-3">How API access works</h2>
                 <div class="table-responsive">
                     <table class="table table-sm align-middle small">
@@ -333,7 +333,7 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
                         </tbody>
                     </table>
                 </div>
-                <p class="small text-muted mb-0">Details: <a href="/blog/unomi-3-multitenancy.html">Multi-tenancy in Unomi 3</a> &middot; <a href="{{ site.data.unomi.manual.multitenancy }}">Manual &mdash; Multi-tenancy</a></p>
+                <p class="small text-muted mb-0">Details: <a href="/blog/unomi-3-multitenancy.html">Multi-tenancy in Unomi 4</a> &middot; <a href="{{ site.data.unomi.manual.multitenancy }}">Manual &mdash; Multi-tenancy</a></p>
             </div>
         </div>
     </div>
@@ -353,7 +353,7 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
                 <a href="/tutorial.html" class="feature-card d-block text-decoration-none h-100 text-center">
                     <div class="feature-icon mx-auto"><i class="bi bi-mortarboard"></i></div>
                     <h3 class="h6 fw-semibold text-dark">Tutorials</h3>
-                    <p class="small text-muted mb-0">API calls, web tracking, rules, and personalization with 3.1 keys.</p>
+                    <p class="small text-muted mb-0">API calls, web tracking, rules, and personalization with 4.0 keys.</p>
                 </a>
             </div>
             <div class="col-md-6 col-lg-3">
@@ -367,7 +367,7 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
                 <a href="/blog/unomi-3-multitenancy.html" class="feature-card d-block text-decoration-none h-100 text-center">
                     <div class="feature-icon mx-auto"><i class="bi bi-buildings"></i></div>
                     <h3 class="h6 fw-semibold text-dark">Multi-tenancy</h3>
-                    <p class="small text-muted mb-0">Why 3.1 was rebuilt for tenants and API keys.</p>
+                    <p class="small text-muted mb-0">Why 4.0 was rebuilt for tenants and API keys.</p>
                 </a>
             </div>
             <div class="col-md-6 col-lg-3">
