@@ -61,7 +61,7 @@ structured_data: >
                         <div class="col-md-6">
                             <ol class="small mb-0">
                                 <li><a href="#docker-quickstart">Quick Start with Docker</a> <span class="badge badge-success">Recommended</span></li>
-                                <li><a href="#create-tenant">Create a Tenant</a> <span class="badge badge-primary">3.1</span></li>
+                                <li><a href="#create-tenant">Create a Tenant</a> <span class="badge badge-primary">4.0</span></li>
                                 <li><a href="#first-api-calls">Your First API Calls</a></li>
                             </ol>
                         </div>
@@ -170,7 +170,7 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
                 <div class="alert alert-warning small" role="alert">
                     <i class="bi bi-exclamation-triangle me-1"></i> Public endpoints reject requests without a valid public API key. Do not use <code>karaf:karaf</code> for context or event collector calls in native 4.0 mode.
                 </div>
-                <p class="small mb-0">More: <a href="/get-started.html#auth">Getting Started auth table</a> &middot; <a href="/blog/unomi-3-multitenancy.html">Multi-tenancy post</a></p>
+                <p class="small mb-0">More: <a href="/get-started.html#auth">Getting Started auth table</a> &middot; <a href="/blog/unomi-4-multitenancy.html">Multi-tenancy post</a></p>
             </div>
         </div>
     </div>
@@ -206,7 +206,7 @@ karaf@root()&gt; unomi:start</code></pre>
                 <p>Create a tenant as in <a href="#create-tenant">Step 2</a>, then call context with <code>X-Unomi-Api-Key</code>. Cluster check: <code>https://localhost:9443/cxs/cluster</code> (<code>karaf</code>/<code>karaf</code>).</p>
 
                 <div class="alert alert-info small" role="alert">
-                    <i class="bi bi-terminal me-1"></i> <strong>Tip:</strong> SSH console <code>ssh -p 8102 karaf@localhost</code> &mdash; <code>unomi:crud list profile</code>, <code>unomi:event-tail</code>, <code>unomi:crud list rule</code>. Full detail: <a href="/blog/unomi-3-shell-commands.html">shell commands post</a> &middot; <a href="https://unomi.apache.org/manual/latest/index.html#_quick_start">manual quick start</a>.
+                    <i class="bi bi-terminal me-1"></i> <strong>Tip:</strong> SSH console <code>ssh -p 8102 karaf@localhost</code> &mdash; <code>unomi:crud list profile</code>, <code>unomi:event-tail</code>, <code>unomi:crud list rule</code>. Full detail: <a href="/blog/unomi-4-shell-commands.html">shell commands post</a> &middot; <a href="https://unomi.apache.org/manual/latest/index.html#_quick_start">manual quick start</a>.
                 </div>
             </div>
         </div>
@@ -634,7 +634,7 @@ unomiWebTracker.registerPersonalizationObject({
                             <div class="feature-icon"><i class="bi bi-buildings"></i></div>
                             <h3 class="h6 fw-semibold mb-2">Multi-tenancy</h3>
                             <p class="small text-muted mb-2">How tenants and API keys work across the CDP.</p>
-                            <a href="/blog/unomi-3-multitenancy.html" class="small fw-semibold">Read the deep dive <i class="bi bi-arrow-right"></i></a>
+                            <a href="/blog/unomi-4-multitenancy.html" class="small fw-semibold">Read the deep dive <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="col-md-6">

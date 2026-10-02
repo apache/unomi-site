@@ -25,7 +25,7 @@ date: 2026-07-03 12:16:00 +0000
         <p>Unomi 4.0 introduces a first-class <strong>task scheduler</strong> for work that must run reliably on a single node or across a cluster:
             maintenance timers, request offload (for example profile-merge follow-up), and operator-visible retry/cancel.</p>
         <p>It sits on the
-            <a href="/blog/unomi-3-platform-foundation.html">persistence-based clustering</a>
+            <a href="/blog/unomi-4-runtime.html">persistence-based clustering</a>
             model &mdash; executor nodes and locks use the shared search index rather than Cellar or Hazelcast.</p>
 
         <img src="/assets/images/unomi3/task-scheduler.svg" class="img-fluid my-4" alt="SchedulerService with REST, built-in task types, and Karaf shell"/>
@@ -101,8 +101,8 @@ schedulerService.newTask("export-tenant-snapshot")
 
         <p class="mt-4">
             <a class="btn btn-primary" href="{{ site.data.unomi.manual.published_latest }}#_scheduler">Manual: scheduler</a>
-            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-3-platform-foundation.html">Platform foundation</a>
-            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-3-request-tracing.html">Request tracing</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-4-runtime.html">Runtime</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-4-request-tracing.html">Request tracing</a>
         </p>
         <p><a href="/blog/">&larr; All posts</a></p>
     </div>

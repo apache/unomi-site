@@ -57,10 +57,10 @@ AI agents and language models are only as good as the data they can access *and*
 - **Unomi 4 hooks**: Multi-tenancy/API keys, additive REST (119/119 documented 2.x paths retained in 4.0), OpenSearch or Elasticsearch, V2 compatibility mode
 
 Blog: https://unomi.apache.org/blog/
-- Unomi 4 intro: https://unomi.apache.org/blog/introducing-apache-unomi-3.html
-- Multi-tenancy: https://unomi.apache.org/blog/unomi-3-multitenancy.html
-- AI agents: https://unomi.apache.org/blog/unomi-3-ai-agents.html
-- Migrate from 2.x: https://unomi.apache.org/blog/migrating-to-unomi-3.html
+- Unomi 4 intro: https://unomi.apache.org/blog/introducing-apache-unomi-4.html
+- Multi-tenancy: https://unomi.apache.org/blog/unomi-4-multitenancy.html
+- AI agents: https://unomi.apache.org/blog/unomi-4-ai-agents.html
+- Migrate from 2.x: https://unomi.apache.org/blog/migrating-to-unomi-4.html
 
 ## Getting Started (Unomi 4.0)
 

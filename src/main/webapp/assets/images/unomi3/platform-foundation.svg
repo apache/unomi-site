@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 840 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Unomi 4 platform foundation: Java 17, Karaf 4.4, ES9, persistence clustering">
+     aria-label="Unomi 4.0 runtime: Java 17, Karaf 4.4, ES9, persistence clustering">
   <defs>
 <style>
   svg {
@@ -37,8 +37,8 @@
 </style>
   </defs>
   <rect width="840" height="400" rx="20" fill="var(--unomi-bg-soft)"/>
-  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">Platform foundation (3.0 floor)</text>
-  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">The runtime that makes multi-tenancy and ops tooling possible</text>
+  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">Unomi 4.0 runtime</text>
+  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">Java 17, Karaf 4.4, Elasticsearch 9, and persistence-based clustering</text>
 
   <g class="float">
     <rect x="40" y="100" width="175" height="120" rx="14" fill="var(--unomi-primary-light)" stroke="var(--unomi-primary)" stroke-width="2"/>

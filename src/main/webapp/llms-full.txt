@@ -54,7 +54,7 @@
 | Tenant admin | `tenantId:privateApiKey` (basic) | Scopes, rules, schemas, searches |
 | Public apps / trackers | `X-Unomi-Api-Key: <public>` | `/cxs/context.json`, `/cxs/eventcollector` |
 
-Optional **V2 compatibility mode** helps phase older Unomi 2.x clients during upgrades. See https://unomi.apache.org/blog/migrating-to-unomi-3.html
+Optional **V2 compatibility mode** helps phase older Unomi 2.x clients during upgrades. See https://unomi.apache.org/blog/migrating-to-unomi-4.html
 
 ### REST API Endpoints (selected)
 - `/cxs/tenants` - Tenant CRUD and API key management (system admin)
@@ -222,7 +222,7 @@ Guides: https://unomi.apache.org/get-started.html · https://unomi.apache.org/tu
 ## Frequently Asked Questions
 
 - **What is Apache Unomi?** An open source Customer Data Platform (CDP) managed by the Apache Software Foundation.
-- **What is Unomi 4 vs 3.1?** 3.0 is the platform foundation (ES9 client, Karaf 4.4, Java 17+, persistence clustering). 4.0 is the product leap: multi-tenancy/API keys (major platform refactor), OpenSearch, task scheduler, V2 compatibility mode, stronger tests.
+- **What is Unomi 4 vs 3.0?** 3.0 is the platform foundation (ES9 client, Karaf 4.4, Java 17+, persistence clustering). 4.0 is the product leap: multi-tenancy/API keys (major platform refactor), OpenSearch, task scheduler, V2 compatibility mode, stronger tests.
 - **How does Unomi differ from proprietary CDPs?** 100% open source (Apache License 2.0), self-hosted, vendor-neutral, extensible through OSGi plugins.
 - **What storage backends are supported?** Elasticsearch 9.x and OpenSearch 3.x (Unomi 4.0).
 - **Does Unomi have a GraphQL API?** Yes, alongside REST.
@@ -245,7 +245,7 @@ Guides: https://unomi.apache.org/get-started.html · https://unomi.apache.org/tu
 
 - https://unomi.apache.org/blog/
 - https://unomi.apache.org/blog/welcome-to-the-apache-unomi-blog.html
-- https://unomi.apache.org/blog/introducing-apache-unomi-3.html
-- https://unomi.apache.org/blog/unomi-3-multitenancy.html
-- https://unomi.apache.org/blog/unomi-3-ai-agents.html
-- https://unomi.apache.org/blog/migrating-to-unomi-3.html
+- https://unomi.apache.org/blog/introducing-apache-unomi-4.html
+- https://unomi.apache.org/blog/unomi-4-multitenancy.html
+- https://unomi.apache.org/blog/unomi-4-ai-agents.html
+- https://unomi.apache.org/blog/migrating-to-unomi-4.html

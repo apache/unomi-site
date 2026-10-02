@@ -55,21 +55,21 @@ date: 2026-07-15 13:58:00 +0000
 
         <h2 class="h4 mt-5 mb-3">Try it on a running 4.0 server</h2>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>curl -u karaf:karaf http://localhost:8181/cxs/openapi.json | jq '.paths["/tenants/{tenantId}"].get'</code></pre>
-        <p>Compare operation descriptions, response maps, and examples against a 2.x or early-3.0 baseline &mdash; the inventory stays stable; the documentation density is what changes.</p>
+        <p>Compare operation descriptions, response maps, and examples against a 2.x baseline &mdash; the inventory stays stable; the documentation density is what changes.</p>
 
-        <h2 class="h4 mt-5 mb-3">Why publish this with 3.1</h2>
+        <h2 class="h4 mt-5 mb-3">Why this ships with 4.0</h2>
         <p>Unomi 4 kept the REST surface familiar for migrations. Enrichment makes that surface
             <em>discoverable</em>
             for contributors, customer engineers, and LLM / agent tooling that already prefer OpenAPI over tribal knowledge.
             It pairs with the
-            <a href="/blog/unomi-3-manual.html">manual</a>
+            <a href="/blog/unomi-4-manual.html">manual</a>
             and
-            <a href="/blog/unomi-3-request-tracing.html">request tracing</a>
+            <a href="/blog/unomi-4-request-tracing.html">request tracing</a>
             investments: docs you can read, traces you can run, schemas you can generate clients from.</p>
 
         <p class="mt-4">
             <a class="btn btn-primary" href="{{ site.data.unomi.manual.published_latest }}">Unomi 4.0 manual</a>
-            <a class="btn btn-outline-primary ms-2" href="/blog/migrating-to-unomi-3.html">API stability / migrate</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/migrating-to-unomi-4.html">API stability / migrate</a>
             <a class="btn btn-outline-primary ms-2" href="https://issues.apache.org/jira/browse/UNOMI-963">UNOMI-963</a>
         </p>
         <p><a href="/blog/">&larr; All posts</a></p>

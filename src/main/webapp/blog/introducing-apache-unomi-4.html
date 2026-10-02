@@ -10,7 +10,7 @@ date: 2026-06-19 10:17:00 +0000
     <div class="container">
         <p class="section-label text-hero-label">Unomi 4</p>
         <h1>Introducing Apache Unomi 4</h1>
-        <p class="lead">A major Customer Data Platform release &mdash; platform foundation (3.0) and product leap (4.0) as one story.</p>
+        <p class="lead">A major Customer Data Platform release &mdash; runtime, multi-tenancy, and quality in Unomi 4.0.</p>
         {% if page.date %}
         <p class="small text-muted mt-2 mb-0">
             <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
@@ -21,29 +21,28 @@ date: 2026-06-19 10:17:00 +0000
 </section>
 <section class="section">
     <div class="container col-lg-8">
-        <p>Apache Unomi 4 is a <strong>major</strong> open-source CDP release. It spans the <strong>3.0 platform modernization</strong> and the <strong>3.1 product capabilities</strong> operators need for multi-tenant production &mdash; told as one Unomi 4 story.</p>
-        <p>A strong second theme: Unomi 4 is also built for <strong>AI agents</strong> that need real customer memory (retrieve, store, summarize, segment) over a stable open API. See <a href="/blog/unomi-3-ai-agents.html">Unomi 4 for AI agents</a>.</p>
-        <p>Unomi 4 steps up the search client (Elasticsearch 9), the runtime (Karaf 4.4; <strong>Java 17+ is the minimum</strong>, not a headline feature), and &mdash; across 4.0 &mdash; a <strong>platform-wide multi-tenancy refactor</strong>, OpenSearch, cluster-aware tasks, safer validation, and stronger tests.</p>
-        <p>The familiar REST map stays put: <strong>all 119 documented Unomi 2.x OpenAPI paths are still present in 4.0</strong>, with new endpoints added alongside. Optional <strong>V2 compatibility mode</strong> lets you phase authentication changes. Details in <a href="/blog/migrating-to-unomi-3.html">Migrating from Unomi 2.x</a>.</p>
+        <p>Apache Unomi 4.0 is a <strong>major</strong> open-source CDP release. It brings the runtime operators need for production &mdash; Elasticsearch 9, Karaf 4.4, <strong>Java 17+</strong>, and persistence-based clustering &mdash; together with a <strong>platform-wide multi-tenancy refactor</strong>, OpenSearch, cluster-aware tasks, safer validation, and stronger tests.</p>
+        <p>A strong second theme: Unomi 4 is also built for <strong>AI agents</strong> that need real customer memory (retrieve, store, summarize, segment) over a stable open API. See <a href="/blog/unomi-4-ai-agents.html">Unomi 4 for AI agents</a>.</p>
+        <p>The familiar REST map stays put: <strong>all 119 documented Unomi 2.x OpenAPI paths are still present in 4.0</strong>, with new endpoints added alongside. Optional <strong>V2 compatibility mode</strong> lets you phase authentication changes. Details in <a href="/blog/migrating-to-unomi-4.html">Migrating from Unomi 2.x</a>.</p>
 
         <h2 class="h4 mt-5 mb-3">The Unomi 4 journey</h2>
         <img src="/assets/images/unomi3/unomi3-journey.svg" class="img-fluid mb-4" alt="Unomi 4 journey diagram"/>
 <h2 class="h4 mt-5 mb-3">By the numbers (since ~2.7)</h2>
         <ul>
-            <li><strong>Tests outpaced implementation:</strong> test Java LOC ~10k → 53k (~5.3×) while production Java grew ~60k → 101k (~1.7×)</li>
-            <li>Test/impl LOC ratio ~0.17 → <strong>0.52</strong></li>
-            <li><code>@Test</code> annotations ~235 → <strong>1,524</strong></li>
+            <li><strong>Tests outpaced implementation:</strong> test Java ~12k → ~63k while production Java grew ~70k (2.7) → ~118k (4.0), about 1.7×</li>
+            <li>Test/main Java ratio ~0.17 → <strong>~0.53</strong></li>
+            <li>About <strong>1,148</strong> unit <code>@Test</code> methods and <strong>388</strong> integration <code>@Test</code> methods on 4.0</li>
             <li><strong>API stability:</strong> 119 / 119 OpenAPI paths retained in 4.0; +12 additive paths</li>
             <li><strong>Unit tests, not only ITs:</strong> new in-memory <code>PersistenceService</code> harness for fast, independent service tests</li>
         </ul>
-        <p class="small text-muted">Stats from a pre-GA snapshot &mdash; regenerate at 4.0.0 GA before treating numbers as final. Do not cite stale JaCoCo %. Current downloadable stable: v{{ site.data.unomi.latest.stable.version }}.</p>
+        <p class="small text-muted">Figures match <a href="/blog/unomi-4-in-numbers.html">Unomi 4 in numbers</a>. Do not cite stale JaCoCo %. Current downloadable stable: v{{ site.data.unomi.latest.stable.version }}.</p>
 
         <h2 class="h4 mt-5 mb-3">What&rsquo;s in the box</h2>
         <ul>
-            <li><strong>Platform:</strong> ES9 client, Karaf 4.4, persistence clustering, health checks (requires Java 17+)</li>
-            <li><strong>Product:</strong> <a href="/blog/unomi-3-multitenancy.html">multi-tenancy &amp; API keys</a> (major platform refactor), OpenSearch, task scheduler, condition validation, request tracing</li>
+            <li><strong>Runtime:</strong> ES9 client, Karaf 4.4, persistence clustering, health checks (requires Java 17+)</li>
+            <li><strong>Multi-tenancy:</strong> <a href="/blog/unomi-4-multitenancy.html">API keys</a> and tenant isolation, plus OpenSearch, the task scheduler, condition validation, and request tracing</li>
             <li><strong>Upgrade bridge:</strong> V2 compatibility mode for phased 2.x client migration</li>
-            <li><strong>Docs:</strong> migration and platform-upgrade runbooks in the official manual</li>
+            <li><strong>Docs:</strong> migration and upgrade runbooks in the official manual</li>
         </ul>
 
         <h2 class="h4 mt-5 mb-3">Try it</h2>

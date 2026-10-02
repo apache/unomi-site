@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="0 0 840 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
-     aria-label="Grouped bar chart of unit and integration @Test methods from Unomi 1 through 3.1">
+     aria-label="Grouped bar chart of unit and integration @Test methods from Unomi 1 through Unomi 4.0">
   <defs><style>
   svg {
     --unomi-primary: #6d5ce7;

@@ -46,7 +46,7 @@ structured_data: >
                 "name": "What is Apache Unomi 4?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Apache Unomi 4 is a major Customer Data Platform release. Unomi 3.0 modernizes the platform (Elasticsearch 9 client, Karaf 4.4, persistence-based clustering; Java 17+ required). Unomi 4.0 centers on a major multi-tenancy refactoring with API keys, plus OpenSearch persistence, a cluster-aware task scheduler, V2 API compatibility for upgrades from 2.x, and a much larger automated test investment."
+                    "text": "Apache Unomi 4.0 is a major Customer Data Platform release. It requires Java 17+, runs on Karaf 4.4 with an Elasticsearch 9 client and persistence-based clustering, and adds a platform-wide multi-tenancy refactor with API keys, OpenSearch persistence, a cluster-aware task scheduler, V2 API compatibility for upgrades from 2.x, and a much larger automated test investment."
                 }
             },
             {
@@ -75,14 +75,14 @@ structured_data: >
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 mb-5 mb-lg-0">
-                <p class="section-label mb-3 text-hero-link">Introducing Apache Unomi&trade; 3</p>
-                <h1 class="display-title mb-4">Apache Unomi <span class="text-hero-accent">3</span></h1>
+                <p class="section-label mb-3 text-hero-link">Introducing Apache Unomi&trade; 4</p>
+                <h1 class="display-title mb-4">Apache Unomi <span class="text-hero-accent">4</span></h1>
                 <p class="lead mb-4">The major open-source Customer Data Platform release &mdash; true <strong>multi-tenancy</strong>, Elasticsearch 9 / OpenSearch, stable REST, and a leap in quality. Built as real customer memory for modern apps <strong>and AI agents</strong>.</p>
                 <div class="d-flex flex-wrap gap-3">
                     <a class="btn btn-primary btn-lg" href="/get-started.html#quickstart">
                         <i class="bi bi-rocket-takeoff me-2"></i>Get started with Docker
                     </a>
-                    <a class="btn btn-outline-light btn-lg" href="/blog/introducing-apache-unomi-3.html">
+                    <a class="btn btn-outline-light btn-lg" href="/blog/introducing-apache-unomi-4.html">
                         <i class="bi bi-journal-richtext me-2"></i>Read the Unomi 4 story
                     </a>
                 </div>
@@ -218,26 +218,26 @@ structured_data: >
 
 
 <!-- Unomi 4 major release (teaser — details on Blog) -->
-<section class="section" id="unomi-3">
+<section class="section" id="unomi-4">
     <div class="container">
         <div class="row align-items-center g-4 g-lg-5">
             <div class="col-lg-6">
                 <p class="section-label">Apache Unomi 4</p>
                 <h2 class="mb-3">A major CDP release</h2>
-                <p class="text-muted mb-3">Platform foundation in <strong>3.0</strong>, product leap in <strong>4.0</strong>. At the heart of that leap: a <strong>platform-wide multi-tenancy refactor</strong> &mdash; plus OpenSearch, cluster tasks, API stability, and a leap in quality.</p>
+                <p class="text-muted mb-3">Unomi 4.0 is the major release: a modern runtime (Java 17+, Karaf 4.4, Elasticsearch 9, persistence clustering) and a <strong>platform-wide multi-tenancy refactor</strong>, plus OpenSearch, cluster tasks, API stability, and a leap in quality.</p>
                 <ul class="list-unstyled small mb-4">
                     <li class="mb-2"><i class="bi bi-buildings text-primary me-2"></i><strong>Multi-tenancy</strong> &mdash; isolate profiles, events, segments, rules &amp; schemas per tenant</li>
                     <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i><strong>119/119</strong> documented 2.x OpenAPI paths retained</li>
-                    <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i>Tests grew faster than production code (~5.3× vs ~1.7× LOC)</li>
+                    <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i>Tests grew faster than production code (~5× vs ~1.7× LOC)</li>
                 </ul>
                 <div class="d-flex flex-wrap gap-2">
-                    <a class="btn btn-primary" href="/blog/introducing-apache-unomi-3.html">Read the Unomi 4 story</a>
-                    <a class="btn btn-outline-primary" href="/blog/unomi-3-multitenancy.html">Multi-tenancy deep dive</a>
+                    <a class="btn btn-primary" href="/blog/introducing-apache-unomi-4.html">Read the Unomi 4 story</a>
+                    <a class="btn btn-outline-primary" href="/blog/unomi-4-multitenancy.html">Multi-tenancy deep dive</a>
                     <a class="btn btn-outline-primary" href="/download.html">Download v{{ site.data.unomi.latest.stable.version }}</a>
                 </div>
             </div>
             <div class="col-lg-6">
-                <a href="/blog/introducing-apache-unomi-3.html" class="d-block" aria-label="Read Introducing Apache Unomi 4">
+                <a href="/blog/introducing-apache-unomi-4.html" class="d-block" aria-label="Read Introducing Apache Unomi 4">
                     <img src="/assets/images/unomi3/unomi3-journey.svg" class="img-fluid illustration w-100" alt="Apache Unomi 4 journey from 2.x to 4.0"/>
                 </a>
             </div>
@@ -260,12 +260,12 @@ structured_data: >
                     <li class="mb-2"><i class="bi bi-cloud text-primary me-2"></i>Built for SaaS and multi-customer deployments</li>
                 </ul>
                 <div class="d-flex flex-wrap gap-2">
-                    <a class="btn btn-primary" href="/blog/unomi-3-multitenancy.html">How multi-tenancy works</a>
+                    <a class="btn btn-primary" href="/blog/unomi-4-multitenancy.html">How multi-tenancy works</a>
                     <a class="btn btn-outline-primary" href="{{ site.data.unomi.manual.multitenancy }}">Manual &mdash; Multi-tenancy</a>
                 </div>
             </div>
             <div class="col-lg-6 order-lg-1">
-                <a href="/blog/unomi-3-multitenancy.html" class="d-block" aria-label="Read Unomi 4 multi-tenancy post">
+                <a href="/blog/unomi-4-multitenancy.html" class="d-block" aria-label="Read Unomi 4 multi-tenancy post">
                     <img src="/assets/images/unomi3/multitenancy.svg" class="img-fluid" alt="Multi-tenancy: API keys map clients to isolated tenants on Elasticsearch or OpenSearch"/>
                 </a>
             </div>
@@ -282,12 +282,12 @@ structured_data: >
                 <h2 class="mb-3">Also: customer memory for the agentic stack</h2>
                 <p class="text-muted mb-3">Unomi is not an LLM. It is the open-source CDP agents <strong>query and update</strong> &mdash; retrieve context, store observations, summarize profiles, and build segments, with consent built in.</p>
                 <div class="d-flex flex-wrap gap-2">
-                    <a class="btn btn-primary" href="/blog/unomi-3-ai-agents.html">Unomi 4 for AI agents</a>
+                    <a class="btn btn-primary" href="/blog/unomi-4-ai-agents.html">Unomi 4 for AI agents</a>
                     <a class="btn btn-outline-primary" href="/use-cases.html">Explore use cases</a>
                 </div>
             </div>
             <div class="col-lg-6 order-lg-1">
-                <a href="/blog/unomi-3-ai-agents.html" class="d-block" aria-label="Read Unomi 4 for AI agents">
+                <a href="/blog/unomi-4-ai-agents.html" class="d-block" aria-label="Read Unomi 4 for AI agents">
                     <img src="/assets/images/unomi3/ai-agents-unomi.svg" class="img-fluid" alt="AI agents reading and writing customer context through Apache Unomi 4"/>
                 </a>
             </div>
@@ -355,7 +355,7 @@ structured_data: >
                 <h2 class="mb-3">Privacy-first context for AI systems</h2>
                 <p class="text-muted mb-4">Feed agents and models with unified profiles and events &mdash; and write durable customer memory back into the CDP. Open, consent-aware, model-vendor-neutral.</p>
                 <a class="btn btn-outline-primary" href="/use-cases.html">AI &amp; personalization use cases</a>
-                <a class="btn btn-outline-primary ms-2" href="/blog/unomi-3-ai-agents.html">Deep dive on the Blog</a>
+                <a class="btn btn-outline-primary ms-2" href="/blog/unomi-4-ai-agents.html">Deep dive on the Blog</a>
             </div>
         </div>
     </div>
@@ -592,10 +592,10 @@ structured_data: >
                     <i class="bi bi-rocket-takeoff news-icon text-success-var"></i>
                     <div>
                         <strong class="small">Apache Unomi {{ site.data.unomi.latest.stable.version }} released</strong>
-                        <span class="small text-muted">&mdash; Unomi 4 product leap: multi-tenancy, OpenSearch, tasks, V2 compat.</span>
+                        <span class="small text-muted">&mdash; Major release: multi-tenancy, OpenSearch, tasks, V2 compatibility, and the Java 17 / Elasticsearch 9 runtime.</span>
                         <a href="/download.html" class="news-link">Download</a>
                         <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version={{ site.data.unomi.latest.stable.jira_version_id }}" target="_blank" rel="noopener" class="news-link">Release notes</a>
-                        <a href="/blog/introducing-apache-unomi-3.html" class="news-link">Unomi 4 story</a>
+                        <a href="/blog/introducing-apache-unomi-4.html" class="news-link">Unomi 4 story</a>
                     </div>
                 </div>
 
@@ -614,7 +614,7 @@ structured_data: >
                     <i class="bi bi-rocket-takeoff news-icon"></i>
                     <div>
                         <strong class="small">Apache Unomi 3.0.0 released</strong>
-                        <span class="small text-muted">&mdash; Platform foundation: Karaf 4.4, Elasticsearch 9 client, persistence clustering.</span>
+                        <span class="small text-muted">&mdash; Karaf 4.4, Elasticsearch 9 client, and persistence clustering. Superseded by Unomi 4.0.</span>
                         <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12355172" target="_blank" rel="noopener" class="news-link">Release notes</a>
                     </div>
                 </div>
@@ -663,7 +663,7 @@ structured_data: >
                     <i class="bi bi-camera-video news-icon"></i>
                     <div>
                         <strong class="small">OpenSearch contribution presentation</strong>
-                        <span class="small text-muted">&mdash; OpenSearch persistence &mdash; part of the Unomi 4.0 product leap (see Blog).</span>
+                        <span class="small text-muted">&mdash; OpenSearch persistence, now part of Unomi 4.0 (see Blog).</span>
                         <a href="/community/events/index.html#opensearch-2025" class="news-link">Watch</a>
                     </div>
                 </div>

@@ -54,7 +54,7 @@ date: 2026-07-05 13:23:00 +0000
         <h2 class="h4 mt-5 mb-3">Auth: tenant admin, not the public key</h2>
         <p>Tracing is restricted to <strong>ADMINISTRATOR</strong> / <strong>TENANT_ADMINISTRATOR</strong>.
             In practice that means authenticate with the tenant <strong>private</strong> API key (Basic <code>tenantId:privateApiKey</code>), not the public track key.</p>
-        <p>We verified the following against a local <strong>Unomi 4.0.0-SNAPSHOT</strong> (HTTPS). Public-key + <code>explain=true</code> returned HTTP <strong>403</strong> with:</p>
+        <p>We verified the following against a local <strong>Unomi 4.0</strong> server (HTTPS). Public-key + <code>explain=true</code> returned HTTP <strong>403</strong> with:</p>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>{"errorMessage":"Insufficient privileges to access tracing information"}</code></pre>
         <p>Integration coverage: <code>EventsCollectorIT#testEventsCollectorWithExplain</code> and <code>#testEventsCollectorWithExplainUnauthorized</code>.</p>
 
@@ -191,8 +191,8 @@ EOF</code></pre>
 
         <p class="mt-4">
             <a class="btn btn-primary" href="{{ site.data.unomi.manual.published_latest }}#_request_tracing_explain">Manual: explain / tracing</a>
-            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-3-manual.html">Manual improvements</a>
-            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-3-task-scheduler.html">Task scheduler</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-4-manual.html">Manual improvements</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-4-task-scheduler.html">Task scheduler</a>
         </p>
         <p><a href="/blog/">&larr; All posts</a></p>
     </div>

@@ -195,77 +195,77 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://unomi.apache.org/blog/introducing-apache-unomi-3.html</loc>
+    <loc>https://unomi.apache.org/blog/introducing-apache-unomi-4.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://unomi.apache.org/blog/unomi-3-ai-agents.html</loc>
+    <loc>https://unomi.apache.org/blog/unomi-4-ai-agents.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://unomi.apache.org/blog/migrating-to-unomi-3.html</loc>
+    <loc>https://unomi.apache.org/blog/migrating-to-unomi-4.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://unomi.apache.org/blog/unomi-3-multitenancy.html</loc>
+    <loc>https://unomi.apache.org/blog/unomi-4-multitenancy.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://unomi.apache.org/blog/unomi-3-it-execution.html</loc>
+    <loc>https://unomi.apache.org/blog/unomi-4-it-execution.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://unomi.apache.org/blog/unomi-3-manual.html</loc>
+    <loc>https://unomi.apache.org/blog/unomi-4-manual.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://unomi.apache.org/blog/unomi-3-build-sh.html</loc>
+    <loc>https://unomi.apache.org/blog/unomi-4-build-sh.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://unomi.apache.org/blog/unomi-3-platform-foundation.html</loc>
+    <loc>https://unomi.apache.org/blog/unomi-4-runtime.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://unomi.apache.org/blog/unomi-3-opensearch.html</loc>
+    <loc>https://unomi.apache.org/blog/unomi-4-opensearch.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://unomi.apache.org/blog/unomi-3-unit-testing-harness.html</loc>
+    <loc>https://unomi.apache.org/blog/unomi-4-unit-testing-harness.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-  <url>
-    <loc>https://unomi.apache.org/blog/unomi-3-in-numbers.html</loc>
+    <loc>https://unomi.apache.org/blog/unomi-4-in-numbers.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
-    <loc>https://unomi.apache.org/blog/unomi-3-shell-commands.html</loc>
+  <url>
+    <loc>https://unomi.apache.org/blog/unomi-4-shell-commands.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://unomi.apache.org/blog/unomi-3-task-scheduler.html</loc>
+    <loc>https://unomi.apache.org/blog/unomi-4-task-scheduler.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://unomi.apache.org/blog/unomi-3-request-tracing.html</loc>
+    <loc>https://unomi.apache.org/blog/unomi-4-request-tracing.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://unomi.apache.org/blog/unomi-3-openapi-enrichment.html</loc>
+    <loc>https://unomi.apache.org/blog/unomi-4-openapi-enrichment.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
