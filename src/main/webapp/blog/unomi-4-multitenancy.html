@@ -1,0 +1,61 @@
+---
+title: Multi-tenancy in Apache Unomi 4
+description: "Unomi 4 multi-tenancy was a major platform refactor — tenant isolation for profiles, events, segments, rules, and schemas with public and private API keys."
+keywords: "Unomi 4 multi-tenancy, tenant API keys, SaaS CDP, Apache Unomi tenants, multi-tenant CDP"
+layout: default
+date: 2026-06-21 11:24:00 +0000
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Unomi 4 &middot; Multi-tenancy</p>
+        <h1>Multi-tenancy in Apache Unomi 4</h1>
+        <p class="lead">A major platform refactoring &mdash; not a bolt-on flag. Isolate customer spaces with API keys on one cluster.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
+    </div>
+</section>
+
+<section class="section">
+    <div class="container col-lg-8">
+        <p>Among the Unomi 4.0 changes, <strong>multi-tenancy stands out for scope and effort</strong>. The work cut across persistence, APIs, security, schemas, rules, segments, events, and operations so a single Unomi cluster can host many isolated tenants.</p>
+        <p>This is foundational for SaaS control planes and agencies running many customer spaces &mdash; without bolting on a separate Unomi per customer.</p>
+
+        <img src="/assets/images/unomi3/multitenancy.svg" class="img-fluid my-4" alt="Multi-tenancy architecture with API keys and isolated tenants"/>
+
+        <h2 class="h4 mt-4 mb-3">What is isolated</h2>
+        <ul>
+            <li>Profiles, events, and sessions</li>
+            <li>Segments, scores, and rules</li>
+            <li>Schemas and definitions scoped per tenant</li>
+        </ul>
+
+        <h2 class="h4 mt-4 mb-3">How access works</h2>
+        <ul>
+            <li><strong>Public and private API keys</strong> resolve requests to a tenant</li>
+            <li>Administrative vs public traffic can be separated by key type</li>
+            <li>Native 4.0 auth expects tenant API keys; <a href="/blog/migrating-to-unomi-4.html">V2 compatibility mode</a> helps phase older clients</li>
+        </ul>
+
+        <h2 class="h4 mt-4 mb-3">Operations</h2>
+        <ul>
+            <li>Tenant usage metrics for upstream control planes</li>
+            <li>Event retention / purge APIs for lifecycle management</li>
+            <li>Works with Elasticsearch or OpenSearch persistence</li>
+        </ul>
+
+        <h2 class="h4 mt-5 mb-3">Why it matters</h2>
+        <p>Multi-tenancy was one of the largest engineering investments in Unomi 4 &mdash; a deep refactor so isolation is correct end-to-end, not a superficial namespace prefix. Pair it with the rest of the <a href="/blog/introducing-apache-unomi-4.html">Unomi 4 story</a> for the platform and quality context.</p>
+
+        <p class="mt-4">
+            <a class="btn btn-primary" href="https://unomi.apache.org/manual/latest/index.html">Open the manual</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/introducing-apache-unomi-4.html">Unomi 4 intro</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/migrating-to-unomi-4.html">Migration guide</a>
+        </p>
+        <p><a href="/blog/">&larr; All posts</a></p>
+    </div>
+</section>

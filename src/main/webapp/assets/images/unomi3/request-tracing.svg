@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 840 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Unomi request tracing: explain=true returns a requestTracing tree">
+  <defs>
+<style>
+  svg {
+    --unomi-primary: #6d5ce7;
+    --unomi-primary-dark: #5a48c9;
+    --unomi-primary-light: #ede9fe;
+    --unomi-primary-subtle: #f5f3ff;
+    --unomi-accent: #00cec9;
+    --unomi-hero-accent: #a78bfa;
+    --unomi-text: #1e293b;
+    --unomi-text-muted: #64748b;
+    --unomi-white: #ffffff;
+    --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0;
+    --unomi-success: #059669;
+    --unomi-success-bg: #ecfdf5;
+    --unomi-amber: #d97706;
+    --unomi-amber-bg: #fef3c7;
+    --unomi-info: #2563eb;
+    --unomi-info-bg: #dbeafe;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes dash-flow { to { stroke-dashoffset: -24; } }
+  @keyframes pulse-soft { 0%,100%{opacity:.55} 50%{opacity:.9} }
+  @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+  @keyframes glow { 0%,100%{filter:drop-shadow(0 0 4px rgba(109,92,231,.35))} 50%{filter:drop-shadow(0 0 10px rgba(109,92,231,.55))} }
+  .flow { stroke-dasharray: 6 5; animation: dash-flow 1.6s linear infinite; }
+  .pulse { animation: pulse-soft 3s ease-in-out infinite; }
+  .float { animation: float-y 3.2s ease-in-out infinite; }
+  .glow { animation: glow 3s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .flow,.pulse,.float,.glow { animation: none !important; }
+  }
+</style>
+  </defs>
+  <rect width="840" height="400" rx="20" fill="var(--unomi-bg-soft)"/>
+  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">Request tracing with explain=true</text>
+  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">Admin / tenant-admin only | tree of conditions, rules, and actions</text>
+
+  <rect x="40" y="95" width="280" height="260" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-border)" stroke-width="2"/>
+  <text x="60" y="128" fill="var(--unomi-primary-dark)" font-size="13" font-weight="700">Your request</text>
+  <text x="60" y="156" fill="var(--unomi-text)" font-size="12">POST /cxs/context.json</text>
+  <text x="60" y="178" fill="var(--unomi-text)" font-size="12">POST /cxs/eventcollector</text>
+  <text x="60" y="210" fill="var(--unomi-accent)" font-size="12" font-weight="700">?explain=true</text>
+  <text x="60" y="242" fill="var(--unomi-text-muted)" font-size="11">Auth: tenantId:privateKey</text>
+  <text x="60" y="266" fill="var(--unomi-text-muted)" font-size="11">(Basic) TENANT_ADMIN</text>
+  <text x="60" y="300" fill="var(--unomi-amber)" font-size="11" font-weight="600">Public key alone =&gt; 403</text>
+  <text x="60" y="324" fill="var(--unomi-text-muted)" font-size="11">UNOMI-873</text>
+
+  <path d="M340 220 H400" stroke="var(--unomi-primary)" stroke-width="3" class="flow"/>
+
+  <rect x="410" y="95" width="390" height="260" rx="16" fill="#0f172a"/>
+  <text x="430" y="128" fill="#94a3b8" font-size="12" font-weight="700">response.requestTracing</text>
+  <text x="430" y="160" fill="#34d399" font-size="12">event-collection</text>
+  <text x="450" y="186" fill="#a78bfa" font-size="11">condition-evaluation</text>
+  <text x="470" y="210" fill="#94a3b8" font-size="11">property | boolean</text>
+  <text x="450" y="240" fill="#a78bfa" font-size="11">action-execution</text>
+  <text x="470" y="264" fill="#94a3b8" font-size="11">increment-property</text>
+  <text x="470" y="288" fill="#94a3b8" font-size="11">evaluate-segments</text>
+  <text x="430" y="322" fill="#64748b" font-size="11">startTime / endTime / traces[]</text>
+
+</svg>

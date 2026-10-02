@@ -1,0 +1,44 @@
+---
+title: Welcome to the Apache Unomi Blog
+description: "The Apache Unomi project launches an official blog — Unomi 4 deep dives, AI/CDP guidance, and community updates."
+keywords: "Apache Unomi blog, Unomi 4, community"
+layout: default
+date: 2026-06-17 09:10:00 +0000
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Blog</p>
+        <h1>Welcome to the Apache Unomi Blog</h1>
+        <p class="lead">Longer-form writing for Unomi 4, AI/CDP builders, and the community.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
+    </div>
+</section>
+<section class="section">
+    <div class="container col-lg-8">
+        <p>Apache Unomi has long shared news through the homepage, <a href="/community/events/index.html">events &amp; talks</a>, mailing lists, and release announcements. With <strong>Unomi 4</strong> &mdash; a major CDP release with a modern runtime, multi-tenancy, OpenSearch, and a stronger role as customer memory for <strong>AI agents</strong> &mdash; we want a home for longer-form writing.</p>
+        <p>This Blog is that home.</p>
+        <h2 class="h4 mt-5 mb-3">What you will find here</h2>
+        <ul>
+            <li><strong>Unomi 4</strong> &mdash; what changed since 2.x, and what it means for operators and builders</li>
+            <li><strong>AI &amp; CDP</strong> &mdash; using Unomi as privacy-first context for agents and personalization</li>
+            <li><strong>Upgrades &amp; API stability</strong> &mdash; including V2 compatibility mode</li>
+            <li><strong>Community</strong> &mdash; contributors, meetings, and how to get involved</li>
+        </ul>
+        <h2 class="h4 mt-5 mb-3">Looking back (without rewriting history)</h2>
+        <p>We are <strong>not</strong> republishing every past meetup or release as a Blog article. Those already live on the <a href="/">homepage News</a>, <a href="/community/events/index.html">events</a>, and <a href="/resources.html">resources</a> pages. Where the past helps explain Unomi 4, we may write selective retrospectives that end with what to do <em>today</em>.</p>
+        <h2 class="h4 mt-5 mb-3">Start here</h2>
+        <ol>
+            <li><a href="/blog/introducing-apache-unomi-4.html">Introducing Apache Unomi 4</a> &mdash; the major release story</li>
+            <li><a href="/blog/unomi-4-ai-agents.html">Unomi 4 for AI agents</a> &mdash; customer memory for the agentic stack</li>
+            <li><a href="/blog/migrating-to-unomi-4.html">Migrating from Unomi 2.x</a> &mdash; API stability &amp; V2 compatibility</li>
+        </ol>
+        <p class="mt-5">Apache Unomi is community-built software of the Apache Software Foundation. Subscribe to <a href="mailto:users-subscribe@unomi.apache.org">users@</a>, join <a href="/community/index.html#slack-access">#unomi on ASF Slack</a>, and watch <a href="https://issues.apache.org/jira/browse/UNOMI">JIRA</a>.</p>
+        <p><a href="/blog/">&larr; All posts</a></p>
+    </div>
+</section>

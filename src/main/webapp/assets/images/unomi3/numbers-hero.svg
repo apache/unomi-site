@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 840 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Unomi 4 in numbers: lines of code, tests, and contributors at a glance">
+  <defs><style>
+  svg {
+    --unomi-primary: #6d5ce7;
+    --unomi-primary-dark: #5a48c9;
+    --unomi-primary-light: #ede9fe;
+    --unomi-primary-subtle: #f5f3ff;
+    --unomi-accent: #00cec9;
+    --unomi-accent-dark: #0d9488;
+    --unomi-hero-accent: #a78bfa;
+    --unomi-text: #1e293b;
+    --unomi-text-muted: #64748b;
+    --unomi-white: #ffffff;
+    --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0;
+    --unomi-success: #059669;
+    --unomi-success-bg: #ecfdf5;
+    --unomi-amber: #d97706;
+    --unomi-amber-bg: #fef3c7;
+    --unomi-info: #2563eb;
+    --unomi-info-bg: #dbeafe;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes grow-bar { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes dash-flow { to { stroke-dashoffset: -20; } }
+  @keyframes pulse-dot { 0%,100%{opacity:.7;r:5} 50%{opacity:1;r:7} }
+  .bar { transform-box: fill-box; transform-origin: bottom; animation: grow-bar 0.9s ease-out both; }
+  .fade { animation: fade-up 0.7s ease-out both; }
+  .flow { stroke-dasharray: 5 4; animation: dash-flow 1.8s linear infinite; }
+  .dot { animation: pulse-dot 2.4s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .bar,.fade,.flow,.dot { animation: none !important; }
+  }
+</style>
+    <linearGradient id="heroGrad" x1="0" y1="0" x2="840" y2="400" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f5f3ff"/><stop offset="1" stop-color="#ecfeff"/>
+    </linearGradient>
+  </defs>
+  <rect width="840" height="400" rx="20" fill="url(#heroGrad)"/>
+  <text class="fade" x="40" y="42" fill="var(--unomi-text)" font-size="20" font-weight="700">Unomi 4 in numbers</text>
+  <text class="fade" style="animation-delay:.1s" x="40" y="66" fill="var(--unomi-text-muted)" font-size="13">From 1.x to 4.0 - codebase, tests, and community growth</text>
+
+  <g class="fade" style="animation-delay:.15s">
+    <rect x="40" y="100" width="175" height="150" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-primary)" stroke-width="2"/>
+    <text x="127" y="145" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="12" font-weight="600">JAVA LOC</text>
+    <text x="127" y="190" text-anchor="middle" fill="var(--unomi-primary-dark)" font-size="36" font-weight="800">181k</text>
+    <text x="127" y="220" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">Unomi 4.0 (was 54k in 1.x)</text>
+  </g>
+  <g class="fade" style="animation-delay:.25s">
+    <rect x="235" y="100" width="175" height="150" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-accent)" stroke-width="2"/>
+    <text x="322" y="145" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="12" font-weight="600">UNIT @Test</text>
+    <text x="322" y="190" text-anchor="middle" fill="var(--unomi-accent-dark)" font-size="36" font-weight="800">1,148</text>
+    <text x="322" y="220" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">up from 34 in Unomi 1.x</text>
+  </g>
+  <g class="fade" style="animation-delay:.35s">
+    <rect x="430" y="100" width="175" height="150" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-info)" stroke-width="2"/>
+    <text x="517" y="145" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="12" font-weight="600">IT @Test</text>
+    <text x="517" y="190" text-anchor="middle" fill="var(--unomi-info)" font-size="36" font-weight="800">388</text>
+    <text x="517" y="220" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">up from 128 in Unomi 1.x</text>
+  </g>
+  <g class="fade" style="animation-delay:.45s">
+    <rect x="625" y="100" width="175" height="150" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-success)" stroke-width="2"/>
+    <text x="712" y="145" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="12" font-weight="600">CONTRIBUTORS</text>
+    <text x="712" y="190" text-anchor="middle" fill="var(--unomi-success)" font-size="36" font-weight="800">77</text>
+    <text x="712" y="220" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">cumulative unique authors</text>
+  </g>
+
+  <rect x="40" y="280" width="760" height="90" rx="14" fill="var(--unomi-white)" stroke="var(--unomi-border)" stroke-width="2"/>
+  <text x="60" y="318" fill="var(--unomi-primary-dark)" font-size="14" font-weight="700">The story in one line</text>
+  <text x="60" y="344" fill="var(--unomi-text)" font-size="13">Production code nearly tripled since 1.x - test code grew ~7x, with the steepest climb in Unomi 4.0.</text>
+</svg>

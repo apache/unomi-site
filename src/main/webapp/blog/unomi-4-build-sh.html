@@ -1,0 +1,86 @@
+---
+title: One entry point — Unomi 4 build.sh
+description: "How Apache Unomi 4 replaced scattered build scripts with a single build.sh — preflight checks, CI mode, integration tests, deploy, and Windows build.ps1 parity."
+keywords: "Unomi build.sh, Apache Unomi developer experience, UNOMI-887, Maven CI, OpenSearch integration tests"
+layout: default
+date: 2026-07-11 11:44:00 +0000
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Unomi 4 &middot; Developer experience</p>
+        <h1>One entry point: <code>build.sh</code></h1>
+        <p class="lead">Preflight, build, test, and deploy &mdash; the same script locally and on GitHub Actions.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
+    </div>
+</section>
+
+<section class="section">
+    <div class="container col-lg-8">
+        <p>Before Unomi 4, contributors juggled several ad-hoc scripts (<code>buildAndRun.sh</code>, <code>compileDeploy.sh</code>, and friends).
+            <a href="https://issues.apache.org/jira/browse/UNOMI-887">UNOMI-887</a>
+            /
+            <a href="https://github.com/apache/unomi/pull/737">#737</a>
+            folded those workflows into a single
+            <strong><code>./build.sh</code></strong>
+            at the repository root &mdash; with clearer errors, colorized output, and flags that match how people actually work.</p>
+
+        <img src="/assets/images/unomi3/build-sh.svg" class="img-fluid my-4" alt="build.sh as one hub for preflight, build, test, and deploy"/>
+
+        <h2 class="h4 mt-4 mb-3">What it replaced</h2>
+        <p>Legacy one-off scripts for &ldquo;build and run,&rdquo; &ldquo;build without tests,&rdquo; packaging, and deploy were removed in favor of one maintained entry point.
+            The PowerShell twin
+            <code>build.ps1</code>
+            tracks the same flags for Windows contributors.</p>
+
+        <h2 class="h4 mt-5 mb-3">What you get</h2>
+        <ul>
+            <li><strong>Preflight</strong> &mdash; Java, Maven, GraphViz; memory/disk heuristics; ports for debug sessions; fail early with readable messages</li>
+            <li><strong>Build flexibility</strong> &mdash; skip tests, OpenSearch vs Elasticsearch, named distributions, offline / Maven debug, optional Javadoc gate</li>
+            <li><strong>Integration tests</strong> &mdash; <code>--integration-tests</code>, <code>--single-test</code>, IT debug/suspend, keep container, stream search logs when needed, memory sampler</li>
+            <li><strong>Run &amp; deploy</strong> &mdash; <code>--deploy --karaf-home</code>, Karaf debug ports, <code>--auto-start</code> for search engines, <code>--no-karaf</code> for package-only builds</li>
+            <li><strong>CI mode</strong> &mdash; <code>--ci</code> is non-interactive, batch Maven (<code>-B -ntp</code>), no Karaf side-trips; GitHub Actions calls the same script as you do locally (<a href="https://github.com/apache/unomi/pull/764">#764</a>)</li>
+            <li><strong>UX details</strong> &mdash; section headers, traps with line/context on failure, <code>NO_COLOR</code> respected, optional <code>--log-file</code> tee</li>
+        </ul>
+
+        <h2 class="h4 mt-5 mb-3">Try it</h2>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>./build.sh --help
+
+# Default install
+./build.sh
+
+# Match GitHub Actions shape
+./build.sh --ci
+
+# Full IT matrix flavors
+./build.sh --integration-tests
+./build.sh --integration-tests --use-opensearch
+
+# One flaky test under a debugger
+./build.sh --integration-tests \
+  --single-test org.apache.unomi.itests.graphql.GraphQLEventIT \
+  --it-debug --it-debug-suspend
+
+# Deploy KAR into an existing Karaf
+./build.sh --deploy --karaf-home ~/apache-karaf</code></pre>
+
+        <h2 class="h4 mt-5 mb-3">Why it matters</h2>
+        <p>Contributor friction kills review velocity. One documented command that validates the environment, builds the right distribution, and runs the same gates as CI means less &ldquo;works on my machine&rdquo; archaeology &mdash; and pairs with the
+            <a href="/blog/unomi-4-it-execution.html">clearer IT console</a>
+            and
+            <a href="/blog/unomi-4-manual.html">manual</a>
+            investments in Unomi 4.</p>
+
+        <p class="mt-4">
+            <a class="btn btn-primary" href="https://github.com/apache/unomi/blob/master/build.sh">View build.sh on GitHub</a>
+            <a class="btn btn-outline-primary ms-2" href="{{ site.data.unomi.manual.published_latest }}#_using_the_build_script">Manual: using the build script</a>
+            <a class="btn btn-outline-primary ms-2" href="/contribute/testing.html">Contribute &middot; Testing</a>
+        </p>
+        <p><a href="/blog/">&larr; All posts</a></p>
+    </div>
+</section>

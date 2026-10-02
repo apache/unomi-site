@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 840 400" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Unomi 4.0 cluster-aware task scheduler with REST and shell">
+  <defs>
+<style>
+  svg {
+    --unomi-primary: #6d5ce7;
+    --unomi-primary-dark: #5a48c9;
+    --unomi-primary-light: #ede9fe;
+    --unomi-primary-subtle: #f5f3ff;
+    --unomi-accent: #00cec9;
+    --unomi-hero-accent: #a78bfa;
+    --unomi-text: #1e293b;
+    --unomi-text-muted: #64748b;
+    --unomi-white: #ffffff;
+    --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0;
+    --unomi-success: #059669;
+    --unomi-success-bg: #ecfdf5;
+    --unomi-amber: #d97706;
+    --unomi-amber-bg: #fef3c7;
+    --unomi-info: #2563eb;
+    --unomi-info-bg: #dbeafe;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes dash-flow { to { stroke-dashoffset: -24; } }
+  @keyframes pulse-soft { 0%,100%{opacity:.55} 50%{opacity:.9} }
+  @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+  @keyframes glow { 0%,100%{filter:drop-shadow(0 0 4px rgba(109,92,231,.35))} 50%{filter:drop-shadow(0 0 10px rgba(109,92,231,.55))} }
+  .flow { stroke-dasharray: 6 5; animation: dash-flow 1.6s linear infinite; }
+  .pulse { animation: pulse-soft 3s ease-in-out infinite; }
+  .float { animation: float-y 3.2s ease-in-out infinite; }
+  .glow { animation: glow 3s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .flow,.pulse,.float,.glow { animation: none !important; }
+  }
+</style>
+  </defs>
+  <rect width="840" height="400" rx="20" fill="var(--unomi-bg-soft)"/>
+  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">Cluster-aware task scheduler</text>
+  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">Durable tasks, locks, retry and resume across Unomi nodes</text>
+
+  <rect x="300" y="95" width="240" height="70" rx="14" fill="var(--unomi-primary)" class="glow"/>
+  <text x="420" y="125" text-anchor="middle" fill="#fff" font-size="15" font-weight="700">SchedulerService</text>
+  <text x="420" y="148" text-anchor="middle" fill="rgba(255,255,255,.85)" font-size="11">persisted tasks + locks</text>
+
+  <g class="float">
+    <rect x="40" y="200" width="230" height="150" rx="14" fill="var(--unomi-info-bg)" stroke="var(--unomi-info)" stroke-width="2"/>
+    <text x="155" y="235" text-anchor="middle" fill="var(--unomi-info)" font-size="13" font-weight="700">REST /cxs/tasks</text>
+    <text x="155" y="262" text-anchor="middle" fill="var(--unomi-text)" font-size="11">list | show | cancel</text>
+    <text x="155" y="286" text-anchor="middle" fill="var(--unomi-text)" font-size="11">retry | resume</text>
+    <text x="155" y="318" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">admin / tenant-admin</text>
+  </g>
+  <g class="float" style="animation-delay:.3s">
+    <rect x="305" y="200" width="230" height="150" rx="14" fill="var(--unomi-amber-bg)" stroke="var(--unomi-amber)" stroke-width="2"/>
+    <text x="420" y="235" text-anchor="middle" fill="var(--unomi-amber)" font-size="13" font-weight="700">Built-in types</text>
+    <text x="420" y="262" text-anchor="middle" fill="var(--unomi-text)" font-size="11">profile-purge</text>
+    <text x="420" y="286" text-anchor="middle" fill="var(--unomi-text)" font-size="11">segment-date-recalculation</text>
+    <text x="420" y="310" text-anchor="middle" fill="var(--unomi-text)" font-size="11">rules-statistics-refresh</text>
+    <text x="420" y="334" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">cache-refresh-* | task-purge</text>
+  </g>
+  <g class="float" style="animation-delay:.6s">
+    <rect x="570" y="200" width="230" height="150" rx="14" fill="var(--unomi-success-bg)" stroke="var(--unomi-success)" stroke-width="2"/>
+    <text x="685" y="235" text-anchor="middle" fill="var(--unomi-success)" font-size="13" font-weight="700">Karaf shell</text>
+    <text x="685" y="262" text-anchor="middle" fill="var(--unomi-text)" font-size="11">unomi:task-list</text>
+    <text x="685" y="286" text-anchor="middle" fill="var(--unomi-text)" font-size="11">task-show | task-retry</text>
+    <text x="685" y="310" text-anchor="middle" fill="var(--unomi-text)" font-size="11">task-cancel | task-purge</text>
+    <text x="685" y="334" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">task-executor</text>
+  </g>
+
+</svg>

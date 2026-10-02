@@ -3,7 +3,6 @@ title: Integrations &amp; Ecosystem
 description: "Discover products built on Apache Unomi, extensions, connectors, and companies offering commercial support for the open source Customer Data Platform."
 keywords: "Apache Unomi integrations, Unomi connectors, Groovy actions, custom plugins, Jahia jExperience, Dropsolid, Inoyu SaaS, CDP integrations, Unomi plugins, commercial support"
 layout: default
-mermaid: true
 structured_data: >
     <script type="application/ld+json">
     {
@@ -50,7 +49,7 @@ structured_data: >
                     <p class="small text-muted mb-3">Jahia is the initial contributor of Apache Unomi, using it as the core engine for their Customer Data Platform (jExperience) and Digital Experience Platform with native GDPR support.</p>
                     <blockquote class="small fst-italic text-muted border-start border-3 border-primary ps-3 mb-3">
                         &ldquo;Apache Unomi is a very important foundation of our products. We love Apache Unomi and are deeply committed to helping our customers succeed with it.&rdquo;
-                        <footer class="mt-1 fw-semibold" class="quote-attribution">Serge Huber, Jahia CTO</footer>
+                        <footer class="mt-1 fw-semibold quote-attribution">&mdash; Serge Huber (Inoyu)</footer>
                     </blockquote>
                     <a href="https://www.jahia.com" target="_blank" rel="noopener" class="small fw-semibold">www.jahia.com <i class="bi bi-box-arrow-up-right"></i></a>
                 </div>
@@ -107,31 +106,7 @@ structured_data: >
         <!-- Architecture overview -->
         <div class="row justify-content-center mb-5">
             <div class="col-lg-10">
-                <pre class="mermaid">
-graph LR
-    subgraph Extend["Extend Unomi"]
-        GROOVY["Groovy Actions"]
-        PLUGIN["Java Plugins"]
-    end
-
-    subgraph Core["Apache Unomi"]
-        API2["Plugin API"]
-        ENGINE["Core Engine"]
-    end
-
-    subgraph Extensions["Products & Services"]
-        UI["UI"]
-        SAAS["SaaS"]
-        ANALYTICS["Analytics"]
-    end
-
-    GROOVY --> API2
-    PLUGIN --> API2
-    API2 --> ENGINE
-    ENGINE --> UI
-    ENGINE --> SAAS
-    ENGINE --> ANALYTICS
-                </pre>
+                <img src="/assets/images/unomi3/extensions-architecture.svg" class="img-fluid" alt="Extend Unomi with Groovy actions and Java plugins through the plugin API"/>
             </div>
         </div>
 
