@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 900 260" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Groovy actions and Java plugins extend Unomi through the plugin API into products and services">
+  <defs>
+<style>
+  svg {
+    --unomi-primary: #6d5ce7;
+    --unomi-primary-dark: #5a48c9;
+    --unomi-primary-light: #ede9fe;
+    --unomi-accent: #00cec9;
+    --unomi-hero-accent: #a78bfa;
+    --unomi-text: #1e293b;
+    --unomi-text-muted: #64748b;
+    --unomi-white: #ffffff;
+    --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0;
+    --unomi-on-dark: rgba(255,255,255,.85);
+    --unomi-success: #059669;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes dash-flow { to { stroke-dashoffset: -24; } }
+  @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+  .flow { stroke-dasharray: 6 5; animation: dash-flow 1.6s linear infinite; }
+  .float { animation: float-y 3.2s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .flow,.float { animation: none !important; }
+  }
+</style>
+</defs>
+  <rect width="900" height="260" rx="20" fill="var(--unomi-bg-soft)"/>
+  <text x="32" y="36" fill="var(--unomi-text)" font-size="15" font-weight="700">Extend Apache Unomi</text>
+  <text x="32" y="56" fill="var(--unomi-text-muted)" font-size="12">Groovy / Java plugins → Plugin API → core → products &amp; services</text>
+
+  <text x="110" y="88" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11" font-weight="600">EXTEND</text>
+  <g class="float">
+    <rect x="40" y="100" width="140" height="48" rx="12" fill="var(--unomi-primary)"/>
+    <text x="110" y="130" text-anchor="middle" fill="var(--unomi-white)" font-size="12" font-weight="600">Groovy Actions</text>
+  </g>
+  <g class="float" style="animation-delay:.2s">
+    <rect x="40" y="164" width="140" height="48" rx="12" fill="var(--unomi-primary-dark)"/>
+    <text x="110" y="194" text-anchor="middle" fill="var(--unomi-white)" font-size="12" font-weight="600">Java Plugins</text>
+  </g>
+
+  <line x1="190" y1="156" x2="250" y2="156" stroke="var(--unomi-primary)" stroke-width="2" class="flow"/>
+
+  <text x="360" y="88" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11" font-weight="600">APACHE UNOMI</text>
+  <g class="float" style="animation-delay:.25s">
+    <rect x="260" y="100" width="200" height="120" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-primary)" stroke-width="2"/>
+    <text x="360" y="145" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="700">Plugin API</text>
+    <text x="360" y="172" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="12">Core Engine</text>
+    <text x="360" y="196" text-anchor="middle" fill="var(--unomi-accent)" font-size="11" font-weight="600">Profiles · Rules · Events</text>
+  </g>
+
+  <line x1="470" y1="156" x2="530" y2="156" stroke="var(--unomi-accent)" stroke-width="2" class="flow"/>
+
+  <text x="690" y="88" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11" font-weight="600">PRODUCTS &amp; SERVICES</text>
+  <g class="float">
+    <rect x="540" y="100" width="120" height="40" rx="12" fill="var(--unomi-accent)"/>
+    <text x="600" y="125" text-anchor="middle" fill="var(--unomi-white)" font-size="12" font-weight="600">UI</text>
+  </g>
+  <g class="float" style="animation-delay:.2s">
+    <rect x="680" y="100" width="160" height="40" rx="12" fill="var(--unomi-primary)"/>
+    <text x="760" y="125" text-anchor="middle" fill="var(--unomi-white)" font-size="12" font-weight="600">SaaS</text>
+  </g>
+  <g class="float" style="animation-delay:.4s">
+    <rect x="540" y="160" width="300" height="48" rx="12" fill="var(--unomi-primary-dark)"/>
+    <text x="690" y="190" text-anchor="middle" fill="var(--unomi-white)" font-size="12" font-weight="600">Analytics &amp; integrations</text>
+  </g>
+</svg>

@@ -201,6 +201,30 @@ textarea:focus-visible,
     background: var(--unomi-primary-light);
 }
 
+/* Compact "New" indicator on nav items (e.g. Blog) */
+.nav-badge-new {
+    display: inline-block;
+    margin-left: 0.4rem;
+    padding: 0.15em 0.4em;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    vertical-align: 0.12em;
+    text-transform: uppercase;
+    color: var(--unomi-primary-dark);
+    background: var(--unomi-primary-light);
+    border: 1px solid var(--unomi-primary-border-light);
+    border-radius: 0.25rem;
+}
+
+.navbar-nav .nav-link:hover .nav-badge-new,
+.navbar-nav .nav-link.active .nav-badge-new {
+    color: var(--unomi-primary-dark);
+    background: var(--unomi-white);
+    border-color: var(--unomi-primary-border-light);
+}
+
 .dropdown-menu {
     min-width: 16rem;
     border: 1px solid var(--unomi-border);
@@ -333,6 +357,15 @@ textarea:focus-visible,
     background: var(--unomi-hover-light);
     transform: translateY(-1px);
 }
+
+/* Same contrast guards for homepage hero */
+.hero .text-muted,
+.hero .text-secondary,
+.hero .text-body,
+.hero .text-dark {
+    color: var(--unomi-hero-muted) !important;
+}
+
 
 /* ---------- Sections ---------- */
 .section {
@@ -589,14 +622,34 @@ pre, code {
 }
 
 pre {
-    background: var(--unomi-text);
-    color: var(--unomi-border);
+    background: var(--unomi-text);           /* slate-800 */
+    color: #f1f5f9;                          /* high-contrast light slate */
     border-radius: var(--unomi-radius-sm);
     padding: 1.25rem;
     font-size: 0.85rem;
     overflow-x: auto;
     max-width: 100%;             /* prevent breaking out of container on mobile */
     -webkit-overflow-scrolling: touch;
+}
+
+pre code {
+    color: inherit;
+    background: transparent;
+    font-size: inherit;
+    padding: 0;
+}
+
+/* Light surface variant (opt-in) — keep text dark for contrast */
+pre.code-block-light,
+pre.bg-light {
+    background: var(--unomi-bg-soft) !important;
+    color: var(--unomi-text) !important;
+    border: 1px solid var(--unomi-border);
+}
+
+pre.code-block-light code,
+pre.bg-light code {
+    color: inherit;
 }
 
 code {
@@ -789,6 +842,24 @@ code {
 .page-header .lead {
     color: var(--unomi-on-dark-muted);
     max-width: 40rem;
+}
+
+/* Bootstrap muted/body/dark utilities are for light surfaces — force contrast on purple headers */
+.page-header .text-muted,
+.page-header .text-secondary,
+.page-header .text-body,
+.page-header .text-dark {
+    color: var(--unomi-hero-muted) !important;
+}
+
+.page-header a:not(.btn) {
+    color: var(--unomi-hero-link);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.page-header a:not(.btn):hover {
+    color: var(--unomi-white);
 }
 
 /* ---------- Version badges ---------- */

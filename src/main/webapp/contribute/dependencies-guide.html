@@ -55,7 +55,7 @@ layout: default
 
             <h3>Bill of Materials (BOM)</h3>
 
-            <p>Starting with Unomi 3, the project uses a <strong>Bill of Materials (BOM)</strong> to centralize and align all dependency versions across the codebase. The BOM is structured in two layers:</p>
+            <p>Starting with Unomi 4, the project uses a <strong>Bill of Materials (BOM)</strong> to centralize and align all dependency versions across the codebase. The BOM is structured in two layers:</p>
 
             <ul>
                 <li><strong><a target="_blank" rel="noopener" href="https://github.com/apache/unomi/blob/master/bom/pom.xml"><code>unomi-bom</code></a></strong> &mdash; The main BOM. It imports the <a target="_blank" rel="noopener" href="https://karaf.apache.org/">Apache Karaf</a> BOM, the Unomi artifacts BOM (below), and declares managed versions for all third-party dependencies used across the project: Jackson, CXF, Elasticsearch, OpenSearch, Groovy, GraphQL, Jetty, Kafka, JUnit, and many more. Every module in the Unomi build inherits from this BOM, ensuring consistent library versions everywhere.</li>
@@ -69,7 +69,7 @@ layout: default
         &lt;dependency&gt;
             &lt;groupId&gt;org.apache.unomi&lt;/groupId&gt;
             &lt;artifactId&gt;unomi-bom&lt;/artifactId&gt;
-            &lt;version&gt;3.0.1&lt;/version&gt;
+            &lt;version&gt;4.0.0&lt;/version&gt;
             &lt;type&gt;pom&lt;/type&gt;
             &lt;scope&gt;import&lt;/scope&gt;
         &lt;/dependency&gt;

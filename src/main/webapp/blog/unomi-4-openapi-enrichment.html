@@ -1,0 +1,77 @@
+---
+title: Richer OpenAPI docs in Unomi 4.0
+description: "How Unomi 4.0 enriches /cxs/openapi.json from JAX-RS Javadoc — summaries, statuses, examples, and schemas without duplicating Swagger annotations (UNOMI-963)."
+keywords: "Unomi OpenAPI, openapi.json, UNOMI-963, CXF OpenAPI, Javadoc enrichment, Unomi 4.0 REST"
+layout: default
+date: 2026-07-15 13:58:00 +0000
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Unomi 4.0 &middot; Developer experience</p>
+        <h1>Richer OpenAPI docs from Javadoc</h1>
+        <p class="lead">Unomi 4.0 ships an enriched <code>/cxs/openapi.json</code> &mdash; summaries, status codes, examples, and schema notes merged from endpoint Javadoc.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
+    </div>
+</section>
+
+<section class="section">
+    <div class="container col-lg-8">
+        <p>Stock CXF OpenAPI generation is a great skeleton and a thin reading experience: operation ids, parameter names, and &ldquo;default response.&rdquo;
+            Unomi 4.0 (
+            <a href="https://issues.apache.org/jira/browse/UNOMI-963">UNOMI-963</a>)
+            keeps a <strong>single source of truth in Javadoc</strong> and merges richer documentation into the live OpenAPI document at runtime.</p>
+
+        <img src="/assets/images/unomi3/openapi-enrichment.svg" class="img-fluid my-4" alt="Javadoc to enrichment pack to CXF openapi.json pipeline"/>
+
+        <h2 class="h4 mt-4 mb-3">How the pipeline works</h2>
+        <ol>
+            <li><strong>Build time</strong> &mdash; a Maven Mojo scans JAX-RS sources and writes an enrichment pack (<code>openapi-doc.json</code>) into each REST module JAR</li>
+            <li><strong>Runtime</strong> &mdash; Unomi&rsquo;s CXF OpenAPI customizer loads every pack on the classpath and merges summaries, parameters, named statuses, examples, and schema field docs into <code>/cxs/openapi.json</code></li>
+        </ol>
+        <p>Authors document once on the Java method / type; agents, Swagger UI, and humans all see the same result.</p>
+
+        <h2 class="h4 mt-5 mb-3">Capabilities</h2>
+        <ul>
+            <li><strong>Build-time Mojo</strong> &mdash; scan JAX-RS sources; emit enrichment pack JSON into each REST module JAR</li>
+            <li><strong>Multi-pack merge</strong> &mdash; runtime loader merges packs from core <code>rest</code> and extension modules</li>
+            <li><strong>CXF OpenApiFeature customizer</strong> &mdash; merges into live <code>/cxs/openapi.json</code> (and Swagger UI)</li>
+            <li><strong>Operation summary / description</strong> &mdash; from the first Javadoc sentences</li>
+            <li><strong>Parameter docs</strong> &mdash; <code>@param</code> Java names remapped to <code>@PathParam</code> / <code>@QueryParam</code> values</li>
+            <li><strong>Return / success docs</strong> &mdash; from <code>@return</code></li>
+            <li><strong>Named HTTP statuses</strong> &mdash; <code>@api.status</code> for realistic 2xx / 4xx / 5xx (not only &ldquo;default response&rdquo;)</li>
+            <li><strong>Examples</strong> &mdash; <code>@api.example</code> on operations and on schema properties</li>
+            <li><strong>Schema field docs</strong> &mdash; Javadoc on DTO fields (enums as string + values; maps document expected keys)</li>
+            <li><strong>Request / response models</strong> &mdash; enrichment for types used by hot paths (tenants, context, profiles, rules, segments, privacy, extensions, &hellip;)</li>
+            <li><strong>extraSourceRoots</strong> &mdash; document DTOs that live in a sibling <code>api</code> module</li>
+            <li><strong>Servlet endpoints</strong> &mdash; optional enrichment for documented <code>HttpServlet</code> paths (class-level tags)</li>
+            <li><strong>Single source of truth</strong> &mdash; no duplicate Swagger annotation tax on every method</li>
+        </ul>
+
+        <h2 class="h4 mt-5 mb-3">Try it on a running 4.0 server</h2>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>curl -u karaf:karaf http://localhost:8181/cxs/openapi.json | jq '.paths["/tenants/{tenantId}"].get'</code></pre>
+        <p>Compare operation descriptions, response maps, and examples against a 2.x baseline &mdash; the inventory stays stable; the documentation density is what changes.</p>
+
+        <h2 class="h4 mt-5 mb-3">Why this ships with 4.0</h2>
+        <p>Unomi 4 kept the REST surface familiar for migrations. Enrichment makes that surface
+            <em>discoverable</em>
+            for contributors, customer engineers, and LLM / agent tooling that already prefer OpenAPI over tribal knowledge.
+            It pairs with the
+            <a href="/blog/unomi-4-manual.html">manual</a>
+            and
+            <a href="/blog/unomi-4-request-tracing.html">request tracing</a>
+            investments: docs you can read, traces you can run, schemas you can generate clients from.</p>
+
+        <p class="mt-4">
+            <a class="btn btn-primary" href="{{ site.data.unomi.manual.published_latest }}">Unomi 4.0 manual</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/migrating-to-unomi-4.html">API stability / migrate</a>
+            <a class="btn btn-outline-primary ms-2" href="https://issues.apache.org/jira/browse/UNOMI-963">UNOMI-963</a>
+        </p>
+        <p><a href="/blog/">&larr; All posts</a></p>
+    </div>
+</section>

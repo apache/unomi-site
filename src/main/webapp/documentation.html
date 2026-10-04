@@ -15,7 +15,7 @@ structured_data: >
             "@type": "ItemList",
             "name": "Apache Unomi Documentation Resources",
             "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Latest Manual", "url": "https://unomi.apache.org/manual/latest/index.html" },
+                { "@type": "ListItem", "position": 1, "name": "Latest Manual", "url": "https://unomi.apache.org/manual/4_0_x/index.html" },
                 { "@type": "ListItem", "position": 2, "name": "REST API Reference", "url": "https://unomi.apache.org/rest-api-doc/index.html" },
                 { "@type": "ListItem", "position": 3, "name": "Java API (Javadoc)", "url": "https://unomi.apache.org/unomi-api/apidocs/index.html" },
                 { "@type": "ListItem", "position": 4, "name": "Tutorials", "url": "https://unomi.apache.org/tutorial.html" }
@@ -42,15 +42,15 @@ structured_data: >
             <div class="col-md-6 col-lg-3">
                 <a href="/get-started.html" class="feature-card d-block text-decoration-none h-100">
                     <div class="feature-icon"><i class="bi bi-rocket-takeoff"></i></div>
-                    <h3 class="h6 fw-semibold text-dark">Getting Started</h3>
+                    <h3 class="h6 fw-semibold text-dark">Getting Started (Unomi 4.0)</h3>
                     <p class="small text-muted mb-0">New to Unomi? Start here with a quick overview and Docker setup.</p>
                 </a>
             </div>
             <div class="col-md-6 col-lg-3">
-                <a href="https://unomi.apache.org/manual/3_0_x/index.html" class="feature-card d-block text-decoration-none h-100">
+                <a href="{{ site.data.unomi.manual.published_stable }}" class="feature-card d-block text-decoration-none h-100">
                     <div class="feature-icon"><i class="bi bi-book"></i></div>
-                    <h3 class="h6 fw-semibold text-dark">Stable Manual <span class="text-muted fw-normal">3.0.x</span></h3>
-                    <p class="small text-muted mb-0">The comprehensive guide for the current stable release.</p>
+                    <h3 class="h6 fw-semibold text-dark">Stable Manual <span class="text-muted fw-normal">{{ site.data.unomi.latest.stable.version }}</span></h3>
+                    <p class="small text-muted mb-0">Comprehensive guide for the current stable release, including multi-tenancy, OpenSearch, and API keys.</p>
                 </a>
             </div>
             <div class="col-md-6 col-lg-3">
@@ -87,7 +87,7 @@ structured_data: >
                 <div class="feature-card h-100">
                     <div class="feature-icon icon-success"><i class="bi bi-box-seam"></i></div>
                     <h3 class="h6 fw-semibold">Installation &amp; Configuration</h3>
-                    <p class="small text-muted mb-2">Docker setup, manual installation, Elasticsearch configuration, and production deployment.</p>
+                    <p class="small text-muted mb-2">Docker setup, tenants and API keys (4.0), Elasticsearch or OpenSearch, and production deployment.</p>
                     <a href="https://unomi.apache.org/manual/latest/index.html#_quick_start" class="small fw-semibold">Installation guide <i class="bi bi-arrow-right"></i></a>
                 </div>
             </div>
@@ -155,11 +155,11 @@ structured_data: >
                         <span class="badge badge-success me-2"><i class="bi bi-circle-fill me-1 badge-dot-sm"></i> Stable</span>
                         <span class="fw-semibold">Recommended</span>
                     </div>
-                    <h3 class="h5 fw-bold mb-1">Unomi 3.0.x</h3>
+                    <h3 class="h5 fw-bold mb-1">Unomi 4.0.x</h3>
                     <div class="d-flex flex-wrap gap-2 mt-3">
-                        <a href="https://unomi.apache.org/manual/3_0_x/index.html" class="btn btn-primary btn-sm">Read Online</a>
-                        <a href="https://dist.apache.org/repos/dist/release/unomi/3.0.1/unomi-manual-3_0_x.zip" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">HTML (zip)</a>
-                        <a href="https://dist.apache.org/repos/dist/release/unomi/3.0.1/unomi-manual-3_0_x.pdf" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">PDF</a>
+                        <a href="{{ site.data.unomi.manual.published_stable }}" class="btn btn-primary btn-sm">Read Online</a>
+                        <a href="https://dist.apache.org/repos/dist/release/unomi/{{ site.data.unomi.latest.stable.version }}/unomi-manual-{{ site.data.unomi.doc.version }}.zip" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">HTML (zip)</a>
+                        <a href="https://dist.apache.org/repos/dist/release/unomi/{{ site.data.unomi.latest.stable.version }}/unomi-manual-{{ site.data.unomi.doc.version }}.pdf" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">PDF</a>
                     </div>
                 </div>
             </div>
@@ -168,9 +168,9 @@ structured_data: >
                     <div class="d-flex align-items-center mb-2">
                         <span class="badge badge-warning me-2"><i class="bi bi-circle-fill me-1 badge-dot-sm"></i> Development</span>
                     </div>
-                    <h3 class="h5 fw-bold mb-1">Unomi {{ site.data.unomi.latest.development.version }}</h3>
-                    <p class="small text-muted mb-2">In development &mdash; may contain unreleased features.</p>
-                    <a href="https://unomi.apache.org/manual/latest/index.html" class="btn btn-outline-primary btn-sm">Read Online</a>
+                    <h3 class="h5 fw-bold mb-1">Latest / development</h3>
+                    <p class="small text-muted mb-2">Tracks <code>manual/latest</code> (usually the current line). Deep links: <a href="{{ site.data.unomi.manual.whats_new }}">What&rsquo;s new in 4.0</a>.</p>
+                    <a href="{{ site.data.unomi.manual.published_latest }}" class="btn btn-outline-primary btn-sm">Read Online</a>
                 </div>
             </div>
         </div>
@@ -180,7 +180,7 @@ structured_data: >
             <div class="col-lg-10">
                 <details class="mt-3">
                     <summary class="fw-semibold text-primary cursor-pointer">
-                        <i class="bi bi-archive me-1"></i> Archived Versions (2.7.x &ndash; 1.1.x)
+                        <i class="bi bi-archive me-1"></i> Archived Versions (3.0.x &ndash; 1.1.x)
                     </summary>
                     <div class="table-responsive mt-3">
                         <table class="table table-sm align-middle">
@@ -193,6 +193,12 @@ structured_data: >
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <td class="fw-semibold">3.0.x</td>
+                                    <td><a href="https://unomi.apache.org/manual/3_0_x/index.html">Online</a></td>
+                                    <td><a href="https://dist.apache.org/repos/dist/release/unomi/3.0.1/unomi-manual-3_0_x.zip" target="_blank" rel="noopener">Download</a></td>
+                                    <td><a href="https://dist.apache.org/repos/dist/release/unomi/3.0.1/unomi-manual-3_0_x.pdf" target="_blank" rel="noopener">Download</a></td>
+                                </tr>
                                 <tr>
                                     <td class="fw-semibold">2.7.x</td>
                                     <td><a href="https://unomi.apache.org/manual/2_7_x/index.html">Online</a></td>
@@ -346,11 +352,12 @@ structured_data: >
     <div class="container">
         <div class="row g-5">
             <div class="col-lg-6">
-                <h2 class="h4 mb-3"><i class="bi bi-database-gear me-2 text-primary"></i>Elasticsearch Migration</h2>
+                <h2 class="h4 mb-3"><i class="bi bi-database-gear me-2 text-primary"></i>Search Engine Migration</h2>
                 <p class="small text-muted">When migrating between Elasticsearch versions used by Unomi:</p>
                 <ul class="small text-muted">
                     <li class="mb-2"><strong>Standalone:</strong> Copy the data directory and custom <code>elasticsearch.yml</code> settings to the new version.</li>
                     <li class="mb-2"><strong>Cluster:</strong> Use Elasticsearch <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html" target="_blank" rel="noopener">Snapshot and Restore</a> functionality.</li>
+                    <li class="mb-2"><strong>OpenSearch (Unomi 4.0):</strong> Unomi supports OpenSearch 3.x as an alternate backend. See <a href="/blog/migrating-to-unomi-4.html">Migrating to Unomi 4</a> and the <a href="{{ site.data.unomi.manual.es_to_os }}" target="_blank" rel="noopener">ES → OpenSearch</a> manual section.</li>
                 </ul>
             </div>
             <div class="col-lg-6">

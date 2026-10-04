@@ -1,0 +1,103 @@
+---
+title: Clearer integration test runs in Unomi 4
+description: "How Unomi 4 improved IT execution — live progress bars with ETA, quieter Maven and Docker output, and tooling for diagnosing long CI suites."
+keywords: "Unomi 4 integration tests, ProgressListener, CI logs, Apache Unomi IT, build.sh"
+layout: default
+date: 2026-07-09 10:37:00 +0000
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Unomi 4 &middot; Quality</p>
+        <h1>Clearer integration test runs in Unomi 4</h1>
+        <p class="lead">Progress bars, quieter CI output, and tools that turn a 90&ndash;minute suite into something you can actually follow.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
+    </div>
+</section>
+
+<section class="section">
+    <div class="container col-lg-8">
+        <p>Apache Unomi&rsquo;s integration tests are deliberately heavy: Pax Exam boots a real Karaf, Docker starts Elasticsearch or OpenSearch, and Failsafe walks a large end-to-end suite. That work takes on the order of
+            <strong>one to two hours</strong> on
+            <a href="https://github.com/apache/unomi/actions/workflows/unomi-ci-build-tests.yml">GitHub Actions</a>
+            (for example
+            <a href="https://github.com/apache/unomi/actions/runs/29200354118">run #29200354118</a>
+            on <code>master</code>, ~1h&nbsp;52m wall time). For years the console mostly said &ldquo;still downloading&rdquo; or &ldquo;still running&rdquo; &mdash; with almost no sense of
+            <em>how far</em>
+            or
+            <em>what was left</em>.</p>
+        <p>Unomi 4 invested in the
+            <strong>execution experience</strong>
+            of that suite: live progress, quieter logs, and developer tooling around archives and memory. The goal is not fewer tests &mdash; it is being able to watch (and debug) the ones we already run.</p>
+
+        <img src="/assets/images/unomi3/it-progress-before-after.svg" class="img-fluid my-4" alt="Before and after IT console: Maven download spam versus progress bar with ETA"/>
+
+        <h2 class="h4 mt-4 mb-3">What changed</h2>
+        <ul>
+            <li><strong>Live progress</strong> &mdash; <a href="https://issues.apache.org/jira/browse/UNOMI-912">UNOMI-912</a> / <a href="https://github.com/apache/unomi/pull/735">#735</a> added <code>ProgressSuite</code> + <code>ProgressListener</code>: accurate total, percentage, ETA, pass/fail counters, and a CSV of the slowest tests at the end.</li>
+            <li><strong>Quieter Maven in CI</strong> &mdash; <a href="https://github.com/apache/unomi/pull/764">#764</a> aligned Actions with <code>./build.sh --ci</code>; follow-up work forces <code>-B -ntp</code> so transfer &ldquo;Progress (1): &hellip; kB&rdquo; lines stop drowning the log.</li>
+            <li><strong>Docker search logs off the console</strong> &mdash; Elasticsearch/OpenSearch container logs go to files under <code>itests/target/</code> by default; opt in with <code>--search-engine-logs</code> when you need them live.</li>
+            <li><strong>Diagnose, don&rsquo;t re-run blindly</strong> &mdash; <a href="https://github.com/apache/unomi/pull/770">#770</a> (archive / compare / <code>kt.sh</code>) and <a href="https://github.com/apache/unomi/pull/782">#782</a> (memory sampling + CI artifacts) make flaky vs systematic failures easier to classify.</li>
+        </ul>
+
+        <h2 class="h4 mt-5 mb-3">Before / after (CI console)</h2>
+        <p>Raw job log downloads from Actions require repository privileges, so the excerpts below are
+            <strong>representative reconstructions</strong>
+            of what contributors and committers see in the &ldquo;Execute integration tests&rdquo; job &mdash; anchored to real public runs and the UNOMI-912 acceptance output.</p>
+
+        <p class="small text-muted mb-2"><strong>Before</strong> &mdash; typical shape of an older IT job before progress-aware running and transfer quieting (see e.g.
+            <a href="https://github.com/apache/unomi/actions/runs/19324846828">run #19324846828</a>,
+            2025-11-13, pre&ndash;UNOMI-912 merge). Walls of Maven transfer progress, little suite-level signal:</p>
+        <pre class="p-3 rounded-3 small overflow-auto" style="max-height: 14rem;"><code>Downloading from central: https://repo.maven.apache.org/.../junit-4.13.2.jar
+Progress (1): 4.1/384 kB
+Progress (1): 48/384 kB
+Progress (1): 128/384 kB
+Downloaded from central: .../junit-4.13.2.jar (0.4 s)
+Downloading from central: https://repo.maven.apache.org/.../hamcrest-core-1.3.jar
+Progress (1): 7.2/45 kB
+...
+[INFO] --- docker-maven-plugin: start (elasticsearch)
+... thousands of similar lines ...
+# Suite still running - no % complete, no ETA, no live fail list</code></pre>
+
+        <p class="small text-muted mb-2 mt-4"><strong>After</strong> &mdash; same class of job on Unomi 4 tip (e.g.
+            <a href="https://github.com/apache/unomi/actions/runs/29200354118">run #29200354118</a>,
+            2026-07-12). Transfer UI suppressed; <code>ProgressListener</code> owns the &ldquo;are we stuck?&rdquo; question. Format from
+            <a href="https://issues.apache.org/jira/browse/UNOMI-912">UNOMI-912</a>:</p>
+        <pre class="p-3 rounded-3 small overflow-auto" style="max-height: 14rem;"><code>[#######-----------------------] Progress: 23.33% (35/150 tests).
+  Estimated time remaining: 4m 12s. Successful: 35, Failed: 0
+
+# ... later ...
+
+Top 10 Slowest Tests:
+Rank,Test Name,Duration (ms)
+1,"GraphQLProfileIT.testUpdateProperty",18234
+2,"ProfileMergeIT.testMerge",14925
+...</code></pre>
+
+        <h2 class="h4 mt-5 mb-3">Try it locally</h2>
+        <pre class="code-block-light p-3 rounded-3 small"><code>./build.sh --integration-tests
+# CI-shaped (batch + no transfer progress):
+./build.sh --ci --integration-tests</code></pre>
+        <p>After a run, see <code>itests/README.md</code> for <code>archive-it-run.sh</code>, <code>compare-it-runs.sh</code>, <code>kt.sh</code>, and memory sampling. On Actions, download the <code>it-memory-metrics-*</code> artifact from a completed IT job.</p>
+
+        <h2 class="h4 mt-5 mb-3">How this fits the Unomi 4 quality story</h2>
+        <p>Progress and cleaner logs make the
+            <em>long</em>
+            path usable. Unomi 4 also added a
+            <em>short</em>
+            path &mdash; the in-memory persistence harness for fast service unit tests without Karaf or Docker. Different layers, same idea: confidence without guessing.</p>
+
+        <p class="mt-4">
+            <a class="btn btn-primary" href="https://github.com/apache/unomi/tree/master/itests">Browse itests on GitHub</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/introducing-apache-unomi-4.html">Unomi 4 intro</a>
+            <a class="btn btn-outline-primary ms-2" href="/contribute/testing.html">Contribute &middot; Testing</a>
+        </p>
+        <p><a href="/blog/">&larr; All posts</a></p>
+    </div>
+</section>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 840 340" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Unit tests with InMemoryPersistenceServiceImpl versus full integration tests">
+  <defs>
+<style>
+  svg {
+    --unomi-primary: #6d5ce7;
+    --unomi-primary-dark: #5a48c9;
+    --unomi-primary-light: #ede9fe;
+    --unomi-primary-subtle: #f5f3ff;
+    --unomi-accent: #00cec9;
+    --unomi-hero-accent: #a78bfa;
+    --unomi-text: #1e293b;
+    --unomi-text-muted: #64748b;
+    --unomi-white: #ffffff;
+    --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0;
+    --unomi-success: #059669;
+    --unomi-success-bg: #ecfdf5;
+    --unomi-amber: #d97706;
+    --unomi-amber-bg: #fef3c7;
+    --unomi-info: #2563eb;
+    --unomi-info-bg: #dbeafe;
+    --unomi-on-dark: rgba(255,255,255,.85);
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes dash-flow { to { stroke-dashoffset: -24; } }
+  @keyframes pulse-soft { 0%,100%{opacity:.55} 50%{opacity:.9} }
+  @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+  @keyframes glow { 0%,100%{filter:drop-shadow(0 0 4px rgba(109,92,231,.35))} 50%{filter:drop-shadow(0 0 10px rgba(109,92,231,.55))} }
+  @keyframes dot-move { 0%{offset-distance:0%;opacity:0} 10%{opacity:1} 90%{opacity:1} 100%{offset-distance:100%;opacity:0} }
+  .flow { stroke-dasharray: 6 5; animation: dash-flow 1.6s linear infinite; }
+  .pulse { animation: pulse-soft 3s ease-in-out infinite; }
+  .float { animation: float-y 3.2s ease-in-out infinite; }
+  .glow { animation: glow 3s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .flow,.pulse,.float,.glow { animation: none !important; }
+  }
+</style>
+</defs>
+  <rect width="840" height="340" rx="20" fill="var(--unomi-bg-soft)"/>
+  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">Two layers of quality</text>
+  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">New in Unomi 4: fast unit tests that do not need Karaf or Elasticsearch</text>
+
+  <!-- Unit track -->
+  <g>
+    <rect x="40" y="90" width="360" height="210" rx="18" fill="var(--unomi-success-bg)" stroke="var(--unomi-success)" stroke-width="2"/>
+    <text x="60" y="122" fill="var(--unomi-success)" font-size="14" font-weight="700">UNIT | seconds</text>
+    <rect x="60" y="140" width="320" height="44" rx="12" fill="var(--unomi-white)" class="glow"/>
+    <text x="220" y="168" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="600">InMemoryPersistenceServiceImpl</text>
+    <text x="80" y="210" fill="var(--unomi-text)" font-size="12">-> TestHelper wires real *ServiceImpl</text>
+    <text x="80" y="232" fill="var(--unomi-text)" font-size="12">-> conditions | refresh simulation</text>
+    <text x="80" y="254" fill="var(--unomi-text)" font-size="12">-> no Docker | no Karaf boot</text>
+    <text x="80" y="280" fill="var(--unomi-success)" font-size="12" font-weight="600">Independent | high-signal</text>
+  </g>
+
+  <!-- IT track -->
+  <g>
+    <rect x="440" y="90" width="360" height="210" rx="18" fill="var(--unomi-info-bg)" stroke="var(--unomi-info)" stroke-width="2"/>
+    <text x="460" y="122" fill="var(--unomi-info)" font-size="14" font-weight="700">INTEGRATION | minutes+</text>
+    <rect x="460" y="140" width="140" height="44" rx="12" fill="var(--unomi-white)" class="float"/>
+    <text x="530" y="168" text-anchor="middle" fill="var(--unomi-text)" font-size="12" font-weight="600">Karaf</text>
+    <rect x="620" y="140" width="160" height="44" rx="12" fill="var(--unomi-white)" class="float" style="animation-delay:.4s"/>
+    <text x="700" y="168" text-anchor="middle" fill="var(--unomi-text)" font-size="12" font-weight="600">ES / OpenSearch</text>
+    <text x="480" y="210" fill="var(--unomi-text)" font-size="12">-> Pax Exam + Docker stack</text>
+    <text x="480" y="232" fill="var(--unomi-text)" font-size="12">-> full REST | clustering | tenants</text>
+    <text x="480" y="254" fill="var(--unomi-text)" font-size="12">-> proves the live platform</text>
+    <text x="480" y="280" fill="var(--unomi-info)" font-size="12" font-weight="600">End-to-end confidence</text>
+  </g>
+</svg>

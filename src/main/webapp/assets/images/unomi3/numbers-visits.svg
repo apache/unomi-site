@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 840 420" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Monthly visits to unomi.apache.org from Matomo, January 2025 through July 2026">
+  <defs>
+    <style>
+  svg {
+    --unomi-primary: #6d5ce7; --unomi-primary-dark: #5a48c9; --unomi-accent: #00cec9;
+    --unomi-text: #1e293b; --unomi-text-muted: #64748b; --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0; --unomi-amber: #d97706;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes fade-up { from { opacity: 0; } to { opacity: 1; } }
+  .fade { animation: fade-up 0.7s ease-out both; }
+  @media (prefers-reduced-motion: reduce) { .fade { animation: none !important; } }
+</style>
+    <linearGradient id="visitFill" x1="0" y1="80" x2="0" y2="340" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6d5ce7" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#6d5ce7" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+  <rect width="840" height="420" rx="20" fill="var(--unomi-bg-soft)"/>
+  <text class="fade" x="40" y="36" fill="var(--unomi-text)" font-size="18" font-weight="700">Website visits</text>
+  <text class="fade" style="animation-delay:.08s" x="40" y="56" fill="var(--unomi-text-muted)" font-size="12">unomi.apache.org via ASF Matomo - monthly series Jan 2025 to Jul 2026</text>
+  <line x1="70" y1="340.0" x2="800" y2="340.0" stroke="var(--unomi-border)" stroke-width="1"/><text x="62" y="344.0" text-anchor="end" fill="var(--unomi-text-muted)" font-size="10">0</text><line x1="70" y1="275.0" x2="800" y2="275.0" stroke="var(--unomi-border)" stroke-width="1"/><text x="62" y="279.0" text-anchor="end" fill="var(--unomi-text-muted)" font-size="10">542</text><line x1="70" y1="210.0" x2="800" y2="210.0" stroke="var(--unomi-border)" stroke-width="1"/><text x="62" y="214.0" text-anchor="end" fill="var(--unomi-text-muted)" font-size="10">1.1k</text><line x1="70" y1="145.0" x2="800" y2="145.0" stroke="var(--unomi-border)" stroke-width="1"/><text x="62" y="149.0" text-anchor="end" fill="var(--unomi-text-muted)" font-size="10">1.6k</text><line x1="70" y1="80.0" x2="800" y2="80.0" stroke="var(--unomi-border)" stroke-width="1"/><text x="62" y="84.0" text-anchor="end" fill="var(--unomi-text-muted)" font-size="10">2.2k</text>
+  <g class="fade" style="animation-delay:.12s"><rect x="57.5" y="269.3" width="25.0" height="70.7" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="98.1" y="141.2" width="25.0" height="198.8" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="138.6" y="113.9" width="25.0" height="226.1" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="179.2" y="133.3" width="25.0" height="206.7" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="219.7" y="141.2" width="25.0" height="198.8" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="260.3" y="148.7" width="25.0" height="191.3" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="300.8" y="155.8" width="25.0" height="184.2" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="341.4" y="146.7" width="25.0" height="193.3" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="382.0" y="135.6" width="25.0" height="204.4" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="422.5" y="151.9" width="25.0" height="188.1" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="463.1" y="148.7" width="25.0" height="191.3" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="503.6" y="163.6" width="25.0" height="176.4" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="544.2" y="142.2" width="25.0" height="197.8" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="584.7" y="166.9" width="25.0" height="173.1" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="625.3" y="123.3" width="25.0" height="216.7" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="665.8" y="182.8" width="25.0" height="157.2" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="706.4" y="158.6" width="25.0" height="181.4" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="747.0" y="141.6" width="25.0" height="198.4" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/><rect x="787.5" y="241.6" width="25.0" height="98.4" rx="3" fill="var(--unomi-primary)" fill-opacity="0.35"/></g>
+  <polygon class="fade" style="animation-delay:.18s" points="70.0,340.0 70.0,269.3 110.6,141.2 151.1,113.9 191.7,133.3 232.2,141.2 272.8,148.7 313.3,155.8 353.9,146.7 394.4,135.6 435.0,151.9 475.6,148.7 516.1,163.6 556.7,142.2 597.2,166.9 637.8,123.3 678.3,182.8 718.9,158.6 759.4,141.6 800.0,241.6 800.0,340.0" fill="url(#visitFill)"/>
+  <polyline class="fade" style="animation-delay:.22s" points="70.0,269.3 110.6,141.2 151.1,113.9 191.7,133.3 232.2,141.2 272.8,148.7 313.3,155.8 353.9,146.7 394.4,135.6 435.0,151.9 475.6,148.7 516.1,163.6 556.7,142.2 597.2,166.9 637.8,123.3 678.3,182.8 718.9,158.6 759.4,141.6 800.0,241.6" fill="none" stroke="var(--unomi-primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="70.0" y="362" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">Jan 25</text><text x="191.7" y="362" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">Apr 25</text><text x="313.3" y="362" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">Jul 25</text><text x="435.0" y="362" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">Oct 25</text><text x="556.7" y="362" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">Jan 26</text><text x="678.3" y="362" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">Apr 26</text><text x="800.0" y="362" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">Jul 26</text>
+  <circle cx="800.0" cy="241.6" r="5" fill="var(--unomi-primary)"/>
+  <text x="40" y="402" fill="var(--unomi-text-muted)" font-size="12">28,795 visits total · 62,762 actions · ~91s avg · bounce 67%</text>
+</svg>

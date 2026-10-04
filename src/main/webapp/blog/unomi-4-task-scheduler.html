@@ -1,0 +1,109 @@
+---
+title: Cluster-aware task scheduler in Unomi 4.0
+description: "Unomi 4.0 durable task scheduler — full capability list: persistence, cluster locks, lifecycle, fluent builder, REST ops, shell, metrics, resume, and built-in jobs."
+keywords: "Unomi task scheduler, /cxs/tasks, unomi:task-list, Unomi 4.0, profile-purge, cluster tasks, TaskExecutor"
+layout: default
+date: 2026-07-03 12:16:00 +0000
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Unomi 4.0 &middot; Operations</p>
+        <h1>Cluster-aware task scheduler</h1>
+        <p class="lead">Durable background work with persistence, locks, retry/resume, REST, shell, and a plugin-friendly fluent API.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
+    </div>
+</section>
+
+<section class="section">
+    <div class="container col-lg-8">
+        <p>Unomi 4.0 introduces a first-class <strong>task scheduler</strong> for work that must run reliably on a single node or across a cluster:
+            maintenance timers, request offload (for example profile-merge follow-up), and operator-visible retry/cancel.</p>
+        <p>It sits on the
+            <a href="/blog/unomi-4-runtime.html">persistence-based clustering</a>
+            model &mdash; executor nodes and locks use the shared search index rather than Cellar or Hazelcast.</p>
+
+        <img src="/assets/images/unomi3/task-scheduler.svg" class="img-fluid my-4" alt="SchedulerService with REST, built-in task types, and Karaf shell"/>
+
+        <h2 class="h4 mt-4 mb-3">Capabilities at a glance</h2>
+        <ul>
+            <li><strong>Task types + executors</strong> &mdash; each logical <code>taskType</code> is handled by a registered <code>TaskExecutor</code> (core services or plugins)</li>
+            <li><strong>Persistent or in-memory</strong> &mdash; cluster-visible <code>scheduledTask</code> items in Elasticsearch/OpenSearch, or <code>nonPersistent()</code> node-local tasks (typical for cache refresh)</li>
+            <li><strong>One-shot and recurring</strong> &mdash; <code>asOneShot()</code>, or period + <code>withFixedDelay()</code> / <code>withFixedRate()</code>, with optional <code>withInitialDelay</code></li>
+            <li><strong>Cluster coordination</strong> &mdash; executor nodes (<code>scheduler.executorNode</code>), cluster locks, optional <code>runOnAllNodes()</code>, parallel execution control via <code>disallowParallelExecution()</code></li>
+            <li><strong>Lifecycle</strong> &mdash; statuses <code>SCHEDULED</code>, <code>WAITING</code>, <code>RUNNING</code>, <code>COMPLETED</code>, <code>FAILED</code>, <code>CANCELLED</code>, <code>CRASHED</code></li>
+            <li><strong>Retries</strong> &mdash; <code>withMaxRetries</code> / <code>withRetryDelay</code> (auto); manual retry via REST/shell (optional failure-count reset)</li>
+            <li><strong>Dependencies</strong> &mdash; <code>withDependencies(taskId&hellip;)</code> so a task waits until prior work is <code>COMPLETED</code></li>
+            <li><strong>Checkpoints / resume</strong> &mdash; long jobs save <code>checkpointData</code> / <code>currentStep</code>; operators resume <code>CRASHED</code> tasks when the executor implements <code>canResume</code> / <code>resume</code></li>
+            <li><strong>Parameters</strong> &mdash; JSON-serializable map passed into the executor (include <code>tenantId</code> and run under <code>executeAsTenant</code> for tenant isolation)</li>
+            <li><strong>System tasks</strong> &mdash; <code>asSystemTask()</code> for jobs created at init that should be preserved across restarts</li>
+            <li><strong>Fluent API</strong> &mdash; <code>schedulerService.newTask(type)</code> builder; also <code>createRecurringTask</code> / <code>createTask</code> helpers</li>
+            <li><strong>Plugin registration</strong> &mdash; register/unregister <code>TaskExecutor</code> from OSGi DS <code>activate</code> / <code>deactivate</code></li>
+            <li><strong>REST ops</strong> &mdash; list (filter by status/type, pagination), get, cancel, retry, resume (admin / tenant-admin); task <em>creation</em> stays in Java services/plugins</li>
+            <li><strong>Karaf shell</strong> &mdash; <code>unomi:task-list|show|cancel|retry|purge|executor</code></li>
+            <li><strong>Built-in purge</strong> &mdash; periodic <code>task-purge</code> of old <code>COMPLETED</code> records (<code>scheduler.purgeTaskEnabled</code>, TTL days)</li>
+            <li><strong>Metrics</strong> &mdash; <code>getMetric</code> / <code>getAllMetrics</code> (completed, failed, crashed, running, lock conflicts, recovery attempts, &hellip;)</li>
+            <li><strong>Config</strong> &mdash; thread pool size, stable <code>scheduler.nodeId</code>, lock timeout, executor vs API-only node roles in <code>org.apache.unomi.services.cfg</code></li>
+        </ul>
+
+        <h2 class="h4 mt-5 mb-3">REST surface</h2>
+        <p>Base path <code>/cxs/tasks</code> (roles <code>ROLE_UNOMI_ADMIN</code> / <code>ROLE_UNOMI_TENANT_ADMIN</code>) &mdash; monitoring and operations, not create:</p>
+        <ul>
+            <li><code>GET /cxs/tasks</code> &mdash; paginated list; filters <code>status=</code>, <code>type=</code>, <code>offset</code>, <code>limit</code></li>
+            <li><code>GET /cxs/tasks/{id}</code> &mdash; detail (parameters, checkpoint, errors)</li>
+            <li><code>DELETE /cxs/tasks/{id}</code> &mdash; cancel (HTTP 204; record kept as <code>CANCELLED</code>)</li>
+            <li><code>POST /cxs/tasks/{id}/retry</code> &mdash; optional <code>?resetFailureCount=true</code></li>
+            <li><code>POST /cxs/tasks/{id}/resume</code> &mdash; for <code>CRASHED</code> + checkpoint-capable executors</li>
+        </ul>
+
+        <h2 class="h4 mt-5 mb-3">Karaf shell</h2>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>unomi:task-list [-s STATUS] [-t TYPE] [--limit N]
+unomi:task-show &lt;id&gt;
+unomi:task-cancel &lt;id&gt;
+unomi:task-retry &lt;id&gt; [--reset]
+unomi:task-purge [--days N] [--force]
+unomi:task-executor          # is this node an executor? nodeId?</code></pre>
+
+        <h2 class="h4 mt-5 mb-3">Fluent scheduling (plugins / services)</h2>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>schedulerService.newTask("cache-refresh-segment")
+    .nonPersistent()
+    .withPeriod(1, TimeUnit.SECONDS)
+    .withFixedDelay()
+    .disallowParallelExecution()
+    .withSimpleExecutor(() -&gt; refreshSegmentCache())
+    .schedule();
+
+schedulerService.newTask("export-tenant-snapshot")
+    .withParameters(Map.of("tenantId", "acme"))
+    .asOneShot()
+    .withMaxRetries(3)
+    .withRetryDelay(2, TimeUnit.MINUTES)
+    .disallowParallelExecution()
+    .withExecutor(myExportExecutor)
+    .schedule();</code></pre>
+
+        <h2 class="h4 mt-5 mb-3">Built-in task types you will see</h2>
+        <ul>
+            <li><code>cache-refresh-*</code> &mdash; reload segments, rules, property types, scopes, &hellip; into memory</li>
+            <li><code>profile-purge</code></li>
+            <li><code>segment-date-recalculation</code></li>
+            <li><code>rules-statistics-refresh</code></li>
+            <li><code>task-purge</code> &mdash; purge old completed scheduler tasks</li>
+            <li><code>merge-profiles-reassign-data</code> &mdash; async session/event reassignment after profile merge (<code>baseplugin</code>)</li>
+            <li><code>clusterNodeStatisticsUpdate</code> / <code>clusterStaleNodesCleanup</code> &mdash; clustering maintenance</li>
+        </ul>
+        <p>Async enrichment-style jobs can reuse the same model instead of ad-hoc threads &mdash; register an executor, schedule with the builder, operate via REST/shell.</p>
+
+        <p class="mt-4">
+            <a class="btn btn-primary" href="{{ site.data.unomi.manual.published_latest }}#_scheduler">Manual: scheduler</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-4-runtime.html">Runtime</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-4-request-tracing.html">Request tracing</a>
+        </p>
+        <p><a href="/blog/">&larr; All posts</a></p>
+    </div>
+</section>

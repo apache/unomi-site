@@ -1,0 +1,91 @@
+---
+title: Faster Unomi service unit tests — InMemoryPersistenceServiceImpl
+description: "How Unomi 4’s in-memory PersistenceService test harness lets Profile, Event, Rules, and Segment services run real unit tests in seconds without Karaf or Elasticsearch."
+keywords: "Unomi unit tests, InMemoryPersistenceServiceImpl, UNOMI-881, Unomi TestHelper, Surefire"
+layout: default
+date: 2026-07-07 09:30:00 +0000
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Unomi 4 &middot; Quality</p>
+        <h1>Faster service unit tests</h1>
+        <p class="lead"><code>InMemoryPersistenceServiceImpl</code> &mdash; a full PersistenceService on the test classpath so service logic no longer waits on Karaf.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
+    </div>
+</section>
+
+<section class="section">
+    <div class="container col-lg-8">
+        <p>In Unomi 2.x, most confidence meant <strong>integration tests</strong>: boot Karaf, talk to Elasticsearch (or Docker), wait.
+            That still matters for the live stack. It is the wrong loop for &ldquo;does <code>ProfileServiceImpl</code> handle this edge case?&rdquo;</p>
+        <p>
+            <a href="https://issues.apache.org/jira/browse/UNOMI-881">UNOMI-881</a>
+            /
+            <a href="https://github.com/apache/unomi/pull/772">#772</a>
+            /
+            <a href="https://github.com/apache/unomi/pull/776">#776</a>
+            added a unit-test harness centered on one class:</p>
+
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>services/src/test/java/org/apache/unomi/services/impl/InMemoryPersistenceServiceImpl.java</code></pre>
+
+        <img src="/assets/images/unomi3/unit-harness-vs-it.svg" class="img-fluid my-4" alt="Unit tests with InMemoryPersistenceServiceImpl versus full integration tests"/>
+
+        <h2 class="h4 mt-4 mb-3">What it is (and is not)</h2>
+        <p>It is <strong>not</strong> a production persistence engine. It is a complete <code>PersistenceService</code> implementation living only on the <strong>test</strong> classpath.</p>
+
+        <h2 class="h4 mt-5 mb-3">Capabilities</h2>
+        <ul>
+            <li><strong>Full SPI surface</strong> &mdash; save/load/remove, query (condition + field), range query, paginated <code>PartialList</code>, remove-by-query</li>
+            <li><strong>Real condition evaluation</strong> &mdash; <code>ConditionEvaluatorDispatcher</code> (not a stubbed query layer)</li>
+            <li><strong>In-memory store</strong> &mdash; <code>ConcurrentHashMap</code> keyed items; optional JSON file mirror under <code>target/persistence-data</code> (pretty-print, clear-on-init)</li>
+            <li><strong>Refresh simulation</strong> &mdash; optional refresh delay thread; per-item-type policies <code>FALSE</code> / <code>TRUE</code> / <code>WAIT_FOR</code>; <code>refresh()</code> API</li>
+            <li><strong>Scroll</strong> &mdash; scroll id + time validity like ES/OS style paging</li>
+            <li><strong>Default query limit</strong> &mdash; mirrors search-engine default size when callers pass negative size</li>
+            <li><strong>Property mappings</strong> &mdash; set/get property mapping metadata used by services</li>
+            <li><strong>Aggregates</strong> &mdash; persistence aggregate SPI support used by analytics-style service tests</li>
+            <li><strong>Sequences / primary terms</strong> &mdash; index sequence helpers for ID generation scenarios</li>
+            <li><strong>System-item ID conventions</strong> &mdash; same <code>tenantId_itemId_itemType</code> rules as ES/OS for system types (rules, segments, schemas, &hellip;)</li>
+            <li><strong>Tenant transformation listeners</strong> &mdash; register listeners like production persistence</li>
+            <li><strong>Batching / overwrite flags</strong> &mdash; <code>save(item, useBatching, alwaysOverwrite)</code> overloads</li>
+            <li><strong>Lifecycle</strong> &mdash; <code>shutdown()</code> to stop refresh threads between tests</li>
+        </ul>
+
+        <h2 class="h4 mt-5 mb-3">How tests use it</h2>
+        <p>Typical Surefire tests construct the harness, wire a real <code>*ServiceImpl</code>, and assert behavior without OSGi:</p>
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>persistenceService = new InMemoryPersistenceServiceImpl(
+        executionContextManager, conditionEvaluatorDispatcher);
+
+// then inject into ProfileServiceImpl, EventServiceImpl,
+// RulesServiceImpl, SegmentServiceImpl, &hellip;</code></pre>
+        <p>Concrete adopters in-tree include <code>ProfileServiceImplTest</code>, <code>EventServiceImplTest</code>, <code>RulesServiceImplTest</code>, <code>SegmentServiceImplTest</code>, and the self-test <code>InMemoryPersistenceServiceImplTest</code>.</p>
+
+        <h2 class="h4 mt-5 mb-3">Unit vs integration</h2>
+        <div class="table-responsive">
+            <table class="table table-sm align-middle">
+                <thead><tr><th></th><th>Integration tests</th><th>Harness unit tests</th></tr></thead>
+                <tbody>
+                    <tr><td>Speed</td><td>Minutes+</td><td>Seconds</td></tr>
+                    <tr><td>Isolation</td><td>Shared cluster state</td><td>Fresh store per test</td></tr>
+                    <tr><td>Scope</td><td>Full platform</td><td>One service / scenario</td></tr>
+                    <tr><td>Fidelity</td><td>Production ES/OS</td><td>SPI + conditions + refresh simulation</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>ITs prove the live stack (and pair with the
+            <a href="/blog/unomi-4-it-execution.html">clearer IT console</a>).
+            The harness is why Unomi 4 could grow high-signal <code>@Test</code> coverage around services without waiting on Docker every time.</p>
+
+        <p class="mt-4">
+            <a class="btn btn-primary" href="https://github.com/apache/unomi/blob/master/services/src/test/java/org/apache/unomi/services/impl/InMemoryPersistenceServiceImpl.java">View on GitHub</a>
+            <a class="btn btn-outline-primary ms-2" href="/contribute/testing.html">Contribute &middot; Testing</a>
+            <a class="btn btn-outline-primary ms-2" href="/blog/unomi-4-it-execution.html">IT execution</a>
+        </p>
+        <p><a href="/blog/">&larr; All posts</a></p>
+    </div>
+</section>

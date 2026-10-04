@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 840 300" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Multi-tenancy: API keys map clients to isolated tenant data in Elasticsearch or OpenSearch">
+  <defs>
+<style>
+  svg {
+    --unomi-primary: #6d5ce7;
+    --unomi-primary-dark: #5a48c9;
+    --unomi-primary-light: #ede9fe;
+    --unomi-primary-subtle: #f5f3ff;
+    --unomi-accent: #00cec9;
+    --unomi-hero-accent: #a78bfa;
+    --unomi-text: #1e293b;
+    --unomi-text-muted: #64748b;
+    --unomi-white: #ffffff;
+    --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0;
+    --unomi-success: #059669;
+    --unomi-success-bg: #ecfdf5;
+    --unomi-amber: #d97706;
+    --unomi-amber-bg: #fef3c7;
+    --unomi-info: #2563eb;
+    --unomi-info-bg: #dbeafe;
+    --unomi-on-dark: rgba(255,255,255,.85);
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes dash-flow { to { stroke-dashoffset: -24; } }
+  @keyframes pulse-soft { 0%,100%{opacity:.55} 50%{opacity:.9} }
+  @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+  @keyframes glow { 0%,100%{filter:drop-shadow(0 0 4px rgba(109,92,231,.35))} 50%{filter:drop-shadow(0 0 10px rgba(109,92,231,.55))} }
+  @keyframes dot-move { 0%{offset-distance:0%;opacity:0} 10%{opacity:1} 90%{opacity:1} 100%{offset-distance:100%;opacity:0} }
+  .flow { stroke-dasharray: 6 5; animation: dash-flow 1.6s linear infinite; }
+  .pulse { animation: pulse-soft 3s ease-in-out infinite; }
+  .float { animation: float-y 3.2s ease-in-out infinite; }
+  .glow { animation: glow 3s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .flow,.pulse,.float,.glow { animation: none !important; }
+  }
+</style>
+</defs>
+  <rect width="840" height="300" rx="20" fill="var(--unomi-primary-subtle)"/>
+  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">Multi-tenancy in Unomi 4.0</text>
+  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">Public / private API keys → tenant boundary → isolated profiles &amp; events</text>
+
+  <!-- clients -->
+  <g class="float">
+    <rect x="40" y="110" width="120" height="56" rx="12" fill="var(--unomi-primary)"/>
+    <text x="100" y="144" text-anchor="middle" fill="var(--unomi-white)" font-size="13" font-weight="600">Client A</text>
+  </g>
+  <g class="float" style="animation-delay:.5s">
+    <rect x="40" y="186" width="120" height="56" rx="12" fill="var(--unomi-primary-dark)"/>
+    <text x="100" y="220" text-anchor="middle" fill="var(--unomi-white)" font-size="13" font-weight="600">Client B</text>
+  </g>
+
+  <line x1="160" y1="138" x2="220" y2="170" stroke="var(--unomi-primary)" stroke-width="2" class="flow"/>
+  <line x1="160" y1="214" x2="220" y2="190" stroke="var(--unomi-primary)" stroke-width="2" class="flow"/>
+
+  <!-- gateway -->
+  <rect x="220" y="130" width="160" height="100" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-primary)" stroke-width="2" class="glow"/>
+  <text x="300" y="168" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="700">API keys</text>
+  <text x="300" y="190" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">public / private</text>
+  <text x="300" y="210" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">tenant resolve</text>
+
+  <line x1="380" y1="180" x2="430" y2="180" stroke="var(--unomi-accent)" stroke-width="2.5" class="flow"/>
+
+  <!-- tenants -->
+  <rect x="430" y="100" width="160" height="70" rx="14" fill="var(--unomi-accent)" opacity=".9"/>
+  <text x="510" y="130" text-anchor="middle" fill="var(--unomi-white)" font-size="14" font-weight="700">Tenant A</text>
+  <text x="510" y="150" text-anchor="middle" fill="var(--unomi-white)" font-size="11">profiles · events · rules</text>
+
+  <rect x="430" y="190" width="160" height="70" rx="14" fill="var(--unomi-hero-accent)" opacity=".95"/>
+  <text x="510" y="220" text-anchor="middle" fill="var(--unomi-white)" font-size="14" font-weight="700">Tenant B</text>
+  <text x="510" y="240" text-anchor="middle" fill="var(--unomi-white)" font-size="11">isolated data plane</text>
+
+  <line x1="590" y1="135" x2="640" y2="160" stroke="var(--unomi-text-muted)" stroke-width="2" class="flow"/>
+  <line x1="590" y1="225" x2="640" y2="200" stroke="var(--unomi-text-muted)" stroke-width="2" class="flow"/>
+
+  <rect x="640" y="120" width="160" height="120" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-border)" stroke-width="1.5"/>
+  <text x="720" y="160" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="700">ES or OS</text>
+  <text x="720" y="184" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">shared cluster</text>
+  <text x="720" y="206" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">tenant-aware</text>
+  <text x="720" y="226" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">indexes / filters</text>
+</svg>

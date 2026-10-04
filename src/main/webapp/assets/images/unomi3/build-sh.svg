@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 840 380" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Unomi build.sh: one entry point for preflight, Maven build, integration tests, and deploy">
+  <defs>
+<style>
+  svg {
+    --unomi-primary: #6d5ce7;
+    --unomi-primary-dark: #5a48c9;
+    --unomi-primary-light: #ede9fe;
+    --unomi-primary-subtle: #f5f3ff;
+    --unomi-accent: #00cec9;
+    --unomi-hero-accent: #a78bfa;
+    --unomi-text: #1e293b;
+    --unomi-text-muted: #64748b;
+    --unomi-white: #ffffff;
+    --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0;
+    --unomi-success: #059669;
+    --unomi-success-bg: #ecfdf5;
+    --unomi-amber: #d97706;
+    --unomi-amber-bg: #fef3c7;
+    --unomi-info: #2563eb;
+    --unomi-info-bg: #dbeafe;
+    --term-bg: #0f172a;
+    --term-ok: #34d399;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes dash-flow { to { stroke-dashoffset: -24; } }
+  @keyframes pulse-soft { 0%,100%{opacity:.55} 50%{opacity:.9} }
+  @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-3px)} }
+  @keyframes glow { 0%,100%{filter:drop-shadow(0 0 4px rgba(109,92,231,.35))} 50%{filter:drop-shadow(0 0 10px rgba(109,92,231,.55))} }
+  .flow { stroke-dasharray: 6 5; animation: dash-flow 1.6s linear infinite; }
+  .pulse { animation: pulse-soft 3s ease-in-out infinite; }
+  .float { animation: float-y 3.2s ease-in-out infinite; }
+  .glow { animation: glow 3s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .flow,.pulse,.float,.glow { animation: none !important; }
+  }
+</style>
+  </defs>
+
+  <rect width="840" height="380" rx="20" fill="var(--unomi-bg-soft)"/>
+  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">One build entry point</text>
+  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">./build.sh replaces scattered scripts | same path locally and in CI</text>
+
+  <rect x="300" y="100" width="240" height="72" rx="16" fill="var(--unomi-primary)" class="glow"/>
+  <text x="420" y="132" text-anchor="middle" fill="#ffffff" font-size="16" font-weight="700">./build.sh</text>
+  <text x="420" y="154" text-anchor="middle" fill="rgba(255,255,255,.85)" font-size="11">UNOMI-887 | build.ps1 twin</text>
+
+  <g class="float">
+    <rect x="40" y="210" width="170" height="120" rx="14" fill="var(--unomi-amber-bg)" stroke="var(--unomi-amber)" stroke-width="2"/>
+    <text x="125" y="242" text-anchor="middle" fill="var(--unomi-amber)" font-size="13" font-weight="700">Preflight</text>
+    <text x="125" y="268" text-anchor="middle" fill="var(--unomi-text)" font-size="11">Java | Maven | GraphViz</text>
+    <text x="125" y="290" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">memory | disk | ports</text>
+    <text x="125" y="312" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">clear failure output</text>
+  </g>
+
+  <g class="float" style="animation-delay:.3s">
+    <rect x="235" y="210" width="170" height="120" rx="14" fill="var(--unomi-info-bg)" stroke="var(--unomi-info)" stroke-width="2"/>
+    <text x="320" y="242" text-anchor="middle" fill="var(--unomi-info)" font-size="13" font-weight="700">Build</text>
+    <text x="320" y="268" text-anchor="middle" fill="var(--unomi-text)" font-size="11">install | -B -ntp in --ci</text>
+    <text x="320" y="290" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">distributions | ES / OS</text>
+    <text x="320" y="312" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">optional --javadoc</text>
+  </g>
+
+  <g class="float" style="animation-delay:.6s">
+    <rect x="430" y="210" width="170" height="120" rx="14" fill="var(--unomi-success-bg)" stroke="var(--unomi-success)" stroke-width="2"/>
+    <text x="515" y="242" text-anchor="middle" fill="var(--unomi-success)" font-size="13" font-weight="700">Test</text>
+    <text x="515" y="268" text-anchor="middle" fill="var(--unomi-text)" font-size="11">--integration-tests</text>
+    <text x="515" y="290" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">--single-test | --it-debug</text>
+    <text x="515" y="312" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">memory sampler</text>
+  </g>
+
+  <g class="float" style="animation-delay:.9s">
+    <rect x="625" y="210" width="175" height="120" rx="14" fill="var(--unomi-primary-light)" stroke="var(--unomi-primary)" stroke-width="2"/>
+    <text x="712" y="242" text-anchor="middle" fill="var(--unomi-primary-dark)" font-size="13" font-weight="700">Run / Deploy</text>
+    <text x="712" y="268" text-anchor="middle" fill="var(--unomi-text)" font-size="11">--deploy | --karaf-home</text>
+    <text x="712" y="290" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">--debug | --auto-start</text>
+    <text x="712" y="312" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">GitHub Actions --ci</text>
+  </g>
+
+  <path d="M340 172 L 125 210" stroke="var(--unomi-primary)" stroke-width="2" class="flow"/>
+  <path d="M390 172 L 320 210" stroke="var(--unomi-primary)" stroke-width="2" class="flow"/>
+  <path d="M450 172 L 515 210" stroke="var(--unomi-primary)" stroke-width="2" class="flow"/>
+  <path d="M500 172 L 712 210" stroke="var(--unomi-primary)" stroke-width="2" class="flow"/>
+
+  <rect x="40" y="345" width="760" height="22" rx="6" fill="var(--term-bg)"/>
+  <text x="56" y="360" fill="var(--term-ok)" font-size="11" font-family="ui-monospace, Menlo, monospace">$ ./build.sh --ci --integration-tests --use-opensearch</text>
+</svg>

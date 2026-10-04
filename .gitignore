@@ -6,3 +6,9 @@ target/
 /.mvn/wrapper/maven-wrapper.jar
 Gemfile.lock
 .bundle/
+vendor/bundle/
+.netlify/
+
+# Local env (secrets)
+.env.local
+.env*.local
