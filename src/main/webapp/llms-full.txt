@@ -11,7 +11,7 @@
 - **Website**: https://unomi.apache.org
 - **Source Code**: https://github.com/apache/unomi
 - **Issue Tracker**: https://issues.apache.org/jira/browse/UNOMI
-- **Current Stable Version**: 4.0.0 — Unomi 4 product leap (multi-tenancy, OpenSearch, tasks, V2 compat)
+- **Current Stable Version**: 4.0.0 — Unomi 4 (multi-tenancy, OpenSearch, tasks, REST compatibility for 2.x and 3.x)
 - **Previous stable**: 3.0.1 (2026-07-20) — 3.0 maintenance line
 - **Development**: 4.1.0-SNAPSHOT
 - **Runtime baseline**: Java 17+
@@ -54,7 +54,7 @@
 | Tenant admin | `tenantId:privateApiKey` (basic) | Scopes, rules, schemas, searches |
 | Public apps / trackers | `X-Unomi-Api-Key: <public>` | `/cxs/context.json`, `/cxs/eventcollector` |
 
-Optional **V2 compatibility mode** helps phase older Unomi 2.x clients during upgrades. See https://unomi.apache.org/blog/migrating-to-unomi-4.html
+Optional **REST compatibility mode** helps phase Unomi 2.x and 3.x clients during upgrades. See https://unomi.apache.org/blog/migrating-to-unomi-4.html
 
 ### REST API Endpoints (selected)
 - `/cxs/tenants` - Tenant CRUD and API key management (system admin)
@@ -222,7 +222,7 @@ Guides: https://unomi.apache.org/get-started.html · https://unomi.apache.org/tu
 ## Frequently Asked Questions
 
 - **What is Apache Unomi?** An open source Customer Data Platform (CDP) managed by the Apache Software Foundation.
-- **What is Unomi 4 vs 3.0?** 3.0 is the platform foundation (ES9 client, Karaf 4.4, Java 17+, persistence clustering). 4.0 is the product leap: multi-tenancy/API keys (major platform refactor), OpenSearch, task scheduler, V2 compatibility mode, stronger tests.
+- **What is Unomi 4 vs 3.0?** Unomi 4.0 is the current major release (Java 17+, Elasticsearch 9, clustering, multi-tenancy/API keys, OpenSearch, task scheduler, REST compatibility for 2.x and 3.x clients, stronger tests). 3.0.x is the previous line.
 - **How does Unomi differ from proprietary CDPs?** 100% open source (Apache License 2.0), self-hosted, vendor-neutral, extensible through OSGi plugins.
 - **What storage backends are supported?** Elasticsearch 9.x and OpenSearch 3.x (Unomi 4.0).
 - **Does Unomi have a GraphQL API?** Yes, alongside REST.
@@ -237,9 +237,9 @@ Guides: https://unomi.apache.org/get-started.html · https://unomi.apache.org/tu
 - **2015**: Entered Apache Incubator
 - **2019**: Graduated to Apache Top-Level Project
 - **2022**: Version 2.0.0 released (major architecture update)
-- **2025**: Version 3.0.0 released (Unomi 3 foundation — Karaf 4.4, Elasticsearch Java client 9.x, GraphQL API, BOM, persistence clustering)
+- **2025**: Version 3.0.0 released (Karaf 4.4, Elasticsearch Java client 9.x, GraphQL API, BOM, persistence clustering)
 - **2026**: Version 3.0.1 released (3.0 maintenance line)
-- **2026**: Version 4.0.0 released (current stable — multi-tenancy major refactor, OpenSearch 3.x, cluster task scheduler, V2 API compatibility)
+- **2026**: Version 4.0.0 released (current stable — multi-tenancy, OpenSearch 3.x, cluster task scheduler, REST compatibility for Unomi 2.x and 3.x clients)
 
 ## Unomi 4 Blog (UNOMI-932)
 
