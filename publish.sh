@@ -5,20 +5,26 @@
 # for personal/community staging previews.
 #
 # Usage:
-#   ./publish.sh --username ASF_ID --password 'SECRET'
-#   ./publish.sh -u ASF_ID -p 'SECRET'
-#   ./publish.sh --username ASF_ID          # prompts for password (no echo)
-#   ./publish.sh --check-only -u ASF_ID -p 'SECRET'
-#   ./publish.sh --dry-run -u ASF_ID -p 'SECRET'
-#   ./publish.sh --skip-build -u ASF_ID -p 'SECRET'   # reuse existing target/site
+#   ./publish.sh --username ASF_ID          # prompts for password (no echo) - preferred
+#   ./publish.sh --check-only -u ASF_ID
+#   ./publish.sh --dry-run -u ASF_ID
+#   ./publish.sh --skip-build -u ASF_ID     # reuse existing target/site
+#   ./publish.sh -u ASF_ID -p 'SECRET'      # works, but the password lands in shell
+#                                           # history and is visible in the process list
 #
 # Credentials may also come from the environment (never commit these):
 #   ASF_USERNAME / ASF_PASSWORD
 #   or APACHE_USERNAME / APACHE_PASSWORD
 #
+# The password is handed to Maven through a private temporary settings file, not on
+# the command line. SVN only verifies it at commit time: the checks here cannot tell
+# a wrong password from a right one.
+#
 # Optional:
 #   JEKYLL_IMAGE   Docker image (default: bretfisher/jekyll)
 #   --yes          Skip the interactive confirmation prompt
+#   --force        Publish even if the git tree is dirty, the branch is not master,
+#                  or _config.yml url is not https://unomi.apache.org
 #
 # Important: do not run Maven clean — it would wipe previously published trees
 # that scm-publish intentionally preserves under docs/, manual/, etc.
@@ -35,32 +41,50 @@ ASF_PASSWORD="${ASF_PASSWORD:-${APACHE_PASSWORD:-}}"
 MODE="publish"          # publish | check-only | dry-run
 SKIP_BUILD=0
 ASSUME_YES=0
+FORCE=0
 SVN_URL="https://svn.apache.org/repos/asf/unomi/website/"
 PROD_URL="https://unomi.apache.org/"
 
 usage() {
-  sed -n '2,28p' "$0" | sed 's/^# \{0,1\}//'
+  # Print the leading comment block (everything after the shebang up to the first non-comment line).
+  awk 'NR == 1 { next } /^#/ { sub(/^# ?/, ""); print; next } { exit }' "$0"
   exit "${1:-0}"
+}
+
+require_value() {
+  # $1 option name, $2 number of remaining arguments (including the option)
+  if [[ "$2" -lt 2 ]]; then
+    echo "Option $1 requires a value" >&2
+    exit 1
+  fi
 }
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -u|--username)
-      ASF_USERNAME="${2:-}"
+      require_value "$1" "$#"
+      if [[ "$2" == -* ]]; then
+        echo "Option $1 requires a value" >&2
+        exit 1
+      fi
+      ASF_USERNAME="$2"
       shift 2
       ;;
     -p|--password)
-      ASF_PASSWORD="${2:-}"
+      require_value "$1" "$#"
+      ASF_PASSWORD="$2"
       shift 2
       ;;
     --check-only) MODE="check-only"; shift ;;
     --dry-run) MODE="dry-run"; shift ;;
     --skip-build) SKIP_BUILD=1; shift ;;
     -y|--yes) ASSUME_YES=1; shift ;;
+    --force) FORCE=1; shift ;;
     -h|--help) usage 0 ;;
     *)
-      echo "Unknown option: $1" >&2
-      usage 1
+      # Do not echo the argument: a misplaced password could end up here.
+      echo "Unknown option or unexpected argument (see --help)" >&2
+      exit 1
       ;;
   esac
 done
@@ -74,8 +98,7 @@ prompt_password_if_needed() {
     exit 1
   fi
   echo -n "ASF LDAP password for '${ASF_USERNAME}': " >&2
-  # shellcheck disable=SC2162
-  read -s ASF_PASSWORD
+  IFS= read -rs ASF_PASSWORD
   echo "" >&2
 }
 
@@ -174,42 +197,25 @@ check_network_svn() {
   fi
 }
 
-check_svn_auth_if_possible() {
-  if [[ -z "${ASF_USERNAME}" ]] || [[ -z "${ASF_PASSWORD}" ]]; then
-    check_warn "skipping SVN credential probe (username/password incomplete)"
-    return
-  fi
-  if ! have_cmd svn; then
-    check_warn "svn CLI not installed — skipping live credential probe (Maven will still auth)"
-    return
-  fi
-
-  # Non-interactive auth against the publish URL. Failure here almost always
-  # means bad credentials or missing commit karma on the Unomi website tree.
-  local svn_out
-  svn_out="$(mktemp)"
-  if SVN_SSH="" svn info "${SVN_URL}" \
-      --non-interactive \
-      --username "${ASF_USERNAME}" \
-      --password "${ASF_PASSWORD}" \
-      --no-auth-cache \
-      >"${svn_out}" 2>&1; then
-    check_pass "SVN credentials accepted for ${SVN_URL}"
-  else
-    check_fail "SVN credential probe failed for ${SVN_URL}"
-    echo "         (wrong password, or account lacks commit access to the Unomi website)" >&2
-    head -5 "${svn_out}" >&2 || true
-  fi
-  rm -f "${svn_out}"
-}
+GIT_BRANCH=""
+GIT_COMMIT=""
 
 check_git_hygiene() {
-  if ! have_cmd git || [[ ! -d "${ROOT}/.git" ]]; then
-    check_warn "not a git checkout — skipping dirty-tree warning"
+  if ! have_cmd git || ! git -C "${ROOT}" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    check_publish_guard "not a git checkout — cannot tell which branch or commit is being published"
     return
   fi
-  if git -C "${ROOT}" status --porcelain 2>/dev/null | grep -q .; then
-    check_warn "working tree has uncommitted changes — confirm you intend to publish them"
+  GIT_BRANCH="$(git -C "${ROOT}" rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
+  GIT_COMMIT="$(git -C "${ROOT}" rev-parse --short HEAD 2>/dev/null || true)"
+
+  if [[ "${GIT_BRANCH}" == "master" ]]; then
+    check_pass "on branch master (${GIT_COMMIT})"
+  else
+    check_publish_guard "on branch '${GIT_BRANCH}' (${GIT_COMMIT}), not master — production is published from master"
+  fi
+
+  if [[ -n "$(git -C "${ROOT}" status --porcelain 2>/dev/null)" ]]; then
+    check_publish_guard "working tree has uncommitted changes — commit or stash them before publishing"
   else
     check_pass "git working tree is clean"
   fi
@@ -232,7 +238,6 @@ check_prerequisites() {
   check_maven_java
   check_credentials
   check_network_svn
-  check_svn_auth_if_possible
   check_git_hygiene
   check_no_clean_trap
 
@@ -261,6 +266,7 @@ confirm_production_publish() {
   echo "  SVN : ${SVN_URL}"
   echo "  URL : ${PROD_URL}"
   echo "  User: ${ASF_USERNAME}"
+  echo "  Git : ${GIT_BRANCH:-unknown} @ ${GIT_COMMIT:-unknown}"
   if [[ "${MODE}" == "dry-run" ]]; then
     echo "  Mode: DRY RUN (no commit)"
   else
@@ -277,12 +283,40 @@ confirm_production_publish() {
   fi
 }
 
+xml_escape() {
+  local s="$1"
+  s="${s//&/&amp;}"
+  s="${s//</&lt;}"
+  s="${s//>/&gt;}"
+  printf '%s' "$s"
+}
+
+MVN_SETTINGS=""
+cleanup_mvn_settings() {
+  if [[ -n "${MVN_SETTINGS}" ]]; then
+    rm -f "${MVN_SETTINGS}"
+  fi
+}
+trap cleanup_mvn_settings EXIT
+
 publish_site() {
+  # scm-publish reads ${username} / ${password}. Supply them as profile properties in a
+  # private global-settings file so the password never appears on a command line
+  # (your own ~/.m2/settings.xml still applies).
+  MVN_SETTINGS="$(mktemp)"
+  chmod 600 "${MVN_SETTINGS}"
+  {
+    printf '<settings><profiles><profile><id>unomi-site-publish</id><properties>'
+    printf '<username>%s</username>' "$(xml_escape "${ASF_USERNAME}")"
+    printf '<password>%s</password>' "$(xml_escape "${ASF_PASSWORD}")"
+    printf '</properties></profile></profiles>'
+    printf '<activeProfiles><activeProfile>unomi-site-publish</activeProfile></activeProfiles></settings>\n'
+  } >"${MVN_SETTINGS}"
+
   local mvn_args=(
+    -gs "${MVN_SETTINGS}"
     install
     scm-publish:publish-scm
-    "-Dusername=${ASF_USERNAME}"
-    "-Dpassword=${ASF_PASSWORD}"
   )
 
   if [[ "${MODE}" == "dry-run" ]]; then
@@ -317,15 +351,14 @@ fi
 
 prompt_password_if_needed
 
-# Re-run credential presence + optional SVN probe now that password is available.
+# Re-check credential presence now that the password is available.
 CHECKS_FAILED=0
 echo "==> Post-prompt credential checks"
 if [[ -z "${ASF_PASSWORD}" ]]; then
   check_fail "password still empty after prompt"
 else
-  check_pass "password available for Maven/SVN"
+  check_pass "password available for Maven/SVN (SVN verifies it at commit time)"
 fi
-check_svn_auth_if_possible
 finish_prerequisite_checks
 
 if [[ "${SKIP_BUILD}" -eq 1 ]]; then

@@ -36,29 +36,34 @@ date: 2026-07-11 11:44:00 +0000
         <p>Legacy one-off scripts for &ldquo;build and run,&rdquo; &ldquo;build without tests,&rdquo; packaging, and deploy were removed in favor of one maintained entry point.
             The PowerShell twin
             <code>build.ps1</code>
-            tracks the same flags for Windows contributors.</p>
+            covers most of the same flags for Windows contributors (it has no equivalent of <code>--no-clean</code> or <code>--no-javadoc</code> yet).</p>
 
         <h2 class="h4 mt-5 mb-3">What you get</h2>
         <ul>
             <li><strong>Preflight</strong> &mdash; Java, Maven, GraphViz; memory/disk heuristics; ports for debug sessions; fail early with readable messages</li>
             <li><strong>Build flexibility</strong> &mdash; skip tests, OpenSearch vs Elasticsearch, named distributions, offline / Maven debug, optional Javadoc gate</li>
             <li><strong>Integration tests</strong> &mdash; <code>--integration-tests</code>, <code>--single-test</code>, IT debug/suspend, keep container, stream search logs when needed, memory sampler</li>
-            <li><strong>Run &amp; deploy</strong> &mdash; <code>--deploy --karaf-home</code>, Karaf debug ports, <code>--auto-start</code> for search engines, <code>--no-karaf</code> for package-only builds</li>
-            <li><strong>CI mode</strong> &mdash; <code>--ci</code> is non-interactive, batch Maven (<code>-B -ntp</code>), no Karaf side-trips; GitHub Actions calls the same script as you do locally (<a href="https://github.com/apache/unomi/pull/764">#764</a>)</li>
+            <li><strong>Run &amp; deploy</strong> &mdash; <code>--deploy --karaf-home</code>, Karaf debug ports, <code>--auto-start</code> to start Unomi against Elasticsearch or OpenSearch once Karaf is up, <code>--no-karaf</code> for package-only builds</li>
+            <li><strong>CI mode</strong> &mdash; <code>--ci</code> skips the script&rsquo;s prompts, hides Maven transfer progress (<code>-ntp</code>), turns on the Javadoc gate, and does not start Karaf; GitHub Actions calls the same script as you do locally (<a href="https://github.com/apache/unomi/pull/764">#764</a>)</li>
             <li><strong>UX details</strong> &mdash; section headers, traps with line/context on failure, <code>NO_COLOR</code> respected, optional <code>--log-file</code> tee</li>
         </ul>
 
         <h2 class="h4 mt-5 mb-3">Try it</h2>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>./build.sh --help
 
-# Default install
+# Default: build, then unpack and start Karaf
 ./build.sh
+
+# Build only
+./build.sh --no-karaf
 
 # Match GitHub Actions shape
 ./build.sh --ci
 
 # Full IT matrix flavors
 ./build.sh --integration-tests
+# OpenSearch runs need the admin password exported first
+export UNOMI_OPENSEARCH_PASSWORD='MyStrongPassw0rd!'
 ./build.sh --integration-tests --use-opensearch
 
 # One flaky test under a debugger

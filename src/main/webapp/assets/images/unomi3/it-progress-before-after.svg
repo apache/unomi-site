@@ -111,9 +111,9 @@
       <rect x="472" y="220" width="118" height="20" rx="4" fill="var(--term-ok)" class="bar-fill float"/>
       <text x="478" y="234" fill="#0f172a" font-size="9" font-weight="700">38%</text>
 
-      <text x="468" y="268" fill="var(--term-ok)">Progress: 38.11% (157/412)</text>
-      <text x="468" y="284" fill="var(--term-warn)">ETA: 18m 42s  |  OK: 157  Failed: 0</text>
-      <text x="468" y="310" fill="var(--term-muted)">Maven: -B -ntp  |  Docker logs to files</text>
+      <text x="468" y="268" fill="var(--term-ok)">Progress: 38.11% (157/412 tests).</text>
+      <text x="468" y="284" fill="var(--term-warn)">Remaining: 18m 42s. Successful: 157, Failed: 0</text>
+      <text x="468" y="310" fill="var(--term-muted)">Maven: -ntp  |  Docker logs to files</text>
       <text x="468" y="326" fill="var(--unomi-hero-accent)">Top 10 slowest - CSV at finish</text>
     </g>
   </g>

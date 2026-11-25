@@ -91,6 +91,7 @@ Important distinctions:
 - **`./preview.sh --prod` ≠ Apache production.** “Prod” here only means Netlify’s primary URL for the **preview** project (`unomi-preview`). It never updates `unomi.apache.org`.
 - **`./publish.sh` ≠ Netlify.** It publishes via Maven scm-publish to ASF SVN. That is the only path for the official site.
 - Netlify staging is for personal/community review only. Do not commit Netlify tokens or `.netlify/` state into git.
+- Preview copies are served with `X-Robots-Tag: noindex, nofollow` (see `netlify.toml`) and do not report to the ASF Matomo instance, which only runs on `unomi.apache.org`.
 
 ## Staging preview (Netlify)
 
@@ -139,7 +140,7 @@ Verify tooling before building:
    # or: netlify login
    ```
 
-   Opens a browser and stores credentials in your user Netlify CLI config (`~/.netlify` / `~/.config/netlify`).
+   Opens a browser and stores credentials in your user Netlify CLI config (`~/Library/Preferences/netlify` on macOS, `~/.config/netlify` on Linux).
 
 2. **Personal access token** (CI / non-interactive):
 
@@ -154,7 +155,8 @@ Verify tooling before building:
 | Variable / file | Purpose |
 |---|---|
 | (default) | Script creates/links a site named `unomi-preview` on first deploy |
-| `NETLIFY_SITE_NAME` | Override the Netlify site name (default: `unomi-preview`) |
+| `NETLIFY_SITE_NAME` | Override the Netlify site name (default: `unomi-preview`). Netlify site names are global, so `unomi-preview` belongs to whichever account created it first: other committers must set a name of their own, and their share URL is `https://<that-name>.netlify.app` |
+| `NETLIFY_CLI_VERSION` | `netlify-cli` major version used through `npx` (default: `27`) |
 | `NETLIFY_SITE_ID` | Use an existing site id and skip interactive link |
 | `.netlify/state.json` | Created after a successful link; reused on later runs (gitignored) |
 
@@ -218,12 +220,12 @@ Use `./publish.sh`, which builds with Docker Jekyll, runs strong validations, th
 
 Do **not** use the Maven `clean` goal — it would remove previously published trees that scm-publish intentionally preserves (`docs/`, `manual/`, etc.).
 
-Credentials: your **ASF LDAP username and password** (not Netlify). Pass them as parameters (or env vars); the password is never printed.
+Credentials: your **ASF LDAP username and password** (not Netlify). Let the script prompt for the password (or set `ASF_PASSWORD`). `-p` also works, but it puts the password in your shell history and in the process list. The script passes the password to Maven through a private temporary settings file, and never prints it.
 
 ```shell
 ./publish.sh --check-only --username YOUR_APACHE_USERNAME
-./publish.sh --dry-run -u YOUR_APACHE_USERNAME -p 'YOUR_APACHE_PASSWORD'
-./publish.sh -u YOUR_APACHE_USERNAME -p 'YOUR_APACHE_PASSWORD'
+./publish.sh --dry-run -u YOUR_APACHE_USERNAME
+./publish.sh -u YOUR_APACHE_USERNAME
 ```
 
 | Flag / env | Purpose |
@@ -234,11 +236,14 @@ Credentials: your **ASF LDAP username and password** (not Netlify). Pass them as
 | `--dry-run` | Full build + validate + Maven scm-publish dry run (no SVN commit) |
 | `--skip-build` | Reuse an existing `target/site` (still validated) |
 | `--yes` | Skip typing `publish` to confirm (required for non-interactive runs) |
+| `--force` | Publish even if the git tree is dirty, the branch is not `master`, or `_config.yml` `url` is not `https://unomi.apache.org` |
 
-Before publishing, the script checks project layout, Jekyll config, `pom.xml` scm-publish settings, Docker, Maven/Java, SVN reachability, optional live SVN auth (if `svn` is installed), git dirty-tree warnings, and the built site contents (required pages, file counts, no Jekyll source dirs).
+Before publishing, the script checks project layout, Jekyll config, `pom.xml` scm-publish settings, Docker, Maven/Java, SVN reachability, the git state (it refuses a dirty tree or a branch other than `master` unless `--force` is given), and the built site contents (required pages, file counts, no Jekyll source dirs). It cannot verify the password: SVN only checks it at commit time, so a wrong one fails at the final Maven step.
 
 Equivalent manual Maven command (prefer the script):
 
 ```shell
 mvn install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD
 ```
+
+This form exposes the password in your shell history and the process list.

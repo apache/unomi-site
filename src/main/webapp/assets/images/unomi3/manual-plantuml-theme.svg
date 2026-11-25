@@ -89,6 +89,6 @@
     <text x="700" y="238" fill="var(--unomi-info)" font-size="8" font-weight="600">sequence</text>
     <text x="560" y="278" fill="var(--unomi-text)" font-size="11" font-weight="600">Inter | brand tokens</text>
     <text x="560" y="296" fill="var(--unomi-text-muted)" font-size="10">Responsive nav + TOC | PDF theme</text>
-    <text x="560" y="314" fill="var(--unomi-primary-dark)" font-size="10" font-weight="600">62 PlantUML diagrams | text in git</text>
+    <text x="560" y="314" fill="var(--unomi-primary-dark)" font-size="10" font-weight="600">78 PlantUML diagrams | text in git</text>
   </g>
 </svg>

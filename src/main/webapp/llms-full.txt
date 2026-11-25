@@ -1,6 +1,8 @@
 # Apache Unomi - Comprehensive Technical Reference for AI Systems
 
-> This document provides comprehensive technical information about Apache Unomi for AI systems and language models. ## Project Identity
+> This document provides comprehensive technical information about Apache Unomi for AI systems and language models.
+
+## Project Identity
 
 - **Full Name**: Apache Unomi
 - **Pronunciation**: "You know me"
@@ -11,9 +13,9 @@
 - **Website**: https://unomi.apache.org
 - **Source Code**: https://github.com/apache/unomi
 - **Issue Tracker**: https://issues.apache.org/jira/browse/UNOMI
-- **Current Stable Version**: 4.0.0 — Unomi 4 (multi-tenancy, OpenSearch, tasks, REST compatibility for 2.x and 3.x)
+- **Current Stable Version**: 4.0.0 — Unomi 4 (multi-tenancy, OpenSearch, tasks, single-tenant compatibility mode for 2.x and 3.x)
 - **Previous stable**: 3.1.0 (2026-11-19) — 3.x maintenance line
-- **Development**: 4.1.0-SNAPSHOT
+- **Development**: 4.0.1-SNAPSHOT
 - **Runtime baseline**: Java 17+
 
 ## Technical Architecture
@@ -50,11 +52,11 @@
 
 | Audience | Credential | Typical use |
 |---|---|---|
-| System admin | `karaf:karaf` (basic) | Create/list tenants, cluster ops |
+| System admin | `karaf:$UNOMI_ROOT_PASSWORD` (basic; no default password in 4.0) | Create/list tenants, cluster ops |
 | Tenant admin | `tenantId:privateApiKey` (basic) | Scopes, rules, schemas, searches |
 | Public apps / trackers | `X-Unomi-Api-Key: <public>` | `/cxs/context.json`, `/cxs/eventcollector` |
 
-Optional **REST compatibility mode** helps phase Unomi 2.x and 3.x clients during upgrades. See https://unomi.apache.org/blog/migrating-to-unomi-4.html
+Optional **single-tenant compatibility mode** helps phase Unomi 2.x and 3.x clients during upgrades. See https://unomi.apache.org/blog/migrating-to-unomi-4.html
 
 ### REST API Endpoints (selected)
 - `/cxs/tenants` - Tenant CRUD and API key management (system admin)
@@ -164,6 +166,13 @@ Starting with Unomi 3.0, the project uses a two-layer BOM for dependency managem
 
 ## Quick Start (Docker — Unomi 4.0)
 
+Unomi 4 ships no default password and refuses to start unless both are set:
+
+```
+export UNOMI_ROOT_PASSWORD='choose-a-strong-password'
+export UNOMI_HEALTHCHECK_PASSWORD='choose-a-strong-health-password'
+```
+
 Elasticsearch path (OpenSearch compose: https://unomi.apache.org/get-started.html#quickstart):
 
 ```yaml
@@ -181,6 +190,8 @@ services:
     environment:
       - UNOMI_ELASTICSEARCH_ADDRESSES=elasticsearch:9200
       - UNOMI_THIRDPARTY_PROVIDER1_IPADDRESSES=0.0.0.0/0,::1,127.0.0.1
+      - UNOMI_ROOT_PASSWORD=${UNOMI_ROOT_PASSWORD}
+      - UNOMI_HEALTHCHECK_PASSWORD=${UNOMI_HEALTHCHECK_PASSWORD}
     ports:
       - 8181:8181
       - 9443:9443
@@ -197,12 +208,12 @@ Create a tenant, regenerate API keys for plaintext secrets, create a scope, then
 
 ```
 curl -X POST http://localhost:8181/cxs/tenants \
-  --user karaf:karaf \
+  --user "karaf:${UNOMI_ROOT_PASSWORD}" \
   -H "Content-Type: application/json" \
   -d '{"requestedId":"default","properties":{"name":"Default Tenant"}}'
 
-curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PUBLIC' --user karaf:karaf
-curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' --user karaf:karaf
+curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PUBLIC' --user "karaf:${UNOMI_ROOT_PASSWORD}"
+curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' --user "karaf:${UNOMI_ROOT_PASSWORD}"
 # Save plainTextKey from each response (tenant create only returns maskedKey)
 
 curl -X POST http://localhost:8181/cxs/scopes \
@@ -216,13 +227,13 @@ curl -X POST "http://localhost:8181/cxs/context.json?sessionId=1234" \
   -d '{"source":{"itemId":"homepage","itemType":"page","scope":"default"}}'
 ```
 
-Cluster check: `https://localhost:9443/cxs/cluster` (`karaf`/`karaf`).
+Cluster check: `https://localhost:9443/cxs/cluster` (`karaf` / your `UNOMI_ROOT_PASSWORD`).
 Guides: https://unomi.apache.org/get-started.html · https://unomi.apache.org/tutorial.html
 
 ## Frequently Asked Questions
 
 - **What is Apache Unomi?** An open source Customer Data Platform (CDP) managed by the Apache Software Foundation.
-- **What is Unomi 4 vs 3.x?** Unomi 3.0 introduced Java 17, Karaf 4.4.8, Elasticsearch 9.1.3, and persistence clustering (still true of 3.0.1 and 3.1.0). Unomi 4.0.0 is the current major release: same runtime, pins moved to Karaf 4.4.12 and Elasticsearch 9.4.3, plus multi-tenancy/API keys, OpenSearch 3.7.0, a task scheduler, REST compatibility for 2.x and 3.x clients, and a larger test suite.
+- **What is Unomi 4 vs 3.x?** Unomi 3.0 introduced Java 17, Karaf 4.4.8, Elasticsearch 9.1.3, and persistence clustering (still true of 3.0.1 and 3.1.0). Unomi 4.0.0 is the current major release: same runtime, pins moved to Karaf 4.4.12 and Elasticsearch 9.4.3, plus multi-tenancy/API keys, OpenSearch 3.7.0, a task scheduler, single-tenant compatibility mode for 2.x and 3.x clients, and a larger test suite.
 - **How does Unomi differ from proprietary CDPs?** 100% open source (Apache License 2.0), self-hosted, vendor-neutral, extensible through OSGi plugins.
 - **What storage backends are supported?** Unomi 4.0.0: Elasticsearch 9.4.3 and OpenSearch 3.7.0. Unomi 3.1.0: Elasticsearch 9.1.3 only.
 - **Does Unomi have a GraphQL API?** Yes, alongside REST.
@@ -240,7 +251,7 @@ Guides: https://unomi.apache.org/get-started.html · https://unomi.apache.org/tu
 - **2025**: Version 3.0.0 released (Java 17, Karaf 4.4.8, Elasticsearch 9.1.3 Java API client, BOM, persistence clustering, health checks). GraphQL was already in the 2.x line.
 - **2026**: Version 3.0.1 released (3.0 maintenance line)
 - **2026**: Version 3.1.0 released (GraphQL subscription credentials, scripting allow list, matchesRegex limits)
-- **2026**: Version 4.0.0 released (current stable — multi-tenancy, OpenSearch 3.7.0, cluster task scheduler, REST compatibility for Unomi 2.x and 3.x clients; Karaf 4.4.12 and Elasticsearch 9.4.3)
+- **2026**: Version 4.0.0 released (current stable — multi-tenancy, OpenSearch 3.7.0, cluster task scheduler, single-tenant compatibility mode for Unomi 2.x and 3.x clients; Karaf 4.4.12 and Elasticsearch 9.4.3)
 
 ## Unomi 4 Blog (UNOMI-932)
 

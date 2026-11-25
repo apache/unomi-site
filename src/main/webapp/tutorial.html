@@ -22,7 +22,7 @@ structured_data: >
                 "@type": "HowToStep",
                 "position": 2,
                 "name": "Create a tenant",
-                "text": "POST /cxs/tenants as karaf/karaf, then regenerate PUBLIC and PRIVATE keys via /cxs/tenants/{id}/apikeys and save each plainTextKey."
+                "text": "POST /cxs/tenants as karaf with your UNOMI_ROOT_PASSWORD, then regenerate PUBLIC and PRIVATE keys via /cxs/tenants/{id}/apikeys and save each plainTextKey."
             },
             {
                 "@type": "HowToStep",
@@ -90,6 +90,11 @@ structured_data: >
                 <h2>Quick Start with Docker</h2>
                 <p class="text-muted">The fastest way to get Unomi 4.0 running. You only need <a href="https://docs.docker.com/get-docker/" target="_blank" rel="noopener">Docker</a>. Full compose options (including OpenSearch) are on the <a href="/get-started.html#quickstart">Getting Started</a> page.</p>
 
+                <h3 class="h6 fw-semibold mt-4 mb-3">Export the admin passwords</h3>
+                <p class="small text-muted">Unomi 4 ships no default password and refuses to start if these are unset. The compose file and the <code>curl</code> commands below read the same variables.</p>
+<pre><code>export UNOMI_ROOT_PASSWORD='choose-a-strong-password'
+export UNOMI_HEALTHCHECK_PASSWORD='choose-a-strong-health-password'</code></pre>
+
                 <h3 class="h6 fw-semibold mt-4 mb-3">Create <code>docker-compose.yml</code> (Elasticsearch)</h3>
 <pre><code>version: '3.8'
 services:
@@ -106,6 +111,8 @@ services:
     environment:
       - UNOMI_ELASTICSEARCH_ADDRESSES=elasticsearch:9200
       - UNOMI_THIRDPARTY_PROVIDER1_IPADDRESSES=0.0.0.0/0,::1,127.0.0.1
+      - UNOMI_ROOT_PASSWORD=${UNOMI_ROOT_PASSWORD}
+      - UNOMI_HEALTHCHECK_PASSWORD=${UNOMI_HEALTHCHECK_PASSWORD}
     ports:
       - 8181:8181
       - 9443:9443
@@ -120,8 +127,8 @@ services:
                 </div>
 
                 <h3 class="h6 fw-semibold mt-4 mb-3">Verify the cluster</h3>
-<pre><code>curl -k https://localhost:9443/cxs/cluster -u karaf:karaf</code></pre>
-                <p class="small text-muted">Default system credentials: <code>karaf</code> / <code>karaf</code>. Accept the self-signed certificate warning in development.</p>
+<pre><code>curl -k https://localhost:9443/cxs/cluster -u "karaf:${UNOMI_ROOT_PASSWORD}"</code></pre>
+                <p class="small text-muted">System admin credentials: <code>karaf</code> / your <code>UNOMI_ROOT_PASSWORD</code> (there is no default password in 4.0). Accept the self-signed certificate warning in development.</p>
 
                 <div class="alert alert-info small" role="alert">
                     <i class="bi bi-info-circle me-1"></i> Development only. Prefer OpenSearch? See <a href="/get-started.html#quickstart">Getting Started &mdash; Option B</a>. Production: <a href="https://unomi.apache.org/manual/latest/index.html#_securing_a_production_environment">security guide</a>.
@@ -147,7 +154,7 @@ services:
                 <h2>Create a Tenant</h2>
                 <p class="text-muted">In Unomi 4.0, data lives under a <strong>tenant</strong>. Create one with the system admin user, then regenerate API keys to obtain the one-time plaintext values.</p>
 <pre><code>curl -X POST http://localhost:8181/cxs/tenants \
-  --user karaf:karaf \
+  --user "karaf:${UNOMI_ROOT_PASSWORD}" \
   -H "Content-Type: application/json" \
   -d '{
     "requestedId": "default",
@@ -159,16 +166,16 @@ services:
 
 # Tenant create only returns maskedKey. Regenerate to get plainTextKey (shown once):
 curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PUBLIC' \
-  --user karaf:karaf
+  --user "karaf:${UNOMI_ROOT_PASSWORD}"
 curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
-  --user karaf:karaf</code></pre>
+  --user "karaf:${UNOMI_ROOT_PASSWORD}"</code></pre>
                 <p class="small text-muted mt-3">From each apikeys response, copy <code>plainTextKey</code>:</p>
                 <ul class="small">
                     <li><code>YOUR_PUBLIC_API_KEY</code> &mdash; header <code>X-Unomi-Api-Key</code> for <code>/cxs/context.json</code> and <code>/cxs/eventcollector</code></li>
                     <li><code>YOUR_PRIVATE_API_KEY</code> &mdash; basic auth <code>default:YOUR_PRIVATE_API_KEY</code> for scopes, rules, schemas, searches</li>
                 </ul>
                 <div class="alert alert-warning small" role="alert">
-                    <i class="bi bi-exclamation-triangle me-1"></i> Public endpoints reject requests without a valid public API key. Do not use <code>karaf:karaf</code> for context or event collector calls in native 4.0 mode.
+                    <i class="bi bi-exclamation-triangle me-1"></i> Public endpoints reject requests without a valid public API key. Do not use the <code>karaf</code> system admin credentials for context or event collector calls in native 4.0 mode.
                 </div>
                 <p class="small mb-0">More: <a href="/get-started.html#auth">Getting Started auth table</a> &middot; <a href="/blog/unomi-4-multitenancy.html">Multi-tenancy post</a></p>
             </div>
@@ -198,15 +205,17 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
                 <p><strong>OpenSearch:</strong> set <code>cluster.name: opensearch-cluster</code> and <code>discovery.type: single-node</code>, then <code>bin/opensearch</code>. In Karaf use <code>unomi:setup -d=unomi-distribution-opensearch -f=true</code> before <code>unomi:start</code>.</p>
 
                 <h3 class="h6 fw-semibold mt-4 mb-3">2. Download &amp; start Apache Unomi</h3>
-                <p>Download the Unomi {{ site.data.unomi.latest.stable.version }} binary from the <a href="/download.html">download page</a>, extract it, then:</p>
-<pre><code>./bin/karaf
+                <p>Download the Unomi {{ site.data.unomi.latest.stable.version }} binary from the <a href="/download.html">download page</a>, extract it, export the required passwords (Unomi refuses to start without them), then:</p>
+<pre><code>export UNOMI_ROOT_PASSWORD='choose-a-strong-password'
+export UNOMI_HEALTHCHECK_PASSWORD='choose-a-strong-health-password'
+./bin/karaf
 karaf@root()&gt; unomi:start</code></pre>
 
                 <h3 class="h6 fw-semibold mt-4 mb-3">3. Tenant + context</h3>
-                <p>Create a tenant as in <a href="#create-tenant">Step 2</a>, then call context with <code>X-Unomi-Api-Key</code>. Cluster check: <code>https://localhost:9443/cxs/cluster</code> (<code>karaf</code>/<code>karaf</code>).</p>
+                <p>Create a tenant as in <a href="#create-tenant">Step 2</a>, then call context with <code>X-Unomi-Api-Key</code>. Cluster check: <code>https://localhost:9443/cxs/cluster</code> (<code>karaf</code> / your <code>UNOMI_ROOT_PASSWORD</code>).</p>
 
                 <div class="alert alert-info small" role="alert">
-                    <i class="bi bi-terminal me-1"></i> <strong>Tip:</strong> SSH console <code>ssh -p 8102 karaf@localhost</code> &mdash; <code>unomi:crud list profile</code>, <code>unomi:event-tail</code>, <code>unomi:crud list rule</code>. Full detail: <a href="/blog/unomi-4-shell-commands.html">shell commands post</a> &middot; <a href="https://unomi.apache.org/manual/latest/index.html#_quick_start">manual quick start</a>.
+                    <i class="bi bi-terminal me-1"></i> <strong>Tip:</strong> SSH console <code>ssh -p 8102 karaf@localhost</code> &mdash; <code>unomi:crud list profile</code>, <code>unomi:event-tail</code>, <code>unomi:crud list rule</code>. Full detail: <a href="/blog/unomi-4-shell-commands.html">shell commands post</a> &middot; <a href="https://unomi.apache.org/manual/latest/index.html#_five_minutes_quickstart">manual quick start</a>.
                 </div>
             </div>
         </div>
@@ -368,7 +377,7 @@ karaf@root()&gt; unomi:start</code></pre>
                 <h2>Web Tracking Tutorial</h2>
                 <p class="text-muted">Collect page views and enable personalization. Unomi 4.0 public endpoints require your tenant <strong>public API key</strong> on every context / event request.</p>
                 <div class="alert alert-info small" role="alert">
-                    <i class="bi bi-key me-1"></i> If your tracker build accepts an API key option, set it to <code>YOUR_PUBLIC_API_KEY</code>. Otherwise ensure requests send header <code>X-Unomi-Api-Key</code> (see the <a href="https://unomi.apache.org/manual/latest/index.html#_how_to_build_a_javascript_web_tracker">JavaScript tracker guide</a> in the manual).
+                    <i class="bi bi-key me-1"></i> The tracker bundled with Unomi 4.0 (version 2.0.0) takes the key as <code>apiKey</code> in <code>wemInitConfig</code> and sends it in the <code>X-Unomi-Api-Key</code> header. Use the <strong>public</strong> key only, never the private one (see <a href="https://unomi.apache.org/manual/latest/index.html#_web_tracker_server_versions">Configuring the tracker for your Unomi server</a> in the manual).
                 </div>
 
                 <!-- Install tracker -->
@@ -398,30 +407,17 @@ karaf@root()&gt; unomi:start</code></pre>
       "attributes": {},
       "consentTypes": []
     },
-    "events:": [],
+    "events": [],
     "wemInitConfig": {
       "contextServerUrl": document.location.origin,
       "timeoutInMilliseconds": "1500",
       "contextServerCookieName": "context-profile-id",
       "activateWem": true,
       "trackerSessionIdCookieName": "my-website-session-id",
-      "trackerProfileIdCookieName": "my-website-profile-id"
-      // If supported by your tracker build, also set apiKey: "YOUR_PUBLIC_API_KEY"
+      "trackerProfileIdCookieName": "my-website-profile-id",
+      // Unomi 4.0: tenant public API key, sent as X-Unomi-Api-Key
+      "apiKey": "YOUR_PUBLIC_API_KEY"
     }
-  };
-
-  // Unomi 4.0: ensure public endpoints receive the tenant public API key
-  var originalOpen = XMLHttpRequest.prototype.open;
-  var originalSend = XMLHttpRequest.prototype.send;
-  XMLHttpRequest.prototype.open = function() {
-    this._unomiUrl = arguments[1];
-    return originalOpen.apply(this, arguments);
-  };
-  XMLHttpRequest.prototype.send = function() {
-    if (this._unomiUrl && String(this._unomiUrl).indexOf("/cxs/") !== -1) {
-      this.setRequestHeader("X-Unomi-Api-Key", "YOUR_PUBLIC_API_KEY");
-    }
-    return originalSend.apply(this, arguments);
   };
 
   // Generate a new session if needed
@@ -446,9 +442,10 @@ karaf@root()&gt; unomi:start</code></pre>
                 <!-- NPM -->
                 <h3 class="h6 fw-semibold mt-4 mb-3">Using the tracker as an NPM package</h3>
                 <p>For JavaScript/TypeScript projects, install the tracker from npm:</p>
-<pre><code>npm install apache-unomi-tracker
+<pre><code>npm install apache-unomi-tracker@2
 # or
-yarn add apache-unomi-tracker</code></pre>
+yarn add apache-unomi-tracker@2</code></pre>
+                <p class="small text-muted">Version 2.0.0 or later is required for <code>apiKey</code>; 1.x does not send the key.</p>
                 <p>Then import and use it:</p>
 <pre><code>import { useTracker } from "apache-unomi-tracker";
 

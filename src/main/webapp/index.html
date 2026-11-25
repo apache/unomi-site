@@ -1,7 +1,7 @@
 ---
 title: Apache Unomi 4 — Open Source Customer Data Platform
 description: "Apache Unomi 4 is a major open-source CDP release on the Unomi 3 runtime — true multi-tenancy, Elasticsearch 9.4.3 / OpenSearch 3.7.0, stable REST, and a privacy-first data layer AI agents can query and update."
-keywords: "Apache Unomi 4, open source CDP, Customer Data Platform, multi-tenancy, OpenSearch, CDP for AI agents, LLM customer context, agentic personalization, REST compatibility, OASIS CXS, GDPR CDP"
+keywords: "Apache Unomi 4, open source CDP, Customer Data Platform, multi-tenancy, OpenSearch, CDP for AI agents, LLM customer context, agentic personalization, single-tenant compatibility mode, OASIS CXS, GDPR CDP"
 layout: default
 structured_data: >
     <script type="application/ld+json">
@@ -46,7 +46,7 @@ structured_data: >
                 "name": "What is Apache Unomi 4?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Apache Unomi 4.0 is a major Customer Data Platform release on the Unomi 3 runtime (Java 17+, Karaf 4.4, Elasticsearch 9, persistence-based clustering). It updates those pins to Karaf 4.4.12 and Elasticsearch 9.4.3, and adds multi-tenancy with API keys, OpenSearch 3.7.0, a cluster-aware task scheduler, REST compatibility for Unomi 2.x and 3.x clients, and a much larger automated test investment."
+                    "text": "Apache Unomi 4.0 is a major Customer Data Platform release on the Unomi 3 runtime (Java 17+, Karaf 4.4, Elasticsearch 9, persistence-based clustering). It updates those pins to Karaf 4.4.12 and Elasticsearch 9.4.3, and adds multi-tenancy with API keys, OpenSearch 3.7.0, a cluster-aware task scheduler, single-tenant compatibility mode for Unomi 2.x and 3.x clients, and a much larger automated test investment."
                 }
             },
             {
@@ -228,7 +228,7 @@ structured_data: >
                 <ul class="list-unstyled small mb-4">
                     <li class="mb-2"><i class="bi bi-buildings text-primary me-2"></i><strong>Multi-tenancy</strong> &mdash; isolate profiles, events, segments, rules &amp; schemas per tenant</li>
                     <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i><strong>119/119</strong> documented 2.x OpenAPI paths retained</li>
-                    <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i>Tests grew faster than production code (~5× vs ~1.7× LOC)</li>
+                    <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i>Tests grew faster than production code (~8× vs ~1.8× LOC)</li>
                 </ul>
                 <div class="d-flex flex-wrap gap-2">
                     <a class="btn btn-primary" href="/blog/introducing-apache-unomi-4.html">Read the Unomi 4 story</a>
@@ -592,7 +592,7 @@ structured_data: >
                     <i class="bi bi-rocket-takeoff news-icon text-success-var"></i>
                     <div>
                         <strong class="small">Apache Unomi {{ site.data.unomi.latest.stable.version }} released</strong>
-                        <span class="small text-muted">&mdash; Major release on the Unomi 3 runtime: multi-tenancy, OpenSearch 3.7.0, tasks, and REST compatibility for 2.x and 3.x. Pins Elasticsearch 9.4.3 and Karaf 4.4.12.</span>
+                        <span class="small text-muted">&mdash; Major release on the Unomi 3 runtime: multi-tenancy, OpenSearch 3.7.0, tasks, and single-tenant compatibility mode for 2.x and 3.x. Pins Elasticsearch 9.4.3 and Karaf 4.4.12.</span>
                         <a href="/download.html" class="news-link">Download</a>
                         <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version={{ site.data.unomi.latest.stable.jira_version_id }}" target="_blank" rel="noopener" class="news-link">Release notes</a>
                         <a href="/blog/introducing-apache-unomi-4.html" class="news-link">Unomi 4 story</a>

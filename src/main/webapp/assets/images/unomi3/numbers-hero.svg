@@ -46,29 +46,29 @@
   <g class="fade" style="animation-delay:.15s">
     <rect x="40" y="100" width="175" height="150" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-primary)" stroke-width="2"/>
     <text x="127" y="145" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="12" font-weight="600">JAVA LOC</text>
-    <text x="127" y="190" text-anchor="middle" fill="var(--unomi-primary-dark)" font-size="36" font-weight="800">181k</text>
+    <text x="127" y="190" text-anchor="middle" fill="var(--unomi-primary-dark)" font-size="36" font-weight="800">220k</text>
     <text x="127" y="220" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">Unomi 4.0 (was 54k in 1.x)</text>
   </g>
   <g class="fade" style="animation-delay:.25s">
     <rect x="235" y="100" width="175" height="150" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-accent)" stroke-width="2"/>
     <text x="322" y="145" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="12" font-weight="600">UNIT @Test</text>
-    <text x="322" y="190" text-anchor="middle" fill="var(--unomi-accent-dark)" font-size="36" font-weight="800">1,148</text>
+    <text x="322" y="190" text-anchor="middle" fill="var(--unomi-accent-dark)" font-size="36" font-weight="800">2,118</text>
     <text x="322" y="220" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">up from 34 in Unomi 1.x</text>
   </g>
   <g class="fade" style="animation-delay:.35s">
     <rect x="430" y="100" width="175" height="150" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-info)" stroke-width="2"/>
     <text x="517" y="145" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="12" font-weight="600">IT @Test</text>
-    <text x="517" y="190" text-anchor="middle" fill="var(--unomi-info)" font-size="36" font-weight="800">388</text>
+    <text x="517" y="190" text-anchor="middle" fill="var(--unomi-info)" font-size="36" font-weight="800">539</text>
     <text x="517" y="220" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">up from 128 in Unomi 1.x</text>
   </g>
   <g class="fade" style="animation-delay:.45s">
     <rect x="625" y="100" width="175" height="150" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-success)" stroke-width="2"/>
     <text x="712" y="145" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="12" font-weight="600">CONTRIBUTORS</text>
-    <text x="712" y="190" text-anchor="middle" fill="var(--unomi-success)" font-size="36" font-weight="800">77</text>
+    <text x="712" y="190" text-anchor="middle" fill="var(--unomi-success)" font-size="36" font-weight="800">79</text>
     <text x="712" y="220" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">cumulative unique authors</text>
   </g>
 
   <rect x="40" y="280" width="760" height="90" rx="14" fill="var(--unomi-white)" stroke="var(--unomi-border)" stroke-width="2"/>
   <text x="60" y="318" fill="var(--unomi-primary-dark)" font-size="14" font-weight="700">The story in one line</text>
-  <text x="60" y="344" fill="var(--unomi-text)" font-size="13">Production code nearly tripled since 1.x - test code grew ~7x, with the steepest climb in Unomi 4.0.</text>
+  <text x="60" y="344" fill="var(--unomi-text)" font-size="13">Production code nearly tripled since 1.x - test code grew ~11x, with the steepest climb in Unomi 4.0.</text>
 </svg>

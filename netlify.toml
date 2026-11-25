@@ -11,3 +11,5 @@
   [headers.values]
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
+    # Preview copies must not be indexed as if they were the official site.
+    X-Robots-Tag = "noindex, nofollow"

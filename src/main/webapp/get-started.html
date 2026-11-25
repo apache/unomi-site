@@ -20,7 +20,7 @@ structured_data: >
                 "@type": "HowToStep",
                 "position": 1,
                 "name": "Create a docker-compose.yml file",
-                "text": "Create a docker-compose.yml with Elasticsearch 9.4.3 or OpenSearch 3.7.0 and Apache Unomi 4.0."
+                "text": "Export UNOMI_ROOT_PASSWORD and UNOMI_HEALTHCHECK_PASSWORD (Unomi 4 refuses to start without them), then create a docker-compose.yml with Elasticsearch 9.4.3 or OpenSearch 3.7.0 and Apache Unomi 4.0."
             },
             {
                 "@type": "HowToStep",
@@ -32,7 +32,7 @@ structured_data: >
                 "@type": "HowToStep",
                 "position": 3,
                 "name": "Create a tenant",
-                "text": "POST /cxs/tenants as karaf/karaf, then POST /cxs/tenants/{id}/apikeys?type=PUBLIC and type=PRIVATE and save each plainTextKey."
+                "text": "POST /cxs/tenants as karaf with your UNOMI_ROOT_PASSWORD, then POST /cxs/tenants/{id}/apikeys?type=PUBLIC and type=PRIVATE and save each plainTextKey."
             },
             {
                 "@type": "HowToStep",
@@ -146,6 +146,10 @@ structured_data: >
                     <div class="flex-grow-1">
                         <h3 class="h6 fw-semibold mb-2">Create a <code>docker-compose.yml</code></h3>
                         <p class="small text-muted mb-3">Pick one backend. Image tag matches the current stable release (<code>{{ site.data.unomi.latest.stable.version }}</code>).</p>
+                        <p class="small text-muted mb-2">Export the passwords first. Unomi 4 ships no default password and refuses to start if they are unset; the compose files and the <code>curl</code> commands below read the same variables.</p>
+                        <pre><code>export UNOMI_ROOT_PASSWORD='choose-a-strong-password'
+export UNOMI_HEALTHCHECK_PASSWORD='choose-a-strong-health-password'</code></pre>
+
 
                         <h4 class="h6 fw-semibold mb-2">Option A &mdash; Elasticsearch 9.4.3</h4>
                         <pre><code>version: '3.8'
@@ -162,6 +166,8 @@ services:
     environment:
       - UNOMI_ELASTICSEARCH_ADDRESSES=elasticsearch:9200
       - UNOMI_THIRDPARTY_PROVIDER1_IPADDRESSES=0.0.0.0/0,::1,127.0.0.1
+      - UNOMI_ROOT_PASSWORD=${UNOMI_ROOT_PASSWORD}
+      - UNOMI_HEALTHCHECK_PASSWORD=${UNOMI_HEALTHCHECK_PASSWORD}
     ports:
       - 8181:8181
       - 9443:9443
@@ -180,7 +186,7 @@ services:
       - discovery.type=single-node
       - bootstrap.memory_lock=true
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
-      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD:-admin}
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD:-MyStrongPassw0rd!}
     ulimits:
       memlock:
         soft: -1
@@ -200,8 +206,10 @@ services:
       - UNOMI_DISTRIBUTION=unomi-distribution-opensearch
       - UNOMI_OPENSEARCH_ADDRESSES=opensearch-node1:9200
       - UNOMI_OPENSEARCH_USERNAME=admin
-      - UNOMI_OPENSEARCH_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD:-admin}
+      - UNOMI_OPENSEARCH_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD:-MyStrongPassw0rd!}
       - UNOMI_HEALTHCHECK_PROVIDERS=cluster,opensearch,unomi,persistence
+      - UNOMI_ROOT_PASSWORD=${UNOMI_ROOT_PASSWORD}
+      - UNOMI_HEALTHCHECK_PASSWORD=${UNOMI_HEALTHCHECK_PASSWORD}
     ports:
       - 8181:8181
       - 9443:9443
@@ -231,7 +239,7 @@ volumes:
                         <h3 class="h6 fw-semibold mb-2">Create a tenant (required in 4.0)</h3>
                         <p class="small text-muted">System admin credentials create tenants. Creation stores hashed keys only (<code>maskedKey</code> in the response) &mdash; regenerate each key once and save <code>plainTextKey</code> immediately.</p>
                         <pre><code>curl -X POST http://localhost:8181/cxs/tenants \
-  --user karaf:karaf \
+  --user "karaf:${UNOMI_ROOT_PASSWORD}" \
   -H "Content-Type: application/json" \
   -d '{
     "requestedId": "default",
@@ -243,9 +251,9 @@ volumes:
 
 # One-time plaintext secrets (replaces any existing key of that type)
 curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PUBLIC' \
-  --user karaf:karaf
+  --user "karaf:${UNOMI_ROOT_PASSWORD}"
 curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
-  --user karaf:karaf</code></pre>
+  --user "karaf:${UNOMI_ROOT_PASSWORD}"</code></pre>
                         <ul class="small text-muted mt-2 mb-0">
                             <li><strong>PUBLIC</strong> <code>plainTextKey</code> &mdash; use as <code>X-Unomi-Api-Key</code> on <code>/cxs/context.json</code> and <code>/cxs/eventcollector</code></li>
                             <li><strong>PRIVATE</strong> <code>plainTextKey</code> &mdash; basic auth <code>default:&lt;private-key&gt;</code> for admin APIs (scopes, rules, schemas, &hellip;)</li>
@@ -259,7 +267,7 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
                     <div class="flex-grow-1">
                         <h3 class="h6 fw-semibold mb-2">Verify cluster &amp; request context</h3>
                         <p class="small text-muted mb-2">Cluster (system admin):</p>
-                        <pre><code>curl -k https://localhost:9443/cxs/cluster -u karaf:karaf</code></pre>
+                        <pre><code>curl -k https://localhost:9443/cxs/cluster -u "karaf:${UNOMI_ROOT_PASSWORD}"</code></pre>
                         <p class="small text-muted mt-3 mb-2">Create a scope before context or events (schema validation rejects unknown scopes):</p>
                         <pre><code>curl -X POST http://localhost:8181/cxs/scopes \
   -u "default:YOUR_PRIVATE_API_KEY" \
@@ -280,7 +288,7 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
       "scope": "default"
     }
   }'</code></pre>
-                        <p class="small text-muted mt-2 mb-0">Default system credentials: <code>karaf</code> / <code>karaf</code>. Certificate warnings on port 9443 are expected in development.</p>
+                        <p class="small text-muted mt-2 mb-0">System admin credentials: <code>karaf</code> / your <code>UNOMI_ROOT_PASSWORD</code> (there is no default password in 4.0). Certificate warnings on port 9443 are expected in development.</p>
                     </div>
                 </div>
             </div>
@@ -290,8 +298,8 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
             <div class="col-lg-9">
                 <div class="p-3 rounded-3 bg-primary-light">
                     <p class="small mb-1"><strong><i class="bi bi-info-circle me-1"></i>Production note:</strong> This configuration is for development only. See the <a href="{{ site.data.unomi.manual.security }}">production security guide</a> before deploying.</p>
-                    <p class="small mb-1"><strong>Manual install?</strong> Java 17+, Elasticsearch 9.4.3 or OpenSearch 3.7.0 &mdash; follow the <a href="{{ site.data.unomi.manual.quick_start }}">manual quick start</a> (same tenant + API key steps).</p>
-                    <p class="small mb-0"><strong>Upgrading from 3.x?</strong> See <a href="/blog/migrating-to-unomi-4.html">Migrating to Unomi 4</a>. Still on 2.7? That page also covers the extra platform steps, plus optional <a href="{{ site.data.unomi.manual.v2_compat }}">REST compatibility mode</a>.</p>
+                    <p class="small mb-1"><strong>Manual install?</strong> Java 17+, Elasticsearch 9.4.3 or OpenSearch 3.7.0; export <code>UNOMI_ROOT_PASSWORD</code> and <code>UNOMI_HEALTHCHECK_PASSWORD</code> before <code>./bin/karaf</code> &mdash; follow the <a href="{{ site.data.unomi.manual.quick_start }}">manual quick start</a> (same tenant + API key steps).</p>
+                    <p class="small mb-0"><strong>Upgrading from 3.x?</strong> See <a href="/blog/migrating-to-unomi-4.html">Migrating to Unomi 4</a>. Still on 2.7? That page also covers the extra platform steps, plus optional <a href="{{ site.data.unomi.manual.v2_compat }}">single-tenant compatibility mode</a>.</p>
                 </div>
             </div>
         </div>
@@ -317,7 +325,7 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
                         <tbody>
                             <tr>
                                 <td>System admin</td>
-                                <td><code>karaf:karaf</code> (basic)</td>
+                                <td><code>karaf:$UNOMI_ROOT_PASSWORD</code> (basic)</td>
                                 <td>Create / list tenants, cluster ops</td>
                             </tr>
                             <tr>

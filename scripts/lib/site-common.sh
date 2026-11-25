@@ -28,6 +28,16 @@ check_pass() { echo "  [ok] $1"; }
 check_fail() { echo "  [FAIL] $1" >&2; CHECKS_FAILED=1; }
 check_warn() { echo "  [warn] $1" >&2; }
 
+# Guard for conditions that must not reach production by accident: fails the checks
+# unless the caller set FORCE=1 (publish.sh --force), in which case it only warns.
+check_publish_guard() {
+  if [[ "${FORCE:-0}" -eq 1 ]]; then
+    check_warn "$1 (continuing: --force)"
+  else
+    check_fail "$1 (use --force to override)"
+  fi
+}
+
 finish_prerequisite_checks() {
   if [[ "${CHECKS_FAILED}" -ne 0 ]]; then
     echo "" >&2
@@ -93,7 +103,7 @@ check_jekyll_config() {
   if [[ "${url}" == "https://unomi.apache.org" ]]; then
     check_pass "_config.yml url is https://unomi.apache.org"
   elif [[ -n "${url}" ]]; then
-    check_warn "_config.yml url is '${url}' (expected https://unomi.apache.org for production)"
+    check_publish_guard "_config.yml url is '${url}' (expected https://unomi.apache.org for production)"
   fi
 }
 
@@ -163,18 +173,16 @@ validate_built_site() {
   echo "  [ok] index.html contains 'Apache Unomi'"
 
   # Unrendered Liquid is a strong signal the build was wrong.
-  if grep -R -E -l '\{\{|\{\%' \
+  # Capture first: testing a pipeline that ends in head/grep -q can report a false
+  # "no match" under pipefail when an upstream grep is killed by SIGPIPE.
+  local liquid_hits
+  liquid_hits="$(grep -R -n -E '\{\{|\{\%' \
       --include='*.html' --include='*.xml' --include='*.txt' \
       "${site_path}" 2>/dev/null \
-      | grep -v '/assets/' \
-      | head -5 \
-      | grep -q .; then
+      | grep -v '/assets/' || true)"
+  if [[ -n "${liquid_hits}" ]]; then
     echo "  [warn] possible unrendered Liquid tags under ${SITE_DIR} (spot-check output)" >&2
-    grep -R -n -E '\{\{|\{\%' \
-      --include='*.html' --include='*.xml' --include='*.txt' \
-      "${site_path}" 2>/dev/null \
-      | grep -v '/assets/' \
-      | head -10 >&2 || true
+    printf '%s\n' "${liquid_hits}" | sed -n '1,10p' >&2
   else
     echo "  [ok] no obvious unrendered Liquid tags in HTML/XML/TXT"
   fi

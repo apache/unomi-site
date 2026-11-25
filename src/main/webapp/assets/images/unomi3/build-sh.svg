@@ -58,7 +58,7 @@
   <g class="float" style="animation-delay:.3s">
     <rect x="235" y="210" width="170" height="120" rx="14" fill="var(--unomi-info-bg)" stroke="var(--unomi-info)" stroke-width="2"/>
     <text x="320" y="242" text-anchor="middle" fill="var(--unomi-info)" font-size="13" font-weight="700">Build</text>
-    <text x="320" y="268" text-anchor="middle" fill="var(--unomi-text)" font-size="11">install | -B -ntp in --ci</text>
+    <text x="320" y="268" text-anchor="middle" fill="var(--unomi-text)" font-size="11">install | -ntp in --ci</text>
     <text x="320" y="290" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">distributions | ES / OS</text>
     <text x="320" y="312" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">optional --javadoc</text>
   </g>

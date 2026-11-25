@@ -111,11 +111,11 @@
             "Full REST/JSON API",
             "GraphQL API for flexible querying",
             "Plugin architecture (OSGi, Groovy actions)",
-            "Elasticsearch storage backend (OpenSearch supported in Unomi 4.0)",
+            "Elasticsearch or OpenSearch storage backend (OpenSearch new in Unomi 4.0)",
             "True multi-tenancy with public/private API keys (major Unomi 4.0 platform refactor)",
             "AI-agent-ready customer memory (retrieve, store, summarize, segment)",
-            "REST compatibility mode for Unomi 2.x and 3.x clients",
-            "Connectors (MailChimp, custom via plugin API)",
+            "single-tenant compatibility mode for Unomi 2.x and 3.x clients",
+            "Connectors (Salesforce, custom via plugin API)",
             "Bill of Materials (BOM) for dependency management",
             "OASIS CDP standard reference implementation"
         ]
@@ -166,6 +166,8 @@
         _paq.push(['trackPageView']);
         _paq.push(['enableLinkTracking']);
         (function() {
+            // Only report from the official site, not from preview copies or local builds.
+            if (location.hostname !== 'unomi.apache.org') { return; }
             var u="https://analytics.apache.org/";
             _paq.push(['setTrackerUrl', u+'matomo.php']);
             _paq.push(['setSiteId', '61']);

@@ -17,7 +17,10 @@
 # Optional environment:
 #   NETLIFY_AUTH_TOKEN   Personal access token (or run: npx netlify-cli login)
 #   NETLIFY_SITE_ID      Existing site id (skips interactive link)
-#   NETLIFY_SITE_NAME    Site name when creating/linking (default: unomi-preview)
+#   NETLIFY_SITE_NAME    Site name when creating/linking (default: unomi-preview).
+#                        Netlify site names are global: if the name belongs to another
+#                        account, set this to a name of your own.
+#   NETLIFY_CLI_VERSION  netlify-cli version used through npx (default: 27)
 #   JEKYLL_IMAGE         Docker image (default: bretfisher/jekyll)
 #   JEKYLL_SERVE_IMAGE   Serve image (default: bretfisher/jekyll-serve)
 
@@ -31,9 +34,11 @@ cd "$ROOT"
 MODE="draft"          # draft | netlify-prod | local | build-only | check-only
 OPEN_URL=0
 NETLIFY_SITE_NAME="${NETLIFY_SITE_NAME:-unomi-preview}"
+NETLIFY_CLI_VERSION="${NETLIFY_CLI_VERSION:-27}"
 
 usage() {
-  sed -n '2,24p' "$0" | sed 's/^# \{0,1\}//'
+  # Print the leading comment block (everything after the shebang up to the first non-comment line).
+  awk 'NR == 1 { next } /^#/ { sub(/^# ?/, ""); print; next } { exit }' "$0"
   exit "${1:-0}"
 }
 
@@ -70,7 +75,7 @@ check_prerequisites() {
       if have_cmd netlify; then
         check_pass "netlify CLI found ($(netlify --version 2>/dev/null | head -1 || echo ok))"
       elif have_cmd npx; then
-        check_pass "npx found (will use: npx netlify-cli)"
+        check_pass "npx found (will use: npx netlify-cli@${NETLIFY_CLI_VERSION})"
         if have_cmd node; then
           check_pass "node found ($(node --version 2>/dev/null))"
         else
@@ -82,7 +87,8 @@ check_prerequisites() {
 
       if [[ -n "${NETLIFY_AUTH_TOKEN:-}" ]]; then
         check_pass "NETLIFY_AUTH_TOKEN is set"
-      elif [[ -f "${HOME}/.netlify/config.json" ]] || [[ -d "${HOME}/.config/netlify" ]]; then
+      elif [[ -f "${HOME}/.netlify/config.json" ]] || [[ -d "${HOME}/.config/netlify" ]] \
+        || [[ -d "${HOME}/Library/Preferences/netlify" ]]; then
         check_pass "Netlify CLI config present (will verify auth at deploy time)"
       else
         check_warn "no NETLIFY_AUTH_TOKEN / Netlify config yet — script will run 'netlify login' if needed"
@@ -131,7 +137,7 @@ netlify_cli() {
   if have_cmd netlify; then
     netlify "$@"
   else
-    npx --yes netlify-cli "$@"
+    npx --yes "netlify-cli@${NETLIFY_CLI_VERSION}" "$@"
   fi
 }
 
@@ -162,18 +168,11 @@ link_or_create_site() {
   echo "==> Linking/creating Netlify site '${NETLIFY_SITE_NAME}'"
   echo "    (static dir deploy only — no GitHub continuous-deploy setup)"
 
-  local site_id=""
-  if netlify_cli sites:list --json 2>/dev/null | grep -q "\"name\":\"${NETLIFY_SITE_NAME}\""; then
-    site_id="$(netlify_cli sites:list --json 2>/dev/null \
-      | tr ',' '\n' \
-      | grep -A2 "\"name\":\"${NETLIFY_SITE_NAME}\"" \
-      | grep '"id"' \
-      | head -1 \
-      | sed -E 's/.*"id":"([^"]+)".*/\1/' || true)"
-    if [[ -n "${site_id}" ]]; then
-      netlify_cli link --id "${site_id}"
-      return 0
-    fi
+  # Capture the listing first (a pipeline into grep -q can fail spuriously under
+  # pipefail), and allow for pretty-printed JSON ("name": "x").
+  local site_id="" sites_json=""
+  sites_json="$(netlify_cli sites:list --json 2>/dev/null || true)"
+  if printf '%s' "${sites_json}" | grep -Eq "\"name\": *\"${NETLIFY_SITE_NAME}\""; then
     netlify_cli link --name "${NETLIFY_SITE_NAME}"
     return 0
   fi
@@ -182,7 +181,9 @@ link_or_create_site() {
   create_log="$(mktemp)"
   if ! netlify_cli sites:create --name "${NETLIFY_SITE_NAME}" --disable-linking 2>&1 | tee "${create_log}"; then
     echo "Failed to create Netlify site '${NETLIFY_SITE_NAME}'" >&2
-    echo "Create it in the Netlify UI, then re-run with:" >&2
+    echo "Netlify site names are global. If '${NETLIFY_SITE_NAME}' belongs to another account," >&2
+    echo "pick your own, for example: export NETLIFY_SITE_NAME=unomi-preview-\$USER" >&2
+    echo "Or create it in the Netlify UI, then re-run with:" >&2
     echo "  export NETLIFY_SITE_ID=<project-id>" >&2
     rm -f "${create_log}"
     exit 1

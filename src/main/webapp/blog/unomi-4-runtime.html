@@ -41,7 +41,7 @@ date: 2026-06-27 09:45:00 +0000
             <a href="/blog/unomi-4-task-scheduler.html">cluster-aware task scheduler</a>.</p>
 
         <h2 class="h4 mt-5 mb-3">What operators should do</h2>
-        <p>From Unomi 3.x the runtime is already in place: move Elasticsearch from 9.1.3 to 9.4.3 (or adopt OpenSearch 3.7.0), then add tenants and tasks. From Unomi 2.7, 4.0 also includes the Unomi 3 cutover: Java 17 hosts and Elasticsearch 7 (2.7.0 pins 7.4.2) to 9.4.3.
+        <p>From Unomi 3.x the runtime is already in place: run the data migration (<code>unomi:migrate 3.0.0</code>), use Elasticsearch 9.4.3 (recommended; the supported range still starts at 9.0.3) or adopt OpenSearch 3.7.0, then add tenants and tasks. From Unomi 2.7, 4.0 also includes the Unomi 3 cutover: Java 17 hosts and Elasticsearch 7 (2.7.0 pins 7.4.2) to 9.4.3.
             The
             <a href="/blog/migrating-to-unomi-4.html">migrating from Unomi 3</a>
             post covers the REST and auth cutover; the manual holds the day-two runbooks.</p>
