@@ -20,7 +20,7 @@ structured_data: >
                 "@type": "HowToStep",
                 "position": 1,
                 "name": "Create a docker-compose.yml file",
-                "text": "Create a docker-compose.yml with Elasticsearch 9.4.3 or OpenSearch 3.x and Apache Unomi 4.0."
+                "text": "Create a docker-compose.yml with Elasticsearch 9.4.3 or OpenSearch 3.7.0 and Apache Unomi 4.0."
             },
             {
                 "@type": "HowToStep",
@@ -64,7 +64,7 @@ structured_data: >
                 <h2 class="h4 mb-3">What you need for Unomi 4.0</h2>
                 <ul class="list-unstyled small mb-0">
                     <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i><strong>Docker</strong> (recommended path) &mdash; or <strong>Java 17+</strong> for a manual install</li>
-                    <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i><strong>Elasticsearch 9.x</strong> (e.g. 9.4.3) <em>or</em> <strong>OpenSearch 3.x</strong></li>
+                    <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i><strong>Elasticsearch 9.4.3</strong> <em>or</em> <strong>OpenSearch 3.7.0</strong> (the versions pinned by Unomi 4.0.0)</li>
                     <li class="mb-0"><i class="bi bi-buildings text-primary me-2"></i>After startup you <strong>create a tenant</strong> and use its <strong>public / private API keys</strong> for API calls</li>
                 </ul>
             </div>
@@ -169,11 +169,11 @@ services:
     depends_on:
       - elasticsearch</code></pre>
 
-                        <h4 class="h6 fw-semibold mt-4 mb-2">Option B &mdash; OpenSearch 3.x</h4>
+                        <h4 class="h6 fw-semibold mt-4 mb-2">Option B &mdash; OpenSearch 3.7.0</h4>
                         <pre><code>version: '3.8'
 services:
   opensearch-node1:
-    image: opensearchproject/opensearch:3
+    image: opensearchproject/opensearch:3.7.0
     environment:
       - cluster.name=opensearch-cluster
       - node.name=opensearch-node1
@@ -290,8 +290,8 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
             <div class="col-lg-9">
                 <div class="p-3 rounded-3 bg-primary-light">
                     <p class="small mb-1"><strong><i class="bi bi-info-circle me-1"></i>Production note:</strong> This configuration is for development only. See the <a href="{{ site.data.unomi.manual.security }}">production security guide</a> before deploying.</p>
-                    <p class="small mb-1"><strong>Manual install?</strong> Java 17+, Elasticsearch 9.4.3 or OpenSearch 3.x &mdash; follow the <a href="{{ site.data.unomi.manual.quick_start }}">manual quick start</a> (same tenant + API key steps).</p>
-                    <p class="small mb-0"><strong>Upgrading from 2.x or 3.x?</strong> See <a href="/blog/migrating-to-unomi-4.html">Migrating to Unomi 4</a> and optional <a href="{{ site.data.unomi.manual.v2_compat }}">REST compatibility mode</a>.</p>
+                    <p class="small mb-1"><strong>Manual install?</strong> Java 17+, Elasticsearch 9.4.3 or OpenSearch 3.7.0 &mdash; follow the <a href="{{ site.data.unomi.manual.quick_start }}">manual quick start</a> (same tenant + API key steps).</p>
+                    <p class="small mb-0"><strong>Upgrading from 3.x?</strong> See <a href="/blog/migrating-to-unomi-4.html">Migrating to Unomi 4</a>. Still on 2.7? That page also covers the extra platform steps, plus optional <a href="{{ site.data.unomi.manual.v2_compat }}">REST compatibility mode</a>.</p>
                 </div>
             </div>
         </div>

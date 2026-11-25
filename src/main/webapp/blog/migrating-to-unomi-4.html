@@ -1,6 +1,6 @@
 ---
 title: Migrating to Unomi 4
-description: "Unomi 4 retains documented 2.x OpenAPI paths and offers REST compatibility mode so Unomi 2.x and 3.x clients can phase in tenant API keys."
+description: "Upgrade from Unomi 3.x to 4.0: tenant API keys, Elasticsearch 9.4.3 or OpenSearch 3.7.0, and REST compatibility for Unomi 2.x and 3.x clients. Unomi 2.7 also takes the Unomi 3 platform steps."
 keywords: "Unomi 4 migration, REST compatibility mode, OpenAPI stability, upgrade from Unomi 2, upgrade from Unomi 3"
 layout: default
 date: 2026-06-25 13:38:00 +0000
@@ -10,7 +10,7 @@ date: 2026-06-25 13:38:00 +0000
     <div class="container">
         <p class="section-label text-hero-label">Upgrades</p>
         <h1>Migrating to Unomi 4</h1>
-        <p class="lead">Familiar REST map, additive APIs, and an optional REST compatibility bridge for Unomi 2.x and 3.x clients.</p>
+        <p class="lead">The usual upgrade is Unomi 3.x to 4.0. Unomi 2.x is a longer path that first takes the Unomi 3 platform steps.</p>
         {% if page.date %}
         <p class="small text-muted mt-2 mb-0">
             <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
@@ -28,7 +28,8 @@ date: 2026-06-25 13:38:00 +0000
         <img src="/assets/images/unomi3/api-stability-v2compat.svg" class="img-fluid my-4" alt="API stability and REST compatibility for Unomi 2.x and 3.x clients"/>
 <h2 class="h4 mt-5 mb-3">Migration paths</h2>
         <ol>
-            <li><strong>Upgrade to 4.0</strong> &mdash; Java 17+ minimum, QueryBuilder ID renames, ES7→ES9 data migration, tenant API keys, and new APIs. A 3.0.x install already has the runtime steps and still needs the tenant keys and new APIs.</li>
+            <li><strong>From Unomi 3.0.x or 3.1.0</strong> &mdash; this is the upgrade most installs take. Java 17, Karaf 4.4.8, Elasticsearch 9.1.3, persistence clustering, health checks, and the QueryBuilder ID renames are already in place. Move Elasticsearch to 9.4.3 (or adopt OpenSearch 3.7.0), then add tenant API keys and the Unomi 4 APIs.</li>
+            <li><strong>From Unomi 2.x (including 2.7)</strong> &mdash; do the Unomi 3 platform steps as well: Java 17+ (Java 11 will not start 4.0), Karaf 4.4.12, Elasticsearch 7 (2.7.0 pins 7.4.2) → 9.4.3 or OpenSearch 3.7.0, and the QueryBuilder ID renames, then the same tenant API keys and new APIs.</li>
             <li><strong>REST compatibility mode</strong> &mdash; phased transition for Unomi 2.x and 3.x clients</li>
             <li>Optional <strong>Elasticsearch → OpenSearch</strong> migration</li>
         </ol>

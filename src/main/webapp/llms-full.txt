@@ -21,7 +21,7 @@
 ### Runtime Stack
 - **Language**: Java
 - **Runtime Container**: Apache Karaf 4.4 (OSGi framework)
-- **Data Store**: Elasticsearch 9.x (e.g. 9.4.3) or OpenSearch 3.x (Unomi 4.0)
+- **Data Store**: Elasticsearch 9.4.3 or OpenSearch 3.7.0 (Unomi 4.0.0). Unomi 3.0–3.1.0 used Elasticsearch 9.1.3 and had no OpenSearch module.
 - **API Protocols**: REST over HTTP/HTTPS with JSON payloads; GraphQL API for flexible queries
 - **Extension Model**: OSGi bundles, Groovy scripting, JSON descriptors
 - **Clustering**: Persistence-based cluster registry/heartbeats (Elasticsearch or OpenSearch; not Karaf Cellar)
@@ -222,9 +222,9 @@ Guides: https://unomi.apache.org/get-started.html · https://unomi.apache.org/tu
 ## Frequently Asked Questions
 
 - **What is Apache Unomi?** An open source Customer Data Platform (CDP) managed by the Apache Software Foundation.
-- **What is Unomi 4 vs 3.0?** Unomi 4.0 is the current major release (Java 17+, Elasticsearch 9, clustering, multi-tenancy/API keys, OpenSearch, task scheduler, REST compatibility for 2.x and 3.x clients, stronger tests). 3.0.x is the previous line.
+- **What is Unomi 4 vs 3.x?** Unomi 3.0 introduced Java 17, Karaf 4.4.8, Elasticsearch 9.1.3, and persistence clustering (still true of 3.0.1 and 3.1.0). Unomi 4.0.0 is the current major release: same runtime, pins moved to Karaf 4.4.12 and Elasticsearch 9.4.3, plus multi-tenancy/API keys, OpenSearch 3.7.0, a task scheduler, REST compatibility for 2.x and 3.x clients, and a larger test suite.
 - **How does Unomi differ from proprietary CDPs?** 100% open source (Apache License 2.0), self-hosted, vendor-neutral, extensible through OSGi plugins.
-- **What storage backends are supported?** Elasticsearch 9.x and OpenSearch 3.x (Unomi 4.0).
+- **What storage backends are supported?** Unomi 4.0.0: Elasticsearch 9.4.3 and OpenSearch 3.7.0. Unomi 3.1.0: Elasticsearch 9.1.3 only.
 - **Does Unomi have a GraphQL API?** Yes, alongside REST.
 - **Can I use Unomi with AI systems?** Yes — privacy-first customer memory for agents (not an LLM), via REST/GraphQL with consent gates and tenant API keys in 4.0.
 - **What is the OASIS CXS standard?** A CDP specification from OASIS; Apache Unomi is its reference implementation.
@@ -237,10 +237,10 @@ Guides: https://unomi.apache.org/get-started.html · https://unomi.apache.org/tu
 - **2015**: Entered Apache Incubator
 - **2019**: Graduated to Apache Top-Level Project
 - **2022**: Version 2.0.0 released (major architecture update)
-- **2025**: Version 3.0.0 released (Karaf 4.4, Elasticsearch Java client 9.x, GraphQL API, BOM, persistence clustering)
+- **2025**: Version 3.0.0 released (Java 17, Karaf 4.4.8, Elasticsearch 9.1.3 Java API client, BOM, persistence clustering, health checks). GraphQL was already in the 2.x line.
 - **2026**: Version 3.0.1 released (3.0 maintenance line)
-- **2026**: Version 3.1.0 released (healthcheck fixes and configuration changes for GraphQL subscriptions, scripting and matchesRegex)
-- **2026**: Version 4.0.0 released (current stable — multi-tenancy, OpenSearch 3.x, cluster task scheduler, REST compatibility for Unomi 2.x and 3.x clients)
+- **2026**: Version 3.1.0 released (GraphQL subscription credentials, scripting allow list, matchesRegex limits)
+- **2026**: Version 4.0.0 released (current stable — multi-tenancy, OpenSearch 3.7.0, cluster task scheduler, REST compatibility for Unomi 2.x and 3.x clients; Karaf 4.4.12 and Elasticsearch 9.4.3)
 
 ## Unomi 4 Blog (UNOMI-932)
 

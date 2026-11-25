@@ -1,6 +1,6 @@
 ---
 title: Apache Unomi 4 — Open Source Customer Data Platform
-description: "Apache Unomi 4 is a major open-source CDP release — true multi-tenancy, Elasticsearch 9 / OpenSearch, stable REST, and a privacy-first data layer AI agents can query and update."
+description: "Apache Unomi 4 is a major open-source CDP release on the Unomi 3 runtime — true multi-tenancy, Elasticsearch 9.4.3 / OpenSearch 3.7.0, stable REST, and a privacy-first data layer AI agents can query and update."
 keywords: "Apache Unomi 4, open source CDP, Customer Data Platform, multi-tenancy, OpenSearch, CDP for AI agents, LLM customer context, agentic personalization, REST compatibility, OASIS CXS, GDPR CDP"
 layout: default
 structured_data: >
@@ -46,7 +46,7 @@ structured_data: >
                 "name": "What is Apache Unomi 4?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Apache Unomi 4.0 is a major Customer Data Platform release. It requires Java 17+, runs on Karaf 4.4 with an Elasticsearch 9 client and persistence-based clustering, and adds a platform-wide multi-tenancy refactor with API keys, OpenSearch persistence, a cluster-aware task scheduler, REST compatibility for Unomi 2.x and 3.x clients, and a much larger automated test investment."
+                    "text": "Apache Unomi 4.0 is a major Customer Data Platform release on the Unomi 3 runtime (Java 17+, Karaf 4.4, Elasticsearch 9, persistence-based clustering). It updates those pins to Karaf 4.4.12 and Elasticsearch 9.4.3, and adds multi-tenancy with API keys, OpenSearch 3.7.0, a cluster-aware task scheduler, REST compatibility for Unomi 2.x and 3.x clients, and a much larger automated test investment."
                 }
             },
             {
@@ -77,7 +77,7 @@ structured_data: >
             <div class="col-lg-6 mb-5 mb-lg-0">
                 <p class="section-label mb-3 text-hero-link">Introducing Apache Unomi&trade; 4</p>
                 <h1 class="display-title mb-4">Apache Unomi <span class="text-hero-accent">4</span></h1>
-                <p class="lead mb-4">The major open-source Customer Data Platform release &mdash; true <strong>multi-tenancy</strong>, Elasticsearch 9 / OpenSearch, stable REST, and a leap in quality. Built as real customer memory for modern apps <strong>and AI agents</strong>.</p>
+                <p class="lead mb-4">The major open-source Customer Data Platform release &mdash; true <strong>multi-tenancy</strong>, OpenSearch alongside Elasticsearch 9.4.3, stable REST, and a leap in quality. Built as real customer memory for modern apps <strong>and AI agents</strong>.</p>
                 <div class="d-flex flex-wrap gap-3">
                     <a class="btn btn-primary btn-lg" href="/get-started.html#quickstart">
                         <i class="bi bi-rocket-takeoff me-2"></i>Get started with Docker
@@ -224,7 +224,7 @@ structured_data: >
             <div class="col-lg-6">
                 <p class="section-label">Apache Unomi 4</p>
                 <h2 class="mb-3">A major CDP release</h2>
-                <p class="text-muted mb-3">Unomi 4.0 is the major release: a modern runtime (Java 17+, Karaf 4.4, Elasticsearch 9, persistence clustering) and a <strong>platform-wide multi-tenancy refactor</strong>, plus OpenSearch, cluster tasks, API stability, and a leap in quality.</p>
+                <p class="text-muted mb-3">Unomi 4.0 is the major release on the runtime Unomi 3 already shipped (Java 17+, Karaf 4.4, Elasticsearch 9, persistence clustering). 4.0.0 moves the pins to <strong>Karaf 4.4.12</strong> and <strong>Elasticsearch 9.4.3</strong>, and adds a <strong>platform-wide multi-tenancy refactor</strong>, OpenSearch 3.7.0, cluster tasks, API stability, and a leap in quality.</p>
                 <ul class="list-unstyled small mb-4">
                     <li class="mb-2"><i class="bi bi-buildings text-primary me-2"></i><strong>Multi-tenancy</strong> &mdash; isolate profiles, events, segments, rules &amp; schemas per tenant</li>
                     <li class="mb-2"><i class="bi bi-check2 text-primary me-2"></i><strong>119/119</strong> documented 2.x OpenAPI paths retained</li>
@@ -238,7 +238,7 @@ structured_data: >
             </div>
             <div class="col-lg-6">
                 <a href="/blog/introducing-apache-unomi-4.html" class="d-block" aria-label="Read Introducing Apache Unomi 4">
-                    <img src="/assets/images/unomi3/unomi3-journey.svg" class="img-fluid illustration w-100" alt="Apache Unomi 4 journey from 2.x to 4.0"/>
+                    <img src="/assets/images/unomi3/unomi3-journey.svg" class="img-fluid illustration w-100" alt="Apache Unomi 4 journey from Unomi 3.1 to 4.0"/>
                 </a>
             </div>
         </div>
@@ -457,7 +457,7 @@ structured_data: >
                 <div class="text-center">
                     <div class="step-number mx-auto mb-3">1</div>
                     <h3 class="h6 fw-semibold mb-2">Start Unomi 4.0</h3>
-                    <p class="small text-muted">Docker Compose with Elasticsearch 9.x or OpenSearch 3.x &mdash; or install with Java 17+.</p>
+                    <p class="small text-muted">Docker Compose with Elasticsearch 9.4.3 or OpenSearch 3.7.0 &mdash; or install with Java 17+.</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -592,7 +592,7 @@ structured_data: >
                     <i class="bi bi-rocket-takeoff news-icon text-success-var"></i>
                     <div>
                         <strong class="small">Apache Unomi {{ site.data.unomi.latest.stable.version }} released</strong>
-                        <span class="small text-muted">&mdash; Major release: multi-tenancy, OpenSearch, tasks, REST compatibility for 2.x and 3.x, and the Java 17 / Elasticsearch 9 runtime.</span>
+                        <span class="small text-muted">&mdash; Major release on the Unomi 3 runtime: multi-tenancy, OpenSearch 3.7.0, tasks, and REST compatibility for 2.x and 3.x. Pins Elasticsearch 9.4.3 and Karaf 4.4.12.</span>
                         <a href="/download.html" class="news-link">Download</a>
                         <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version={{ site.data.unomi.latest.stable.jira_version_id }}" target="_blank" rel="noopener" class="news-link">Release notes</a>
                         <a href="/blog/introducing-apache-unomi-4.html" class="news-link">Unomi 4 story</a>
@@ -604,7 +604,7 @@ structured_data: >
                     <i class="bi bi-rocket-takeoff news-icon"></i>
                     <div>
                         <strong class="small">Apache Unomi {{ site.data.unomi.previous.stable.version }} released</strong>
-                        <span class="small text-muted">&mdash; Healthcheck fixes and configuration changes for GraphQL subscriptions, scripting and matchesRegex. Current stable is Unomi 4.0.</span>
+                        <span class="small text-muted">&mdash; GraphQL subscription credentials, scripting allow list, and matchesRegex limits. Current stable is Unomi 4.0.</span>
                         <a href="/download.html#archives" class="news-link">Archives</a>
                         <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version={{ site.data.unomi.previous.stable.jira_version_id }}" target="_blank" rel="noopener" class="news-link">Release notes</a>
                     </div>
@@ -625,7 +625,7 @@ structured_data: >
                     <i class="bi bi-rocket-takeoff news-icon"></i>
                     <div>
                         <strong class="small">Apache Unomi 3.0.0 released</strong>
-                        <span class="small text-muted">&mdash; Karaf 4.4, Elasticsearch 9 client, and persistence clustering. Superseded by Unomi 4.0.</span>
+                        <span class="small text-muted">&mdash; Java 17, Karaf 4.4.8, Elasticsearch 9.1.3, and persistence clustering. Superseded by Unomi 4.0.</span>
                         <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12355172" target="_blank" rel="noopener" class="news-link">Release notes</a>
                     </div>
                 </div>

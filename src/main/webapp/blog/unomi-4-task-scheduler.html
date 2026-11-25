@@ -26,7 +26,7 @@ date: 2026-07-03 12:16:00 +0000
             maintenance timers, request offload (for example profile-merge follow-up), and operator-visible retry/cancel.</p>
         <p>It sits on the
             <a href="/blog/unomi-4-runtime.html">persistence-based clustering</a>
-            model &mdash; executor nodes and locks use the shared search index rather than Cellar or Hazelcast.</p>
+            model. Executor nodes and locks use the shared search index. That clustering model has been in place since Unomi 3.0, which replaced Karaf Cellar and Hazelcast.</p>
 
         <img src="/assets/images/unomi3/task-scheduler.svg" class="img-fluid my-4" alt="SchedulerService with REST, built-in task types, and Karaf shell"/>
 

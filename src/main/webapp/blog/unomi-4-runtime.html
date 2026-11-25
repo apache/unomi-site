@@ -1,6 +1,6 @@
 ---
 title: Unomi 4.0 runtime
-description: "What Unomi 4.0 runs on — Java 17, Karaf 4.4, Elasticsearch 9, and persistence-based clustering without Cellar or Hazelcast."
+description: "What Unomi 4.0 runs on — the Unomi 3 runtime (Java 17, Karaf 4.4, Elasticsearch 9, persistence clustering), updated to Karaf 4.4.12 and Elasticsearch 9.4.3."
 keywords: "Unomi 4.0 runtime, Java 17, Karaf 4.4, UNOMI-877, persistence clustering, Elasticsearch 9"
 layout: default
 date: 2026-06-27 09:45:00 +0000
@@ -10,7 +10,7 @@ date: 2026-06-27 09:45:00 +0000
     <div class="container">
         <p class="section-label text-hero-label">Unomi 4.0 &middot; Runtime</p>
         <h1>Unomi 4.0 runtime</h1>
-        <p class="lead">Java 17, Karaf 4.4, Elasticsearch 9, and clustering without Cellar or Hazelcast.</p>
+        <p class="lead">The Unomi 3 runtime, with 4.0.0 pins: Java 17, Karaf 4.4.12, Elasticsearch 9.4.3.</p>
         {% if page.date %}
         <p class="small text-muted mt-2 mb-0">
             <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
@@ -22,28 +22,28 @@ date: 2026-06-27 09:45:00 +0000
 
 <section class="section">
     <div class="container col-lg-8">
-        <p>Unomi 4.0 ships a modern runtime with the rest of the major release: fewer legacies, clearer installers, and a cluster model that matches how Unomi already stores data.</p>
+        <p>Unomi 3.0 is where this runtime landed: Java 11, Karaf Cellar, Hazelcast, and the Elasticsearch 7 High Level REST Client were retired there. Unomi 3.0.0 through 3.1.0 ship <strong>Java 17</strong>, <strong>Karaf 4.4.8</strong>, <strong>Elasticsearch 9.1.3</strong>, and persistence-based clustering. Unomi 4.0.0 keeps that model and updates the pins to <strong>Karaf 4.4.12</strong> and <strong>Elasticsearch 9.4.3</strong>, and adds OpenSearch 3.7.0 as a second distribution.</p>
 
         <img src="/assets/images/unomi3/platform-foundation.svg" class="img-fluid my-4" alt="Unomi 4.0 runtime: Java 17, Karaf 4.4, search clients, persistence clustering"/>
 
         <h2 class="h4 mt-4 mb-3">Baseline upgrades</h2>
         <ul>
-            <li><strong>Java 17+</strong> &mdash; Java 11 is retired for Unomi 4 installers and CI</li>
-            <li><strong>Apache Karaf 4.4</strong> &mdash; current patch lines (for example 4.4.11)</li>
-            <li><strong>Elasticsearch 9</strong> &mdash; Java API client; HLRC retired; OpenSearch as a peer distribution (see
+            <li><strong>Java 17+</strong> &mdash; required since Unomi 3.0; Java 11 installs cannot run 3.x or 4.0</li>
+            <li><strong>Apache Karaf 4.4.12</strong> &mdash; 4.0.0 pin (Unomi 3.0.0 through 3.1.0 used 4.4.8)</li>
+            <li><strong>Elasticsearch 9.4.3</strong> &mdash; Java API client, same as 3.x but moved from 9.1.3; OpenSearch 3.7.0 is the new peer distribution (see
                 <a href="/blog/unomi-4-opensearch.html">Elasticsearch 9 and OpenSearch</a>)</li>
             <li><strong>Log / dependency pins</strong> &mdash; platform bump PRs keep Log4j and client stacks on supported lines</li>
         </ul>
 
         <h2 class="h4 mt-5 mb-3">Persistence-based clustering (UNOMI-877)</h2>
-        <p>Cellar and Hazelcast are gone. Nodes register <code>ClusterNode</code> documents in Elasticsearch or OpenSearch, publish heartbeats and stats, and discover peers through the shared index.
+        <p>Unomi 3.0 replaced Karaf Cellar and Hazelcast with this model. Nodes register <code>ClusterNode</code> documents in Elasticsearch or OpenSearch, publish heartbeats and stats, and discover peers through the shared index.
             The same mechanism underpins executor selection and locking for the
             <a href="/blog/unomi-4-task-scheduler.html">cluster-aware task scheduler</a>.</p>
 
         <h2 class="h4 mt-5 mb-3">What operators should do</h2>
-        <p>Treat 4.0 as the cutover from 2.x: confirm Java 17 hosts, pick an ES9 or OpenSearch distribution, and read the clustering and health-check chapters together with tenants and tasks.
+        <p>From Unomi 3.x the runtime is already in place: move Elasticsearch from 9.1.3 to 9.4.3 (or adopt OpenSearch 3.7.0), then add tenants and tasks. From Unomi 2.7, 4.0 also includes the Unomi 3 cutover: Java 17 hosts and Elasticsearch 7 (2.7.0 pins 7.4.2) to 9.4.3.
             The
-            <a href="/blog/migrating-to-unomi-4.html">migrating from 2.x</a>
+            <a href="/blog/migrating-to-unomi-4.html">migrating from Unomi 3</a>
             post covers the REST and auth cutover; the manual holds the day-two runbooks.</p>
 
         <p class="mt-4">
