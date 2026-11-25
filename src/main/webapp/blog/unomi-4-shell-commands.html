@@ -64,7 +64,9 @@ unomi:cache --stats</code></pre>
 
         <h2 class="h4 mt-5 mb-3">Tenant context first</h2>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code># Create a tenant: both keys are generated, but only their hashes are stored
-unomi:crud create tenant '{"itemId":"acme","name":"Acme Corp"}'
+unomi:crud create tenant '{"itemId":"acme"}'
+# The display name is set by update, not create
+unomi:crud update tenant acme '{"name":"Acme Corp"}'
 # create apikey replaces the key of that type and prints the new plaintext once
 unomi:crud create apikey '{"tenantId":"acme","keyType":"PUBLIC"}'
 unomi:crud create apikey '{"tenantId":"acme","keyType":"PRIVATE"}'
@@ -124,8 +126,9 @@ unomi:crud delete profile demo-ada</code></pre>
         <p class="small text-muted">There are no separate <code>profile-list</code> / <code>profile-view</code> commands in Unomi 4 &mdash; use <code>unomi:crud list|read|delete profile</code>.</p>
 
         <h3 class="h6 mt-4 mb-2">Scope first</h3>
-        <p class="small text-muted">Sessions and events must reference a scope that already exists for the tenant.
-            Without it, event schema validation logs <code>Unknown scope value</code> and rejects the payload.</p>
+        <p class="small text-muted">Sessions and events should reference a scope that already exists for the tenant.
+            Events sent through the REST API are schema-validated and rejected with <code>Unknown scope value</code> when it does not;
+            <code>unomi:crud</code> does not run that validation, so create the scope first to keep shell-created data consistent.</p>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code># Scope name lives under metadata (not a top-level "name" field)
 unomi:crud create scope '{"itemId":"myscope","metadata":{"id":"myscope","name":"My scope"}}'
 unomi:crud list scope</code></pre>
@@ -198,9 +201,9 @@ unomi:task-cancel TASK_ID
 unomi:task-purge --days 14 --force
 unomi:task-executor</code></pre>
 
-        <h2 class="h4 mt-5 mb-3">Still there: live debugging &amp; lifecycle</h2>
+        <h2 class="h4 mt-5 mb-3">First-class commands: live debugging &amp; lifecycle</h2>
         <p>Dedicated list/view/remove commands for profiles, sessions, events, rules, segments, actions, and conditions were folded into <code>unomi:crud</code>.
-            What remains as first-class commands:</p>
+            The first-class commands (<code>unomi:list-invalid-objects</code> and <code>unomi:setup</code> are new in 4.0):</p>
         <ul>
             <li><code>unomi:rule-reset-stats</code>, <code>unomi:rule-tail</code>, <code>unomi:rule-watch RULE_ID&hellip;</code></li>
             <li><code>unomi:event-tail</code> (live stream; Ctrl+C to stop)</li>

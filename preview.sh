@@ -158,6 +158,8 @@ ensure_netlify_auth() {
   netlify_cli login
 }
 
+LINKED_EXISTING=0
+
 link_or_create_site() {
   # Manual static deploys only — never run `netlify init` (that asks for GitHub
   # webhooks/deploy keys, which we do not need and should not grant for ASF repos).
@@ -167,7 +169,9 @@ link_or_create_site() {
     return 0
   fi
   if [[ -f .netlify/state.json ]]; then
-    echo "==> Using existing Netlify link (.netlify/state.json)"
+    echo "==> Using existing Netlify link (.netlify/state.json); NETLIFY_SITE_NAME is ignored"
+    echo "    Delete .netlify/ to link a different site"
+    LINKED_EXISTING=1
     return 0
   fi
 
@@ -177,7 +181,10 @@ link_or_create_site() {
   # Capture the listing first (a pipeline into grep -q can fail spuriously under
   # pipefail), and allow for pretty-printed JSON ("name": "x").
   local site_id="" sites_json=""
-  sites_json="$(netlify_cli sites:list --json 2>/dev/null || true)"
+  if ! sites_json="$(netlify_cli sites:list --json)"; then
+    echo "Could not list Netlify sites (see the error above) — not creating a new one" >&2
+    exit 1
+  fi
   if printf '%s' "${sites_json}" | grep -Eq "\"name\": *\"${NETLIFY_SITE_NAME}\""; then
     netlify_cli link --name "${NETLIFY_SITE_NAME}"
     return 0
@@ -261,14 +268,16 @@ deploy_netlify() {
       | tr -d '<>' || true)"
   fi
   if [[ -z "${url}" ]]; then
-    # Fallback: first *.netlify.app that is NOT a unique deploy subdomain (has --)
+    # Fallback: unique deploy subdomains contain "--"; the stable site URL does not.
+    # Never report the stable URL as a draft preview, or the reverse.
+    local draft_filter=(grep -- '--')
+    if [[ "${MODE}" == "netlify-prod" ]]; then
+      draft_filter=(grep -v -- '--')
+    fi
     url="$(grep -Eo 'https://[^ >]+\.netlify\.app' "${log}" \
       | tr -d '<>' \
-      | grep -v -- '--' \
+      | "${draft_filter[@]}" \
       | head -1 || true)"
-  fi
-  if [[ -z "${url}" ]]; then
-    url="$(grep -Eo 'https://[^ >]+\.netlify\.app' "${log}" | tr -d '<>' | tail -1 || true)"
   fi
   rm -f "${log}"
 
@@ -278,7 +287,11 @@ deploy_netlify() {
       echo "==> Share URL: ${url}"
     else
       echo "==> Preview URL: ${url}"
-      echo "    Tip: ./preview.sh --prod for the stable https://${NETLIFY_SITE_NAME}.netlify.app link"
+      if [[ "${LINKED_EXISTING}" -eq 1 ]]; then
+        echo "    Tip: ./preview.sh --prod for the linked site's stable URL"
+      else
+        echo "    Tip: ./preview.sh --prod for the stable https://${NETLIFY_SITE_NAME}.netlify.app link"
+      fi
     fi
     if [[ "${OPEN_URL}" -eq 1 ]] && have_cmd open; then
       open "${url}"
@@ -291,6 +304,9 @@ deploy_netlify() {
 serve_local() {
   echo "==> Serving with Docker (${JEKYLL_SERVE_IMAGE}) at http://localhost:4000/"
   echo "    Ctrl+C to stop"
+  # jekyll serve regenerates target/site with local-server URLs: it is no longer
+  # the validated production build, so publish.sh --skip-build must not accept it.
+  rm -f "${ROOT}/${BUILD_SOURCE_FILE}"
   docker run --rm \
     --volume="${ROOT}:/site" \
     -p 4000:4000 \

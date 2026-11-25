@@ -9,7 +9,8 @@ fi
 
 JEKYLL_IMAGE="${JEKYLL_IMAGE:-bretfisher/jekyll}"
 JEKYLL_SERVE_IMAGE="${JEKYLL_SERVE_IMAGE:-bretfisher/jekyll-serve}"
-SITE_DIR="${SITE_DIR:-target/site}"
+# Fixed: _config.yml, pom.xml and the build stamp all assume target/site.
+SITE_DIR="target/site"
 # Records which commit (and whether a clean tree) target/site was built from.
 BUILD_SOURCE_FILE="target/.site-build-source"
 CHECKS_FAILED=0
@@ -99,13 +100,15 @@ check_jekyll_config() {
   elif [[ -n "${dest}" ]]; then
     check_fail "_config.yml destination is '${dest}' (expected target/site)"
   else
-    check_warn "could not parse destination from _config.yml"
+    check_fail "could not parse destination from _config.yml (expected target/site)"
   fi
 
   if [[ "${url}" == "https://unomi.apache.org" ]]; then
     check_pass "_config.yml url is https://unomi.apache.org"
   elif [[ -n "${url}" ]]; then
     check_publish_guard "_config.yml url is '${url}' (expected https://unomi.apache.org for production)"
+  else
+    check_publish_guard "could not parse url from _config.yml (expected https://unomi.apache.org for production)"
   fi
 }
 
@@ -182,6 +185,13 @@ validate_built_site() {
     exit 1
   fi
   echo "  [ok] index.html contains 'Apache Unomi'"
+
+  # `jekyll serve` (preview.sh --local) rewrites site.url to the local server address.
+  if grep -E 'rel="canonical"' "${site_path}/index.html" | grep -Eq '//(0\.0\.0\.0|localhost|127\.0\.0\.1)'; then
+    echo "Validation failed: ${SITE_DIR} has local-server URLs (left by a local preview) — rebuild" >&2
+    exit 1
+  fi
+  echo "  [ok] canonical URL is not a local-server address"
 
   # Unrendered Liquid is a strong signal the build was wrong.
   # Capture first: testing a pipeline that ends in head/grep -q can report a false

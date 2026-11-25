@@ -238,7 +238,7 @@ Credentials: your **ASF LDAP username and password** (not Netlify). Let the scri
 | `--yes` | Skip typing `publish` to confirm (required for non-interactive runs) |
 | `--force` | Publish even if the git tree is dirty, the branch is not `master`, or `_config.yml` `url` is not `https://unomi.apache.org` |
 
-Before publishing, the script checks project layout, Jekyll config, `pom.xml` scm-publish settings, Docker, Maven/Java, the `svn` client, SVN reachability, the git state (it refuses a dirty tree or a branch other than `master` unless `--force` is given; with `--skip-build` it also refuses a `target/site` that was not built from the current clean commit), and the built site contents (required pages, file counts, no Jekyll source dirs). It cannot verify the password: SVN only checks it at commit time, so a wrong one fails at the final Maven step.
+Before publishing, the script checks project layout, Jekyll config, `pom.xml` scm-publish settings, Docker, Maven/Java, the `svn` client, SVN reachability, the git state (it refuses a dirty tree or a branch other than `master` unless `--force` is given; it also refuses a `HEAD` that differs from its upstream as of the last fetch, and with `--skip-build` it refuses a `target/site` that was not built from the current clean commit), and the built site contents (required pages, file counts, no Jekyll source dirs). It cannot verify the password: SVN only checks it at commit time, so a wrong one fails at the final Maven step.
 
 Equivalent manual Maven command (prefer the script):
 

@@ -35,6 +35,9 @@
 # that scm-publish intentionally preserves under docs/, manual/, etc.
 
 set -euo pipefail
+# bash 5.2+ treats an unquoted & in a ${var//pat/repl} replacement as "the match",
+# which would corrupt xml_escape. The option does not exist in older bash.
+shopt -u patsub_replacement 2>/dev/null || true
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=scripts/lib/site-common.sh
@@ -103,7 +106,11 @@ prompt_password_if_needed() {
     exit 1
   fi
   echo -n "ASF LDAP password for '${ASF_USERNAME}': " >&2
-  IFS= read -rs ASF_PASSWORD
+  if ! IFS= read -rs ASF_PASSWORD; then
+    echo "" >&2
+    echo "No password entered" >&2
+    exit 1
+  fi
   echo "" >&2
 }
 
@@ -188,15 +195,20 @@ check_credentials() {
       check_warn "password not set yet — will prompt securely before publish"
     fi
   else
-    # shellcheck disable=SC2016
-    if [[ "${ASF_PASSWORD}" == *'${'* ]] || [[ "${ASF_PASSWORD}" != "${ASF_PASSWORD#[[:space:]]}" ]] \
-      || [[ "${ASF_PASSWORD}" != "${ASF_PASSWORD%[[:space:]]}" ]]; then
-      check_fail "password contains '\${' or leading/trailing whitespace, which Maven would alter — use the manual mvn command from the README"
-    elif [[ "${#ASF_PASSWORD}" -lt 8 ]]; then
-      check_fail "password looks too short (< 8 chars)"
-    else
-      check_pass "ASF password is set (${#ASF_PASSWORD} chars, value not printed)"
-    fi
+    check_password_shape
+  fi
+}
+
+# Also run after the prompt, so a typed password gets the same checks.
+check_password_shape() {
+  # shellcheck disable=SC2016
+  if [[ "${ASF_PASSWORD}" == *'${'* ]] || [[ "${ASF_PASSWORD}" != "${ASF_PASSWORD#[[:space:]]}" ]] \
+    || [[ "${ASF_PASSWORD}" != "${ASF_PASSWORD%[[:space:]]}" ]]; then
+    check_fail "password contains '\${' or leading/trailing whitespace, which Maven would alter — use the manual mvn command from the README"
+  elif [[ "${#ASF_PASSWORD}" -lt 8 ]]; then
+    check_fail "password looks too short (< 8 chars)"
+  else
+    check_pass "ASF password is set (${#ASF_PASSWORD} chars, value not printed; SVN verifies it at commit time)"
   fi
 }
 
@@ -234,6 +246,17 @@ check_git_hygiene() {
     check_publish_guard "working tree has uncommitted changes — commit or stash them before publishing"
   else
     check_pass "git working tree is clean"
+  fi
+
+  # Compared with the last fetch: a stale or unpushed master publishes the wrong tree.
+  local upstream
+  upstream="$(git -C "${ROOT}" rev-parse --verify --quiet '@{u}' 2>/dev/null || true)"
+  if [[ -z "${upstream}" ]]; then
+    check_warn "branch has no upstream — cannot tell whether it matches the remote"
+  elif [[ "${upstream}" == "$(git -C "${ROOT}" rev-parse HEAD 2>/dev/null || true)" ]]; then
+    check_pass "HEAD matches its upstream (as of the last fetch)"
+  else
+    check_publish_guard "HEAD differs from its upstream — pull or push so that what you publish is what is on the remote"
   fi
 }
 
@@ -394,7 +417,7 @@ echo "==> Post-prompt credential checks"
 if [[ -z "${ASF_PASSWORD}" ]]; then
   check_fail "password still empty after prompt"
 else
-  check_pass "password available for Maven/SVN (SVN verifies it at commit time)"
+  check_password_shape
 fi
 finish_prerequisite_checks
 
