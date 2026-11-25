@@ -19,7 +19,8 @@
 #   NETLIFY_SITE_ID      Existing site id (skips interactive link)
 #   NETLIFY_SITE_NAME    Site name when creating/linking (default: unomi-preview).
 #                        Netlify site names are global: if the name belongs to another
-#                        account, set this to a name of your own.
+#                        account, Netlify creates <name>-NNN instead and the script
+#                        reports that URL. Set a name of your own to avoid the suffix.
 #   NETLIFY_CLI_VERSION  netlify-cli version used through npx (default: 27)
 #   JEKYLL_IMAGE         Docker image (default: bretfisher/jekyll)
 #   JEKYLL_SERVE_IMAGE   Serve image (default: bretfisher/jekyll-serve)
@@ -38,7 +39,7 @@ NETLIFY_CLI_VERSION="${NETLIFY_CLI_VERSION:-27}"
 
 usage() {
   # Print the leading comment block (everything after the shebang up to the first non-comment line).
-  awk 'NR == 1 { next } /^#/ { sub(/^# ?/, ""); print; next } { exit }' "$0"
+  awk 'NR == 1 { next } /^#/ { sub(/^# ?/, ""); print; next } { exit }' "${ROOT}/preview.sh"
   exit "${1:-0}"
 }
 
@@ -78,6 +79,11 @@ check_prerequisites() {
         check_pass "npx found (will use: npx netlify-cli@${NETLIFY_CLI_VERSION})"
         if have_cmd node; then
           check_pass "node found ($(node --version 2>/dev/null))"
+          local node_major
+          node_major="$(node --version 2>/dev/null | sed -E 's/^v([0-9]+).*/\1/' || true)"
+          if [[ "${node_major}" =~ ^[0-9]+$ ]] && [[ "${node_major}" -lt 22 ]]; then
+            check_warn "netlify-cli@${NETLIFY_CLI_VERSION} expects Node 22.13 or later — upgrade Node or set NETLIFY_CLI_VERSION"
+          fi
         else
           check_warn "node not found — npx may still work depending on your Node install"
         fi
@@ -181,8 +187,8 @@ link_or_create_site() {
   create_log="$(mktemp)"
   if ! netlify_cli sites:create --name "${NETLIFY_SITE_NAME}" --disable-linking 2>&1 | tee "${create_log}"; then
     echo "Failed to create Netlify site '${NETLIFY_SITE_NAME}'" >&2
-    echo "Netlify site names are global. If '${NETLIFY_SITE_NAME}' belongs to another account," >&2
-    echo "pick your own, for example: export NETLIFY_SITE_NAME=unomi-preview-\$USER" >&2
+    echo "Netlify site names are global. Pick one of your own, for example:" >&2
+    echo "  export NETLIFY_SITE_NAME=unomi-preview-\$USER" >&2
     echo "Or create it in the Netlify UI, then re-run with:" >&2
     echo "  export NETLIFY_SITE_ID=<project-id>" >&2
     rm -f "${create_log}"
@@ -195,7 +201,18 @@ link_or_create_site() {
   if [[ -z "${site_id}" ]]; then
     site_id="$(grep -Eo '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}' "${create_log}" | head -1 || true)"
   fi
+  # When the name is taken by another account, Netlify silently creates <name>-NNN.
+  # Use the name it actually gave us so the share URL we print is ours.
+  local created_name
+  created_name="$(grep -Eo 'https://[a-z0-9-]+\.netlify\.app' "${create_log}" \
+    | head -1 \
+    | sed -E 's#https://([a-z0-9-]+)\.netlify\.app#\1#' || true)"
   rm -f "${create_log}"
+  if [[ -n "${created_name}" ]] && [[ "${created_name}" != "${NETLIFY_SITE_NAME}" ]]; then
+    echo "  [warn] '${NETLIFY_SITE_NAME}' was not available; Netlify created '${created_name}'" >&2
+    echo "         Your share URL is https://${created_name}.netlify.app" >&2
+    NETLIFY_SITE_NAME="${created_name}"
+  fi
 
   if [[ -n "${site_id}" ]]; then
     netlify_cli link --id "${site_id}"

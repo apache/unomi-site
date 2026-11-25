@@ -49,7 +49,7 @@ date: 2026-07-07 09:30:00 +0000
             <li><strong>Default query limit</strong> &mdash; mirrors search-engine default size when callers pass negative size</li>
             <li><strong>Property mappings</strong> &mdash; set/get property mapping metadata used by services</li>
             <li><strong>Aggregates</strong> &mdash; persistence aggregate SPI support used by analytics-style service tests</li>
-            <li><strong>Sequences / primary terms</strong> &mdash; index sequence helpers for ID generation scenarios</li>
+            <li><strong>Sequence numbers / primary terms</strong> &mdash; optimistic-concurrency conflict detection on conditional saves, as the scheduler lock manager relies on</li>
             <li><strong>System-item ID conventions</strong> &mdash; same <code>tenantId_itemId_itemType</code> rules as ES/OS for system types (rules, segments, schemas, &hellip;)</li>
             <li><strong>Tenant transformation listeners</strong> &mdash; register listeners like production persistence</li>
             <li><strong>Batching / overwrite flags</strong> &mdash; <code>save(item, useBatching, alwaysOverwrite)</code> overloads</li>

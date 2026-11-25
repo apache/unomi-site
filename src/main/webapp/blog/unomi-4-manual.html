@@ -42,9 +42,9 @@ date: 2026-07-13 12:51:00 +0000
         <p>Diagrams live
             <strong>in the AsciiDoc</strong>
             as <code>[plantuml]</code> blocks &mdash; reviewable in pull requests, regenerated on every docs build, no orphaned PNGs in git.
-            Tip today has on the order of
+            The 4.0.0 manual has
             <strong>78 PlantUML diagrams</strong>
-            across 31 chapter files (architecture C4, sequences, upgrade flows, condition evaluation, scheduler, past-event strategies, and more).</p>
+            across 31 source files (architecture C4, sequences, upgrade flows, condition evaluation, scheduler, past-event strategies, and more).</p>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>[plantuml]
 ----
 @startuml
@@ -81,7 +81,7 @@ Component(restApi, "REST API", "JAX-RS")
         <ul>
             <li><strong>Platform story</strong> &mdash; architecture, security, configuration, clustering, data structures</li>
             <li><strong>Unomi 4.0</strong> &mdash; multi-tenancy, task scheduler, OpenSearch notes, condition validation / evaluation, property types</li>
-            <li><strong>Migrations</strong> &mdash; 3.x&rarr;4.0 first (data migration with <code>unomi:migrate</code>, Elasticsearch 9.4.3 or OpenSearch 3.7.0, tenant API keys), then the longer 2.7&rarr;4.0 path (Java 17, Elasticsearch 7.4.2&rarr;9.4.3, QueryBuilder ID renames), single-tenant compatibility mode, script authoring</li>
+            <li><strong>Migrations</strong> &mdash; 3.x&rarr;4.0 first (data migration with <code>unomi:migrate</code>, QueryBuilder ID renames, Elasticsearch 9.4.3 or OpenSearch 3.7.0, tenant API keys), then the longer 2.7&rarr;4.0 path (Java 17, Elasticsearch 7.4.2&rarr;9.4.3), single-tenant compatibility mode, script authoring</li>
             <li><strong>Platform upgrades</strong> &mdash; dedicated <code>upgrades/</code> runbooks (Java, Karaf, Elasticsearch, Log4j, CXF/Jackson/Jetty, dependency hygiene, ITs)</li>
             <li><strong>Day-to-day APIs</strong> &mdash; request examples (including explain/tracing), GraphQL, shell commands, JavaScript tracker guide, recipes</li>
             <li><strong>Reference depth</strong> &mdash; conditions guide and builtin type catalogs (UNOMI-960), past-event conditions, profile tracking</li>

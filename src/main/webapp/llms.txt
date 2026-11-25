@@ -90,7 +90,7 @@ Tutorials: https://unomi.apache.org/tutorial.html
 - Main documentation: https://unomi.apache.org/documentation.html
 - Latest manual: https://unomi.apache.org/manual/latest/index.html
 - REST API reference: https://unomi.apache.org/rest-api-doc/index.html
-- Java API (Javadoc): https://unomi.apache.org/unomi-api/apidocs/index.html
+- Java API (Javadoc): https://unomi.apache.org/unomi-api/latest/apidocs/index.html
 
 ## Community & Support
 

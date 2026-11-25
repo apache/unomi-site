@@ -67,9 +67,9 @@
   </g>
   <g class="fade" style="animation-delay:0.46s">
     <rect class="bar" style="animation-delay:0.46s" x="640" y="125.9" width="36" height="194.1" rx="4" fill="var(--unomi-primary)"/>
-    <rect class="bar" style="animation-delay:0.51s" x="682" y="270.6" width="36" height="49.4" rx="4" fill="var(--unomi-info)"/>
+    <rect class="bar" style="animation-delay:0.51s" x="682" y="280.5" width="36" height="39.5" rx="4" fill="var(--unomi-info)"/>
     <text x="658" y="117.9" text-anchor="middle" fill="var(--unomi-primary-dark)" font-size="11" font-weight="700">2,118</text>
-    <text x="700" y="262.6" text-anchor="middle" fill="var(--unomi-info)" font-size="11" font-weight="700">539</text>
+    <text x="700" y="272.5" text-anchor="middle" fill="var(--unomi-info)" font-size="11" font-weight="700">431</text>
     <text x="679" y="344" text-anchor="middle" fill="var(--unomi-text)" font-size="13" font-weight="700">Unomi 4.0</text>
     <text x="679" y="362" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">4.0.0</text>
   </g>

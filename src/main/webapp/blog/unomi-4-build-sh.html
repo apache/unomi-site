@@ -51,28 +51,32 @@ date: 2026-07-11 11:44:00 +0000
         <h2 class="h4 mt-5 mb-3">Try it</h2>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>./build.sh --help
 
-# Default: build, then unpack and start Karaf
-./build.sh
-
 # Build only
 ./build.sh --no-karaf
+
+# Default: build, then unpack and start Karaf.
+# Karaf refuses to start unless both passwords are set.
+export UNOMI_ROOT_PASSWORD='choose-a-strong-password'
+export UNOMI_HEALTHCHECK_PASSWORD='choose-a-strong-health-password'
+./build.sh
 
 # Match GitHub Actions shape
 ./build.sh --ci
 
-# Full IT matrix flavors
-./build.sh --integration-tests
-# OpenSearch runs need the admin password exported first
+# Full IT matrix flavors (--no-karaf: do not start Karaf after the tests)
+./build.sh --integration-tests --no-karaf
+# OpenSearch runs need the admin password exported first.
+# Use a separate shell: with it set, the Elasticsearch run refuses to start.
 export UNOMI_OPENSEARCH_PASSWORD='MyStrongPassw0rd!'
-./build.sh --integration-tests --use-opensearch
+./build.sh --integration-tests --use-opensearch --no-karaf
 
 # One flaky test under a debugger
-./build.sh --integration-tests \
+./build.sh --integration-tests --no-karaf \
   --single-test org.apache.unomi.itests.graphql.GraphQLEventIT \
   --it-debug --it-debug-suspend
 
-# Deploy KAR into an existing Karaf
-./build.sh --deploy --karaf-home ~/apache-karaf</code></pre>
+# Deploy KAR into an existing Karaf (without starting the freshly built one)
+./build.sh --deploy --karaf-home ~/apache-karaf --no-karaf</code></pre>
 
         <h2 class="h4 mt-5 mb-3">Why it matters</h2>
         <p>Contributor friction kills review velocity. One documented command that validates the environment, builds the right distribution, and runs the same gates as CI means less &ldquo;works on my machine&rdquo; archaeology &mdash; and pairs with the

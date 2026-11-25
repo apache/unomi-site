@@ -31,24 +31,25 @@ date: 2026-07-17 10:00:00 +0000
             Unomi&nbsp;4.0 = <code>unomi-root-4.0.0</code>.
             Counts are physical lines of code and approximate JUnit <code>@Test</code> annotations from the git tree at each tag.</p>
 
-        <img src="/assets/images/unomi3/numbers-hero.svg" class="img-fluid my-4" alt="Unomi 4 headline metrics: 220k Java LOC, 2118 unit tests, 539 IT tests, 79 contributors"/>
+        <img src="/assets/images/unomi3/numbers-hero.svg" class="img-fluid my-4" alt="Unomi 4 headline metrics: 220k Java LOC, 2118 unit tests, 431 IT tests, 79 contributors"/>
 
         <h2 class="h4 mt-5 mb-3">Lines of code</h2>
         <p>Production Java grew from about <strong>45k</strong> lines in late Unomi&nbsp;1 to about <strong>70k</strong> in Unomi&nbsp;2 and <strong>71k</strong> at Unomi&nbsp;3.0.1 &mdash; then jumped to about <strong>127k</strong> at 4.0.0.
             Test Java stayed modest through 3.0 (~12k) and then leapt to about <strong>93k</strong> with the unit harness, multi-tenancy coverage, and related work.</p>
         <img src="/assets/images/unomi3/numbers-loc.svg" class="img-fluid my-4" alt="Stacked bar chart of Java production and test lines of code across Unomi 1, 2, 3.0.1, and 4.0"/>
-        <p class="small text-muted">Methodology: physical line counts over <code>.java</code> (and primary companion sources for totals elsewhere) from <code>git archive</code> at each tag; paths under <code>target/</code> excluded.
+        <p class="small text-muted">Methodology: physical line counts over <code>.java</code> files in the git tree at each tag.
             &ldquo;Main&rdquo; is everything outside <code>src/test/</code> and <code>itests/</code>; &ldquo;Tests&rdquo; is those trees.</p>
 
         <h2 class="h4 mt-5 mb-3">Unit and integration tests</h2>
-        <p>Integration tests have been Unomi&rsquo;s historical strength &mdash; growing from roughly <strong>128</strong> IT <code>@Test</code> methods in 1.9.1 to about <strong>539</strong> on 4.0.
+        <p>Integration tests have been Unomi&rsquo;s historical strength &mdash; growing from roughly <strong>128</strong> IT <code>@Test</code> methods in 1.9.1 to about <strong>431</strong> on 4.0.
             The dramatic change is on the unit side: from a few dozen methods through Unomi&nbsp;2 to about <strong>2,118</strong> on 4.0, driven by the in-memory persistence harness and denser service-level coverage.</p>
         <img src="/assets/images/unomi3/numbers-tests.svg" class="img-fluid my-4" alt="Grouped bars of unit versus integration @Test method counts across Unomi versions"/>
         <ul>
-            <li><strong>Unit classes</strong> &mdash; 11 &rarr; 12 &rarr; 15 &rarr; <strong>151</strong></li>
-            <li><strong>IT classes</strong> &mdash; 25 &rarr; 44 &rarr; 43 &rarr; <strong>77</strong></li>
+            <li><strong>Unit test classes</strong> (<code>*Test.java</code> outside <code>itests/</code>) &mdash; 11 &rarr; 12 &rarr; 15 &rarr; <strong>151</strong></li>
+            <li><strong>IT classes</strong> (<code>*IT.java</code> under <code>itests/</code>, shared base classes included) &mdash; 25 &rarr; 44 &rarr; 43 &rarr; <strong>77</strong></li>
             <li><strong>Test / main Java ratio</strong> &mdash; ~0.19 in 1.x, ~0.17 in 2.x, ~<strong>0.73</strong> on 4.0</li>
         </ul>
+        <p class="small text-muted">Integration counts are <code>@Test</code> methods in <code>*IT.java</code> files under <code>itests/</code>; unit counts are test annotations everywhere else. The 108 plain JUnit tests that 4.0 adds under <code>itests/</code> for the IT tooling itself are in neither series.</p>
         <p>That ratio shift is intentional: Unomi&nbsp;4.0 invests in fast feedback for rules, persistence, and tenancy while keeping the heavier IT suite for end-to-end confidence.
             See also
             <a href="/blog/unomi-4-unit-testing-harness.html">the unit testing harness</a>

@@ -58,7 +58,7 @@
   <g class="fade" style="animation-delay:.35s">
     <rect x="430" y="100" width="175" height="150" rx="16" fill="var(--unomi-white)" stroke="var(--unomi-info)" stroke-width="2"/>
     <text x="517" y="145" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="12" font-weight="600">IT @Test</text>
-    <text x="517" y="190" text-anchor="middle" fill="var(--unomi-info)" font-size="36" font-weight="800">539</text>
+    <text x="517" y="190" text-anchor="middle" fill="var(--unomi-info)" font-size="36" font-weight="800">431</text>
     <text x="517" y="220" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="11">up from 128 in Unomi 1.x</text>
   </g>
   <g class="fade" style="animation-delay:.45s">

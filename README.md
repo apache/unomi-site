@@ -155,8 +155,8 @@ Verify tooling before building:
 | Variable / file | Purpose |
 |---|---|
 | (default) | Script creates/links a site named `unomi-preview` on first deploy |
-| `NETLIFY_SITE_NAME` | Override the Netlify site name (default: `unomi-preview`). Netlify site names are global, so `unomi-preview` belongs to whichever account created it first: other committers must set a name of their own, and their share URL is `https://<that-name>.netlify.app` |
-| `NETLIFY_CLI_VERSION` | `netlify-cli` major version used through `npx` (default: `27`) |
+| `NETLIFY_SITE_NAME` | Override the Netlify site name (default: `unomi-preview`). Netlify site names are global, so `unomi-preview` belongs to whichever account created it first. For anyone else Netlify creates `unomi-preview-NNN` instead and the script prints that share URL; set a name of your own to avoid the suffix |
+| `NETLIFY_CLI_VERSION` | `netlify-cli` major version used through `npx` (default: `27`, which needs Node 22.13 or later) |
 | `NETLIFY_SITE_ID` | Use an existing site id and skip interactive link |
 | `.netlify/state.json` | Created after a successful link; reused on later runs (gitignored) |
 
@@ -220,7 +220,7 @@ Use `./publish.sh`, which builds with Docker Jekyll, runs strong validations, th
 
 Do **not** use the Maven `clean` goal — it would remove previously published trees that scm-publish intentionally preserves (`docs/`, `manual/`, etc.).
 
-Credentials: your **ASF LDAP username and password** (not Netlify). Let the script prompt for the password (or set `ASF_PASSWORD`). `-p` also works, but it puts the password in your shell history and in the process list. The script passes the password to Maven through a private temporary settings file, and never prints it.
+Credentials: your **ASF LDAP username and password** (not Netlify). Let the script prompt for the password (or set `ASF_PASSWORD`). `-p` also works, but it puts the password in your shell history and in the process list. The script passes the password to Maven through a private temporary settings file, which keeps it off the `mvn` command line, and never prints it. Maven's SCM provider still hands it to the `svn` child process as an argument while that runs, so do not publish from a host shared with untrusted users. The temporary file replaces Maven's global settings for the run: `~/.m2/settings.xml` still applies, a mirror or proxy set in the Maven installation's `conf/settings.xml` does not. Passwords containing `${` or leading/trailing whitespace are refused, because Maven would alter them; use the manual command below for those.
 
 ```shell
 ./publish.sh --check-only --username YOUR_APACHE_USERNAME
@@ -238,7 +238,7 @@ Credentials: your **ASF LDAP username and password** (not Netlify). Let the scri
 | `--yes` | Skip typing `publish` to confirm (required for non-interactive runs) |
 | `--force` | Publish even if the git tree is dirty, the branch is not `master`, or `_config.yml` `url` is not `https://unomi.apache.org` |
 
-Before publishing, the script checks project layout, Jekyll config, `pom.xml` scm-publish settings, Docker, Maven/Java, SVN reachability, the git state (it refuses a dirty tree or a branch other than `master` unless `--force` is given), and the built site contents (required pages, file counts, no Jekyll source dirs). It cannot verify the password: SVN only checks it at commit time, so a wrong one fails at the final Maven step.
+Before publishing, the script checks project layout, Jekyll config, `pom.xml` scm-publish settings, Docker, Maven/Java, the `svn` client, SVN reachability, the git state (it refuses a dirty tree or a branch other than `master` unless `--force` is given; with `--skip-build` it also refuses a `target/site` that was not built from the current clean commit), and the built site contents (required pages, file counts, no Jekyll source dirs). It cannot verify the password: SVN only checks it at commit time, so a wrong one fails at the final Maven step.
 
 Equivalent manual Maven command (prefer the script):
 

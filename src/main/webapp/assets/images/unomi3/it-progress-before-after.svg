@@ -105,14 +105,15 @@
 
     <g clip-path="url(#afterClip)" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="10">
       <text x="468" y="182" fill="var(--unomi-accent)">Apache Unomi  |  Integration tests</text>
-      <text x="468" y="200" fill="var(--term-muted)">Total tests: 412  |  Search: Elasticsearch</text>
+      <text x="468" y="200" fill="var(--term-muted)">Starting test suite with 412 tests. Good luck!</text>
 
       <rect x="468" y="216" width="304" height="28" rx="6" fill="#1e293b" stroke="#334155"/>
       <rect x="472" y="220" width="118" height="20" rx="4" fill="var(--term-ok)" class="bar-fill float"/>
       <text x="478" y="234" fill="#0f172a" font-size="9" font-weight="700">38%</text>
 
       <text x="468" y="268" fill="var(--term-ok)">Progress: 38.11% (157/412 tests).</text>
-      <text x="468" y="284" fill="var(--term-warn)">Remaining: 18m 42s. Successful: 157, Failed: 0</text>
+      <text x="468" y="282" fill="var(--term-warn)">Estimated time remaining: 18m 42s.</text>
+      <text x="468" y="296" fill="var(--term-warn)">Successful: 157, Failed: 0</text>
       <text x="468" y="310" fill="var(--term-muted)">Maven: -ntp  |  Docker logs to files</text>
       <text x="468" y="326" fill="var(--unomi-hero-accent)">Top 10 slowest - CSV at finish</text>
     </g>

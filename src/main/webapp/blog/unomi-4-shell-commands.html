@@ -43,7 +43,7 @@ date: 2026-07-01 11:59:00 +0000
             <li><strong>Completers</strong> &mdash; operation, type, and id completion for faster operator workflows</li>
             <li><strong>Tenant session</strong> &mdash; <code>unomi:tenant-get</code> / <code>unomi:tenant-set</code> so following commands run in a tenant (or <code>system</code>)</li>
             <li><strong>Tenant &amp; API key CRUD</strong> &mdash; create/list/update tenants and API keys from the shell</li>
-            <li><strong>Cache management</strong> &mdash; <code>unomi:cache</code> stats, reset, clear, inspect, view, remove, watch, filters by tenant/type, CSV</li>
+            <li><strong>Cache management</strong> &mdash; <code>unomi:cache</code> stats (filter by item type), reset, clear, inspect, view, remove (by tenant and class), watch, CSV</li>
             <li><strong>Scheduler ops</strong> &mdash; <code>unomi:task-list|show|cancel|retry|purge|executor</code> (see
                 <a href="/blog/unomi-4-task-scheduler.html">task scheduler</a>)</li>
             <li><strong>Validation assist</strong> &mdash; <code>unomi:list-invalid-objects</code> for rules/segments/goals/campaigns/scoring with unresolved types</li>
@@ -63,11 +63,12 @@ unomi:version
 unomi:cache --stats</code></pre>
 
         <h2 class="h4 mt-5 mb-3">Tenant context first</h2>
-        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code># Create a tenant (hashed keys are stored; plaintext only via create apikey)
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code># Create a tenant: both keys are generated, but only their hashes are stored
 unomi:crud create tenant '{"itemId":"acme","name":"Acme Corp"}'
+# create apikey replaces the key of that type and prints the new plaintext once
 unomi:crud create apikey '{"tenantId":"acme","keyType":"PUBLIC"}'
 unomi:crud create apikey '{"tenantId":"acme","keyType":"PRIVATE"}'
-# plaintext key is printed once for each create apikey &mdash; store it immediately
+# store each plaintext key immediately; running create apikey again rotates it
 unomi:crud list tenant
 
 unomi:tenant-set acme
@@ -87,9 +88,6 @@ unomi:crud create rule file:///tmp/rule.json
 unomi:crud create rule '{"itemId":"my-rule-id","metadata":{"id":"my-rule-id","name":"My rule","enabled":true},"condition":{"type":"matchAllCondition","parameterValues":{}},"actions":[]}'
 unomi:crud update rule my-rule-id '{"itemId":"my-rule-id","metadata":{"id":"my-rule-id","name":"My rule","enabled":false},"condition":{"type":"matchAllCondition","parameterValues":{}},"actions":[]}'
 unomi:crud delete rule my-rule-id
-
-unomi:crud create apikey '{"tenantId":"acme","keyType":"PRIVATE"}'
-# plaintext key is printed once &mdash; store it immediately
 
 unomi:crud list profile -n 20
 unomi:crud list schema          # when json-schema extension is present</code></pre>
@@ -179,14 +177,17 @@ unomi:event-tail
 unomi:rule-tail</code></pre>
 
         <h2 class="h4 mt-5 mb-3">Cache</h2>
-        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>unomi:cache --stats
-unomi:cache --stats --detailed --tenant acme
-unomi:cache --stats --type profile --csv
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code># Statistics are global; --type takes a cached item type (rule, segment, scope, ...)
+unomi:cache --stats
+unomi:cache --stats --detailed
+unomi:cache --stats --type rule --csv
+unomi:cache --watch 5
+
+# Entries are per tenant; here --type is the Java class of the cached item
 unomi:cache --clear --tenant acme
-unomi:cache --inspect
-unomi:cache --view --id ENTRY_ID --type TYPE --tenant acme
-unomi:cache --remove --id ENTRY_ID --type TYPE --tenant acme
-unomi:cache --watch 5</code></pre>
+unomi:cache --inspect --type org.apache.unomi.api.rules.Rule --tenant acme
+unomi:cache --view --id ENTRY_ID --type org.apache.unomi.api.rules.Rule --tenant acme
+unomi:cache --remove --id ENTRY_ID --type org.apache.unomi.api.rules.Rule --tenant acme</code></pre>
 
         <h2 class="h4 mt-5 mb-3">Scheduler (shell twin of REST)</h2>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>unomi:task-list -s RUNNING

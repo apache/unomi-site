@@ -48,7 +48,7 @@ date: 2026-07-03 12:16:00 +0000
             <li><strong>Karaf shell</strong> &mdash; <code>unomi:task-list|show|cancel|retry|purge|executor</code></li>
             <li><strong>Built-in purge</strong> &mdash; periodic <code>task-purge</code> of old <code>COMPLETED</code> records (<code>scheduler.purgeTaskEnabled</code>, TTL days)</li>
             <li><strong>Metrics</strong> &mdash; <code>getMetric</code> / <code>getAllMetrics</code> (completed, failed, crashed, running, lock conflicts, recovery attempts, &hellip;)</li>
-            <li><strong>Config</strong> &mdash; thread pool size, stable <code>scheduler.nodeId</code>, lock timeout, executor vs API-only node roles in <code>org.apache.unomi.services.cfg</code></li>
+            <li><strong>Config</strong> &mdash; thread pool size, lock timeout, and executor vs API-only node roles (<code>scheduler.executorNode</code>) in <code>org.apache.unomi.services.cfg</code>; the node id comes from Unomi itself, with the <code>org.apache.unomi.scheduler.nodeId</code> system property as the override</li>
         </ul>
 
         <h2 class="h4 mt-5 mb-3">REST surface</h2>
@@ -70,7 +70,7 @@ unomi:task-purge [--days N] [--force]
 unomi:task-executor          # is this node an executor? nodeId?</code></pre>
 
         <h2 class="h4 mt-5 mb-3">Fluent scheduling (plugins / services)</h2>
-        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>schedulerService.newTask("cache-refresh-segment")
+        <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>schedulerService.newTask("cache-refresh-Segment")
     .nonPersistent()
     .withPeriod(1, TimeUnit.SECONDS)
     .withFixedDelay()

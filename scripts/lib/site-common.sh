@@ -10,6 +10,8 @@ fi
 JEKYLL_IMAGE="${JEKYLL_IMAGE:-bretfisher/jekyll}"
 JEKYLL_SERVE_IMAGE="${JEKYLL_SERVE_IMAGE:-bretfisher/jekyll-serve}"
 SITE_DIR="${SITE_DIR:-target/site}"
+# Records which commit (and whether a clean tree) target/site was built from.
+BUILD_SOURCE_FILE="target/.site-build-source"
 CHECKS_FAILED=0
 
 have_cmd() {
@@ -110,6 +112,14 @@ check_jekyll_config() {
 build_site() {
   echo "==> Building site with Docker (${JEKYLL_IMAGE})"
   mkdir -p "${ROOT}/target"
+  rm -f "${ROOT}/${BUILD_SOURCE_FILE}"
+  local source_commit="unknown" source_state="dirty"
+  if have_cmd git && git -C "${ROOT}" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    source_commit="$(git -C "${ROOT}" rev-parse HEAD 2>/dev/null || echo unknown)"
+    if [[ -z "$(git -C "${ROOT}" status --porcelain 2>/dev/null)" ]]; then
+      source_state="clean"
+    fi
+  fi
   # The repo Gemfile is mounted into the image, so Bundler must install gems
   # into the project before jekyll build. A bare `jekyll build` fails with
   # GemNotFound when Gemfile.lock exists locally.
@@ -121,6 +131,7 @@ build_site() {
     -lc 'bundle install && bundle exec jekyll build'
 
   validate_built_site
+  printf '%s %s\n' "${source_commit}" "${source_state}" >"${ROOT}/${BUILD_SOURCE_FILE}"
   echo "==> Build OK → ${SITE_DIR}"
 }
 

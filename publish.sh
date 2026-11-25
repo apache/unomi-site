@@ -16,9 +16,14 @@
 #   ASF_USERNAME / ASF_PASSWORD
 #   or APACHE_USERNAME / APACHE_PASSWORD
 #
-# The password is handed to Maven through a private temporary settings file, not on
-# the command line. SVN only verifies it at commit time: the checks here cannot tell
-# a wrong password from a right one.
+# The password is handed to Maven through a private temporary settings file, so it
+# stays off the mvn command line and out of shell history. Maven's SCM provider still
+# passes it to the svn child process as an argument while that process runs, so do
+# not publish from a host you share with untrusted users. That settings file is used
+# as Maven's *global* settings for this run (your ~/.m2/settings.xml still applies; a
+# mirror or proxy configured in the Maven installation's conf/settings.xml does not).
+# SVN only verifies the password at commit time: the checks here cannot tell a wrong
+# password from a right one.
 #
 # Optional:
 #   JEKYLL_IMAGE   Docker image (default: bretfisher/jekyll)
@@ -47,7 +52,7 @@ PROD_URL="https://unomi.apache.org/"
 
 usage() {
   # Print the leading comment block (everything after the shebang up to the first non-comment line).
-  awk 'NR == 1 { next } /^#/ { sub(/^# ?/, ""); print; next } { exit }' "$0"
+  awk 'NR == 1 { next } /^#/ { sub(/^# ?/, ""); print; next } { exit }' "${ROOT}/publish.sh"
   exit "${1:-0}"
 }
 
@@ -141,6 +146,13 @@ check_maven_java() {
     check_fail "mvn not found — install Apache Maven"
   fi
 
+  # Maven's SCM provider drives the svn command line client.
+  if have_cmd svn; then
+    check_pass "svn found ($(svn --version --quiet 2>/dev/null | head -1 || echo ok))"
+  else
+    check_fail "svn not found — Maven needs the Subversion command line client to publish"
+  fi
+
   if have_cmd java; then
     check_pass "java found ($(java -version 2>&1 | head -1 || echo ok))"
   else
@@ -176,7 +188,11 @@ check_credentials() {
       check_warn "password not set yet — will prompt securely before publish"
     fi
   else
-    if [[ "${#ASF_PASSWORD}" -lt 8 ]]; then
+    # shellcheck disable=SC2016
+    if [[ "${ASF_PASSWORD}" == *'${'* ]] || [[ "${ASF_PASSWORD}" != "${ASF_PASSWORD#[[:space:]]}" ]] \
+      || [[ "${ASF_PASSWORD}" != "${ASF_PASSWORD%[[:space:]]}" ]]; then
+      check_fail "password contains '\${' or leading/trailing whitespace, which Maven would alter — use the manual mvn command from the README"
+    elif [[ "${#ASF_PASSWORD}" -lt 8 ]]; then
       check_fail "password looks too short (< 8 chars)"
     else
       check_pass "ASF password is set (${#ASF_PASSWORD} chars, value not printed)"
@@ -221,6 +237,26 @@ check_git_hygiene() {
   fi
 }
 
+# With --skip-build the branch/dirty checks above describe the checkout, not what
+# target/site was built from. build_site records that; compare it with HEAD.
+check_skip_build_source() {
+  local stamp="${ROOT}/${BUILD_SOURCE_FILE}"
+  local built_commit built_dirty head_commit
+  if [[ ! -f "${stamp}" ]]; then
+    check_publish_guard "--skip-build: no record of what ${SITE_DIR} was built from — rebuild without --skip-build"
+    return
+  fi
+  read -r built_commit built_dirty <"${stamp}" || true
+  head_commit="$(git -C "${ROOT}" rev-parse HEAD 2>/dev/null || true)"
+  if [[ -z "${head_commit}" ]] || [[ "${built_commit}" != "${head_commit}" ]]; then
+    check_publish_guard "--skip-build: ${SITE_DIR} was built from ${built_commit:0:7}, not the current commit ${head_commit:0:7}"
+  elif [[ "${built_dirty}" != "clean" ]]; then
+    check_publish_guard "--skip-build: ${SITE_DIR} was built from a tree with uncommitted changes"
+  else
+    check_pass "--skip-build: ${SITE_DIR} was built from the current commit (${head_commit:0:7})"
+  fi
+}
+
 check_no_clean_trap() {
   # Soft guard: refuse if someone aliased/wrapped this script oddly; real
   # protection is never invoking `mvn clean` in publish_site().
@@ -244,6 +280,7 @@ check_prerequisites() {
   if [[ "${SKIP_BUILD}" -eq 1 ]]; then
     if [[ -d "${ROOT}/${SITE_DIR}" ]]; then
       check_pass "--skip-build: ${SITE_DIR} exists (will validate before publish)"
+      check_skip_build_source
     else
       check_fail "--skip-build set but ${SITE_DIR} is missing — build first"
     fi
@@ -301,7 +338,7 @@ trap cleanup_mvn_settings EXIT
 
 publish_site() {
   # scm-publish reads ${username} / ${password}. Supply them as profile properties in a
-  # private global-settings file so the password never appears on a command line
+  # private global-settings file so the password stays off the mvn command line
   # (your own ~/.m2/settings.xml still applies).
   MVN_SETTINGS="$(mktemp)"
   chmod 600 "${MVN_SETTINGS}"

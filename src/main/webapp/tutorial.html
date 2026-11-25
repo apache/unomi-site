@@ -201,8 +201,8 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
                 </ul>
 
                 <h3 class="h6 fw-semibold mt-4 mb-3">1. Start the search engine</h3>
-                <p><strong>Elasticsearch:</strong> set <code>cluster.name: contextElasticSearch</code> in <code>config/elasticsearch.yml</code>, then <code>bin/elasticsearch</code>.</p>
-                <p><strong>OpenSearch:</strong> set <code>cluster.name: opensearch-cluster</code> and <code>discovery.type: single-node</code>, then <code>bin/opensearch</code>. In Karaf use <code>unomi:setup -d=unomi-distribution-opensearch -f=true</code> before <code>unomi:start</code>.</p>
+                <p><strong>Elasticsearch:</strong> set <code>cluster.name: contextElasticSearch</code> and, for this development setup, <code>xpack.security.enabled: false</code> in <code>config/elasticsearch.yml</code>, then <code>bin/elasticsearch</code>. Unomi connects over plain HTTP without credentials by default; to keep Elasticsearch security on, configure <code>UNOMI_ELASTICSEARCH_USERNAME</code>, <code>UNOMI_ELASTICSEARCH_PASSWORD</code> and <code>UNOMI_ELASTICSEARCH_SSL_ENABLE</code> instead.</p>
+                <p><strong>OpenSearch:</strong> set <code>cluster.name: opensearch-cluster</code> and <code>discovery.type: single-node</code>, export a strong <code>OPENSEARCH_INITIAL_ADMIN_PASSWORD</code> (OpenSearch rejects weak ones such as <code>admin</code>), then <code>bin/opensearch</code>. Before starting Karaf, export the same value as <code>UNOMI_OPENSEARCH_PASSWORD</code> (Unomi connects as <code>admin</code> over TLS by default). In Karaf use <code>unomi:setup -d=unomi-distribution-opensearch -f=true</code> before <code>unomi:start</code>.</p>
 
                 <h3 class="h6 fw-semibold mt-4 mb-3">2. Download &amp; start Apache Unomi</h3>
                 <p>Download the Unomi {{ site.data.unomi.latest.stable.version }} binary from the <a href="/download.html">download page</a>, extract it, export the required passwords (Unomi refuses to start without them), then:</p>
@@ -215,7 +215,7 @@ karaf@root()&gt; unomi:start</code></pre>
                 <p>Create a tenant as in <a href="#create-tenant">Step 2</a>, then call context with <code>X-Unomi-Api-Key</code>. Cluster check: <code>https://localhost:9443/cxs/cluster</code> (<code>karaf</code> / your <code>UNOMI_ROOT_PASSWORD</code>).</p>
 
                 <div class="alert alert-info small" role="alert">
-                    <i class="bi bi-terminal me-1"></i> <strong>Tip:</strong> SSH console <code>ssh -p 8102 karaf@localhost</code> &mdash; <code>unomi:crud list profile</code>, <code>unomi:event-tail</code>, <code>unomi:crud list rule</code>. Full detail: <a href="/blog/unomi-4-shell-commands.html">shell commands post</a> &middot; <a href="https://unomi.apache.org/manual/latest/index.html#_five_minutes_quickstart">manual quick start</a>.
+                    <i class="bi bi-terminal me-1"></i> <strong>Tip:</strong> SSH console <code>ssh -p 8102 karaf@localhost</code> &mdash; run <code>unomi:tenant-set default</code> first (the shell starts in the <code>system</code> context and would list nothing), then <code>unomi:crud list profile</code>, <code>unomi:event-tail</code>, <code>unomi:crud list rule</code>. Full detail: <a href="/blog/unomi-4-shell-commands.html">shell commands post</a> &middot; <a href="https://unomi.apache.org/manual/latest/index.html#_five_minutes_quickstart">manual quick start</a>.
                 </div>
             </div>
         </div>
@@ -357,7 +357,7 @@ karaf@root()&gt; unomi:start</code></pre>
   -u "default:YOUR_PRIVATE_API_KEY"</code></pre>
 
                 <div class="alert alert-info small" role="alert">
-                    <i class="bi bi-terminal me-1"></i> <strong>SSH Console shortcuts:</strong> <code>unomi:event-tail</code> watches events in real time, <code>unomi:crud list event</code> / <code>unomi:crud list profile</code> list recent items, <code>unomi:crud read profile PROFILE_UUID</code> shows profile details.
+                    <i class="bi bi-terminal me-1"></i> <strong>SSH Console shortcuts</strong> (after <code>unomi:tenant-set default</code>): <code>unomi:event-tail</code> watches events in real time, <code>unomi:crud list event</code> / <code>unomi:crud list profile</code> list recent items, <code>unomi:crud read profile PROFILE_UUID</code> shows profile details.
                 </div>
             </div>
         </div>
@@ -494,7 +494,7 @@ const unomiWebTracker = useTracker();
       }
     }]
   }'</code></pre>
-                <p class="small text-muted">After creating this rule, reload your tracked page a few times, then check the profile with <code>unomi:crud read profile PROFILE_UUID</code> in the SSH console to see the counter increase.</p>
+                <p class="small text-muted">After creating this rule, reload your tracked page a few times, then check the profile with <code>unomi:crud read profile PROFILE_UUID</code> in the SSH console (after <code>unomi:tenant-set default</code>) to see the counter increase.</p>
 
                 <!-- Copy event properties to profile -->
                 <h3 class="h6 fw-semibold mt-4 mb-3">Map event data to a profile</h3>
@@ -672,7 +672,7 @@ karaf@root()&gt; log:set DEBUG org.apache.unomi.schema.impl.SchemaServiceImpl
 
 # Watch logs in real-time
 karaf@root()&gt; log:tail</code></pre>
-                    <p class="small text-muted mb-0">Useful commands: <code>unomi:event-tail</code>, <code>unomi:rule-tail</code>, <code>unomi:crud list event|rule|profile</code>, <code>unomi:crud read profile &lt;ID&gt;</code></p>
+                    <p class="small text-muted mb-0">Useful commands (set the tenant first with <code>unomi:tenant-set default</code>): <code>unomi:event-tail</code>, <code>unomi:rule-tail</code>, <code>unomi:crud list event|rule|profile</code>, <code>unomi:crud read profile &lt;ID&gt;</code></p>
                 </div>
             </div>
         </div>

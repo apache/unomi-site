@@ -32,7 +32,7 @@ date: 2026-07-15 13:58:00 +0000
         <h2 class="h4 mt-4 mb-3">How the pipeline works</h2>
         <ol>
             <li><strong>Build time</strong> &mdash; a Maven Mojo scans JAX-RS sources and writes an enrichment pack (<code>openapi-doc.json</code>) into each REST module JAR</li>
-            <li><strong>Runtime</strong> &mdash; Unomi&rsquo;s CXF OpenAPI customizer loads every pack on the classpath and merges summaries, parameters, named statuses, examples, and schema field docs into <code>/cxs/openapi.json</code></li>
+            <li><strong>Runtime</strong> &mdash; a CXF OpenAPI customizer (from the same <code>dev.inoyu.openapi</code> library as the Mojo) loads the pack of every deployed bundle and merges summaries, parameters, named statuses, examples, and schema field docs into <code>/cxs/openapi.json</code></li>
         </ol>
         <p>Authors document once on the Java method / type; agents, Swagger UI, and humans all see the same result.</p>
 
