@@ -130,6 +130,10 @@ structured_data: >
                 <pre><code>gpg --import KEYS
 gpg --verify unomi-{{ site.data.unomi.latest.stable.version }}-bin.tar.gz.asc \
     unomi-{{ site.data.unomi.latest.stable.version }}-bin.tar.gz</code></pre>
+                <p class="small text-muted mb-2">For the tracker, check the signature and the checksum:</p>
+                <pre><code>gpg --verify unomi-tracker-{{ site.data.unomi.tracker.latest.version }}.tar.gz.asc \
+    unomi-tracker-{{ site.data.unomi.tracker.latest.version }}.tar.gz
+shasum -a 512 -c unomi-tracker-{{ site.data.unomi.tracker.latest.version }}.tar.gz.sha512</code></pre>
               </div>
         </div>
     </div>
