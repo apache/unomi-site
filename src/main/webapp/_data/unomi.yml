@@ -13,3 +13,8 @@ branch:
   version: master
 doc:
   version: master
+tracker:
+  latest:
+    version: 1.5.0
+    date: 2024-09-06
+    jira: 12354788
