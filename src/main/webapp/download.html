@@ -77,6 +77,43 @@ structured_data: >
     </div>
 </section>
 
+
+<!-- Apache Unomi tracker -->
+<section class="section pt-0" id="tracker">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="version-card p-4">
+                    <h2 class="h3 fw-bold mb-1">Apache Unomi tracker {{ site.data.unomi.tracker.latest.version }}</h2>
+                    <p class="text-muted small mb-3">Released {{ site.data.unomi.tracker.latest.date }}. The JavaScript tracker that websites use to send events to Apache Unomi.</p>
+
+                    <h3 class="h6 fw-semibold mb-2">Source Distribution</h3>
+                    <div class="d-flex flex-wrap gap-2 mb-3">
+                        <a href="https://www.apache.org/dyn/closer.lua/unomi/unomi-tracker/{{ site.data.unomi.tracker.latest.version }}/unomi-tracker-{{ site.data.unomi.tracker.latest.version }}.tar.gz" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">
+                            <i class="bi bi-file-earmark-code me-1"></i> Source (tar.gz)
+                        </a>
+                    </div>
+                    <p class="small text-muted mb-3">
+                        Verify: <a href="https://downloads.apache.org/unomi/unomi-tracker/{{ site.data.unomi.tracker.latest.version }}/unomi-tracker-{{ site.data.unomi.tracker.latest.version }}.tar.gz.asc" target="_blank" rel="noopener">PGP</a> &bull;
+                        <a href="https://downloads.apache.org/unomi/unomi-tracker/{{ site.data.unomi.tracker.latest.version }}/unomi-tracker-{{ site.data.unomi.tracker.latest.version }}.tar.gz.sha512" target="_blank" rel="noopener">SHA512</a> &bull;
+                        <a href="https://downloads.apache.org/unomi/KEYS" target="_blank" rel="noopener">KEYS</a>
+                    </p>
+
+                    <p class="small text-muted mb-3">
+                        The same release is on npm, built from this source distribution:
+                        <code>npm install apache-unomi-tracker@{{ site.data.unomi.tracker.latest.version }}</code>.
+                        Previous releases are in the <a href="https://archive.apache.org/dist/unomi/unomi-tracker/" target="_blank" rel="noopener">Apache archive</a>.
+                    </p>
+
+                    <a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&amp;version={{ site.data.unomi.tracker.latest.jira }}" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-journal-text me-1"></i> Release Notes
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Installation & Verification -->
 <section class="section section-alt">
       <div class="container">
@@ -115,6 +152,7 @@ gpg --verify unomi-{{ site.data.unomi.latest.stable.version }}-bin.tar.gz.asc \
                             <tr><th>Version</th><th>Binary</th><th>Source</th><th>Notes</th></tr>
                 </thead>
                   <tbody>
+                            <tr><td class="fw-semibold">3.1.0</td><td><a href="https://archive.apache.org/dist/unomi/3.1.0/unomi-3.1.0-bin.tar.gz" target="_blank" rel="noopener">tar.gz</a> &bull; <a href="https://archive.apache.org/dist/unomi/3.1.0/unomi-3.1.0-bin.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://archive.apache.org/dist/unomi/3.1.0/unomi-3.1.0-src.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12357799" target="_blank" rel="noopener">Notes</a></td></tr>
                             <tr><td class="fw-semibold">3.0.1</td><td><a href="https://archive.apache.org/dist/unomi/3.0.1/unomi-3.0.1-bin.tar.gz" target="_blank" rel="noopener">tar.gz</a> &bull; <a href="https://archive.apache.org/dist/unomi/3.0.1/unomi-3.0.1-bin.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://archive.apache.org/dist/unomi/3.0.1/unomi-3.0.1-src.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12357201" target="_blank" rel="noopener">Notes</a></td></tr>
                             <tr><td class="fw-semibold">3.0.0</td><td><a href="https://archive.apache.org/dist/unomi/3.0.0/unomi-3.0.0-bin.tar.gz" target="_blank" rel="noopener">tar.gz</a> &bull; <a href="https://archive.apache.org/dist/unomi/3.0.0/unomi-3.0.0-bin.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://archive.apache.org/dist/unomi/3.0.0/unomi-3.0.0-src.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12352340" target="_blank" rel="noopener">Notes</a></td></tr>
                             <tr><td class="fw-semibold">2.7.0</td><td><a href="https://archive.apache.org/dist/unomi/2.7.0/unomi-2.7.0-bin.tar.gz" target="_blank" rel="noopener">tar.gz</a> &bull; <a href="https://archive.apache.org/dist/unomi/2.7.0/unomi-2.7.0-bin.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://archive.apache.org/dist/unomi/2.7.0/unomi-2.7.0-src.zip" target="_blank" rel="noopener">zip</a></td><td><a href="https://issues.apache.org/jira/secure/ReleaseNote.jspa?projectId=12319220&version=12355172" target="_blank" rel="noopener">Notes</a></td></tr>

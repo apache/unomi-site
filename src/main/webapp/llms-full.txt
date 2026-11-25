@@ -12,7 +12,7 @@
 - **Source Code**: https://github.com/apache/unomi
 - **Issue Tracker**: https://issues.apache.org/jira/browse/UNOMI
 - **Current Stable Version**: 4.0.0 — Unomi 4 (multi-tenancy, OpenSearch, tasks, REST compatibility for 2.x and 3.x)
-- **Previous stable**: 3.0.1 (2026-07-20) — 3.0 maintenance line
+- **Previous stable**: 3.1.0 (2026-11-19) — 3.x maintenance line
 - **Development**: 4.1.0-SNAPSHOT
 - **Runtime baseline**: Java 17+
 
@@ -239,6 +239,7 @@ Guides: https://unomi.apache.org/get-started.html · https://unomi.apache.org/tu
 - **2022**: Version 2.0.0 released (major architecture update)
 - **2025**: Version 3.0.0 released (Karaf 4.4, Elasticsearch Java client 9.x, GraphQL API, BOM, persistence clustering)
 - **2026**: Version 3.0.1 released (3.0 maintenance line)
+- **2026**: Version 3.1.0 released (healthcheck fixes and configuration changes for GraphQL subscriptions, scripting and matchesRegex)
 - **2026**: Version 4.0.0 released (current stable — multi-tenancy, OpenSearch 3.x, cluster task scheduler, REST compatibility for Unomi 2.x and 3.x clients)
 
 ## Unomi 4 Blog (UNOMI-932)

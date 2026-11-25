@@ -1,8 +1,7 @@
 latest:
   stable:
     version: 4.0.0
-    # Set to the real GA calendar date when you publish the site with the release.
-    date: 2026-07-14
+    date: 2026-11-24
     jira_version_id: "12356384"
   development:
     version: 4.1.0-SNAPSHOT
@@ -14,9 +13,9 @@ next:
     version: 4.1.0-SNAPSHOT
 previous:
   stable:
-    version: 3.0.1
-    date: 2026-07-20
-    jira_version_id: "12357201"
+    version: 3.1.0
+    date: 2026-11-19
+    jira_version_id: "12357799"
 branch:
   version: master
 doc:
@@ -31,3 +30,8 @@ manual:
   v2_compat: "https://unomi.apache.org/manual/latest/index.html#_v2_compatibility_mode"
   es_to_os: "https://unomi.apache.org/manual/latest/index.html#_migrate_from_elasticsearch_to_opensearch"
   security: "https://unomi.apache.org/manual/latest/index.html#_securing_a_production_environment"
+tracker:
+  latest:
+    version: 2.0.0
+    date: 2026-11-18
+    jira: "12357743"
