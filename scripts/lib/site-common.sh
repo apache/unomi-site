@@ -134,6 +134,17 @@ build_site() {
     -lc 'bundle install && bundle exec jekyll build'
 
   validate_built_site
+  # The build takes minutes: only record the source if it did not change meanwhile.
+  local end_commit="unknown" end_state="dirty"
+  if have_cmd git && git -C "${ROOT}" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    end_commit="$(git -C "${ROOT}" rev-parse HEAD 2>/dev/null || echo unknown)"
+    if [[ -z "$(git -C "${ROOT}" status --porcelain 2>/dev/null)" ]]; then
+      end_state="clean"
+    fi
+  fi
+  if [[ "${end_commit}" != "${source_commit}" ]] || [[ "${end_state}" != "${source_state}" ]]; then
+    source_state="dirty"
+  fi
   printf '%s %s\n' "${source_commit}" "${source_state}" >"${ROOT}/${BUILD_SOURCE_FILE}"
   echo "==> Build OK → ${SITE_DIR}"
 }
@@ -186,12 +197,17 @@ validate_built_site() {
   fi
   echo "  [ok] index.html contains 'Apache Unomi'"
 
-  # `jekyll serve` (preview.sh --local) rewrites site.url to the local server address.
-  if grep -E 'rel="canonical"' "${site_path}/index.html" | grep -Eq '//(0\.0\.0\.0|localhost|127\.0\.0\.1)'; then
-    echo "Validation failed: ${SITE_DIR} has local-server URLs (left by a local preview) — rebuild" >&2
+  # The canonical URL must be the configured site url. `jekyll serve`
+  # (preview.sh --local) rewrites site.url to the local server address.
+  local site_url canonical
+  site_url="$(grep -E '^url:' "${ROOT}/_config.yml" 2>/dev/null | awk '{print $2}' | tr -d '"' || true)"
+  canonical="$(grep -Eo '<link rel="canonical" href="[^"]*"' "${site_path}/index.html" | head -1 || true)"
+  if [[ -z "${site_url}" ]] || [[ "${canonical}" != "<link rel=\"canonical\" href=\"${site_url}/\"" ]]; then
+    echo "Validation failed: index.html canonical URL is not ${site_url:-<url missing from _config.yml>}/ (found: ${canonical:-none})" >&2
+    echo "  A local preview (jekyll serve) rewrites it — rebuild the site" >&2
     exit 1
   fi
-  echo "  [ok] canonical URL is not a local-server address"
+  echo "  [ok] canonical URL is ${site_url}/"
 
   # Unrendered Liquid is a strong signal the build was wrong.
   # Capture first: testing a pipeline that ends in head/grep -q can report a false

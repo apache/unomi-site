@@ -27,12 +27,14 @@
 #
 # Optional:
 #   JEKYLL_IMAGE   Docker image (default: bretfisher/jekyll)
-#   --yes          Skip the interactive confirmation prompt
-#   --force        Publish even if the git tree is dirty, the branch is not master,
-#                  or _config.yml url is not https://unomi.apache.org
+#   --yes, -y      Skip the interactive confirmation prompt
+#   --force        Override the publish guards: dirty git tree, branch other than
+#                  master, HEAD different from its upstream, not a git checkout,
+#                  _config.yml url not https://unomi.apache.org, and (with
+#                  --skip-build) a target/site not built from the current clean commit
 #
-# Important: do not run Maven clean — it would wipe previously published trees
-# that scm-publish intentionally preserves under docs/, manual/, etc.
+# Important: do not run Maven clean — it deletes target/, including the site that
+# was just built and validated and the scm-publish working copy.
 
 set -euo pipefail
 # bash 5.2+ treats an unquoted & in a ${var//pat/repl} replacement as "the match",
@@ -147,23 +149,31 @@ check_pom_publish_config() {
 }
 
 check_maven_java() {
-  if have_cmd mvn; then
-    check_pass "mvn found ($(mvn -v 2>/dev/null | head -1 || echo ok))"
-  else
+  # Run each tool, not just look it up: macOS ships java/svn stubs that exist but fail.
+  local out
+  if ! have_cmd mvn; then
     check_fail "mvn not found — install Apache Maven"
+  elif out="$(mvn -v 2>&1)"; then
+    check_pass "mvn found (${out%%$'\n'*})"
+  else
+    check_fail "mvn found but not runnable: ${out%%$'\n'*}"
   fi
 
   # Maven's SCM provider drives the svn command line client.
-  if have_cmd svn; then
-    check_pass "svn found ($(svn --version --quiet 2>/dev/null | head -1 || echo ok))"
-  else
+  if ! have_cmd svn; then
     check_fail "svn not found — Maven needs the Subversion command line client to publish"
+  elif out="$(svn --version --quiet 2>&1)"; then
+    check_pass "svn found (${out%%$'\n'*})"
+  else
+    check_fail "svn found but not runnable: ${out%%$'\n'*}"
   fi
 
-  if have_cmd java; then
-    check_pass "java found ($(java -version 2>&1 | head -1 || echo ok))"
-  else
+  if ! have_cmd java; then
     check_fail "java not found — install a JDK for Maven"
+  elif out="$(java -version 2>&1)"; then
+    check_pass "java found (${out%%$'\n'*})"
+  else
+    check_fail "java found but not runnable: ${out%%$'\n'*}"
   fi
 
   if [[ -n "${JAVA_HOME:-}" ]]; then
@@ -248,13 +258,16 @@ check_git_hygiene() {
     check_pass "git working tree is clean"
   fi
 
-  # Compared with the last fetch: a stale or unpushed master publishes the wrong tree.
+  # A stale or unpushed master publishes the wrong tree.
   local upstream
+  if ! git -C "${ROOT}" fetch --quiet 2>/dev/null; then
+    check_warn "git fetch failed — comparing with the upstream as of the last fetch"
+  fi
   upstream="$(git -C "${ROOT}" rev-parse --verify --quiet '@{u}' 2>/dev/null || true)"
   if [[ -z "${upstream}" ]]; then
     check_warn "branch has no upstream — cannot tell whether it matches the remote"
   elif [[ "${upstream}" == "$(git -C "${ROOT}" rev-parse HEAD 2>/dev/null || true)" ]]; then
-    check_pass "HEAD matches its upstream (as of the last fetch)"
+    check_pass "HEAD matches its upstream"
   else
     check_publish_guard "HEAD differs from its upstream — pull or push so that what you publish is what is on the remote"
   fi
@@ -360,6 +373,9 @@ cleanup_mvn_settings() {
 trap cleanup_mvn_settings EXIT
 
 publish_site() {
+  # Validate again: target/site may have changed while waiting at the prompts
+  # (for example a preview.sh --local container regenerating it).
+  validate_built_site
   # scm-publish reads ${username} / ${password}. Supply them as profile properties in a
   # private global-settings file so the password stays off the mvn command line
   # (your own ~/.m2/settings.xml still applies).

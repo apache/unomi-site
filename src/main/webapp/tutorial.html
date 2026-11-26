@@ -192,17 +192,37 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
             <div class="col-lg-10">
                 <span class="badge badge-primary mb-3">Alternative to Docker</span>
                 <h2>Manual Installation</h2>
-                <p class="text-muted">Prefer running Unomi 4.0 on your machine? Match the versions used in the project quick start.</p>
+                <p class="text-muted">Prefer running Unomi 4.0 itself on your machine? Run the search engine with Docker Compose and Unomi from the binary distribution.</p>
 
                 <h3 class="h6 fw-semibold mt-4 mb-3">Prerequisites</h3>
                 <ul class="small">
                     <li><strong>Java 17</strong> or later &mdash; set <code>JAVA_HOME</code>. OpenJDK works fine.</li>
-                    <li><strong>Elasticsearch 9.4.3</strong> <em>or</em> <strong>OpenSearch 3.7.0</strong></li>
+                    <li><strong>Docker</strong> with Compose, for <strong>Elasticsearch 9.4.3</strong> <em>or</em> <strong>OpenSearch 3.7.0</strong></li>
                 </ul>
 
                 <h3 class="h6 fw-semibold mt-4 mb-3">1. Start the search engine</h3>
-                <p><strong>Elasticsearch:</strong> set <code>cluster.name: contextElasticSearch</code> and, for this development setup, <code>xpack.security.enabled: false</code> in <code>config/elasticsearch.yml</code>, then <code>bin/elasticsearch</code>. Unomi connects over plain HTTP without credentials by default; to keep Elasticsearch security on, configure <code>UNOMI_ELASTICSEARCH_USERNAME</code>, <code>UNOMI_ELASTICSEARCH_PASSWORD</code> and <code>UNOMI_ELASTICSEARCH_SSL_ENABLE</code> instead.</p>
-                <p><strong>OpenSearch:</strong> set <code>cluster.name: opensearch-cluster</code> and <code>discovery.type: single-node</code>, export a strong <code>OPENSEARCH_INITIAL_ADMIN_PASSWORD</code> (OpenSearch rejects weak ones such as <code>admin</code>), then <code>bin/opensearch</code>. Before starting Karaf, export the same value as <code>UNOMI_OPENSEARCH_PASSWORD</code> (Unomi connects as <code>admin</code> over TLS by default). In Karaf use <code>unomi:setup -d=unomi-distribution-opensearch -f=true</code> before <code>unomi:start</code>.</p>
+                <p>Run only the search engine in Docker: save one of the files below as <code>docker-compose.yml</code>, then run <code>docker compose up -d</code>.</p>
+                <p><strong>Elasticsearch</strong> (development setup, security off; Unomi connects to <code>localhost:9200</code> over plain HTTP without credentials by default):</p>
+<pre><code>services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.4.3
+    environment:
+      - cluster.name=contextElasticSearch
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - 9200:9200</code></pre>
+                <p><strong>OpenSearch</strong> (export a strong <code>OPENSEARCH_INITIAL_ADMIN_PASSWORD</code> first; OpenSearch rejects weak ones such as <code>admin</code>):</p>
+<pre><code>services:
+  opensearch:
+    image: opensearchproject/opensearch:3.7.0
+    environment:
+      - cluster.name=opensearch-cluster
+      - discovery.type=single-node
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}
+    ports:
+      - 9200:9200</code></pre>
+                <p>Before starting Karaf, export the same value as <code>UNOMI_OPENSEARCH_PASSWORD</code> (Unomi connects as <code>admin</code> over TLS by default). In Karaf use <code>unomi:setup -d=unomi-distribution-opensearch -f=true</code> before <code>unomi:start</code>.</p>
 
                 <h3 class="h6 fw-semibold mt-4 mb-3">2. Download &amp; start Apache Unomi</h3>
                 <p>Download the Unomi {{ site.data.unomi.latest.stable.version }} binary from the <a href="/download.html">download page</a>, extract it, export the required passwords (Unomi refuses to start without them), then:</p>
@@ -237,8 +257,8 @@ karaf@root()&gt; unomi:start</code></pre>
 
                 <!-- Create a scope first -->
                 <h3 class="h6 fw-semibold mt-4 mb-3">Create a scope</h3>
-                <p>Context requests and events must use a <strong>scope</strong> that already exists for the tenant.
-                    Schema validation rejects unknown scopes (<code>Unknown scope value</code> in the logs):</p>
+                <p>Events must use a <strong>scope</strong> that already exists for the tenant: schema validation silently drops
+                    events with an unknown scope (<code>Unknown scope value</code> in the logs). Create it first:</p>
 <pre><code>curl -X POST http://localhost:8181/cxs/scopes \
   -u "default:YOUR_PRIVATE_API_KEY" \
   -H "Content-Type: application/json" \
@@ -410,7 +430,7 @@ karaf@root()&gt; unomi:start</code></pre>
     "events": [],
     "wemInitConfig": {
       "contextServerUrl": document.location.origin,
-      "timeoutInMilliseconds": "1500",
+      "timeoutInMilliseconds": 1500,
       "contextServerCookieName": "context-profile-id",
       "activateWem": true,
       "trackerSessionIdCookieName": "my-website-session-id",
@@ -436,7 +456,7 @@ karaf@root()&gt; unomi:start</code></pre>
 &lt;/script&gt;</code></pre>
 
                 <div class="alert alert-warning small" role="alert">
-                    <i class="bi bi-exclamation-triangle me-1"></i> Remember to <strong>create the scope</strong> first (see <a href="#first-api-calls">Step 3</a>) or events will be rejected.
+                    <i class="bi bi-exclamation-triangle me-1"></i> Remember to <strong>create the scope</strong> first (see <a href="#first-api-calls">Step 3</a>) or events will be dropped.
                 </div>
 
                 <!-- NPM -->

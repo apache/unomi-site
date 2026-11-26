@@ -329,26 +329,18 @@ git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
                   Be careful with links that contain & (ampersand) characters, they must be replaced with &amp;. Normally all
                   this should be easy to do by simply search & replacing the version number. Finally on the home page update the news section to add the release.
                   <pre class="alert alert-primary"><code>git clone https://gitbox.apache.org/repos/asf/unomi-site.git</code></pre>
-                  Perform any modifications, notably change the versions in the pom.xml file:
-                  <pre class="alert alert-primary"><code>    &lt;properties&gt;
-        &lt;latest.stable.version&gt;4.0.0&lt;/latest.stable.version&gt;
-        &lt;next.development.version&gt;4.0.1-SNAPSHOT&lt;/next.development.version&gt;
-        &lt;next.stable.version&gt;4.0.1&lt;/next.stable.version&gt;
-        &lt;latest.development.version&gt;4.0.1-SNAPSHOT&lt;/latest.development.version&gt;
-    &lt;/properties&gt;
-</code></pre>
+                  Perform any modifications, notably change the versions in <code>src/main/webapp/_data/unomi.yml</code> (<code>latest.stable</code>, <code>latest.development</code> and <code>next.stable</code>).
                  Then modify the index.html, download.html to add the new files. For the documentation see the next step.
               </li>
                 <li>
                   Test the site modifications using the generated site HTML using Jekyll serve
-                    <pre class="alert alert-primary"><code>./mvnw clean install gem:exec@jekyll-serve-filtered</code></pre>
-                    Connect to http://127.0.0.1:4000 to check the modifications. If you need to make more modifications,
-                    simply relaunch the above line after modifying the HTML files.
+                    <pre class="alert alert-primary"><code>./preview.sh --local</code></pre>
+                    Connect to http://127.0.0.1:4000 to check the modifications. Source changes are detected and the
+                    site is rebuilt automatically.
                 </li>
                 <li>
-                  Deploy the web site changes using:
-                  <pre class="alert alert-primary"><code>./mvnw clean install
-./mvnw install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD</code></pre>
+                  Commit and push the changes to <code>master</code>, then deploy the web site with the publish script, which builds, validates and publishes (it prompts for your ASF password):
+                  <pre class="alert alert-primary"><code>./publish.sh --username YOUR_APACHE_USERNAME</code></pre>
                 </li>
                 <li>
                   Then make sure to commit all the changes to the web site's git project:

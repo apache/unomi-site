@@ -49,7 +49,7 @@ The generated site will be in the folder `target/site`.
 
 ### Local development server with Docker
 
-Serves the site at http://localhost:4000/ with live-reload on source changes:
+Serves the site at http://localhost:4000/ and rebuilds on source changes (reload the page to see them):
 
 ```shell
 docker run --rm \
@@ -71,7 +71,7 @@ bundle install
 bundle exec jekyll build
 ```
 
-Or serve locally with live-reload:
+Or serve locally, rebuilding on source changes:
 
 ```shell
 bundle exec jekyll serve
@@ -83,7 +83,7 @@ bundle exec jekyll serve
 |---|---|---|---|
 | Quick review (throwaway link) | `./preview.sh` | Unique draft, e.g. `https://<deploy-id>--unomi-preview.netlify.app` | Netlify account |
 | Stable link to share with reviewers | `./preview.sh --prod` | `https://unomi-preview.netlify.app` | Netlify account |
-| Local live-reload | `./preview.sh --local` | `http://localhost:4000` | none |
+| Local, rebuilds on change | `./preview.sh --local` | `http://localhost:4000` | none |
 | **Official** Apache site | `./publish.sh` | `https://unomi.apache.org` | **ASF LDAP** (not Netlify) |
 
 Important distinctions:
@@ -155,7 +155,7 @@ Verify tooling before building:
 | Variable / file | Purpose |
 |---|---|
 | (default) | Script creates/links a site named `unomi-preview` on first deploy |
-| `NETLIFY_SITE_NAME` | Override the Netlify site name (default: `unomi-preview`). Netlify site names are global, so `unomi-preview` belongs to whichever account created it first. For anyone else Netlify creates `unomi-preview-NNN` instead and the script prints that share URL; set a name of your own to avoid the suffix |
+| `NETLIFY_SITE_NAME` | Override the Netlify site name (default: `unomi-preview`). Netlify site names are global, so `unomi-preview` belongs to whichever account created it first. For anyone else Netlify creates `unomi-preview-NNN` instead and the script prints that share URL; set a name of your own to avoid the suffix. Ignored once `.netlify/state.json` exists or `NETLIFY_SITE_ID` is set (delete `.netlify/` to link a different site) |
 | `NETLIFY_CLI_VERSION` | `netlify-cli` major version used through `npx` (default: `27`, which needs Node 22.13 or later) |
 | `NETLIFY_SITE_ID` | Use an existing site id and skip interactive link |
 | `.netlify/state.json` | Created after a successful link; reused on later runs (gitignored) |
@@ -218,9 +218,9 @@ This is the **official** Apache Unomi website. It is **not** Netlify and is unre
 
 Use `./publish.sh`, which builds with Docker Jekyll, runs strong validations, then publishes via Maven `scm-publish` to ASF SVN (`https://svn.apache.org/repos/asf/unomi/website/`).
 
-Do **not** use the Maven `clean` goal — it would remove previously published trees that scm-publish intentionally preserves (`docs/`, `manual/`, etc.).
+Do **not** use the Maven `clean` goal — it deletes `target/`, including the site that was just built and validated and the scm-publish working copy. (The published `docs/`, `manual/`, etc. trees are preserved on SVN by `ignorePathsToDelete` in `pom.xml`.)
 
-Credentials: your **ASF LDAP username and password** (not Netlify). Let the script prompt for the password (or set `ASF_PASSWORD`). `-p` also works, but it puts the password in your shell history and in the process list. The script passes the password to Maven through a private temporary settings file, which keeps it off the `mvn` command line, and never prints it. Maven's SCM provider still hands it to the `svn` child process as an argument while that runs, so do not publish from a host shared with untrusted users. The temporary file replaces Maven's global settings for the run: `~/.m2/settings.xml` still applies, a mirror or proxy set in the Maven installation's `conf/settings.xml` does not. Passwords containing `${` or leading/trailing whitespace are refused, because Maven would alter them; use the manual command below for those.
+Credentials: your **ASF LDAP username and password** (not Netlify). Let the script prompt for the password (or set `ASF_PASSWORD`). `-p` also works, but it puts the password in your shell history and in the process list. The script passes the password to Maven through a private temporary settings file, which keeps it off the `mvn` command line, and never prints it. Maven's SCM provider still hands it to the `svn` child process as an argument while that runs, so do not publish from a host shared with untrusted users. The temporary file replaces Maven's global settings for the run: `~/.m2/settings.xml` still applies, a mirror or proxy set in the Maven installation's `conf/settings.xml` does not. The username must be a lowercase ASF id. Passwords shorter than 8 characters, or containing `${` or leading/trailing whitespace, are refused (`--force` does not override this), because Maven would alter them; use the manual command below for those.
 
 ```shell
 ./publish.sh --check-only --username YOUR_APACHE_USERNAME
@@ -235,12 +235,12 @@ Credentials: your **ASF LDAP username and password** (not Netlify). Let the scri
 | `--check-only` | Run prerequisite checks only (no build/publish) |
 | `--dry-run` | Full build + validate + Maven scm-publish dry run (no SVN commit) |
 | `--skip-build` | Reuse an existing `target/site` (still validated) |
-| `--yes` | Skip typing `publish` to confirm (required for non-interactive runs) |
-| `--force` | Publish even if the git tree is dirty, the branch is not `master`, or `_config.yml` `url` is not `https://unomi.apache.org` |
+| `--yes`, `-y` | Skip typing `publish` to confirm (required for non-interactive runs) |
+| `--force` | Override the publish guards: dirty git tree, branch other than `master`, `HEAD` different from its upstream, not a git checkout, `_config.yml` `url` not `https://unomi.apache.org`, and (with `--skip-build`) a `target/site` not built from the current clean commit |
 
-Before publishing, the script checks project layout, Jekyll config, `pom.xml` scm-publish settings, Docker, Maven/Java, the `svn` client, SVN reachability, the git state (it refuses a dirty tree or a branch other than `master` unless `--force` is given; it also refuses a `HEAD` that differs from its upstream as of the last fetch, and with `--skip-build` it refuses a `target/site` that was not built from the current clean commit), and the built site contents (required pages, file counts, no Jekyll source dirs). It cannot verify the password: SVN only checks it at commit time, so a wrong one fails at the final Maven step.
+Before publishing, the script checks project layout, Jekyll config, `pom.xml` scm-publish settings, Docker, Maven/Java, the `svn` client, SVN reachability, the git state (it refuses a dirty tree or a branch other than `master` unless `--force` is given; it also fetches and refuses a `HEAD` that differs from its upstream, and with `--skip-build` it refuses a `target/site` that was not built from the current clean commit), and the built site contents (required pages, file counts, no Jekyll source dirs). It cannot verify the password: SVN only checks it at commit time, so a wrong one fails at the final Maven step.
 
-Equivalent manual Maven command (prefer the script):
+Manual Maven command. It is **not** equivalent to the script: it skips the Jekyll build, the site validation, the git checks and the confirmation, and publishes whatever is in `target/site`. Build and check `target/site` first (`./preview.sh --build-only`):
 
 ```shell
 mvn install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD

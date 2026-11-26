@@ -166,6 +166,7 @@ link_or_create_site() {
   if [[ -n "${NETLIFY_SITE_ID:-}" ]]; then
     echo "==> Linking by NETLIFY_SITE_ID=${NETLIFY_SITE_ID}"
     netlify_cli link --id "${NETLIFY_SITE_ID}"
+    LINKED_EXISTING=1
     return 0
   fi
   if [[ -f .netlify/state.json ]]; then
@@ -185,7 +186,8 @@ link_or_create_site() {
     echo "Could not list Netlify sites (see the error above) — not creating a new one" >&2
     exit 1
   fi
-  if printf '%s' "${sites_json}" | grep -Eq "\"name\": *\"${NETLIFY_SITE_NAME}\""; then
+  if printf '%s' "${sites_json}" \
+    | grep -Fq -e "\"name\":\"${NETLIFY_SITE_NAME}\"" -e "\"name\": \"${NETLIFY_SITE_NAME}\""; then
     netlify_cli link --name "${NETLIFY_SITE_NAME}"
     return 0
   fi

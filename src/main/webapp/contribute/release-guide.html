@@ -263,21 +263,14 @@ git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
                  Then modify the <code>index.html</code>, <code>download.html</code> to add the new files. For the documentation see the next step or git <a href="https://github.com/apache/unomi-site/blob/master/README.md">README</a>.
               </li>
                 <li>
-                  Test the site modifications using the generated site HTML using Jekyll serve
-                    <pre class="alert alert-primary"><code>jekyll serve</code></pre>
-                    or by using docker (to not install <a href="https://jekyllrb.com/">Jekyll</a> locally)
-                    <pre class="alert alert-primary"><code> docker run --rm \
-  --volume="$PWD:/srv/jekyll:Z" \
-  -p 4000:4000 \
-  jekyll/jekyll:4.2.0 \
-  jekyll serve </code></pre>
-                    Connect to <code>http://127.0.0.1:4000</code> to check the modifications. With the docker image source changes are detected and site build automatically.
+                  Test the site modifications locally (Docker only, no local <a href="https://jekyllrb.com/">Jekyll</a> needed)
+                    <pre class="alert alert-primary"><code>./preview.sh --local</code></pre>
+                    Connect to <code>http://127.0.0.1:4000</code> to check the modifications. Source changes are detected and the site is rebuilt automatically.
                     This generates the site in the <code>target/site</code> folder.
                 </li>
                 <li>
-                  Once the site builds, deploy the web site changes using:
-                  <pre class="alert alert-primary"><code>
-mvn install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD</code></pre>
+                  Commit and push the changes to <code>master</code>, then deploy the web site with the publish script, which builds, validates and publishes (it prompts for your ASF password):
+                  <pre class="alert alert-primary"><code>./publish.sh --username YOUR_APACHE_USERNAME</code></pre>
                 </li>
                 <li>
                   Then make sure to commit all the changes to the web site's git project:
