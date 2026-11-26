@@ -252,11 +252,7 @@ mkdir {{ site.data.unomi.next.stable.version }}
 cd {{ site.data.unomi.next.stable.version }}</code></pre>
               </li>
               <li>
-                Copy all the Zip and Tarbars including ASC (but do not copy the SHA1 or MD5 sum) files from:
-                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/{{ site.data.unomi.next.stable.version }}/" target="_blank" rel="noopener">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi/{{ site.data.unomi.next.stable.version }}/</a>
-                and
-                <a href="https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/{{ site.data.unomi.next.stable.version }}/" target="_blank" rel="noopener">https://repository.apache.org/content/repositories/orgapacheunomi-1014/org/apache/unomi/unomi-root/{{ site.data.unomi.next.stable.version }}/</a>
-                  using commands such as : <pre class="alert alert-primary"><code>export REPO_ID=orgapacheunomi-1033
+                Copy the zip and tar.gz files, and their <code>.asc</code> signatures, from the staging repository you just closed. Do not copy the SHA1 or MD5 sums. Its id is shown in <a href="https://repository.apache.org/#stagingRepositories" target="_blank" rel="noopener">the staging repository list</a> and looks like <code>orgapacheunomi-NNNN</code>. For example: <pre class="alert alert-primary"><code>export REPO_ID=orgapacheunomi-1033
 wget https://repository.apache.org/content/repositories/$REPO_ID/org/apache/unomi/unomi-root/{{ site.data.unomi.next.stable.version }}/unomi-root-{{ site.data.unomi.next.stable.version }}-source-release.zip
 wget https://repository.apache.org/content/repositories/$REPO_ID/org/apache/unomi/unomi-root/{{ site.data.unomi.next.stable.version }}/unomi-root-{{ site.data.unomi.next.stable.version }}-source-release.zip.asc
 wget https://repository.apache.org/content/repositories/$REPO_ID/org/apache/unomi/unomi/{{ site.data.unomi.next.stable.version }}/unomi-{{ site.data.unomi.next.stable.version }}.tar.gz
