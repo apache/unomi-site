@@ -127,7 +127,7 @@ unomi:crud delete profile demo-ada</code></pre>
 
         <h3 class="h6 mt-4 mb-2">Scope first</h3>
         <p class="small text-muted">Sessions and events should reference a scope that already exists for the tenant.
-            Events sent through the REST API are schema-validated and rejected with <code>Unknown scope value</code> when it does not;
+            Events sent through the REST API are schema-validated and silently dropped (<code>Unknown scope value</code> in the log) when it does not;
             <code>unomi:crud</code> does not run that validation, so create the scope first to keep shell-created data consistent.</p>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code># Scope name lives under metadata (not a top-level "name" field)
 unomi:crud create scope '{"itemId":"myscope","metadata":{"id":"myscope","name":"My scope"}}'

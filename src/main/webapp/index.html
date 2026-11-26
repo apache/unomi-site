@@ -471,7 +471,7 @@ structured_data: >
                 <div class="text-center">
                     <div class="step-number mx-auto mb-3">3</div>
                     <h3 class="h6 fw-semibold mb-2">Integrate</h3>
-                    <p class="small text-muted">Call the REST API with <code>X-Unomi-Api-Key</code> &mdash; events, profiles, segments, personalization.</p>
+                    <p class="small text-muted">Call the REST API with your tenant keys &mdash; the public key (<code>X-Unomi-Api-Key</code>) for events and personalization, the private key for profiles and segments.</p>
                 </div>
             </div>
         </div>
@@ -576,7 +576,7 @@ structured_data: >
 })();
 </script>
 
-<!-- Latest News — capped at 10 most recent items (releases + articles + events), newest first.
+<!-- Latest News — most recent items (releases + articles + events), newest first.
      To add a news item, copy any <div class="news-item"> block and update date, icon, and content.
      Icon classes:  bi-rocket-takeoff = release,  bi-journal-richtext = blog/article,
                     bi-calendar-event = event,  bi-megaphone = announcement,  bi-camera-video = video -->

@@ -270,8 +270,9 @@ git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
                 </li>
                 <li>
                   Commit and push all the changes to <code>master</code> (the publish script refuses a dirty or unpushed tree):
-                  <pre class="alert alert-primary"><code>git commit -m "Apache Unomi {{ site.data.unomi.next.stable.version }} Release website update"
-git push</code></pre>
+                  <pre class="alert alert-primary"><code>git add -A
+git commit -m "Apache Unomi {{ site.data.unomi.next.stable.version }} Release website update"
+git push origin master</code></pre>
                 </li>
                 <li>
                   Deploy the web site with the publish script, which builds, validates and publishes (it prompts for your ASF password):

@@ -54,13 +54,13 @@ date: 2026-07-05 13:23:00 +0000
         <h2 class="h4 mt-5 mb-3">Auth: tenant admin, not the public key</h2>
         <p>Tracing is restricted to <strong>ADMINISTRATOR</strong> / <strong>TENANT_ADMINISTRATOR</strong>.
             In practice that means authenticate with the tenant <strong>private</strong> API key (Basic <code>tenantId:privateApiKey</code>), not the public track key.</p>
-        <p>We verified the following against a local <strong>Unomi 4.0</strong> server (HTTPS). Public-key + <code>explain=true</code> returned HTTP <strong>403</strong> with:</p>
+        <p>We verified the following against a local <strong>Unomi 4.0</strong> server. Public-key + <code>explain=true</code> returned HTTP <strong>403</strong> with:</p>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>{"errorMessage":"Insufficient privileges to access tracing information"}</code></pre>
         <p>Integration coverage: <code>EventsCollectorIT#testEventsCollectorWithExplain</code> and <code>#testEventsCollectorWithExplainUnauthorized</code>.</p>
 
         <h2 class="h4 mt-5 mb-3">Prerequisite: create the scope</h2>
-        <p>JSON Schema validation rejects events whose <code>scope</code> is unknown for the tenant
-            (<code>Unknown scope value &hellip; for value myscope</code>). Create the scope first:</p>
+        <p>Events whose <code>scope</code> is unknown for the tenant fail JSON Schema validation and are silently dropped
+            (the log shows <code>Unknown scope value &hellip; for value myscope</code>). Create the scope first:</p>
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>curl -X POST http://localhost:8181/cxs/scopes \
   -u 'YOUR_TENANT_ID:YOUR_PRIVATE_API_KEY' \
   -H 'Content-Type: application/json' \

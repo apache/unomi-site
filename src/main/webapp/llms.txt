@@ -72,7 +72,7 @@ export UNOMI_HEALTHCHECK_PASSWORD='choose-a-strong-health-password'
 docker compose up
 ```
 
-Unomi 4 ships no default password and refuses to start unless both variables are set (pass them to the `unomi` service in the compose file). Then create a tenant (`POST /cxs/tenants` as `karaf:$UNOMI_ROOT_PASSWORD`), regenerate keys via `POST /cxs/tenants/{id}/apikeys?type=PUBLIC|PRIVATE` (save each `plainTextKey` — create only returns `maskedKey`), and create a scope before context/events:
+Unomi 4 ships no default password and refuses to start unless both variables are set (pass them to the `unomi` service in the compose file). Then create a tenant (`POST /cxs/tenants` as `karaf:$UNOMI_ROOT_PASSWORD`), regenerate keys via `POST /cxs/tenants/{id}/apikeys?type=PUBLIC|PRIVATE` (save each `plainTextKey` — create only returns `maskedKey`), and create a scope before sending events (events with an unknown scope are silently dropped):
 
 - **Public key** → header `X-Unomi-Api-Key` for `/cxs/context.json` and `/cxs/eventcollector`
 - **Private key** → basic auth `tenantId:privateApiKey` for admin APIs (scopes, rules, schemas, searches)

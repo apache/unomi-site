@@ -333,15 +333,16 @@ git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
                  Then modify the index.html, download.html to add the new files. For the documentation see the next step.
               </li>
                 <li>
-                  Test the site modifications using the generated site HTML using Jekyll serve
+                  Test the site modifications locally (Docker only, no local Jekyll needed)
                     <pre class="alert alert-primary"><code>./preview.sh --local</code></pre>
                     Connect to http://127.0.0.1:4000 to check the modifications. Source changes are detected and the
                     site is rebuilt automatically.
                 </li>
                 <li>
                   Commit and push all the changes to <code>master</code> (the publish script refuses a dirty or unpushed tree):
-                  <pre class="alert alert-primary"><code>git commit -m "Apache Unomi {{ site.data.unomi.next.stable.version }} Release website update"
-git push</code></pre>
+                  <pre class="alert alert-primary"><code>git add -A
+git commit -m "Apache Unomi {{ site.data.unomi.next.stable.version }} Release website update"
+git push origin master</code></pre>
                 </li>
                 <li>
                   Deploy the web site with the publish script, which builds, validates and publishes (it prompts for your ASF password):
@@ -353,41 +354,27 @@ git push</code></pre>
 
             <ol>
                 <li>
-                    In the `unomi` project, on the master, branch, make sure that you have a archive for the current
-                    branch in the `manual/src/archives` directory. If not, create one with the current main version and
-                    copy the contents of `manual/src/main` into the newly created directory. Make sure you add all the
-                    files to the git repository.
+                    In the <code>unomi</code> project, on the <code>master</code> branch, the manual is generated from the
+                    <code>manual/src/main/asciidoc</code> sources of each branch listed in <code>generate-manual-config.sh</code>
+                    (the script clones them itself): make sure the manual changes are committed and pushed on those branches.
                 </li>
                 <li>
-                    Update the versions in <code>generate-manual-config.sh</code> if needed to add the new version
-                    you added in the previous step.
+                    Update the branches, versions and directories in <code>generate-manual-config.sh</code>
+                    (<code>LATEST_*</code> and <code>STABLE_*</code>) for the new release.
                 </li>
                 <li>
                     Launch <pre class="alert alert-primary"><code>./generate-manual.sh simulate APACHE_LDAP_USERNAME APACHE_LDAP_PASSWORD</code></pre> from the project's
                     root directory. This is a dry run that makes no changes.
                 </li>
-              <li>Check the generated site by opening <code>target/staging/manual/index.html</code>
+              <li>Check the generated site by opening <code>target/staging/manual/latest/index.html</code>
                   and check your changes and verify that there are no broken links.
               </li>
               <li>
                 Upload the site modification by using:
                 <pre class="alert alert-primary"><code>./generate-manual.sh publish APACHE_LDAP_USERNAME APACHE_LDAP_PASSWORD</code></pre>
+                This also uploads the manual PDF and ZIP packages (with their signatures and checksums) to
+                <code>https://dist.apache.org/repos/dist/release/unomi/{{ site.data.unomi.next.stable.version }}</code>: there is no separate upload step.
               </li>
-                <li>
-                    You will now need to publish the new version of the manual as downloadable resources
-                    <pre class="alert alert-primary"><code>cd manual
-cd target
-svn co https://dist.apache.org/repos/dist/release/unomi/{{ site.data.unomi.next.stable.version }}
-mv unomi-manual-{{ site.data.unomi.next.stable.version }}.pdf {{ site.data.unomi.next.stable.version }}
-mv unomi-manual-{{ site.data.unomi.next.stable.version }}.pdf.asc {{ site.data.unomi.next.stable.version }}
-mv unomi-manual-{{ site.data.unomi.next.stable.version }}.zip {{ site.data.unomi.next.stable.version }}
-mv unomi-manual-{{ site.data.unomi.next.stable.version }}.pdf.sha512 {{ site.data.unomi.next.stable.version }}
-mv unomi-manual-{{ site.data.unomi.next.stable.version }}.zip.asc {{ site.data.unomi.next.stable.version }}
-mv unomi-manual-{{ site.data.unomi.next.stable.version }}.zip.sha512 {{ site.data.unomi.next.stable.version }}
-cd {{ site.data.unomi.next.stable.version }}
-svn add unomi-manual*
-svn commit -m "Update Unomi manual packages"</code></pre>
-                </li>
                 <li>
                     Go back to the site project and make sure you update the documentation page to link to the proper
                     versions of the documents.

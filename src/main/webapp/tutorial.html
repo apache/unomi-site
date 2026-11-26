@@ -96,8 +96,7 @@ structured_data: >
 export UNOMI_HEALTHCHECK_PASSWORD='choose-a-strong-health-password'</code></pre>
 
                 <h3 class="h6 fw-semibold mt-4 mb-3">Create <code>docker-compose.yml</code> (Elasticsearch)</h3>
-<pre><code>version: '3.8'
-services:
+<pre><code>services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.4.3
     environment:
@@ -140,9 +139,6 @@ services:
 
 <hr class="section-divider">
 
-
-<hr class="section-divider">
-
 <!-- ============================================================ -->
 <!-- Create Tenant (Unomi 4.0) -->
 <!-- ============================================================ -->
@@ -177,7 +173,7 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
                     <li><code>YOUR_PRIVATE_API_KEY</code> &mdash; basic auth <code>default:YOUR_PRIVATE_API_KEY</code> for scopes, rules, schemas, searches</li>
                 </ul>
                 <div class="alert alert-warning small" role="alert">
-                    <i class="bi bi-exclamation-triangle me-1"></i> Public endpoints reject requests without a valid public API key. Do not use the <code>karaf</code> system admin credentials for context or event collector calls in native 4.0 mode.
+                    <i class="bi bi-exclamation-triangle me-1"></i> Public endpoints reject requests without a tenant API key: send the public key (they also accept the private key as basic auth, which must never reach a browser). Do not use the <code>karaf</code> system admin credentials for context or event collector calls in native 4.0 mode.
                 </div>
                 <p class="small mb-0">More: <a href="/get-started.html#auth">Getting Started auth table</a> &middot; <a href="/blog/unomi-4-multitenancy.html">Multi-tenancy post</a></p>
             </div>
@@ -185,8 +181,10 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
     </div>
 </section>
 
+<hr class="section-divider">
+
 <!-- ============================================================ -->
-<!-- 2. Manual Installation -->
+<!-- Alternative to Step 1: Manual Installation -->
 <!-- ============================================================ -->
 <section id="manual-install" class="section">
     <div class="container">
@@ -224,7 +222,7 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
       - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${OPENSEARCH_INITIAL_ADMIN_PASSWORD}
     ports:
       - 9200:9200</code></pre>
-                <p>Before starting Karaf, export the same value as <code>UNOMI_OPENSEARCH_PASSWORD</code> (Unomi connects as <code>admin</code> over TLS by default). In Karaf use <code>unomi:setup -d=unomi-distribution-opensearch -f=true</code> before <code>unomi:start</code>.</p>
+                <p>Before starting Karaf, export the same value as <code>UNOMI_OPENSEARCH_PASSWORD</code> (Unomi connects as <code>admin</code> over TLS by default).</p>
 
                 <h3 class="h6 fw-semibold mt-4 mb-3">2. Download &amp; start Apache Unomi</h3>
                 <p>Download the Unomi {{ site.data.unomi.latest.stable.version }} binary from the <a href="/download.html">download page</a>, extract it, export the required passwords (Unomi refuses to start without them), then:</p>
@@ -357,7 +355,7 @@ karaf@root()&gt; unomi:start</code></pre>
 
                 <!-- Search events -->
                 <h3 class="h6 fw-semibold mt-4 mb-3">Search events</h3>
-                <p>Retrieve events matching a condition:</p>
+                <p>Retrieve events matching a condition (new events take a second or two to become searchable):</p>
 <pre><code>curl -X POST http://localhost:8181/cxs/events/search \
   -u "default:YOUR_PRIVATE_API_KEY" \
   -H "Content-Type: application/json" \
@@ -519,7 +517,37 @@ const unomiWebTracker = useTracker();
       }
     }]
   }'</code></pre>
-                <p class="small text-muted">After creating this rule, reload your tracked page a few times, then check the profile with <code>unomi:crud read profile PROFILE_UUID</code> in the SSH console (after <code>unomi:tenant-set default</code>) to see the counter increase.</p>
+                <p class="small text-muted">After creating this rule, reload your tracked page a few times, or send a <code>view</code> event with curl (same cookie jar as in Step 3):</p>
+<pre><code>curl -c cookies.txt -b cookies.txt -X POST http://localhost:8181/cxs/eventcollector \
+  -H "Content-Type: application/json" \
+  -H "X-Unomi-Api-Key: YOUR_PUBLIC_API_KEY" \
+  --data-raw '{
+    "sessionId": "1234",
+    "events": [{
+      "eventType": "view",
+      "scope": "my-website",
+      "source": {
+        "itemType": "site",
+        "scope": "my-website",
+        "itemId": "mysite"
+      },
+      "target": {
+        "itemType": "page",
+        "scope": "my-website",
+        "itemId": "homepage",
+        "properties": {
+          "pageInfo": {
+            "pageID": "homepage",
+            "pageName": "Home",
+            "pagePath": "/",
+            "destinationURL": "http://localhost/",
+            "language": "en"
+          }
+        }
+      }
+    }]
+  }'</code></pre>
+                <p class="small text-muted">Then read the profile again (<code>curl http://localhost:8181/cxs/profiles/PROFILE_UUID -u "default:YOUR_PRIVATE_API_KEY"</code>, or <code>unomi:crud read profile PROFILE_UUID</code> in the SSH console after <code>unomi:tenant-set default</code>) to see <code>pageViewCount</code> increase.</p>
 
                 <!-- Copy event properties to profile -->
                 <h3 class="h6 fw-semibold mt-4 mb-3">Map event data to a profile</h3>

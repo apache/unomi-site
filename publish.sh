@@ -30,8 +30,8 @@
 #   --yes, -y      Skip the interactive confirmation prompt
 #   --force        Override the publish guards: dirty git tree, branch other than
 #                  master, HEAD different from its upstream, not a git checkout,
-#                  _config.yml url not https://unomi.apache.org, and (with
-#                  --skip-build) a target/site not built from the current clean commit
+#                  _config.yml url not https://unomi.apache.org, and a target/site
+#                  not built from the current clean commit
 #
 # Important: do not run Maven clean — it deletes target/, including the site that
 # was just built and validated and the scm-publish working copy.
@@ -259,11 +259,19 @@ check_git_hygiene() {
   fi
 
   # A stale or unpushed master publishes the wrong tree.
-  local upstream
+  local upstream ssh_cmd fetch_err
   # Never wait on a credential prompt: an unattended check would hang silently.
-  if ! GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND="${GIT_SSH_COMMAND:-ssh} -o BatchMode=yes" \
-    git -C "${ROOT}" fetch --quiet 2>/dev/null; then
-    check_warn "git fetch failed — comparing with the upstream as of the last fetch"
+  # Keep the user's own ssh command (env or git config); leave a GIT_SSH wrapper alone.
+  local fetch_env=(GIT_TERMINAL_PROMPT=0)
+  ssh_cmd="${GIT_SSH_COMMAND:-$(git -C "${ROOT}" config core.sshCommand 2>/dev/null || true)}"
+  if [[ -z "${ssh_cmd}" ]] && [[ -z "${GIT_SSH:-}" ]]; then
+    ssh_cmd="ssh"
+  fi
+  if [[ -n "${ssh_cmd}" ]]; then
+    fetch_env+=("GIT_SSH_COMMAND=${ssh_cmd} -o BatchMode=yes")
+  fi
+  if ! fetch_err="$(env "${fetch_env[@]}" git -C "${ROOT}" fetch --quiet 2>&1)"; then
+    check_warn "git fetch failed (${fetch_err%%$'\n'*}) — comparing with the upstream as of the last fetch"
   fi
   upstream="$(git -C "${ROOT}" rev-parse --verify --quiet '@{u}' 2>/dev/null || true)"
   if [[ -z "${upstream}" ]]; then
@@ -383,6 +391,9 @@ publish_site() {
   # Validate again: target/site may have changed while waiting at the prompts
   # (for example a preview.sh --local container regenerating it).
   validate_built_site
+  CHECKS_FAILED=0
+  check_skip_build_source
+  finish_prerequisite_checks
   # scm-publish reads ${username} / ${password}. Supply them as profile properties in a
   # private global-settings file so the password stays off the mvn command line
   # (your own ~/.m2/settings.xml still applies).
@@ -417,10 +428,10 @@ publish_site() {
   echo ""
   if [[ "${MODE}" == "dry-run" ]]; then
     echo "==> Dry run finished (nothing committed)"
-  elif ! grep -q 'Checked in' "${MVN_LOG}"; then
+  elif ! grep -Eq 'Checked in [1-9][0-9]* file' "${MVN_LOG}"; then
     # Maven exits 0 when there was nothing to commit or the check-in was skipped.
-    echo "==> Maven finished without reporting an SVN check-in"
-    echo "    Nothing may have been published (no changes?) — read the Maven output above"
+    echo "==> Maven finished without checking any file in to SVN"
+    echo "    Nothing was published (most likely no change since the last publish) — read the Maven output above"
   else
     echo "==> Publish finished"
     echo "    Live site: ${PROD_URL}"

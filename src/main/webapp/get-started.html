@@ -152,8 +152,7 @@ export UNOMI_HEALTHCHECK_PASSWORD='choose-a-strong-health-password'</code></pre>
 
 
                         <h4 class="h6 fw-semibold mb-2">Option A &mdash; Elasticsearch 9.4.3</h4>
-                        <pre><code>version: '3.8'
-services:
+                        <pre><code>services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:9.4.3
     environment:
@@ -176,8 +175,7 @@ services:
       - elasticsearch</code></pre>
 
                         <h4 class="h6 fw-semibold mt-4 mb-2">Option B &mdash; OpenSearch 3.7.0</h4>
-                        <pre><code>version: '3.8'
-services:
+                        <pre><code>services:
   opensearch-node1:
     image: opensearchproject/opensearch:3.7.0
     environment:
