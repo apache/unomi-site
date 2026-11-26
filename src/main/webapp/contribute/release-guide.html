@@ -215,21 +215,18 @@ and run mvn release:perform</code></pre>
                         <li>Remove the tag in Git:
                             <pre class="alert alert-primary"><code>git push --delete origin unomi-root-{{ site.data.unomi.next.stable.version }}
 git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
+                            (the local delete only applies if you fetched the tag)
                         </li>
                         <li>Correct any problems in the source, make sure to do them in master and cherry-pick them to the relevant branches</li>
-                        <li>Reset all versions back to <code>{{ site.data.unomi.next.development.version }}</code> with the following command, then commit and push the result to the release branch:
+                        <li><code>git pull</code> the release branch (the script pushed the release commits from its own clone), reset all versions back to <code>{{ site.data.unomi.next.development.version }}</code> with the following command, then commit and push the result to the release branch:
                             <pre class="alert alert-primary"><code>mvn versions:set -DnewVersion={{ site.data.unomi.next.development.version }} -DskipITs=true -DskipTests=true -P integration-tests,rat,apache-release,docker,\!run-tests</code></pre>
                         </li>
                         <li>Remove the refused candidate from the dev area (the upload step fails if the directory already exists):
                             <pre class="alert alert-primary"><code>svn rm https://dist.apache.org/repos/dist/dev/unomi/{{ site.data.unomi.next.stable.version }} -m "Remove refused Apache Unomi {{ site.data.unomi.next.stable.version }} release candidate"</code></pre>
                         </li>
-                        <li>Remove <code>target/release/{{ site.data.unomi.next.stable.version }}</code> and run <code>./release-stage-1.sh {{ site.data.unomi.next.stable.version }} BRANCH_NAME</code> again (the script builds a fresh clone from gitbox, not your checkout, so everything must be pushed), then <code>./release-stage-2.sh</code> with the new Nexus id</li>
+                        <li>Remove <code>target/release/{{ site.data.unomi.next.stable.version }}</code> and run <code>./release-stage-1.sh {{ site.data.unomi.next.stable.version }} BRANCH_NAME</code> again (the script builds a fresh clone from gitbox, not your checkout, so everything must be pushed), then close the new staging repository and run <code>./release-stage-2.sh {{ site.data.unomi.next.stable.version }} orgapacheunomi-NEW-ID</code></li>
                     </ol>
                 </li>
-              <li>
-                If the vote is refused, you will need to restart the release process. Make sure you remove the staging repositories as well as the release tag. You will also need to reset the version in the project using:
-                <pre class="alert alert-primary"><code>mvn versions:set</code></pre>
-              </li>
                 <li>Send out a vote summary in the same thread to the Unomi mailing list once the voting period has expired, see <a href="#mail-2">[2]</a></li>
             </ol>
 

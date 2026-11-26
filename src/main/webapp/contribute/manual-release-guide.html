@@ -307,10 +307,6 @@ git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
                         <li>Restart at the release:prepare step</li>
                     </ol>
                 </li>
-              <li>
-                If the vote is refused, you will need to restart the release process. Make sure you remove the staging repositories as well as the release tag. You will also need to reset the version in the project using:
-                <pre class="alert alert-primary"><code>mvn versions:set</code></pre>
-              </li>
                 <li>Send out a vote summary in the same thread to the Unomi mailing list once the voting period has expired, see <a href="#mail-2">[2]</a></li>
             </ol>
 
