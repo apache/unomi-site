@@ -162,20 +162,21 @@ gpg --verify test.txt.asc test.txt
                 <li>Setup server passwords for publishing as documented here:
                     <a href="https://www.apache.org/dev/publishing-maven-artifacts.html" target="_blank" rel="noopener">https://www.apache.org/dev/publishing-maven-artifacts.html</a> and <a href="https://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords" target="_blank" rel="noopener">https://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords</a>
                 </li>
+              <li>Check that the KEYS file only contains signatures with @apache.org addresses (if there are non @apache.org don't remove them because they have
+                been used to sign older releases)
+              </li>
+              <li>Check the Copyright notice years in the NOTICE file and anywhere else where it might be (by using search and replace)</li>
+              <li>Check that there are no JARs or ZIP files in the source code. The release script stops on a RAT failure, but it goes straight on to the release itself, so check beforehand by generating the RAT report in your checkout:
+                <pre class="alert alert-primary"><code>mvn clean install -DskipITs=true -DskipTests=true -P integration-tests,rat,apache-release,docker,\!run-tests
+less target/unomi-root-{{ site.data.unomi.next.development.version }}.rat</code></pre>
+              </li>
               <li>Launch the first build script using.
                 <pre class="alert alert-primary"><code>./release-stage-1.sh {{ site.data.unomi.next.stable.version }} BRANCH_NAME</code></pre>
                   where BRANCH_NAME is the branch you want to release (It must be created first if it doesn't exist !).<br>
                   <strong>This step will generate staging artifacts onto the <a href="https://repository.apache.org/#stagingRepositories">Apache Nexus</a>, if at the end of the script the
                   artefacts are not there, something bad happened in the script execution.</strong>
               </li>
-              <li>Check that there are no JARs or ZIP files in the source code, you can do this by looking at the generated RAT report here :
-                <pre class="alert alert-primary"><code>less target/unomi-root-{{ site.data.unomi.next.development.version }}.rat</code></pre>
-              </li>
-              <li>Check that the KEYS file only contains signatures with @apache.org addresses (if there are non @apache.org don't remove them because they have
-                been used to sign older releases)
-              </li>
-              <li>Check the Copyright notice years in the NOTICE file and anywhere else where it might be (by using search and replace)</li>
-              <li>If you get JavaDoc errors or other errors you must correct all of them before proceeding further</li>
+              <li>If the script stops on JavaDoc errors or other errors, correct all of them, commit and push the fixes to the release branch, then run it again (remove <code>target/release/{{ site.data.unomi.next.stable.version }}</code> first: the script makes a fresh clone from gitbox into it)</li>
               <li>If you get a error while signing despite having the proper keys install that looks like this:
                 <pre class="alert alert-primary"><code>[INFO] --- maven-gpg-plugin:1.5:sign (default) @ unomi-root ---
 gpg: 'echec de la signature : Inappropriate ioctl for device
@@ -214,18 +215,18 @@ and run mvn release:perform</code></pre>
                         <li>Remove the tag in Git:
                             <pre class="alert alert-primary"><code>git push --delete origin unomi-root-{{ site.data.unomi.next.stable.version }}
 git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
+                            (the local delete only applies if you fetched the tag)
                         </li>
                         <li>Correct any problems in the source, make sure to do them in master and cherry-pick them to the relevant branches</li>
-                        <li>Reset all versions with the following command:
-                            <pre class="alert alert-primary"><code>mvn versions:set -DskipITs=true -DskipTests=true -P integration-tests,rat,apache-release,docker,\!run-tests</code></pre>
+                        <li><code>git pull</code> the release branch (the script pushed the release commits from its own clone), reset all versions back to <code>{{ site.data.unomi.next.development.version }}</code> with the following command, then commit and push the result to the release branch:
+                            <pre class="alert alert-primary"><code>mvn versions:set -DnewVersion={{ site.data.unomi.next.development.version }} -DskipITs=true -DskipTests=true -P integration-tests,rat,apache-release,docker,\!run-tests</code></pre>
                         </li>
-                        <li>Restart at the release:prepare step</li>
+                        <li>Remove the refused candidate from the dev area (the upload step fails if the directory already exists):
+                            <pre class="alert alert-primary"><code>svn rm https://dist.apache.org/repos/dist/dev/unomi/{{ site.data.unomi.next.stable.version }} -m "Remove refused Apache Unomi {{ site.data.unomi.next.stable.version }} release candidate"</code></pre>
+                        </li>
+                        <li>Remove <code>target/release/{{ site.data.unomi.next.stable.version }}</code> and run <code>./release-stage-1.sh {{ site.data.unomi.next.stable.version }} BRANCH_NAME</code> again (the script builds a fresh clone from gitbox, not your checkout, so everything must be pushed), then close the new staging repository and run <code>./release-stage-2.sh {{ site.data.unomi.next.stable.version }} orgapacheunomi-NEW-ID</code></li>
                     </ol>
                 </li>
-              <li>
-                If the vote is refused, you will need to restart the release process. Make sure you remove the staging repositories as well as the release tag. You will also need to reset the version in the project using:
-                <pre class="alert alert-primary"><code>mvn versions:set</code></pre>
-              </li>
                 <li>Send out a vote summary in the same thread to the Unomi mailing list once the voting period has expired, see <a href="#mail-2">[2]</a></li>
             </ol>
 
@@ -252,38 +253,32 @@ git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
                   <pre class="alert alert-primary"><code>
                       latest:
                           stable:
-                            version: 3.1.0
+                            version: 4.0.0
                           development:
-                            version: 4.0.0-SNAPSHOT
+                            version: 4.0.1-SNAPSHOT
                         next:
                           stable:
-                            version: 4.0.0
+                            version: 4.0.1
                       ...
                 </code></pre>
                  Then modify the <code>index.html</code>, <code>download.html</code> to add the new files. For the documentation see the next step or git <a href="https://github.com/apache/unomi-site/blob/master/README.md">README</a>.
               </li>
                 <li>
-                  Test the site modifications using the generated site HTML using Jekyll serve
-                    <pre class="alert alert-primary"><code>jekyll serve</code></pre>
-                    or by using docker (to not install <a href="https://jekyllrb.com/">Jekyll</a> locally)
-                    <pre class="alert alert-primary"><code> docker run --rm \
-  --volume="$PWD:/srv/jekyll:Z" \
-  -p 4000:4000 \
-  jekyll/jekyll:4.2.0 \
-  jekyll serve </code></pre>
-                    Connect to <code>http://127.0.0.1:4000</code> to check the modifications. With the docker image source changes are detected and site build automatically.
+                  Test the site modifications locally (Docker only, no local <a href="https://jekyllrb.com/">Jekyll</a> needed)
+                    <pre class="alert alert-primary"><code>./preview.sh --local</code></pre>
+                    Connect to <code>http://127.0.0.1:4000</code> to check the modifications. Source changes are detected and the site is rebuilt automatically.
                     This generates the site in the <code>target/site</code> folder.
                 </li>
                 <li>
-                  Once the site builds, deploy the web site changes using:
-                  <pre class="alert alert-primary"><code>
-mvn install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD</code></pre>
+                  Commit and push all the changes to <code>master</code> (the publish script refuses a dirty or unpushed tree):
+                  <pre class="alert alert-primary"><code>git add -A
+git commit -m "Apache Unomi {{ site.data.unomi.next.stable.version }} Release website update"
+git push origin master</code></pre>
                 </li>
                 <li>
-                  Then make sure to commit all the changes to the web site's git project:
-                  <pre class="alert alert-primary"><code>git commit -m "Apache Unomi {{ site.data.unomi.next.stable.version }} Release website update"
-git push</code></pre>
-              </li>
+                  Deploy the web site with the publish script, which builds, validates and publishes (it prompts for your ASF password):
+                  <pre class="alert alert-primary"><code>./publish.sh --username YOUR_APACHE_USERNAME</code></pre>
+                </li>
             </ol>
 
               <h3 id="final-documentation">Documentation</h3>
@@ -291,19 +286,19 @@ git push</code></pre>
               <ol>
                   <li>
                       Before running the manual and API generation tool, make sure to update the versions in the
-                      <pre class="alert alert-primary"><code>generate-manual-config</code></pre> file to make sure the
-                      correct versions are used. You should only have to update the following lines:
+                      <pre class="alert alert-primary"><code>generate-manual-config.sh</code></pre> file to make sure the
+                      correct versions are used. You should only have to update the following lines (the values below are an example: <code>STABLE_VERSION</code> must be the release you are publishing, and <code>STABLE_BRANCH</code> an existing branch that holds the released sources):
                       <pre class="alert alert-primary"><code>
 # === VERSION CONFIGURATION ===
 # Latest version (master branch)
 LATEST_BRANCH="master"
-LATEST_VERSION="4.0.0-SNAPSHOT"
+LATEST_VERSION="4.0.1-SNAPSHOT"
 LATEST_DIR="latest"
 
 # Stable version (release branch)
-STABLE_BRANCH="unomi-3.x"
-STABLE_VERSION="3.1.0"
-STABLE_DIR="3_1_x"
+STABLE_BRANCH="unomi-4.0.x"
+STABLE_VERSION="4.0.0"
+STABLE_DIR="4_0_x"
                       </code></pre>
                   </li>
                   <li>
@@ -319,6 +314,8 @@ STABLE_DIR="3_1_x"
                       To publish the documentation to the Apache SVN, run:<br>
                       <pre class="alert alert-primary"><code>./generate-manual.sh publish APACHE_LDAP_USERNAME APACHE_LDAP_PASSWORD</code></pre>
                       This will generate and upload both the latest and stable documentation versions, as well as release packages.
+                      <strong>It also removes every other version directory under <code>https://unomi.apache.org/manual/</code></strong> (only the versions generated in this run, normally <code>latest</code> and <code>STABLE_DIR</code>, are kept; a version that fails to generate is removed as well, so check that the <code>simulate</code> run generates both before publishing): afterwards, on the documentation page, replace the "Online" links of the versions that were removed with their PDF/ZIP downloads.
+                      The packages go to <code>https://dist.apache.org/repos/dist/release/unomi/&lt;STABLE_VERSION&gt;</code>, the value set in <code>generate-manual-config.sh</code> (it is not read from the site's <code>unomi.yml</code>): set it to the release you are publishing. A failed package upload is logged but does not stop the run, so check that directory afterwards rather than relying on the final success message.
                   </li>
                   <li>
                       Go back to the site project and update the documentation page to link to the correct versions of the documents.

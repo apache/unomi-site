@@ -1,0 +1,58 @@
+---
+title: Introducing Apache Unomi 4
+description: "Apache Unomi 4 is a major open-source CDP release on the Unomi 3 runtime — multi-tenancy, OpenSearch 3.7.0, Elasticsearch 9.4.3, stable REST, and a larger test suite."
+keywords: "Apache Unomi 4, open source CDP, multi-tenancy, OpenSearch, single-tenant compatibility mode, CDP tests"
+layout: default
+date: 2026-06-19 10:17:00 +0000
+---
+
+<section class="page-header">
+    <div class="container">
+        <p class="section-label text-hero-label">Unomi 4</p>
+        <h1>Introducing Apache Unomi 4</h1>
+        <p class="lead">A major Customer Data Platform release &mdash; multi-tenancy, OpenSearch, and a larger test suite on the runtime Unomi 3 already shipped.</p>
+        {% if page.date %}
+        <p class="small text-muted mt-2 mb-0">
+            <time datetime="{{ page.date | date_to_xmlschema }}">Published {{ page.date | date: "%B %d, %Y at %H:%M UTC" }}</time>
+        </p>
+        {% endif %}
+
+    </div>
+</section>
+<section class="section">
+    <div class="container col-lg-8">
+        <p>Apache Unomi 4.0 is a <strong>major</strong> open-source CDP release. It keeps the production runtime that shipped in Unomi 3.0 and continued through 3.1.0 &mdash; <strong>Java 17+</strong>, Apache Karaf 4.4, the Elasticsearch 9 Java API client, and persistence-based clustering &mdash; and adds a <strong>platform-wide multi-tenancy refactor</strong>, OpenSearch as a peer backend, cluster-aware tasks, safer validation, and stronger tests.</p>
+        <p>The 4.0.0 distribution updates the pins on that runtime: <strong>Karaf 4.4.12</strong> (3.0.0 through 3.1.0 used 4.4.8) and <strong>Elasticsearch 9.4.3</strong> (3.x used 9.1.3). OpenSearch support is new in 4.0 and is pinned to <strong>OpenSearch 3.7.0</strong>.</p>
+        <p>A strong second theme: Unomi 4 is also built for <strong>AI agents</strong> that need real customer memory (retrieve, store, summarize, segment) over a stable open API. See <a href="/blog/unomi-4-ai-agents.html">Unomi 4 for AI agents</a>.</p>
+        <p>The familiar REST map stays put: <strong>all 119 documented Unomi 2.x OpenAPI paths are still present in 4.0</strong>, with new endpoints added alongside. Optional <strong>single-tenant compatibility mode</strong> lets you phase Unomi 2.x and 3.x clients onto tenant API keys. Details in <a href="/blog/migrating-to-unomi-4.html">Migrating to Unomi 4</a>.</p>
+
+        <h2 class="h4 mt-5 mb-3">The Unomi 4 journey</h2>
+        <img src="/assets/images/unomi3/unomi3-journey.svg" class="img-fluid mb-4" alt="Unomi 4 journey diagram"/>
+<h2 class="h4 mt-5 mb-3">By the numbers (3.0.1 to 4.0)</h2>
+        <ul>
+            <li><strong>Tests outpaced implementation:</strong> test Java ~12k at 3.0.1 → ~93k at 4.0, while production Java grew ~71k → ~127k (about 1.8×). Unomi 3.0.1 was still close in size to 2.7; the growth is the 3 to 4 step.</li>
+            <li>Test/main Java ratio ~0.17 → <strong>~0.73</strong></li>
+            <li>About <strong>2,118</strong> unit <code>@Test</code> methods and <strong>431</strong> integration <code>@Test</code> methods on 4.0</li>
+            <li><strong>API stability:</strong> 119 / 119 OpenAPI paths retained in 4.0; +12 additive paths</li>
+            <li><strong>Unit tests, not only ITs:</strong> new in-memory <code>PersistenceService</code> harness for fast, independent service tests</li>
+        </ul>
+        <p class="small text-muted">Figures match <a href="/blog/unomi-4-in-numbers.html">Unomi 4 in numbers</a>. Current downloadable stable: v{{ site.data.unomi.latest.stable.version }}.</p>
+
+        <h2 class="h4 mt-5 mb-3">What&rsquo;s in the box</h2>
+        <ul>
+            <li><strong>Runtime, from Unomi 3 and updated in 4.0:</strong> Java 17+, Karaf 4.4.12, Elasticsearch 9.4.3, persistence clustering</li>
+            <li><strong>New in 4.0:</strong> <a href="/blog/unomi-4-multitenancy.html">multi-tenancy and API keys</a>, OpenSearch 3.7.0, the task scheduler, condition validation, and request tracing</li>
+            <li><strong>Upgrade bridge:</strong> single-tenant compatibility mode for phased Unomi 2.x and 3.x client migration</li>
+            <li><strong>Docs:</strong> migration and upgrade runbooks in the official manual</li>
+        </ul>
+
+        <h2 class="h4 mt-5 mb-3">Try it</h2>
+        <p><a class="btn btn-primary" href="/download.html">Download current stable</a>
+           <a class="btn btn-outline-primary ms-2" href="/get-started.html">Get started</a>
+           <a class="btn btn-outline-primary ms-2" href="https://unomi.apache.org/manual/latest/index.html">Manual</a></p>
+
+        <h2 class="h4 mt-5 mb-3">Community</h2>
+        <p>Apache Unomi 4 is community-built software of the Apache Software Foundation. Among the many contributions, we especially want to thank <strong>Serge Huber (Inoyu)</strong> for an exceptional volume of engineering on this major release, alongside <strong>Jérôme Blanchard</strong>, <strong>Jonathan Sinovassin-Naik</strong>, and <strong>François G. (Jahia)</strong>, and other community contributors.</p>
+        <p><a href="/blog/">&larr; All posts</a></p>
+    </div>
+</section>

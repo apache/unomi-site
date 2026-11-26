@@ -155,14 +155,14 @@ gpg --verify test.txt.asc test.txt
                  in a separate directory, to make sure you don't have any additional files in the build
                   (such as allCountries.zip or other binary files that should not be there)</li>
                 <li>
-                    Simply checkout an existing branch for release
+                    Simply checkout an existing branch for release (<code>RELEASE_BRANCH</code> is for example <code>master</code> or <code>unomi-3.x</code>)
                     <pre class="alert alert-primary"><code>cd unomi
-git checkout unomi-{{ site.data.unomi.branch.version }}
+git checkout RELEASE_BRANCH
                     </code></pre>
                 </li>
                 <li>OR Create a new branch if needed for the release using:
                     <pre class="alert alert-primary"><code>cd unomi
-git checkout -b unomi-{{ site.data.unomi.branch.version }}
+git checkout -b RELEASE_BRANCH
                     </code></pre>
                 </li>
             </ol>
@@ -248,7 +248,8 @@ and run mvn release:perform</code></pre>
               </li>
               <li>
                 <pre class="alert alert-primary"><code>cd unomi-dev
-mkdir {{ site.data.unomi.next.stable.version }}</code></pre>
+mkdir {{ site.data.unomi.next.stable.version }}
+cd {{ site.data.unomi.next.stable.version }}</code></pre>
               </li>
               <li>
                 Copy all the Zip and Tarbars including ASC (but do not copy the SHA1 or MD5 sum) files from:
@@ -297,16 +298,15 @@ svn add {{ site.data.unomi.next.stable.version }}</code></pre>
 git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
                         </li>
                         <li>Correct any problems in the source, make sure to do them in master and cherry-pick them to the relevant branches</li>
-                        <li>Reset all versions with the following command:
-                            <pre class="alert alert-primary"><code>mvn versions:set -DskipITs=true -DskipTests=true -P integration-tests,rat,apache-release,docker,\!run-tests</code></pre>
+                        <li>Reset all versions back to <code>{{ site.data.unomi.next.development.version }}</code> with the following command, then commit and push the result to the release branch:
+                            <pre class="alert alert-primary"><code>mvn versions:set -DnewVersion={{ site.data.unomi.next.development.version }} -DskipITs=true -DskipTests=true -P integration-tests,rat,apache-release,docker,\!run-tests</code></pre>
+                        </li>
+                        <li>Remove the refused candidate from the dev area (the upload step fails if the directory already exists):
+                            <pre class="alert alert-primary"><code>svn rm https://dist.apache.org/repos/dist/dev/unomi/{{ site.data.unomi.next.stable.version }} -m "Remove refused Apache Unomi {{ site.data.unomi.next.stable.version }} release candidate"</code></pre>
                         </li>
                         <li>Restart at the release:prepare step</li>
                     </ol>
                 </li>
-              <li>
-                If the vote is refused, you will need to restart the release process. Make sure you remove the staging repositories as well as the release tag. You will also need to reset the version in the project using:
-                <pre class="alert alert-primary"><code>mvn versions:set</code></pre>
-              </li>
                 <li>Send out a vote summary in the same thread to the Unomi mailing list once the voting period has expired, see <a href="#mail-2">[2]</a></li>
             </ol>
 
@@ -329,73 +329,53 @@ git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
                   Be careful with links that contain & (ampersand) characters, they must be replaced with &amp;. Normally all
                   this should be easy to do by simply search & replacing the version number. Finally on the home page update the news section to add the release.
                   <pre class="alert alert-primary"><code>git clone https://gitbox.apache.org/repos/asf/unomi-site.git</code></pre>
-                  Perform any modifications, notably change the versions in the pom.xml file:
-                  <pre class="alert alert-primary"><code>    &lt;properties&gt;
-        &lt;latest.stable.version&gt;3.1.0&lt;/latest.stable.version&gt;
-        &lt;next.development.version&gt;4.0.0-SNAPSHOT&lt;/next.development.version&gt;
-        &lt;next.stable.version&gt;4.0.0&lt;/next.stable.version&gt;
-        &lt;latest.development.version&gt;4.0.0-SNAPSHOT&lt;/latest.development.version&gt;
-    &lt;/properties&gt;
-</code></pre>
+                  Perform any modifications, notably change the versions in <code>src/main/webapp/_data/unomi.yml</code> (<code>latest.stable</code>, <code>latest.development</code> and <code>next.stable</code>).
                  Then modify the index.html, download.html to add the new files. For the documentation see the next step.
               </li>
                 <li>
-                  Test the site modifications using the generated site HTML using Jekyll serve
-                    <pre class="alert alert-primary"><code>./mvnw clean install gem:exec@jekyll-serve-filtered</code></pre>
-                    Connect to http://127.0.0.1:4000 to check the modifications. If you need to make more modifications,
-                    simply relaunch the above line after modifying the HTML files.
+                  Test the site modifications locally (Docker only, no local Jekyll needed)
+                    <pre class="alert alert-primary"><code>./preview.sh --local</code></pre>
+                    Connect to http://127.0.0.1:4000 to check the modifications. Source changes are detected and the
+                    site is rebuilt automatically.
                 </li>
                 <li>
-                  Deploy the web site changes using:
-                  <pre class="alert alert-primary"><code>./mvnw clean install
-./mvnw install scm-publish:publish-scm -Dusername=YOUR_APACHE_USERNAME -Dpassword=YOUR_APACHE_PASSWORD</code></pre>
+                  Commit and push all the changes to <code>master</code> (the publish script refuses a dirty or unpushed tree):
+                  <pre class="alert alert-primary"><code>git add -A
+git commit -m "Apache Unomi {{ site.data.unomi.next.stable.version }} Release website update"
+git push origin master</code></pre>
                 </li>
                 <li>
-                  Then make sure to commit all the changes to the web site's git project:
-                  <pre class="alert alert-primary"><code>git commit -m "Apache Unomi {{ site.data.unomi.next.stable.version }} Release website update"
-git push</code></pre>
-              </li>
+                  Deploy the web site with the publish script, which builds, validates and publishes (it prompts for your ASF password):
+                  <pre class="alert alert-primary"><code>./publish.sh --username YOUR_APACHE_USERNAME</code></pre>
+                </li>
             </ol>
 
             <h3 id="final-documentation">Documentation</h3>
 
             <ol>
                 <li>
-                    In the `unomi` project, on the master, branch, make sure that you have a archive for the current
-                    branch in the `manual/src/archives` directory. If not, create one with the current main version and
-                    copy the contents of `manual/src/main` into the newly created directory. Make sure you add all the
-                    files to the git repository.
+                    In the <code>unomi</code> project, on the <code>master</code> branch, the manual is generated from the
+                    <code>manual/src/main/asciidoc</code> sources of each branch listed in <code>generate-manual-config.sh</code>
+                    (the script clones them itself): make sure the manual changes are committed and pushed on those branches.
                 </li>
                 <li>
-                    Modify the `generate-site.sh` and `generate-site-and-upload.sh` if needed to add the new version
-                    you added in the previous step.
+                    Update the branches, versions and directories in <code>generate-manual-config.sh</code>
+                    (<code>LATEST_*</code> and <code>STABLE_*</code>) for the new release.
                 </li>
                 <li>
-                    Launch <pre class="alert alert-primary"><code>./generate-site.sh</code></pre> from the project's
-                    root directory.
+                    Launch <pre class="alert alert-primary"><code>./generate-manual.sh simulate APACHE_LDAP_USERNAME APACHE_LDAP_PASSWORD</code></pre> from the project's
+                    root directory. This is a dry run that makes no changes.
                 </li>
-              <li>Check the generated site by opening <code>target/staging/manual/index.html</code>
+              <li>Check the generated site by opening <code>target/staging/manual/latest/index.html</code>
                   and check your changes and verify that there are no broken links.
               </li>
               <li>
                 Upload the site modification by using:
-                <pre class="alert alert-primary"><code>./generate-site-and-upload.sh APACHE_LDAP_USERNAME APACHE_LDAP_PASSWORD</code></pre>
+                <pre class="alert alert-primary"><code>./generate-manual.sh publish APACHE_LDAP_USERNAME APACHE_LDAP_PASSWORD</code></pre>
+                This also uploads the manual PDF and ZIP packages (with their signatures and checksums): there is no separate upload step.
+                <strong>It also removes every other version directory under <code>https://unomi.apache.org/manual/</code></strong> (only the versions generated in this run, normally <code>latest</code> and <code>STABLE_DIR</code>, are kept; a version that fails to generate is removed as well, so check that the <code>simulate</code> run generates both before publishing): afterwards, on the documentation page, replace the "Online" links of the versions that were removed with their PDF/ZIP downloads.
+                The packages go to <code>https://dist.apache.org/repos/dist/release/unomi/&lt;STABLE_VERSION&gt;</code>, the value set in <code>generate-manual-config.sh</code> (it is not read from the site's <code>unomi.yml</code>): set it to the release you are publishing. A failed package upload is logged but does not stop the run, so check that directory afterwards rather than relying on the final success message.
               </li>
-                <li>
-                    You will now need to publish the new version of the manual as downloadable resources
-                    <pre class="alert alert-primary"><code>cd manual
-cd target
-svn co https://dist.apache.org/repos/dist/release/unomi/{{ site.data.unomi.next.stable.version }}
-mv unomi-manual-{{ site.data.unomi.doc.version }}.pdf {{ site.data.unomi.next.stable.version }}
-mv unomi-manual-{{ site.data.unomi.doc.version }}.pdf.asc {{ site.data.unomi.next.stable.version }}
-mv unomi-manual-{{ site.data.unomi.doc.version }}.zip {{ site.data.unomi.next.stable.version }}
-mv unomi-manual-{{ site.data.unomi.doc.version }}.pdf.sha512 {{ site.data.unomi.next.stable.version }}
-mv unomi-manual-{{ site.data.unomi.doc.version }}.zip.asc {{ site.data.unomi.next.stable.version }}
-mv unomi-manual-{{ site.data.unomi.doc.version }}.zip.sha512 {{ site.data.unomi.next.stable.version }}
-cd {{ site.data.unomi.next.stable.version }}
-svn add unomi-manual*
-svn commit -m "Update Unomi manual packages"</code></pre>
-                </li>
                 <li>
                     Go back to the site project and make sure you update the documentation page to link to the proper
                     versions of the documents.

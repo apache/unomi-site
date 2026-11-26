@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 900 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="AI agents read and write customer context through Apache Unomi 4">
+  <defs>
+<style>
+  svg {
+    --unomi-primary: #6d5ce7;
+    --unomi-primary-dark: #5a48c9;
+    --unomi-primary-light: #ede9fe;
+    --unomi-primary-subtle: #f5f3ff;
+    --unomi-accent: #00cec9;
+    --unomi-hero-accent: #a78bfa;
+    --unomi-text: #1e293b;
+    --unomi-text-muted: #64748b;
+    --unomi-white: #ffffff;
+    --unomi-bg-soft: #f8fafc;
+    --unomi-border: #e2e8f0;
+    --unomi-success: #059669;
+    --unomi-on-dark: rgba(255,255,255,.85);
+    font-family: Inter, system-ui, sans-serif;
+  }
+  @keyframes dash-flow { to { stroke-dashoffset: -24; } }
+  @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+  @keyframes glow { 0%,100%{filter:drop-shadow(0 0 4px rgba(109,92,231,.35))} 50%{filter:drop-shadow(0 0 10px rgba(109,92,231,.55))} }
+  .flow { stroke-dasharray: 6 5; animation: dash-flow 1.6s linear infinite; }
+  .flow-rev { stroke-dasharray: 6 5; animation: dash-flow 1.6s linear infinite reverse; }
+  .float { animation: float-y 3.2s ease-in-out infinite; }
+  .glow { animation: glow 3s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .flow,.flow-rev,.float,.glow { animation: none !important; }
+  }
+</style>
+</defs>
+  <rect width="900" height="320" rx="20" fill="var(--unomi-primary-subtle)"/>
+  <text x="40" y="40" fill="var(--unomi-text)" font-size="18" font-weight="700">AI agents ↔ Apache Unomi 4</text>
+  <text x="40" y="62" fill="var(--unomi-text-muted)" font-size="13">Retrieve context · store memory · summarize profiles · build segments — with consent</text>
+
+  <!-- Agent -->
+  <g class="float">
+    <rect x="40" y="100" width="200" height="160" rx="18" fill="var(--unomi-primary)" class="glow"/>
+    <text x="140" y="140" text-anchor="middle" fill="var(--unomi-white)" font-size="15" font-weight="700">AI Agent / LLM</text>
+    <text x="140" y="168" text-anchor="middle" fill="var(--unomi-on-dark)" font-size="12">copilots · MCP tools</text>
+    <text x="140" y="196" text-anchor="middle" fill="var(--unomi-on-dark)" font-size="12">chat · recommend · act</text>
+    <text x="140" y="230" text-anchor="middle" fill="var(--unomi-accent)" font-size="11" font-weight="600">read + write</text>
+  </g>
+
+  <!-- arrows -->
+  <line x1="250" y1="150" x2="340" y2="150" stroke="var(--unomi-primary)" stroke-width="2.5" class="flow"/>
+  <text x="295" y="138" text-anchor="middle" fill="var(--unomi-primary-dark)" font-size="11" font-weight="600">retrieve</text>
+  <line x1="340" y1="210" x2="250" y2="210" stroke="var(--unomi-accent)" stroke-width="2.5" class="flow-rev"/>
+  <text x="295" y="232" text-anchor="middle" fill="var(--unomi-accent)" font-size="11" font-weight="600">write / act</text>
+
+  <!-- Unomi core -->
+  <rect x="350" y="90" width="220" height="180" rx="18" fill="var(--unomi-white)" stroke="var(--unomi-primary)" stroke-width="2"/>
+  <text x="460" y="125" text-anchor="middle" fill="var(--unomi-text)" font-size="15" font-weight="700">Unomi 4 CDP</text>
+  <text x="460" y="150" text-anchor="middle" fill="var(--unomi-text-muted)" font-size="12">REST · GraphQL</text>
+  <text x="460" y="178" text-anchor="middle" fill="var(--unomi-text)" font-size="12">profiles · events</text>
+  <text x="460" y="200" text-anchor="middle" fill="var(--unomi-text)" font-size="12">segments · rules</text>
+  <text x="460" y="222" text-anchor="middle" fill="var(--unomi-text)" font-size="12">consent gates</text>
+  <text x="460" y="248" text-anchor="middle" fill="var(--unomi-success)" font-size="11" font-weight="600">privacy-first memory</text>
+
+  <!-- capabilities -->
+  <g class="float" style="animation-delay:.4s">
+    <rect x="610" y="95" width="250" height="42" rx="12" fill="var(--unomi-white)" stroke="var(--unomi-border)"/>
+    <text x="735" y="121" text-anchor="middle" fill="var(--unomi-text)" font-size="12" font-weight="600">Personalize with live context</text>
+  </g>
+  <g class="float" style="animation-delay:.6s">
+    <rect x="610" y="150" width="250" height="42" rx="12" fill="var(--unomi-white)" stroke="var(--unomi-border)"/>
+    <text x="735" y="176" text-anchor="middle" fill="var(--unomi-text)" font-size="12" font-weight="600">Store agent observations</text>
+  </g>
+  <g class="float" style="animation-delay:.8s">
+    <rect x="610" y="205" width="250" height="42" rx="12" fill="var(--unomi-white)" stroke="var(--unomi-border)"/>
+    <text x="735" y="231" text-anchor="middle" fill="var(--unomi-text)" font-size="12" font-weight="600">Summarize → profile props</text>
+  </g>
+  <g class="float" style="animation-delay:1s">
+    <rect x="610" y="260" width="250" height="42" rx="12" fill="var(--unomi-white)" stroke="var(--unomi-border)"/>
+    <text x="735" y="286" text-anchor="middle" fill="var(--unomi-text)" font-size="12" font-weight="600">Build / query segments</text>
+  </g>
+</svg>

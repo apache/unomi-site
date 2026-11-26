@@ -111,8 +111,11 @@
             "Full REST/JSON API",
             "GraphQL API for flexible querying",
             "Plugin architecture (OSGi, Groovy actions)",
-            "Elasticsearch storage backend (OpenSearch support coming soon)",
-            "Connectors (MailChimp, custom via plugin API)",
+            "Elasticsearch or OpenSearch storage backend (OpenSearch new in Unomi 4.0)",
+            "True multi-tenancy with public/private API keys (major Unomi 4.0 platform refactor)",
+            "AI-agent-ready customer memory (retrieve, store, summarize, segment)",
+            "Single-tenant compatibility mode for Unomi 2.x and 3.x clients",
+            "Connectors (Salesforce, custom via plugin API)",
             "Bill of Materials (BOM) for dependency management",
             "OASIS CDP standard reference implementation"
         ]
@@ -134,7 +137,7 @@
             {
                 "@type": "ListItem",
                 "position": 2,
-                "name": "{{ page.title }}",
+                "name": "{{ page.title | replace: '&amp;', '&' | replace: '&mdash;', '—' }}",
                 "item": "{{ site.url }}{{ page.url }}"
             }{% endif %}
         ]
@@ -163,6 +166,8 @@
         _paq.push(['trackPageView']);
         _paq.push(['enableLinkTracking']);
         (function() {
+            // Only report from the official site, not from preview copies or local builds.
+            if (location.hostname !== 'unomi.apache.org') { return; }
             var u="https://analytics.apache.org/";
             _paq.push(['setTrackerUrl', u+'matomo.php']);
             _paq.push(['setSiteId', '61']);
@@ -208,6 +213,11 @@
                     <li class="nav-item">
                         <a class="nav-link fw-medium" href="/get-started.html">Get Started</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="/blog/" aria-label="Blog (new)">
+                            Blog<span class="nav-badge-new" aria-hidden="true">New</span>
+                        </a>
+                    </li>
 
                     <!-- Documentation Dropdown -->
                     <li class="nav-item dropdown">
@@ -228,7 +238,7 @@
                             <li><hr class="dropdown-divider my-1"></li>
                             <li><a class="dropdown-item rounded-2 py-2" href="https://unomi.apache.org/rest-api-doc/index.html">
                                 <i class="bi bi-braces me-2 text-primary"></i>REST API</a></li>
-                            <li><a class="dropdown-item rounded-2 py-2" href="https://unomi.apache.org/unomi-api/apidocs/index.html">
+                            <li><a class="dropdown-item rounded-2 py-2" href="https://unomi.apache.org/unomi-api/latest/apidocs/index.html">
                                 <i class="bi bi-code-square me-2 text-primary"></i>Javadoc</a></li>
                         </ul>
                     </li>
@@ -294,6 +304,7 @@
                     <li class="mb-2"><a href="/get-started.html" class="footer-link">Getting Started</a></li>
                     <li class="mb-2"><a href="/get-started.html#quickstart" class="footer-link">Quick Start</a></li>
                     <li class="mb-2"><a href="/download.html" class="footer-link">Download</a></li>
+                    <li class="mb-2"><a href="/blog/" class="footer-link">Blog</a></li>
                     <li class="mb-2"><a href="/integrations.html" class="footer-link">Integrations</a></li>
                 </ul>
             </div>
@@ -303,7 +314,7 @@
                     <li class="mb-2"><a href="/documentation.html" class="footer-link">Documentation Home</a></li>
                     <li class="mb-2"><a href="/use-cases.html" class="footer-link">Use Cases</a></li>
                     <li class="mb-2"><a href="https://unomi.apache.org/rest-api-doc/index.html" class="footer-link">REST API</a></li>
-                    <li class="mb-2"><a href="https://unomi.apache.org/unomi-api/apidocs/index.html" class="footer-link">Javadoc</a></li>
+                    <li class="mb-2"><a href="https://unomi.apache.org/unomi-api/latest/apidocs/index.html" class="footer-link">Javadoc</a></li>
                 </ul>
             </div>
             <div class="col-6 col-md-3">
