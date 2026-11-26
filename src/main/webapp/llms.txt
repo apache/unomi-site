@@ -76,7 +76,7 @@ Unomi 4 ships no default password and refuses to start unless both variables are
 
 - **Public key** → header `X-Unomi-Api-Key` for `/cxs/context.json` and `/cxs/eventcollector`
 - **Private key** → basic auth `tenantId:privateApiKey` for admin APIs (scopes, rules, schemas, searches)
-- **Scope** → `POST /cxs/scopes` before any context or event that references that scope id
+- **Scope** → `POST /cxs/scopes` before sending events that reference that scope id (events with an unknown scope are silently dropped)
 
 System admin (`karaf:$UNOMI_ROOT_PASSWORD`) is for tenant management and cluster operations, not for public context/event calls in native 4.0 mode.
 

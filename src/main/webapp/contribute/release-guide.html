@@ -269,14 +269,14 @@ git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
                     This generates the site in the <code>target/site</code> folder.
                 </li>
                 <li>
-                  Commit and push the changes to <code>master</code>, then deploy the web site with the publish script, which builds, validates and publishes (it prompts for your ASF password):
-                  <pre class="alert alert-primary"><code>./publish.sh --username YOUR_APACHE_USERNAME</code></pre>
-                </li>
-                <li>
-                  Then make sure to commit all the changes to the web site's git project:
+                  Commit and push all the changes to <code>master</code> (the publish script refuses a dirty or unpushed tree):
                   <pre class="alert alert-primary"><code>git commit -m "Apache Unomi {{ site.data.unomi.next.stable.version }} Release website update"
 git push</code></pre>
-              </li>
+                </li>
+                <li>
+                  Deploy the web site with the publish script, which builds, validates and publishes (it prompts for your ASF password):
+                  <pre class="alert alert-primary"><code>./publish.sh --username YOUR_APACHE_USERNAME</code></pre>
+                </li>
             </ol>
 
               <h3 id="final-documentation">Documentation</h3>
@@ -284,7 +284,7 @@ git push</code></pre>
               <ol>
                   <li>
                       Before running the manual and API generation tool, make sure to update the versions in the
-                      <pre class="alert alert-primary"><code>generate-manual-config</code></pre> file to make sure the
+                      <pre class="alert alert-primary"><code>generate-manual-config.sh</code></pre> file to make sure the
                       correct versions are used. You should only have to update the following lines:
                       <pre class="alert alert-primary"><code>
 # === VERSION CONFIGURATION ===

@@ -79,9 +79,11 @@ check_prerequisites() {
         check_pass "npx found (will use: npx netlify-cli@${NETLIFY_CLI_VERSION})"
         if have_cmd node; then
           check_pass "node found ($(node --version 2>/dev/null))"
-          local node_major
+          local node_major node_minor
           node_major="$(node --version 2>/dev/null | sed -E 's/^v([0-9]+).*/\1/' || true)"
-          if [[ "${node_major}" =~ ^[0-9]+$ ]] && [[ "${node_major}" -lt 22 ]]; then
+          node_minor="$(node --version 2>/dev/null | sed -E 's/^v[0-9]+\.([0-9]+).*/\1/' || true)"
+          if [[ "${node_major}" =~ ^[0-9]+$ ]] && [[ "${node_minor}" =~ ^[0-9]+$ ]] \
+            && { [[ "${node_major}" -lt 22 ]] || { [[ "${node_major}" -eq 22 ]] && [[ "${node_minor}" -lt 13 ]]; }; }; then
             check_warn "netlify-cli@${NETLIFY_CLI_VERSION} expects Node 22.13 or later — upgrade Node or set NETLIFY_CLI_VERSION"
           fi
         else

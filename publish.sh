@@ -260,7 +260,9 @@ check_git_hygiene() {
 
   # A stale or unpushed master publishes the wrong tree.
   local upstream
-  if ! git -C "${ROOT}" fetch --quiet 2>/dev/null; then
+  # Never wait on a credential prompt: an unattended check would hang silently.
+  if ! GIT_TERMINAL_PROMPT=0 GIT_SSH_COMMAND="${GIT_SSH_COMMAND:-ssh} -o BatchMode=yes" \
+    git -C "${ROOT}" fetch --quiet 2>/dev/null; then
     check_warn "git fetch failed — comparing with the upstream as of the last fetch"
   fi
   upstream="$(git -C "${ROOT}" rev-parse --verify --quiet '@{u}' 2>/dev/null || true)"
@@ -275,21 +277,22 @@ check_git_hygiene() {
 
 # With --skip-build the branch/dirty checks above describe the checkout, not what
 # target/site was built from. build_site records that; compare it with HEAD.
+# Also run right after a build, in case the source changed while it ran.
 check_skip_build_source() {
   local stamp="${ROOT}/${BUILD_SOURCE_FILE}"
   local built_commit built_dirty head_commit
   if [[ ! -f "${stamp}" ]]; then
-    check_publish_guard "--skip-build: no record of what ${SITE_DIR} was built from — rebuild without --skip-build"
+    check_publish_guard "no record of what ${SITE_DIR} was built from — rebuild without --skip-build"
     return
   fi
   read -r built_commit built_dirty <"${stamp}" || true
   head_commit="$(git -C "${ROOT}" rev-parse HEAD 2>/dev/null || true)"
   if [[ -z "${head_commit}" ]] || [[ "${built_commit}" != "${head_commit}" ]]; then
-    check_publish_guard "--skip-build: ${SITE_DIR} was built from ${built_commit:0:7}, not the current commit ${head_commit:0:7}"
+    check_publish_guard "${SITE_DIR} was built from ${built_commit:0:7}, not the current commit ${head_commit:0:7}"
   elif [[ "${built_dirty}" != "clean" ]]; then
-    check_publish_guard "--skip-build: ${SITE_DIR} was built from a tree with uncommitted changes"
+    check_publish_guard "${SITE_DIR} was built from a tree with uncommitted changes"
   else
-    check_pass "--skip-build: ${SITE_DIR} was built from the current commit (${head_commit:0:7})"
+    check_pass "${SITE_DIR} was built from the current commit (${head_commit:0:7})"
   fi
 }
 
@@ -349,7 +352,7 @@ confirm_production_publish() {
   echo -n "Type 'publish' to continue: " >&2
   local answer
   # shellcheck disable=SC2162
-  read answer
+  read -r answer || answer=""
   if [[ "${answer}" != "publish" ]]; then
     echo "Aborted." >&2
     exit 1
@@ -365,9 +368,13 @@ xml_escape() {
 }
 
 MVN_SETTINGS=""
+MVN_LOG=""
 cleanup_mvn_settings() {
   if [[ -n "${MVN_SETTINGS}" ]]; then
     rm -f "${MVN_SETTINGS}"
+  fi
+  if [[ -n "${MVN_LOG}" ]]; then
+    rm -f "${MVN_LOG}"
   fi
 }
 trap cleanup_mvn_settings EXIT
@@ -403,11 +410,17 @@ publish_site() {
   fi
 
   # Intentionally never: mvn clean
-  mvn "${mvn_args[@]}"
+  # pipefail + set -e: a Maven failure still stops the script here.
+  MVN_LOG="$(mktemp)"
+  mvn "${mvn_args[@]}" 2>&1 | tee "${MVN_LOG}"
 
   echo ""
   if [[ "${MODE}" == "dry-run" ]]; then
     echo "==> Dry run finished (nothing committed)"
+  elif ! grep -q 'Checked in' "${MVN_LOG}"; then
+    # Maven exits 0 when there was nothing to commit or the check-in was skipped.
+    echo "==> Maven finished without reporting an SVN check-in"
+    echo "    Nothing may have been published (no changes?) — read the Maven output above"
   else
     echo "==> Publish finished"
     echo "    Live site: ${PROD_URL}"
@@ -442,6 +455,10 @@ if [[ "${SKIP_BUILD}" -eq 1 ]]; then
   validate_built_site
 else
   build_site
+  # The build takes minutes: refuse to go on if the commit or tree changed meanwhile.
+  CHECKS_FAILED=0
+  check_skip_build_source
+  finish_prerequisite_checks
 fi
 
 confirm_production_publish

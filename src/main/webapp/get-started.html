@@ -268,7 +268,7 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
                         <h3 class="h6 fw-semibold mb-2">Verify cluster &amp; request context</h3>
                         <p class="small text-muted mb-2">Cluster (system admin):</p>
                         <pre><code>curl -k https://localhost:9443/cxs/cluster -u "karaf:${UNOMI_ROOT_PASSWORD}"</code></pre>
-                        <p class="small text-muted mt-3 mb-2">Create a scope before context or events (schema validation rejects unknown scopes):</p>
+                        <p class="small text-muted mt-3 mb-2">Create a scope before sending events (events with an unknown scope are silently dropped):</p>
                         <pre><code>curl -X POST http://localhost:8181/cxs/scopes \
   -u "default:YOUR_PRIVATE_API_KEY" \
   -H "Content-Type: application/json" \

@@ -67,10 +67,10 @@ structured_data: >
                         </div>
                         <div class="col-md-6">
                             <ol class="small mb-0" start="4">
-                                <li><a href="#manual-install">Manual Installation</a></li>
                                 <li><a href="#web-tracking">Web Tracking Tutorial</a></li>
                                 <li><a href="#rules-personalization">Rules &amp; Personalization</a></li>
                             </ol>
+                            <p class="small mb-0 mt-2">Alternative to Step 1: <a href="#manual-install">Manual Installation</a></p>
                         </div>
                     </div>
                 </div>
@@ -126,9 +126,9 @@ services:
                     <i class="bi bi-hourglass-split me-1"></i> Wait 1&ndash;2 minutes for both Elasticsearch and Unomi to fully initialize before continuing.
                 </div>
 
-                <h3 class="h6 fw-semibold mt-4 mb-3">Verify the cluster</h3>
-<pre><code>curl -k https://localhost:9443/cxs/cluster -u "karaf:${UNOMI_ROOT_PASSWORD}"</code></pre>
-                <p class="small text-muted">System admin credentials: <code>karaf</code> / your <code>UNOMI_ROOT_PASSWORD</code> (there is no default password in 4.0). Accept the self-signed certificate warning in development.</p>
+                <h3 class="h6 fw-semibold mt-4 mb-3">Verify Unomi is up</h3>
+<pre><code>curl -u "karaf:${UNOMI_ROOT_PASSWORD}" http://localhost:8181/cxs/tenants</code></pre>
+                <p class="small text-muted">This returns <code>[]</code> on a fresh install: no tenant exists yet, and most other endpoints answer <code>400</code> until you create one in Step 2. System admin credentials: <code>karaf</code> / your <code>UNOMI_ROOT_PASSWORD</code> (there is no default password in 4.0).</p>
 
                 <div class="alert alert-info small" role="alert">
                     <i class="bi bi-info-circle me-1"></i> Development only. Prefer OpenSearch? See <a href="/get-started.html#quickstart">Getting Started &mdash; Option B</a>. Production: <a href="https://unomi.apache.org/manual/latest/index.html#_securing_a_production_environment">security guide</a>.
@@ -169,6 +169,8 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PUBLIC' \
   --user "karaf:${UNOMI_ROOT_PASSWORD}"
 curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
   --user "karaf:${UNOMI_ROOT_PASSWORD}"</code></pre>
+                <p class="small text-muted mt-3">With a tenant in place, the cluster check works (accept the self-signed certificate warning in development):</p>
+<pre><code>curl -k https://localhost:9443/cxs/cluster -u "karaf:${UNOMI_ROOT_PASSWORD}"</code></pre>
                 <p class="small text-muted mt-3">From each apikeys response, copy <code>plainTextKey</code>:</p>
                 <ul class="small">
                     <li><code>YOUR_PUBLIC_API_KEY</code> &mdash; header <code>X-Unomi-Api-Key</code> for <code>/cxs/context.json</code> and <code>/cxs/eventcollector</code></li>
@@ -229,10 +231,12 @@ curl -X POST 'http://localhost:8181/cxs/tenants/default/apikeys?type=PRIVATE' \
 <pre><code>export UNOMI_ROOT_PASSWORD='choose-a-strong-password'
 export UNOMI_HEALTHCHECK_PASSWORD='choose-a-strong-health-password'
 ./bin/karaf
+# OpenSearch only, before unomi:start:
+karaf@root()&gt; unomi:setup -d=unomi-distribution-opensearch -f=true
 karaf@root()&gt; unomi:start</code></pre>
 
                 <h3 class="h6 fw-semibold mt-4 mb-3">3. Tenant + context</h3>
-                <p>Create a tenant as in <a href="#create-tenant">Step 2</a>, then call context with <code>X-Unomi-Api-Key</code>. Cluster check: <code>https://localhost:9443/cxs/cluster</code> (<code>karaf</code> / your <code>UNOMI_ROOT_PASSWORD</code>).</p>
+                <p>Create a tenant as in <a href="#create-tenant">Step 2</a>, then call context with <code>X-Unomi-Api-Key</code>. Cluster check, once the tenant exists: <code>https://localhost:9443/cxs/cluster</code> (<code>karaf</code> / your <code>UNOMI_ROOT_PASSWORD</code>).</p>
 
                 <div class="alert alert-info small" role="alert">
                     <i class="bi bi-terminal me-1"></i> <strong>Tip:</strong> SSH console <code>ssh -p 8102 karaf@localhost</code> &mdash; run <code>unomi:tenant-set default</code> first (the shell starts in the <code>system</code> context and would list nothing), then <code>unomi:crud list profile</code>, <code>unomi:event-tail</code>, <code>unomi:crud list rule</code>. Full detail: <a href="/blog/unomi-4-shell-commands.html">shell commands post</a> &middot; <a href="https://unomi.apache.org/manual/latest/index.html#_five_minutes_quickstart">manual quick start</a>.
@@ -273,8 +277,9 @@ karaf@root()&gt; unomi:start</code></pre>
 
                 <!-- Read context -->
                 <h3 class="h6 fw-semibold mt-4 mb-3">Read the current context</h3>
-                <p>The <code>/cxs/context.json</code> endpoint is the primary public endpoint. In 4.0 it requires a <strong>public API key</strong>:</p>
-<pre><code>curl -X POST "http://localhost:8181/cxs/context.json?sessionId=1234" \
+                <p>The <code>/cxs/context.json</code> endpoint is the primary public endpoint. In 4.0 it requires a <strong>public API key</strong>.
+                    The visitor's profile is carried by the <code>context-profile-id</code> cookie, so keep a cookie jar (<code>-c</code> / <code>-b</code>) across the public calls; without it each call creates a new profile. The response contains the <code>profileId</code>:</p>
+<pre><code>curl -c cookies.txt -b cookies.txt -X POST "http://localhost:8181/cxs/context.json?sessionId=1234" \
   -H "Content-Type: application/json" \
   -H "X-Unomi-Api-Key: YOUR_PUBLIC_API_KEY" \
   --data-raw '{
@@ -324,7 +329,7 @@ karaf@root()&gt; unomi:start</code></pre>
   }'</code></pre>
 
                 <p>Now send the event via the <strong>event collector</strong> (the public endpoint for submitting events):</p>
-<pre><code>curl -X POST http://localhost:8181/cxs/eventcollector \
+<pre><code>curl -c cookies.txt -b cookies.txt -X POST http://localhost:8181/cxs/eventcollector \
   -H "Content-Type: application/json" \
   -H "X-Unomi-Api-Key: YOUR_PUBLIC_API_KEY" \
   --data-raw '{
@@ -372,7 +377,7 @@ karaf@root()&gt; unomi:start</code></pre>
 
                 <!-- View a profile -->
                 <h3 class="h6 fw-semibold mt-4 mb-3">View a profile</h3>
-                <p>Use the profile UUID (from the <code>context-profile-id</code> cookie or event response) to look up profile details:</p>
+                <p>Use the profile UUID (the <code>profileId</code> in the <code>/cxs/context.json</code> response, also stored in the <code>context-profile-id</code> cookie) to look up profile details:</p>
 <pre><code>curl http://localhost:8181/cxs/profiles/PROFILE_UUID \
   -u "default:YOUR_PRIVATE_API_KEY"</code></pre>
 
@@ -402,7 +407,7 @@ karaf@root()&gt; unomi:start</code></pre>
 
                 <!-- Install tracker -->
                 <h3 class="h6 fw-semibold mt-4 mb-3">Add the tracker to your page</h3>
-                <p>Include the tracker script and initialize it (scope must exist under your tenant):</p>
+                <p>Include the tracker script and initialize it (scope must exist under your tenant). This snippet assumes the page is served from the same origin as Unomi; from another origin, use absolute URLs for the script and <code>contextServerUrl</code>, and allow that origin on the tenant (see the manual):</p>
 <pre><code>&lt;!-- Load the Unomi web tracker --&gt;
 &lt;script src="/tracker/unomi-web-tracker.min.js"&gt;&lt;/script&gt;
 
@@ -518,7 +523,7 @@ const unomiWebTracker = useTracker();
 
                 <!-- Copy event properties to profile -->
                 <h3 class="h6 fw-semibold mt-4 mb-3">Map event data to a profile</h3>
-                <p>This rule listens for the <code>contactInfoSubmitted</code> event (from Step 3) and copies its properties to the profile:</p>
+                <p>This rule listens for the <code>contactInfoSubmitted</code> event (from Step 3) and copies its properties to the profile. Rules only apply to events received after they are created, so send the Step 3 event again to see the effect:</p>
 <pre><code>curl -X POST http://localhost:8181/cxs/rules \
   -u "default:YOUR_PRIVATE_API_KEY" \
   -H "Content-Type: application/json" \
