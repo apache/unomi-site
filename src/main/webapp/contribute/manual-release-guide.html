@@ -155,14 +155,14 @@ gpg --verify test.txt.asc test.txt
                  in a separate directory, to make sure you don't have any additional files in the build
                   (such as allCountries.zip or other binary files that should not be there)</li>
                 <li>
-                    Simply checkout an existing branch for release
+                    Simply checkout an existing branch for release (<code>RELEASE_BRANCH</code> is for example <code>master</code> or <code>unomi-3.x</code>)
                     <pre class="alert alert-primary"><code>cd unomi
-git checkout unomi-{{ site.data.unomi.branch.version }}
+git checkout RELEASE_BRANCH
                     </code></pre>
                 </li>
                 <li>OR Create a new branch if needed for the release using:
                     <pre class="alert alert-primary"><code>cd unomi
-git checkout -b unomi-{{ site.data.unomi.branch.version }}
+git checkout -b RELEASE_BRANCH
                     </code></pre>
                 </li>
             </ol>
@@ -373,6 +373,7 @@ git push origin master</code></pre>
                 Upload the site modification by using:
                 <pre class="alert alert-primary"><code>./generate-manual.sh publish APACHE_LDAP_USERNAME APACHE_LDAP_PASSWORD</code></pre>
                 This also uploads the manual PDF and ZIP packages (with their signatures and checksums): there is no separate upload step.
+                <strong>It also removes every other version directory under <code>https://unomi.apache.org/manual/</code></strong> (only <code>latest</code> and <code>STABLE_DIR</code> are kept): afterwards, on the documentation page, replace the "Online" links of the versions that were removed with their PDF/ZIP downloads.
                 The packages go to <code>https://dist.apache.org/repos/dist/release/unomi/&lt;STABLE_VERSION&gt;</code>, the value set in <code>generate-manual-config.sh</code> (it is not read from the site's <code>unomi.yml</code>): set it to the release you are publishing. A failed package upload is logged but does not stop the run, so check that directory afterwards rather than relying on the final success message.
               </li>
                 <li>

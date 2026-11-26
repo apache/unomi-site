@@ -119,7 +119,7 @@ build_site() {
   local source_commit="unknown" source_state="dirty"
   if have_cmd git && git -C "${ROOT}" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     source_commit="$(git -C "${ROOT}" rev-parse HEAD 2>/dev/null || echo unknown)"
-    if [[ -z "$(git -C "${ROOT}" status --porcelain 2>/dev/null)" ]]; then
+    if [[ -z "$(git -C "${ROOT}" status --porcelain --untracked-files=normal 2>/dev/null)" ]]; then
       source_state="clean"
     fi
   fi
@@ -134,11 +134,12 @@ build_site() {
     -lc 'bundle install && bundle exec jekyll build'
 
   validate_built_site
-  # The build takes minutes: only record the source if it did not change meanwhile.
+  # The build takes minutes: record the source as clean only if neither the commit
+  # nor the tree state changed meanwhile.
   local end_commit="unknown" end_state="dirty"
   if have_cmd git && git -C "${ROOT}" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     end_commit="$(git -C "${ROOT}" rev-parse HEAD 2>/dev/null || echo unknown)"
-    if [[ -z "$(git -C "${ROOT}" status --porcelain 2>/dev/null)" ]]; then
+    if [[ -z "$(git -C "${ROOT}" status --porcelain --untracked-files=normal 2>/dev/null)" ]]; then
       end_state="clean"
     fi
   fi
@@ -213,10 +214,12 @@ validate_built_site() {
   # Capture first: testing a pipeline that ends in head/grep -q can report a false
   # "no match" under pipefail when an upstream grep is killed by SIGPIPE.
   local liquid_hits
-  liquid_hits="$(grep -R -n -E '\{\{|\{\%' \
+  # Skip the assets directory by name: filtering the output lines on "/assets/"
+  # would also drop real hits on lines that merely link to an asset.
+  liquid_hits="$(grep -R -n -E '\{\{|\{%' \
       --include='*.html' --include='*.xml' --include='*.txt' \
-      "${site_path}" 2>/dev/null \
-      | grep -v '/assets/' || true)"
+      --exclude-dir=assets \
+      "${site_path}" 2>/dev/null || true)"
   if [[ -n "${liquid_hits}" ]]; then
     echo "  [warn] possible unrendered Liquid tags under ${SITE_DIR} (spot-check output)" >&2
     printf '%s\n' "${liquid_hits}" | sed -n '1,10p' >&2

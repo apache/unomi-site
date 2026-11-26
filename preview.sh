@@ -17,6 +17,8 @@
 # Optional environment:
 #   NETLIFY_AUTH_TOKEN   Personal access token (or run: npx netlify-cli login)
 #   NETLIFY_SITE_ID      Existing site id (skips interactive link)
+#   NETLIFY_ACCOUNT_SLUG Team to create the site in, when your account has several
+#                        teams and no default one.
 #   NETLIFY_SITE_NAME    Site name when creating/linking (default: unomi-preview).
 #                        Netlify site names are global: if the name belongs to another
 #                        account, Netlify creates <name>-NNN instead and the script
@@ -157,7 +159,8 @@ ensure_netlify_auth() {
   # 1 when logged in but not linked yet): read the JSON instead.
   local status_json
   status_json="$(netlify_cli status --json 2>/dev/null || true)"
-  if printf '%s' "${status_json}" | grep -Eq '"loggedIn":[[:space:]]*true'; then
+  local logged_in_re='"loggedIn":[[:space:]]*true'
+  if [[ "${status_json}" =~ ${logged_in_re} ]]; then
     return 0
   fi
   echo "==> Netlify auth required (browser login)"
@@ -192,17 +195,25 @@ link_or_create_site() {
     echo "Could not list Netlify sites (see the error above) — not creating a new one" >&2
     exit 1
   fi
-  if printf '%s' "${sites_json}" \
-    | grep -Fq -e "\"name\":\"${NETLIFY_SITE_NAME}\"" -e "\"name\": \"${NETLIFY_SITE_NAME}\""; then
-    netlify_cli link --name "${NETLIFY_SITE_NAME}"
-    return 0
-  fi
+  # No pipe here either: with a long listing, grep -q exits at the first match and
+  # the writer dies of SIGPIPE, which pipefail would report as "not found".
+  case "${sites_json}" in
+    *"\"name\":\"${NETLIFY_SITE_NAME}\""* | *"\"name\": \"${NETLIFY_SITE_NAME}\""*)
+      netlify_cli link --name "${NETLIFY_SITE_NAME}"
+      return 0
+      ;;
+  esac
 
   local create_log
   create_log="$(mktemp)"
-  if ! netlify_cli sites:create --name "${NETLIFY_SITE_NAME}" --disable-linking 2>&1 | tee "${create_log}"; then
-    echo "Failed to create Netlify site '${NETLIFY_SITE_NAME}'" >&2
-    echo "Netlify site names are global. Pick one of your own, for example:" >&2
+  local create_args=(sites:create --name "${NETLIFY_SITE_NAME}" --disable-linking)
+  if [[ -n "${NETLIFY_ACCOUNT_SLUG:-}" ]]; then
+    create_args+=(--account-slug "${NETLIFY_ACCOUNT_SLUG}")
+  fi
+  if ! netlify_cli "${create_args[@]}" 2>&1 | tee "${create_log}"; then
+    echo "Failed to create Netlify site '${NETLIFY_SITE_NAME}' (see the Netlify error above)" >&2
+    echo "If your account has several teams, choose one: export NETLIFY_ACCOUNT_SLUG=<team-slug>" >&2
+    echo "If the name is the problem (site names are global), pick one of your own, for example:" >&2
     echo "  export NETLIFY_SITE_NAME=unomi-preview-\$USER" >&2
     echo "Or create it in the Netlify UI, then re-run with:" >&2
     echo "  export NETLIFY_SITE_ID=<project-id>" >&2

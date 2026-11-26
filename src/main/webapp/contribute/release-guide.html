@@ -162,20 +162,21 @@ gpg --verify test.txt.asc test.txt
                 <li>Setup server passwords for publishing as documented here:
                     <a href="https://www.apache.org/dev/publishing-maven-artifacts.html" target="_blank" rel="noopener">https://www.apache.org/dev/publishing-maven-artifacts.html</a> and <a href="https://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords" target="_blank" rel="noopener">https://maven.apache.org/guides/mini/guide-encryption.html#How_to_encrypt_server_passwords</a>
                 </li>
+              <li>Check that the KEYS file only contains signatures with @apache.org addresses (if there are non @apache.org don't remove them because they have
+                been used to sign older releases)
+              </li>
+              <li>Check the Copyright notice years in the NOTICE file and anywhere else where it might be (by using search and replace)</li>
+              <li>Check that there are no JARs or ZIP files in the source code. The release script stops on a RAT failure, but it goes straight on to the release itself, so check beforehand by generating the RAT report in your checkout:
+                <pre class="alert alert-primary"><code>mvn clean install -DskipITs=true -DskipTests=true -P integration-tests,rat,apache-release,docker,\!run-tests
+less target/unomi-root-{{ site.data.unomi.next.development.version }}.rat</code></pre>
+              </li>
               <li>Launch the first build script using.
                 <pre class="alert alert-primary"><code>./release-stage-1.sh {{ site.data.unomi.next.stable.version }} BRANCH_NAME</code></pre>
                   where BRANCH_NAME is the branch you want to release (It must be created first if it doesn't exist !).<br>
                   <strong>This step will generate staging artifacts onto the <a href="https://repository.apache.org/#stagingRepositories">Apache Nexus</a>, if at the end of the script the
                   artefacts are not there, something bad happened in the script execution.</strong>
               </li>
-              <li>Check that there are no JARs or ZIP files in the source code, you can do this by looking at the generated RAT report here :
-                <pre class="alert alert-primary"><code>less target/unomi-root-{{ site.data.unomi.next.development.version }}.rat</code></pre>
-              </li>
-              <li>Check that the KEYS file only contains signatures with @apache.org addresses (if there are non @apache.org don't remove them because they have
-                been used to sign older releases)
-              </li>
-              <li>Check the Copyright notice years in the NOTICE file and anywhere else where it might be (by using search and replace)</li>
-              <li>If you get JavaDoc errors or other errors you must correct all of them before proceeding further</li>
+              <li>If the script stops on JavaDoc errors or other errors, correct all of them and run it again (remove <code>target/release/{{ site.data.unomi.next.stable.version }}</code> first: the script clones into it)</li>
               <li>If you get a error while signing despite having the proper keys install that looks like this:
                 <pre class="alert alert-primary"><code>[INFO] --- maven-gpg-plugin:1.5:sign (default) @ unomi-root ---
 gpg: 'echec de la signature : Inappropriate ioctl for device
@@ -219,7 +220,7 @@ git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
                         <li>Reset all versions with the following command:
                             <pre class="alert alert-primary"><code>mvn versions:set -DskipITs=true -DskipTests=true -P integration-tests,rat,apache-release,docker,\!run-tests</code></pre>
                         </li>
-                        <li>Restart at the release:prepare step</li>
+                        <li>Run <code>./release-stage-1.sh</code> again (remove <code>target/release/{{ site.data.unomi.next.stable.version }}</code> first: the script clones into it)</li>
                     </ol>
                 </li>
               <li>
@@ -286,7 +287,7 @@ git push origin master</code></pre>
                   <li>
                       Before running the manual and API generation tool, make sure to update the versions in the
                       <pre class="alert alert-primary"><code>generate-manual-config.sh</code></pre> file to make sure the
-                      correct versions are used. You should only have to update the following lines (the values below are an example: <code>STABLE_VERSION</code> must be the release you are publishing):
+                      correct versions are used. You should only have to update the following lines (the values below are an example: <code>STABLE_VERSION</code> must be the release you are publishing, and <code>STABLE_BRANCH</code> an existing branch that holds the released sources):
                       <pre class="alert alert-primary"><code>
 # === VERSION CONFIGURATION ===
 # Latest version (master branch)
@@ -313,6 +314,7 @@ STABLE_DIR="4_0_x"
                       To publish the documentation to the Apache SVN, run:<br>
                       <pre class="alert alert-primary"><code>./generate-manual.sh publish APACHE_LDAP_USERNAME APACHE_LDAP_PASSWORD</code></pre>
                       This will generate and upload both the latest and stable documentation versions, as well as release packages.
+                      <strong>It also removes every other version directory under <code>https://unomi.apache.org/manual/</code></strong> (only <code>latest</code> and <code>STABLE_DIR</code> are kept): afterwards, on the documentation page, replace the "Online" links of the versions that were removed with their PDF/ZIP downloads.
                       The packages go to <code>https://dist.apache.org/repos/dist/release/unomi/&lt;STABLE_VERSION&gt;</code>, the value set in <code>generate-manual-config.sh</code> (it is not read from the site's <code>unomi.yml</code>): set it to the release you are publishing. A failed package upload is logged but does not stop the run, so check that directory afterwards rather than relying on the final success message.
                   </li>
                   <li>

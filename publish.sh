@@ -34,8 +34,10 @@
 #                  _config.yml url not https://unomi.apache.org, and a target/site
 #                  not built from the current clean commit
 #
-# Exit status: 0 published (or dry run / check finished), 3 Maven succeeded but
-# checked nothing in to SVN (nothing was published), 1 anything else.
+# Exit status: 0 published (or dry run / check finished); 3 Maven succeeded but
+# checked nothing in to SVN (nothing was published); any other non-zero status is a
+# failure (1 from the script's own checks; a failing docker or mvn passes its own
+# status through).
 #
 # Important: do not run Maven clean — it deletes target/, including the site that
 # was just built and validated and the scm-publish working copy.
@@ -258,7 +260,7 @@ check_git_hygiene() {
     check_publish_guard "on branch '${GIT_BRANCH}' (${GIT_COMMIT}), not master — production is published from master"
   fi
 
-  if [[ -n "$(git -C "${ROOT}" status --porcelain 2>/dev/null)" ]]; then
+  if [[ -n "$(git -C "${ROOT}" status --porcelain --untracked-files=normal 2>/dev/null)" ]]; then
     check_publish_guard "working tree has uncommitted changes — commit or stash them before publishing"
   else
     check_pass "git working tree is clean"
@@ -315,9 +317,9 @@ check_skip_build_source() {
 }
 
 check_no_clean_trap() {
-  # Soft guard: refuse if someone aliased/wrapped this script oddly; real
-  # protection is never invoking `mvn clean` in publish_site().
-  check_pass "publish will not run Maven clean (preserves docs/manual on SVN)"
+  # Informational only: the real protection is that publish_site() never passes
+  # `clean` to Maven.
+  check_pass "publish will not run Maven clean (keeps the validated ${SITE_DIR} and the scm-publish working copy)"
 }
 
 check_prerequisites() {
