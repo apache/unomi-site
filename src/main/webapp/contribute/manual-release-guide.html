@@ -248,7 +248,8 @@ and run mvn release:perform</code></pre>
               </li>
               <li>
                 <pre class="alert alert-primary"><code>cd unomi-dev
-mkdir {{ site.data.unomi.next.stable.version }}</code></pre>
+mkdir {{ site.data.unomi.next.stable.version }}
+cd {{ site.data.unomi.next.stable.version }}</code></pre>
               </li>
               <li>
                 Copy all the Zip and Tarbars including ASC (but do not copy the SHA1 or MD5 sum) files from:
@@ -297,8 +298,11 @@ svn add {{ site.data.unomi.next.stable.version }}</code></pre>
 git tag -d unomi-root-{{ site.data.unomi.next.stable.version }}</code></pre>
                         </li>
                         <li>Correct any problems in the source, make sure to do them in master and cherry-pick them to the relevant branches</li>
-                        <li>Reset all versions with the following command:
-                            <pre class="alert alert-primary"><code>mvn versions:set -DskipITs=true -DskipTests=true -P integration-tests,rat,apache-release,docker,\!run-tests</code></pre>
+                        <li>Reset all versions back to <code>{{ site.data.unomi.next.development.version }}</code> with the following command, then commit and push the result to the release branch:
+                            <pre class="alert alert-primary"><code>mvn versions:set -DnewVersion={{ site.data.unomi.next.development.version }} -DskipITs=true -DskipTests=true -P integration-tests,rat,apache-release,docker,\!run-tests</code></pre>
+                        </li>
+                        <li>Remove the refused candidate from the dev area (the upload step fails if the directory already exists):
+                            <pre class="alert alert-primary"><code>svn rm https://dist.apache.org/repos/dist/dev/unomi/{{ site.data.unomi.next.stable.version }} -m "Remove refused Apache Unomi {{ site.data.unomi.next.stable.version }} release candidate"</code></pre>
                         </li>
                         <li>Restart at the release:prepare step</li>
                     </ol>
@@ -373,7 +377,7 @@ git push origin master</code></pre>
                 Upload the site modification by using:
                 <pre class="alert alert-primary"><code>./generate-manual.sh publish APACHE_LDAP_USERNAME APACHE_LDAP_PASSWORD</code></pre>
                 This also uploads the manual PDF and ZIP packages (with their signatures and checksums): there is no separate upload step.
-                <strong>It also removes every other version directory under <code>https://unomi.apache.org/manual/</code></strong> (only <code>latest</code> and <code>STABLE_DIR</code> are kept): afterwards, on the documentation page, replace the "Online" links of the versions that were removed with their PDF/ZIP downloads.
+                <strong>It also removes every other version directory under <code>https://unomi.apache.org/manual/</code></strong> (only the versions generated in this run, normally <code>latest</code> and <code>STABLE_DIR</code>, are kept; a version that fails to generate is removed as well, so check that the <code>simulate</code> run generates both before publishing): afterwards, on the documentation page, replace the "Online" links of the versions that were removed with their PDF/ZIP downloads.
                 The packages go to <code>https://dist.apache.org/repos/dist/release/unomi/&lt;STABLE_VERSION&gt;</code>, the value set in <code>generate-manual-config.sh</code> (it is not read from the site's <code>unomi.yml</code>): set it to the release you are publishing. A failed package upload is logged but does not stop the run, so check that directory afterwards rather than relying on the final success message.
               </li>
                 <li>
