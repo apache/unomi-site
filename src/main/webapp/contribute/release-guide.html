@@ -286,7 +286,7 @@ git push origin master</code></pre>
                   <li>
                       Before running the manual and API generation tool, make sure to update the versions in the
                       <pre class="alert alert-primary"><code>generate-manual-config.sh</code></pre> file to make sure the
-                      correct versions are used. You should only have to update the following lines:
+                      correct versions are used. You should only have to update the following lines (the values below are an example: <code>STABLE_VERSION</code> must be the release you are publishing):
                       <pre class="alert alert-primary"><code>
 # === VERSION CONFIGURATION ===
 # Latest version (master branch)
@@ -313,6 +313,7 @@ STABLE_DIR="4_0_x"
                       To publish the documentation to the Apache SVN, run:<br>
                       <pre class="alert alert-primary"><code>./generate-manual.sh publish APACHE_LDAP_USERNAME APACHE_LDAP_PASSWORD</code></pre>
                       This will generate and upload both the latest and stable documentation versions, as well as release packages.
+                      The packages go to <code>https://dist.apache.org/repos/dist/release/unomi/&lt;STABLE_VERSION&gt;</code>, the value set in <code>generate-manual-config.sh</code> (it is not read from the site's <code>unomi.yml</code>): set it to the release you are publishing. A failed package upload is logged but does not stop the run, so check that directory afterwards rather than relying on the final success message.
                   </li>
                   <li>
                       Go back to the site project and update the documentation page to link to the correct versions of the documents.

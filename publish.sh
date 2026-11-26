@@ -29,14 +29,20 @@
 #   JEKYLL_IMAGE   Docker image (default: bretfisher/jekyll)
 #   --yes, -y      Skip the interactive confirmation prompt
 #   --force        Override the publish guards: dirty git tree, branch other than
-#                  master, HEAD different from its upstream, not a git checkout,
+#                  master, HEAD different from its upstream (or a failed fetch, or no
+#                  upstream), not a git checkout, unrendered Liquid in the built site,
 #                  _config.yml url not https://unomi.apache.org, and a target/site
 #                  not built from the current clean commit
+#
+# Exit status: 0 published (or dry run / check finished), 3 Maven succeeded but
+# checked nothing in to SVN (nothing was published), 1 anything else.
 #
 # Important: do not run Maven clean — it deletes target/, including the site that
 # was just built and validated and the scm-publish working copy.
 
 set -euo pipefail
+# Unrendered Liquid in the built site stops a publish (see validate_built_site).
+STRICT_LIQUID=1
 # bash 5.2+ treats an unquoted & in a ${var//pat/repl} replacement as "the match",
 # which would corrupt xml_escape. The option does not exist in older bash.
 shopt -u patsub_replacement 2>/dev/null || true
@@ -270,12 +276,16 @@ check_git_hygiene() {
   if [[ -n "${ssh_cmd}" ]]; then
     fetch_env+=("GIT_SSH_COMMAND=${ssh_cmd} -o BatchMode=yes")
   fi
+  local fetched=1
   if ! fetch_err="$(env "${fetch_env[@]}" git -C "${ROOT}" fetch --quiet 2>&1)"; then
-    check_warn "git fetch failed (${fetch_err%%$'\n'*}) — comparing with the upstream as of the last fetch"
+    fetched=0
+    check_publish_guard "git fetch failed (${fetch_err%%$'\n'*}) — cannot verify HEAD against the remote"
   fi
   upstream="$(git -C "${ROOT}" rev-parse --verify --quiet '@{u}' 2>/dev/null || true)"
   if [[ -z "${upstream}" ]]; then
-    check_warn "branch has no upstream — cannot tell whether it matches the remote"
+    check_publish_guard "branch has no upstream — cannot tell whether it matches the remote"
+  elif [[ "${fetched}" -eq 0 ]]; then
+    : # already reported: the upstream ref may be stale, so do not claim a match
   elif [[ "${upstream}" == "$(git -C "${ROOT}" rev-parse HEAD 2>/dev/null || true)" ]]; then
     check_pass "HEAD matches its upstream"
   else
@@ -432,6 +442,7 @@ publish_site() {
     # Maven exits 0 when there was nothing to commit or the check-in was skipped.
     echo "==> Maven finished without checking any file in to SVN"
     echo "    Nothing was published (most likely no change since the last publish) — read the Maven output above"
+    exit 3
   else
     echo "==> Publish finished"
     echo "    Live site: ${PROD_URL}"

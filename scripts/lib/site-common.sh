@@ -220,6 +220,11 @@ validate_built_site() {
   if [[ -n "${liquid_hits}" ]]; then
     echo "  [warn] possible unrendered Liquid tags under ${SITE_DIR} (spot-check output)" >&2
     printf '%s\n' "${liquid_hits}" | sed -n '1,10p' >&2
+    # publish.sh sets STRICT_LIQUID: do not put these on the production site unseen.
+    if [[ "${STRICT_LIQUID:-0}" -eq 1 ]] && [[ "${FORCE:-0}" -ne 1 ]]; then
+      echo "Validation failed: unrendered Liquid tags in ${SITE_DIR} (use --force to publish anyway)" >&2
+      exit 1
+    fi
   else
     echo "  [ok] no obvious unrendered Liquid tags in HTML/XML/TXT"
   fi

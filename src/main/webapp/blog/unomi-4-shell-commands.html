@@ -196,7 +196,7 @@ unomi:cache --remove --id ENTRY_ID --type org.apache.unomi.api.rules.Rule --tena
         <pre class="code-block-light p-3 rounded-3 small overflow-auto"><code>unomi:task-list -s RUNNING
 unomi:task-list -t profile-purge --limit 20
 unomi:task-show TASK_ID
-unomi:task-retry TASK_ID --reset
+unomi:task-retry --reset TASK_ID
 unomi:task-cancel TASK_ID
 unomi:task-purge --days 14 --force
 unomi:task-executor</code></pre>

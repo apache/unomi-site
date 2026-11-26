@@ -153,8 +153,11 @@ ensure_netlify_auth() {
   if [[ -n "${NETLIFY_AUTH_TOKEN:-}" ]]; then
     return 0
   fi
-  # `netlify status` exits 0 even when logged out: read the JSON instead.
-  if netlify_cli status --json 2>/dev/null | grep -Eq '"loggedIn":[[:space:]]*true'; then
+  # The exit status says nothing about the login (0 when logged out without --json,
+  # 1 when logged in but not linked yet): read the JSON instead.
+  local status_json
+  status_json="$(netlify_cli status --json 2>/dev/null || true)"
+  if printf '%s' "${status_json}" | grep -Eq '"loggedIn":[[:space:]]*true'; then
     return 0
   fi
   echo "==> Netlify auth required (browser login)"
