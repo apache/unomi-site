@@ -18,6 +18,23 @@ destination: target/site
 Can be found in [_data folder](src/main/webapp/_data/unomi.yml)
 This contains some variables used to replace placeholders in the site.
 
+## Third-party resources (Content Security Policy)
+
+The ASF web servers send a [Content Security Policy](https://infra.apache.org/csp.html) that only lets pages load
+scripts, styles, fonts, images and frames from the site itself and from a few ASF hosts (`*.apache.org`). Anything
+served by a CDN, Google Fonts, Gravatar, etc. is blocked in the browser. Keep such files in the repository instead:
+
+| Path | Content |
+|---|---|
+| `src/main/webapp/assets/vendor/bootstrap` | Bootstrap 5.3.8 (CSS and JS bundle) |
+| `src/main/webapp/assets/vendor/bootstrap-icons` | Bootstrap Icons 1.11.3 (CSS and fonts) |
+| `src/main/webapp/assets/vendor/inter` | Inter variable font (declared in `assets/css/unomi.css`) |
+| `src/main/webapp/assets/vendor/mermaid` | Mermaid 11.17.2 (loaded only by pages with `mermaid: true`) |
+| `src/main/webapp/assets/images/team` | Team page avatars |
+
+The build validation fails when a built page loads a resource from another host, and Netlify previews send the same
+policy (`netlify.toml`), so a blocked resource shows up in the browser console before publishing.
+
 ## Build
 
 You need either Docker (recommended) or a local Ruby/Jekyll installation to build the website.

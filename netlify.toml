@@ -13,3 +13,6 @@
     X-Content-Type-Options = "nosniff"
     # Preview copies must not be indexed as if they were the official site.
     X-Robots-Tag = "noindex, nofollow"
+    # Same policy as the ASF web servers (https://infra.apache.org/csp.html), so a
+    # preview blocks the same third-party resources as unomi.apache.org does.
+    Content-Security-Policy = "default-src 'self' data: blob: 'unsafe-inline' 'unsafe-eval' https://www.apachecon.com/ https://www.communityovercode.org/ https://*.apache.org/ https://apache.org/ https://*.scarf.sh/; script-src 'self' data: blob: 'unsafe-inline' 'unsafe-eval' https://www.apachecon.com/ https://www.communityovercode.org/ https://*.apache.org/ https://apache.org/ https://*.scarf.sh/; style-src 'self' data: blob: 'unsafe-inline' 'unsafe-eval' https://www.apachecon.com/ https://www.communityovercode.org/ https://*.apache.org/ https://apache.org/ https://*.scarf.sh/; frame-ancestors 'self'; frame-src 'self' data: blob: 'unsafe-inline' 'unsafe-eval' https://www.apachecon.com/ https://www.communityovercode.org/ https://*.apache.org/ https://apache.org/ https://*.scarf.sh/; worker-src 'self' data: blob:;"

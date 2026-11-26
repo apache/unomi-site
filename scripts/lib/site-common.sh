@@ -210,6 +210,21 @@ validate_built_site() {
   fi
   echo "  [ok] canonical URL is ${site_url}/"
 
+  # The ASF Content Security Policy only lets pages load scripts, styles, images and
+  # frames from the site itself and a few ASF hosts: anything else is blocked in the
+  # browser (https://infra.apache.org/csp.html). Vendor such files under assets/vendor.
+  local external
+  external="$(grep -R -n -o -E '<(script|link|img|iframe|source|video|audio)[^>]*[[:space:]](src|href)="(https?:)?//[^"]*"' \
+    --include='*.html' "${site_path}" 2>/dev/null \
+    | grep -v -E '(src|href)="https://([a-z0-9.-]+\.)?(apache\.org|apachecon\.com|communityovercode\.org|scarf\.sh)(/[^"]*)?"$' \
+    | head -5 || true)"
+  if [[ -n "${external}" ]]; then
+    echo "Validation failed: pages load resources from hosts the ASF Content Security Policy blocks:" >&2
+    echo "${external//${site_path}\//    }" >&2
+    exit 1
+  fi
+  echo "  [ok] no resource loaded from a host outside the ASF Content Security Policy"
+
   # Unrendered Liquid is a strong signal the build was wrong.
   # Capture first: testing a pipeline that ends in head/grep -q can report a false
   # "no match" under pipefail when an upstream grep is killed by SIGPIPE.
